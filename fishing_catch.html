@@ -74,6 +74,34 @@
 
   *{box-sizing:border-box;}
   [id]{ scroll-margin-top: 72px; }
+
+  /* ---------- Password gate ---------- */
+  body.locked{ overflow:hidden; }
+  body.locked .wrap{ display:none; }
+  #pwGate{
+    position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center;
+    background:var(--surface); padding:16px;
+  }
+  #pwGate[hidden]{ display:none; }
+  .pw-card{
+    width:100%; max-width:340px; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:16px; padding:32px 28px; box-shadow:var(--shadow); text-align:center;
+  }
+  .pw-card .pw-icon{ font-size:2.2rem; margin-bottom:10px; }
+  .pw-card h1{ font-size:1.4rem; margin:0 0 6px; }
+  .pw-card p{ font-size:.86rem; color:var(--ink-soft); margin:0 0 20px; }
+  .pw-card input{
+    width:100%; font:inherit; font-size:1rem; padding:11px 14px; border-radius:10px;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+    text-align:center; letter-spacing:.04em; margin-bottom:12px;
+  }
+  .pw-card input:focus{ outline:2px solid var(--tide); outline-offset:1px; }
+  .pw-card button{
+    width:100%; font:inherit; font-size:.95rem; font-weight:700; padding:11px 14px; border-radius:10px;
+    border:none; background:var(--sea); color:#fff; cursor:pointer;
+  }
+  .pw-card button:hover{ background:var(--sea-deep); }
+  .pw-card .pw-error{ color:var(--coral); font-size:.82rem; margin-top:10px; min-height:1.2em; }
   body{
     background:var(--surface);
     color:var(--ink);
@@ -396,6 +424,32 @@
   a.gear-card{ text-decoration:none; display:block; transition:transform .12s; }
   a.gear-card:hover{ transform:translateY(-2px); border-color:var(--sea); }
 </style>
+
+<div id="pwGate" hidden>
+  <div class="pw-card">
+    <div class="pw-icon">🌊</div>
+    <h1>갯것 대백과</h1>
+    <p>공유받은 비밀번호를 입력하세요.</p>
+    <form id="pwForm" autocomplete="off">
+      <input type="password" id="pwInput" placeholder="비밀번호" aria-label="비밀번호" autocomplete="off">
+      <button type="submit">입장하기</button>
+      <div class="pw-error" id="pwError"></div>
+    </form>
+  </div>
+</div>
+<script>
+(function(){
+  try{
+    var unlocked = false;
+    try{ unlocked = localStorage.getItem('gg_unlocked_v1') === '1'; }catch(e){}
+    if(!unlocked){
+      document.body.classList.add('locked');
+      var gate = document.getElementById('pwGate');
+      if(gate) gate.hidden = false;
+    }
+  }catch(e){}
+})();
+</script>
 
 <div class="wrap">
 
@@ -2433,6 +2487,41 @@
         applyFilters();
       });
     }
+  }catch(e){}
+})();
+
+/* ---- 비밀번호 게이트 ---- */
+(function(){
+  try{
+    var form = document.getElementById('pwForm');
+    var input = document.getElementById('pwInput');
+    var errorEl = document.getElementById('pwError');
+    var gate = document.getElementById('pwGate');
+    if(!form) return;
+    var PW_HASH = '8954a9101463be0557698a1c411d99dc0423d518250b78ad4d97972266a4d56c';
+    function toHex(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(b){ return ('0'+b.toString(16)).slice(-2); }).join('');
+    }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var val = input.value;
+      if(!val) return;
+      if(!(window.crypto && window.crypto.subtle)){
+        errorEl.textContent = '이 브라우저·환경에서는 지원되지 않습니다 (https 주소에서 열어주세요).';
+        return;
+      }
+      window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(function(buf){
+        if(toHex(buf) === PW_HASH){
+          try{ localStorage.setItem('gg_unlocked_v1', '1'); }catch(e){}
+          document.body.classList.remove('locked');
+          if(gate) gate.hidden = true;
+        }else{
+          errorEl.textContent = '비밀번호가 올바르지 않습니다.';
+          input.value = '';
+          input.focus();
+        }
+      });
+    });
   }catch(e){}
 })();
 
