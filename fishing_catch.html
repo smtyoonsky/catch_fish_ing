@@ -1,0 +1,2783 @@
+<title>갯것 대백과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea-deep:#0F2B3A;
+    --sea:#146B82;
+    --tide:#2E8F82;
+    --amber:#C97A2E;
+    --coral:#AE3A28;
+    --ink:#13232A;
+    --ink-soft:#4A5D62;
+    --surface:#FBF7EE;
+    --surface-2:#FFFFFF;
+    --surface-3:#F1EADA;
+    --border:rgba(19,35,42,0.14);
+    --border-strong:rgba(19,35,42,0.28);
+    --chip-bg:#EFE7D2;
+    --warn-bg:#F7E9E1;
+    --warn-border:#D7A48F;
+    --tag-fish:#146B82;
+    --tag-mollusk:#2E8F82;
+    --tag-shell:#C97A2E;
+    --tag-crab:#AE3A28;
+    --shadow:0 1px 2px rgba(15,43,58,.06), 0 8px 24px -12px rgba(15,43,58,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sea-deep:#0A171D;
+      --sea:#6BC7DB;
+      --tide:#5FCBB8;
+      --amber:#E2A45C;
+      --coral:#E2846F;
+      --ink:#EAF1EE;
+      --ink-soft:#A9C0BB;
+      --surface:#0D1A1C;
+      --surface-2:#132424;
+      --surface-3:#1B2F2C;
+      --border:rgba(234,241,238,0.14);
+      --border-strong:rgba(234,241,238,0.26);
+      --chip-bg:#1B2F2C;
+      --warn-bg:#2C1E1A;
+      --warn-border:#6B4234;
+      --tag-fish:#6BC7DB;
+      --tag-mollusk:#5FCBB8;
+      --tag-shell:#E2A45C;
+      --tag-crab:#E2846F;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sea-deep:#0A171D;
+    --sea:#6BC7DB;
+    --tide:#5FCBB8;
+    --amber:#E2A45C;
+    --coral:#E2846F;
+    --ink:#EAF1EE;
+    --ink-soft:#A9C0BB;
+    --surface:#0D1A1C;
+    --surface-2:#132424;
+    --surface-3:#1B2F2C;
+    --border:rgba(234,241,238,0.14);
+    --border-strong:rgba(234,241,238,0.26);
+    --chip-bg:#1B2F2C;
+    --warn-bg:#2C1E1A;
+    --warn-border:#6B4234;
+    --tag-fish:#6BC7DB;
+    --tag-mollusk:#5FCBB8;
+    --tag-shell:#E2A45C;
+    --tag-crab:#E2846F;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  [id]{ scroll-margin-top: 72px; }
+  body{
+    background:var(--surface);
+    color:var(--ink);
+    font-family:'Noto Sans KR',-apple-system,sans-serif;
+    line-height:1.7;
+    padding-inline:16px;
+  }
+  ::selection{ background:var(--tide); color:#fff; }
+  h1,h2,h3,h4{ font-family:'Song Myung', serif; font-weight:400; text-wrap:balance; color:var(--sea-deep); }
+  :root[data-theme="dark"] h1, :root[data-theme="dark"] h2, :root[data-theme="dark"] h3, :root[data-theme="dark"] h4{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) h1, :root:not([data-theme="light"]) h2, :root:not([data-theme="light"]) h3, :root:not([data-theme="light"]) h4{ color:var(--ink); } }
+  a{ color:var(--sea); }
+  code, .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+  .tabular{ font-variant-numeric:tabular-nums; }
+
+  .wrap{ max-width:1180px; margin-inline:auto; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-block:clamp(28px,6vw,56px) 20px;
+    display:flex; flex-wrap:wrap; gap:32px; align-items:center;
+  }
+  .hero-copy{ flex:1 1 380px; min-width:0; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--tide); font-weight:600; margin-bottom:14px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:2px; background:var(--tide); display:inline-block; }
+  .hero h1{ font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.15; margin:0 0 14px; }
+  .hero p.lede{ font-size:1.05rem; color:var(--ink-soft); max-width:56ch; margin:0 0 18px; }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; font-size:.85rem; color:var(--ink-soft); }
+  .hero-meta span{ background:var(--surface-2); border:1px solid var(--border); border-radius:999px; padding:5px 12px; }
+  .hero-art{ flex:0 0 280px; max-width:100%; }
+  .hero-art svg{ width:100%; height:auto; display:block; }
+
+  /* ---------- Nav ---------- */
+  .toc-wrap{
+    position:sticky; top:env(safe-area-inset-top,0px);
+    z-index:20; background:var(--surface); padding-block:10px;
+    border-bottom:1px solid var(--border);
+  }
+  .toc{
+    display:flex; gap:8px; overflow-x:auto; scrollbar-width:thin;
+    padding-bottom:2px;
+  }
+  .toc a{
+    flex:0 0 auto; text-decoration:none; font-size:.84rem; font-weight:500;
+    color:var(--ink-soft); background:var(--chip-bg); border:1px solid var(--border);
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+    transition:background .15s,color .15s;
+  }
+  .toc a:hover{ color:var(--surface-2); background:var(--sea); border-color:var(--sea); }
+
+  /* ---------- Layout ---------- */
+  .layout{ display:flex; gap:40px; align-items:flex-start; padding-block:32px 60px; }
+  .side{
+    flex:0 0 216px; position:sticky; top:calc(env(safe-area-inset-top,0px) + 58px);
+    font-size:.86rem;
+  }
+  .side-list{ list-style:none; margin:0; padding:0; border-left:2px solid var(--border); }
+  .side-list li a{
+    display:block; padding:6px 0 6px 16px; text-decoration:none; color:var(--ink-soft);
+    border-left:2px solid transparent; margin-left:-2px;
+  }
+  .side-list li a:hover{ color:var(--sea); border-left-color:var(--tide); }
+  @media (max-width:900px){ .side{ display:none; } }
+
+  main{ flex:1; min-width:0; max-width:760px; }
+
+  /* ---------- Sections ---------- */
+  .section{ padding-block:38px; border-top:1px solid var(--border); }
+  .section:first-of-type{ border-top:none; }
+  .part-no{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--amber);
+    font-weight:600; letter-spacing:.06em;
+  }
+  .section h2{ font-size:1.9rem; margin:4px 0 6px; }
+  .section .kicker{ color:var(--ink-soft); font-size:.98rem; max-width:60ch; margin:0 0 20px; }
+  .section h3{ font-size:1.24rem; margin:28px 0 10px; font-family:'Noto Sans KR',sans-serif; font-weight:700; color:var(--sea-deep); }
+  :root[data-theme="dark"] .section h3{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .section h3{ color:var(--ink); } }
+  .section p{ margin:0 0 14px; }
+  .section ul, .section ol{ margin:0 0 14px; padding-left:1.3em; }
+  .section li{ margin-bottom:6px; }
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--border); border-radius:12px; margin:0 0 18px; box-shadow:var(--shadow); background:var(--surface-2); }
+  table{ border-collapse:collapse; width:100%; font-size:.88rem; min-width:560px; }
+  thead th{
+    text-align:left; background:var(--surface-3); color:var(--sea-deep); font-weight:700;
+    padding:10px 14px; white-space:nowrap; border-bottom:1px solid var(--border-strong);
+  }
+  :root[data-theme="dark"] thead th{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) thead th{ color:var(--ink); } }
+  tbody td{ padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--surface-3); }
+
+  /* ---------- Badges / tags ---------- */
+  .badge{
+    display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px;
+    border-radius:999px; white-space:nowrap;
+  }
+  .badge.easy{ background:rgba(46,143,130,.16); color:var(--tide); }
+  .badge.mid{ background:rgba(201,122,46,.16); color:var(--amber); }
+  .badge.hard{ background:rgba(174,58,40,.16); color:var(--coral); }
+  .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.05em; padding:2px 7px; border-radius:5px; color:#fff; white-space:nowrap; display:inline-block; }
+  .tag.t-fish{ background:var(--tag-fish); }
+  .tag.t-mollusk{ background:var(--tag-mollusk); }
+  .tag.t-shell{ background:var(--tag-shell); }
+  .tag.t-crab{ background:var(--tag-crab); }
+
+  /* ---------- Callouts ---------- */
+  .callout{
+    border:1px solid var(--border); border-left:4px solid var(--tide);
+    background:var(--surface-2); border-radius:10px; padding:16px 18px; margin:0 0 18px;
+    box-shadow:var(--shadow);
+  }
+  .callout h4{ font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:.95rem; margin:0 0 6px; color:var(--sea-deep); }
+  :root[data-theme="dark"] .callout h4{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .callout h4{ color:var(--ink); } }
+  .callout p:last-child{ margin-bottom:0; }
+  .callout.warn{ border-left-color:var(--coral); background:var(--warn-bg); }
+  .callout.warn h4{ color:var(--coral); }
+  .callout.amber{ border-left-color:var(--amber); }
+
+  /* ---------- Gear checklist ---------- */
+  .gear-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin:0 0 18px; }
+  .gear-card{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    padding:12px 14px; font-size:.87rem; box-shadow:var(--shadow);
+  }
+  .gear-card b{ display:block; color:var(--sea-deep); margin-bottom:3px; font-size:.9rem; }
+  :root[data-theme="dark"] .gear-card b{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .gear-card b{ color:var(--ink); } }
+  .gear-card span{ color:var(--ink-soft); }
+
+  /* ---------- Stat row ---------- */
+  .stat-row{ display:flex; flex-wrap:wrap; gap:14px; margin:0 0 18px; }
+  .stat{
+    flex:1 1 140px; background:var(--sea-deep); color:#F4EFE1; border-radius:12px;
+    padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .stat .num{ font-family:'IBM Plex Mono',monospace; font-size:1.7rem; font-weight:600; display:block; }
+  .stat .lbl{ font-size:.78rem; opacity:.82; }
+
+  /* ---------- Search box ---------- */
+  .search-box{ margin-bottom:14px; }
+  .search-box input{
+    width:100%; max-width:320px; font:inherit; padding:9px 14px; border-radius:999px;
+    border:1px solid var(--border-strong); background:var(--surface-2); color:var(--ink);
+  }
+  .search-box input:focus{ outline:2px solid var(--tide); outline-offset:1px; }
+  .no-match{ text-align:center; color:var(--ink-soft); padding:18px; display:none; }
+
+  /* ---------- Links list ---------- */
+  .src-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+  @media (min-width:640px){ .src-grid{ grid-template-columns:1fr 1fr; } }
+  .src-group{ background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow); }
+  .src-group h4{ font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:.92rem; margin:0 0 10px; color:var(--sea-deep); }
+  :root[data-theme="dark"] .src-group h4{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .src-group h4{ color:var(--ink); } }
+  .src-group ul{ margin:0; padding:0; list-style:none; }
+  .src-group li{ margin-bottom:7px; font-size:.85rem; line-height:1.5; }
+  .src-group li a{ text-decoration:none; }
+  .src-group li a:hover{ text-decoration:underline; }
+  .src-group li span{ color:var(--ink-soft); font-size:.78rem; display:block; }
+
+  footer{
+    border-top:1px solid var(--border); padding-block:26px 40px; margin-top:10px;
+    color:var(--ink-soft); font-size:.82rem; text-align:center;
+  }
+  footer a{ color:var(--ink-soft); }
+
+  @media (max-width:640px){
+    .hero{ flex-direction:column-reverse; }
+    .hero-art{ flex-basis:auto; max-width:220px; margin-inline:auto; }
+    table{ min-width:520px; }
+  }
+
+  /* ---------- Site-wide search ---------- */
+  .site-search{ position:relative; padding-top:10px; }
+  .site-search .ss-icon{ position:absolute; left:14px; top:20px; color:var(--ink-soft); pointer-events:none; }
+  .site-search input{
+    width:100%; font:inherit; font-size:.92rem; padding:10px 14px 10px 38px; border-radius:12px;
+    border:1px solid var(--border-strong); background:var(--surface-2); color:var(--ink);
+  }
+  .site-search input:focus{ outline:2px solid var(--tide); outline-offset:1px; }
+  .site-search-results{
+    position:absolute; left:0; right:0; top:calc(100% + 4px); z-index:30;
+    background:var(--surface-2); border:1px solid var(--border-strong); border-radius:12px;
+    box-shadow:var(--shadow); max-height:min(60vh,420px); overflow-y:auto; padding:6px;
+  }
+  .ss-item{
+    display:flex; align-items:baseline; gap:8px; width:100%; text-align:left; border:none; background:none;
+    font:inherit; padding:9px 10px; border-radius:8px; cursor:pointer; color:var(--ink);
+  }
+  .ss-item:hover, .ss-item.active{ background:var(--surface-3); }
+  .ss-item .ss-label{ font-weight:600; font-size:.88rem; flex-shrink:0; }
+  .ss-item .ss-section{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--tide); white-space:nowrap; margin-left:auto; padding-left:8px; }
+  .ss-empty{ padding:14px 10px; font-size:.85rem; color:var(--ink-soft); text-align:center; }
+  .section h3, .tackle-card, .gterm, .video-card, details.type-detail, .gear-card, .callout, .tbl-wrap table tbody tr{ scroll-margin-top:78px; }
+
+  /* ---------- Tide calculator ---------- */
+  .tide-tool{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:14px;
+    padding:18px; box-shadow:var(--shadow); margin:0 0 18px;
+  }
+  .tide-controls{ display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:space-between; margin-bottom:16px; }
+  .tide-date-field{ display:flex; flex-direction:column; gap:4px; }
+  .tide-date-field label{ font-size:.76rem; color:var(--ink-soft); }
+  .tide-date-field input[type="date"]{
+    font:inherit; font-family:'IBM Plex Mono',monospace; padding:8px 12px; border-radius:10px;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+  }
+  .tide-month-nav{ display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:.92rem; }
+  .tide-month-nav button{
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--ink); font-size:1rem; cursor:pointer; line-height:1;
+  }
+  .tide-month-nav button:hover{ background:var(--sea); color:#fff; border-color:var(--sea); }
+
+  .tide-detail{
+    display:flex; flex-wrap:wrap; gap:18px; align-items:center; background:var(--surface-3);
+    border-radius:12px; padding:14px 18px; margin-bottom:16px;
+  }
+  .tide-detail .moon-icon{ font-size:2.2rem; line-height:1; }
+  .tide-detail .td-main{ flex:1; min-width:180px; }
+  .tide-detail .td-date{ font-weight:700; font-size:1.02rem; margin-bottom:2px; }
+  .tide-detail .td-label{ font-size:.86rem; color:var(--ink-soft); }
+  .tide-detail .td-gauge{ flex:1 1 160px; min-width:140px; }
+  .gauge-track{ width:100%; height:8px; border-radius:99px; background:var(--border); overflow:hidden; }
+  .gauge-fill{ height:100%; border-radius:99px; background:linear-gradient(90deg,var(--tide),var(--amber),var(--coral)); }
+  .td-note{ flex-basis:100%; font-size:.84rem; color:var(--ink-soft); }
+
+  .cal-weekdays{ display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-size:.74rem; color:var(--ink-soft); margin-bottom:4px; }
+  .tide-calendar-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-cell{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    padding-block:7px; border-radius:8px; cursor:pointer; font-size:.8rem; border:1px solid transparent;
+    background:var(--surface); color:var(--ink); font-family:'IBM Plex Mono',monospace;
+  }
+  .cal-cell:hover{ border-color:var(--border-strong); }
+  .cal-cell.today{ box-shadow:inset 0 0 0 1.5px var(--sea); }
+  .cal-cell.selected{ background:var(--sea-deep); color:#fff; }
+  .cal-cell.empty{ visibility:hidden; cursor:default; }
+  .cal-cell .bar{ width:60%; height:4px; border-radius:2px; }
+  .cal-legend{ display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; font-size:.76rem; color:var(--ink-soft); }
+  .cal-legend .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px; }
+  .gear-card.gear-link{ display:block; text-decoration:none; }
+  .tackle-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:0 0 20px; }
+  .tackle-card{ background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow); }
+  .tackle-card h4{ font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:1.02rem; margin:0 0 10px; color:var(--sea-deep); display:flex; align-items:center; gap:8px; }
+  :root[data-theme="dark"] .tackle-card h4{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tackle-card h4{ color:var(--ink); } }
+  .tackle-card table{ min-width:0; font-size:.82rem; }
+  .tackle-card td:first-child{ white-space:nowrap; color:var(--ink-soft); font-weight:600; width:30%; }
+  .tackle-card .tip{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:.83rem; }
+  .tackle-card .tip b{ color:var(--amber); }
+  .tackle-filter{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .tackle-filter button{
+    font:inherit; font-size:.8rem; padding:6px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink-soft);
+  }
+  .tackle-filter button.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+
+  /* ---------- Diagrams ---------- */
+  .diagram-box{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:14px;
+    padding:20px; margin:0 0 20px; box-shadow:var(--shadow);
+  }
+  .diagram-box svg{ width:100%; height:auto; display:block; }
+  .diagram-caption{ font-size:.8rem; color:var(--ink-soft); text-align:center; margin-top:10px; }
+
+  /* ---------- Video cards ---------- */
+  .video-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; margin:0 0 10px; }
+  .video-card{
+    display:flex; gap:12px; align-items:center; text-decoration:none;
+    background:var(--surface-2); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px; box-shadow:var(--shadow); transition:transform .12s,border-color .12s;
+  }
+  .video-card:hover{ transform:translateY(-2px); border-color:var(--sea); }
+  .video-card .play-icon{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%; background:var(--coral);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .video-card .play-icon svg{ width:14px; height:14px; fill:#fff; margin-left:2px; }
+  .video-card .vc-text{ min-width:0; }
+  .video-card .vc-text b{ display:block; font-size:.86rem; color:var(--ink); margin-bottom:2px; line-height:1.3; }
+  .video-card .vc-text span{ font-size:.74rem; color:var(--ink-soft); }
+  .type-detail-grid{ display:flex; flex-direction:column; gap:16px; margin:0 0 24px; }
+  .type-detail{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:14px;
+    padding:20px 22px; box-shadow:var(--shadow);
+  }
+  .type-detail summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between;
+    gap:12px; font-family:'Noto Sans KR',sans-serif;
+  }
+  .type-detail summary::-webkit-details-marker{ display:none; }
+  .type-detail summary .td-title{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .type-detail summary .td-title b{ font-size:1.08rem; color:var(--sea-deep); }
+  :root[data-theme="dark"] .type-detail summary .td-title b{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .type-detail summary .td-title b{ color:var(--ink); } }
+  .type-detail summary .chev{ font-size:1.1rem; color:var(--ink-soft); transition:transform .15s; flex-shrink:0; }
+  .type-detail[open] summary .chev{ transform:rotate(90deg); }
+  .type-detail .td-body{ margin-top:16px; padding-top:16px; border-top:1px solid var(--border); font-size:.92rem; }
+  .type-detail .td-body h5{ font-size:.85rem; text-transform:uppercase; letter-spacing:.04em; color:var(--tide); margin:16px 0 6px; font-family:'IBM Plex Mono',monospace; }
+  .type-detail .td-body h5:first-child{ margin-top:0; }
+  .type-detail .td-body p{ margin:0 0 10px; }
+  .type-detail .td-body ul,.type-detail .td-body ol{ margin:0 0 10px; padding-left:1.2em; }
+  .type-detail .td-body li{ margin-bottom:4px; }
+  .back-to-list{ display:inline-block; margin-top:4px; font-size:.8rem; }
+
+  .media-label{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--tide); margin:0 0 8px; display:block;
+  }
+  a.gear-card{ text-decoration:none; display:block; transition:transform .12s; }
+  a.gear-card:hover{ transform:translateY(-2px); border-color:var(--sea); }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">바다생물 채집 실전 가이드</span>
+      <h1>갯것 대백과</h1>
+      <p class="lede">낚시, 해루질, 다이빙, 갯벌 체험까지 — 바다에서 먹거리를 직접 거두는 모든 방법을 한곳에 모았습니다. 도구, 어종, 물때, 포인트, 법규와 안전 수칙, 그리고 실제로 검색해 확인한 유튜브·블로그·공식기관 출처까지 함께 정리했습니다.</p>
+      <div class="hero-meta">
+        <span>4개 활동 분야</span>
+        <span>어종별 채비 가이드 14종</span>
+        <span>물때 계산기</span>
+        <span>어종·생물 도감 40종+</span>
+        <span>출처 120여 건</span>
+        <span>초보자 중심</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="280" fill="none"/>
+        <path d="M0 190 Q 40 170 80 190 T 160 190 T 240 190 T 320 190" stroke="var(--tide)" stroke-width="3" fill="none" opacity="0.55"/>
+        <path d="M0 210 Q 40 195 80 210 T 160 210 T 240 210 T 320 210" stroke="var(--sea)" stroke-width="3" fill="none" opacity="0.4"/>
+        <path d="M0 230 Q 40 218 80 230 T 160 230 T 240 230 T 320 230" stroke="var(--amber)" stroke-width="2" fill="none" opacity="0.5"/>
+        <!-- fishing rod & line -->
+        <line x1="235" y1="35" x2="160" y2="150" stroke="var(--sea-deep)" stroke-width="4" stroke-linecap="round"/>
+        <line x1="160" y1="150" x2="150" y2="205" stroke="var(--ink-soft)" stroke-width="1.5"/>
+        <circle cx="150" cy="208" r="4" fill="var(--coral)"/>
+        <!-- shell -->
+        <path d="M60 235 a22 16 0 0 1 44 0 z" fill="var(--amber)" opacity="0.85"/>
+        <path d="M70 235 q4 -10 12 -12 q8 2 12 12" stroke="var(--surface)" stroke-width="1.4" fill="none" opacity="0.6"/>
+        <!-- crab -->
+        <ellipse cx="240" cy="245" rx="17" ry="11" fill="var(--coral)" opacity="0.85"/>
+        <path d="M226 240 l-10 -6 M226 250 l-10 6 M254 240 l10 -6 M254 250 l10 6" stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+        <!-- headlamp beam (haerujil) -->
+        <circle cx="55" cy="60" r="7" fill="var(--sea-deep)"/>
+        <path d="M55 60 L120 100 L100 130 Z" fill="var(--amber)" opacity="0.28"/>
+      </svg>
+    </div>
+  </header>
+
+  <nav class="toc-wrap" aria-label="빠른 이동">
+    <div class="site-search" id="siteSearchBox">
+      <svg class="ss-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="search" id="siteSearch" placeholder="사이트 전체 검색 (예: 전복, 챔질, 사리, 패류독소)" aria-label="사이트 전체 검색" autocomplete="off">
+      <div class="site-search-results" id="siteSearchResults" hidden></div>
+    </div>
+    <div class="toc" id="quicknav">
+      <a href="#intro">소개</a>
+      <a href="#fishing">01 낚시</a>
+      <a href="#haerujil">02 해루질</a>
+      <a href="#diving">03 다이빙</a>
+      <a href="#tidalflat">04 갯벌체험</a>
+      <a href="#tackle">어종별 채비</a>
+      <a href="#species">어종도감</a>
+      <a href="#compare">유사종 구별</a>
+      <a href="#handling">손질·보관</a>
+      <a href="#hazards">위험 생물</a>
+      <a href="#tides">물때·바다날씨</a>
+      <a href="#safety">안전·법규</a>
+      <a href="#learn">배우기</a>
+      <a href="#glossary">용어사전</a>
+      <a href="#sources">출처</a>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="side">
+      <ul class="side-list" id="sidenav">
+        <li><a href="#intro">소개</a></li>
+        <li><a href="#fishing">01 · 낚시</a></li>
+        <li><a href="#haerujil">02 · 해루질</a></li>
+        <li><a href="#diving">03 · 다이빙 &amp; 스피어피싱</a></li>
+        <li><a href="#tidalflat">04 · 갯벌 체험</a></li>
+        <li><a href="#tackle">어종별 채비 가이드</a></li>
+        <li><a href="#species">어종·생물 도감</a></li>
+        <li><a href="#compare">헷갈리는 생물 구별</a></li>
+        <li><a href="#handling">손질 · 보관 · 식중독 예방</a></li>
+        <li><a href="#hazards">위험 생물 주의</a></li>
+        <li><a href="#tides">물때 캘린더 · 바다날씨</a></li>
+        <li><a href="#safety">안전 수칙 &amp; 법규</a></li>
+        <li><a href="#learn">배우고 나누기</a></li>
+        <li><a href="#glossary">용어사전</a></li>
+        <li><a href="#sources">출처 모음</a></li>
+      </ul>
+    </aside>
+
+    <main>
+
+      <section class="section" id="intro">
+        <p class="kicker" style="margin-top:0;">이 백과사전은 실제 웹 검색으로 확인한 정부기관 자료·전문 블로그·유튜브 채널을 바탕으로 만들었습니다. 물때·계절·금어기 등은 매년 바뀌므로, 현장에 나가기 전 <a href="#sources">출처</a>에 링크된 공식 자료로 최신 정보를 다시 확인하세요.</p>
+        <div class="gear-grid">
+          <div class="gear-card"><b>낚시</b><span>대·릴을 이용해 물고기를 낚는 가장 대중적인 방법. 배낚시부터 민물 붕어낚시까지 스펙트럼이 넓습니다.</span></div>
+          <div class="gear-card"><b>해루질</b><span>썰물 때 갯벌·갯바위를 걸으며 손이나 간단한 도구로 조개·게·낙지를 잡는 활동.</span></div>
+          <div class="gear-card"><b>다이빙</b><span>물속에 들어가 관찰하거나 채집하는 활동. 국내에서는 규제가 가장 엄격한 분야입니다.</span></div>
+          <div class="gear-card"><b>갯벌 체험</b><span>어촌계가 운영하는 체험마을에서 호미·갈퀴로 조개를 캐는, 가족 단위로 가장 접근하기 쉬운 방법.</span></div>
+        </div>
+      </section>
+
+      <!-- ============ 01 FISHING ============ -->
+      <section class="section" id="fishing">
+        <span class="part-no">PART 01</span>
+        <h2>낚시</h2>
+        <p class="kicker">대·릴로 물고기를 낚는 가장 오래되고 대중적인 채집법. 낚시터·대상어·기법에 따라 완전히 다른 놀이가 됩니다.</p>
+
+        <h3 id="fishing-types">낚시의 종류</h3>
+        <p style="font-size:.82rem;color:var(--ink-soft);">이름을 누르면 아래 상세 설명으로 바로 이동합니다.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>종류</th><th>특징</th><th>난이도</th><th>초보자 적합도</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#type-surfcast">원투낚시(캐스팅) ›</a></td><td>채비를 멀리 던져 바닥에 놓고 입질을 기다림. 방파제·해변 어디서나 가능</td><td><span class="badge easy">쉬움</span></td><td>가장 배우기 쉬움</td></tr>
+            <tr><td><a href="#type-float">갯바위·방파제 찌낚시 ›</a></td><td>구멍찌로 밑밥을 뿌려 감성돔·참돔 등을 노림. 찌맞춤 등 기술 필요</td><td><span class="badge mid">보통</span></td><td>방파제는 쉬움, 원도 갯바위는 어려움</td></tr>
+            <tr><td><a href="#type-lure">루어낚시(락피싱·에깅·배스) ›</a></td><td>가짜 미끼를 던지고 액션을 줘 포식성 어종을 유혹. 볼락 락피싱·에깅은 입문 난이도가 낮음</td><td><span class="badge mid">보통</span></td><td>배스·볼락 루어는 쉬운 편</td></tr>
+            <tr><td><a href="#type-jigging">지깅 ›</a></td><td>무거운 메탈지그를 수직·연안 캐스팅으로 운용해 방어·부시리 등 회유어 공략</td><td><span class="badge hard">어려움</span></td><td>체력·장비 부담 큼</td></tr>
+            <tr><td><a href="#type-boat">배낚시(선상낚시) ›</a></td><td>배를 타고 나가 먼바다 포인트를 공략. 원거리·심해 어종 가능</td><td><span class="badge mid">보통</span></td><td>장비 대여 시 접근 쉬움</td></tr>
+            <tr><td><a href="#type-freshwater">민물낚시(붕어·향어) ›</a></td><td>저수지·관리형 낚시터에서 즐기는 전통 바닥낚시</td><td><span class="badge easy">쉬움</span></td><td>매우 높음</td></tr>
+            <tr><td><a href="#type-ice">얼음낚시 ›</a></td><td>겨울 결빙된 호수에서 빙어·산천어를 낚는 축제형 낚시. 얼음 두께 10cm 이상 확인 필수</td><td><span class="badge easy">쉬움</span></td><td>아이·가족 단위로 최적</td></tr>
+            <tr><td><a href="#type-gyeonji">견지낚시 ›</a></td><td>대나무 외짝 얼레에 줄을 감아 흐르는 물에서 스침질로 피라미 등을 낚는 한국 고유 기법</td><td><span class="badge easy">쉬움</span></td><td>여름 피서낚시로 적합</td></tr>
+            <tr><td><a href="#type-fly">플라이피싱 ›</a></td><td>무게가 실린 라인으로 인조 미끼를 캐스팅. 국내는 송어·산천어 대상</td><td><span class="badge hard">어려움</span></td><td>캐스팅 동작 습득에 강습 필요</td></tr>
+            <tr><td><a href="#type-kayak">카약낚시 ›</a></td><td>카약으로 이동성을 확보해 육지에서 닿지 않는 포인트 공략</td><td><span class="badge mid">보통</span></td><td>기상·안전수칙 숙지 필요</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>낚시 종류별 상세 설명</h3>
+        <div class="type-detail-grid">
+
+          <details class="type-detail" id="type-surfcast">
+            <summary><span class="td-title"><b>원투낚시(캐스팅)</b><span class="badge easy">쉬움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>채비를 멀리 던져 바닥에 가라앉힌 뒤 입질을 기다리는 가장 기본적인 낚시. 방파제·백사장 어디서나 별다른 지형 조건 없이 시작할 수 있어 "가장 배우기 쉬운 낚시"로 꼽힙니다.</p>
+              <h5>필요 장비</h5>
+              <p>원투대 3호 이상(4.5m 전후), 릴 3000번 이상 중형 스피닝릴, 원줄 PE 4호 또는 나일론 6호를 200m 이상 감아 원거리 캐스팅에 대비합니다.</p>
+              <h5>기법</h5>
+              <ul>
+                <li><b>처넣기낚시</b> — 채비를 멀리 던지지 않고 발밑에 넣고 기다리는 입문용 변형</li>
+                <li><b>카고낚시(직공낚시)</b> — 봉돌 대신 밑밥통(카고)에 크릴을 담아 투척, 집어와 동시 진행</li>
+                <li><b>비거리 늘리기</b> — 낚싯대 탄성과 원심력이 핵심, 초릿대~봉돌 거리 1.5m 유지</li>
+              </ul>
+              <h5>대상 어종 · 시즌</h5>
+              <p>여름 보리멸(백사장 대표 어종), 광어·삼치·농어·우럭·노래미 등 계절별로 다양합니다.</p>
+              <p style="font-size:.85rem;"><a href="#fishing">↑ 채비 조립 순서·장비 자세히 보기</a></p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-float">
+            <summary><span class="td-title"><b>갯바위·방파제 찌낚시</b><span class="badge mid">보통</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>구멍찌·막대찌로 미끼(주로 크릴)를 조류에 자연스럽게 흘려보내며, 밑밥으로 물고기를 채비 주변에 모으는(집어) 방식. 감성돔·벵에돔·참돔 등 갯바위 대표 어종을 노립니다.</p>
+              <h5>4가지 흘림 방식</h5>
+              <ul>
+                <li><b>고정찌</b> — 수심이 일정한 얕은 곳에 적합, 가장 쉬움</li>
+                <li><b>반유동</b> — 면사매듭으로 수심을 지정, 입문자 최우선 추천</li>
+                <li><b>전유동</b> — 저부력찌가 매듭 없이 전 수심을 탐색, 숙련자용</li>
+                <li><b>막대찌</b> — 원투성·시인성이 좋아 원거리·배낚시에 사용</li>
+              </ul>
+              <h5>시즌</h5>
+              <p>감성돔은 가을~겨울(10월~)과 봄(3~6월), 참돔은 4~6월·10~11월이 성수기입니다.</p>
+              <h5>안전</h5>
+              <p>원도 갯바위는 배로만 진입하며 구명조끼·스파이크화가 필수입니다. 방파제는 편의시설이 갖춰져 있어 입문에 적합합니다.</p>
+              <p style="font-size:.85rem;"><a href="#fishing">↑ 채비 조립 9단계 다이어그램 보기</a></p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-lure">
+            <summary><span class="td-title"><b>루어낚시(락피싱·에깅·배스)</b><span class="badge mid">보통</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>가짜 미끼(루어)를 캐스팅한 뒤 릴링·액션으로 살아있는 먹이처럼 움직여 포식성 어종의 반사적 입질을 유도하는 공격적인 낚시 장르입니다.</p>
+              <h5>세부 장르</h5>
+              <ul>
+                <li><b>락피싱</b> — 볼락 등 암초·해조밭 소형 루어. 입문 난이도 낮음</li>
+                <li><b>에깅</b> — 에기(가짜 오징어)로 갑오징어·주꾸미·무늬오징어·문어를 공략. 폴링→저킹→스테이 3단 액션</li>
+                <li><b>배스낚시</b> — 저수지 민물, 텍사스·다운샷·캐롤라이나·지그헤드·노싱커 등 리그 선택이 핵심</li>
+                <li><b>시배스(농어) 루어</b> — 미노우·바이브레이션·탑워터를 계절에 맞춰 운용</li>
+                <li><b>아징</b> — 0.5~3g 초경량 지그헤드로 전갱이·볼락을 노림. UL~L 로드, 소형릴(1000~2000번), 합사 0.2~0.4호</li>
+                <li><b>타이라바</b> — 헤드·스커트·바늘이 하나로 된 채비를 감아올려 참돔을 노림. 헤드 무게는 수심 1m당 1g이 기준(조류 빠르면 더 무겁게)</li>
+                <li><b>사비키(카드채비)</b> — 작은 바늘 여러 개가 달린 채비를 수직으로 내려 전갱이·고등어 등 어군을 노림. 발밑 낚시로 입문 최적</li>
+              </ul>
+              <p style="font-size:.85rem;"><a href="#tackle">↑ 어종별 채비 가이드에서 지그헤드·리그 상세 보기</a></p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-jigging">
+            <summary><span class="td-title"><b>지깅</b><span class="badge hard">어려움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>무거운 메탈지그를 수직 또는 연안 캐스팅으로 운용해 방어·부시리 등 힘 좋은 회유어를 공략하는 파워풀한 낚시. 전신 근력을 쓰는 만큼 체력 소모가 큽니다.</p>
+              <h5>3가지 스타일</h5>
+              <ul>
+                <li><b>하이피치(스피드) 지깅</b> — 빠르고 격렬한 액션으로 도주하는 베이트피시를 흉내, 반사 입질 유도</li>
+                <li><b>슬로우피칭 지깅</b> — 로드 반동으로 느리고 리드미컬하게, 전용 지그(90~250g)와 로드 필요</li>
+                <li><b>라이트지깅</b> — 부드러운 가벼운 로드로 보트·카약에서 수직 운용, 접근성 좋음</li>
+              </ul>
+              <h5>시즌</h5>
+              <p>가을~초겨울 방어·부시리 회유 시즌이 대표적입니다.</p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-boat">
+            <summary><span class="td-title"><b>배낚시(선상낚시)</b><span class="badge mid">보통</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>배를 타고 나가 갯바위·방파제에서 닿지 않는 먼바다·깊은 수심 포인트를 공략합니다. 장비 대여가 되는 선사가 많아 초보자도 접근하기 쉽습니다.</p>
+              <h5>대표 출항지</h5>
+              <p>인천 옹진군(남항·만석부두), 태안 신진도·안흥항, 여수 국동항, 통영 영운리항 등 — 우럭·갑오징어·주꾸미·참돔·갈치를 계절별로 노립니다.</p>
+              <h5>예약 방법</h5>
+              <p>어바웃피싱·선상24·더피싱에서 ① 지역·항구 선택 → ② 날짜·시간 설정 → ③ 선박 확인 → ④ 결제 순. 출항 30분 전 도착, 신분증·구명조끼 지참이 대부분 필수입니다.</p>
+              <h5>준비물</h5>
+              <p>멀미약(초심자 필수), 여벌옷, 물·간식. 미끼는 선사에서 제공하는 경우가 많습니다.</p>
+              <p style="font-size:.85rem;"><a href="#fishing">↑ 선상낚시 예약·출항지 표 자세히 보기</a></p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-freshwater">
+            <summary><span class="td-title"><b>민물낚시(붕어·향어)</b><span class="badge easy">쉬움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>저수지·강·관리형 낚시터에서 붕어·향어·잉어·배스를 노리는, 진입장벽이 가장 낮은 낚시입니다.</p>
+              <h5>바닥낚시 vs 내림낚시</h5>
+              <p><b>바닥낚시(올림낚시)</b>는 봉돌이 바닥에 닿은 채 찌가 올라오는 신호로 챔질하는 전통 방식이고, <b>내림낚시</b>는 붕어가 미끼를 살짝 건드리기만 해도 찌가 내려가는 예민한 신호를 이용합니다.</p>
+              <h5>대표 낚시터</h5>
+              <p>예당저수지(국내 최대급), 충주호·대청호(배스), 소양호(다어종) 등이 꼽힙니다.</p>
+              <h5>미끼</h5>
+              <p>지렁이(사계절 강세) &gt; 글루텐(입문 추천) &gt; 옥수수 &gt; 새우 순으로 선호됩니다.</p>
+              <p style="font-size:.85rem;"><a href="#tackle">↑ 붕어·향어 채비 가이드 자세히 보기</a></p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-ice">
+            <summary><span class="td-title"><b>얼음낚시</b><span class="badge easy">쉬움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>겨울철 얼어붙은 호수에 구멍을 뚫고 빙어·산천어를 낚는 축제형 낚시. 화천 산천어축제(매년 1월~2월, 2026년은 1/10~2/1 예정)가 대표적이며, 온라인 사전 예매 시 비교적 성공률이 높은 상류 구역을 배정받을 수 있습니다.</p>
+              <h5>필요 장비</h5>
+              <ul>
+                <li>짧은 얼음낚시 전용 대, 아이스오거(얼음 구멍 뚫는 스크류)</li>
+                <li>방한복·방한장갑·방한화, 앉을 방석과 무릎 담요(장시간 착석으로 저체온증 위험)</li>
+              </ul>
+              <h5>안전 기준</h5>
+              <p>일반적으로 <b>얼음 두께 10cm 이상</b>이 최소 기준이지만, 기온에 따라 얼음 상태가 수시로 바뀌므로 두꺼워 보여도 방심은 금물입니다. 축제장 등 통제된 구역에서 즐기는 것이 가장 안전합니다.</p>
+              <h5>채비·미끼</h5>
+              <p>빙어는 짧은 가지채비에 구더기(파리 유충) 미끼를 사용하는 것이 일반적입니다.</p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-gyeonji">
+            <summary><span class="td-title"><b>견지낚시</b><span class="badge easy">쉬움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의·유래</h5>
+              <p>대나무 외짝 얼레(견지대)에 줄을 감아 흐르는 강물에서 피라미·갈겨니·끄리·누치를 낚는 한국 고유의 전통 기법으로, 북한강·남한강 일대에서 특히 성행합니다.</p>
+              <h5>스침질(견지질)</h5>
+              <p>견지대를 상류 쪽으로 챘다가 하류로 내려주며 줄을 풀어주는 동작을 반복합니다. 편납(추)의 무게를 유속에 맞게 조절하는 것이 핵심 — 너무 무거우면 바닥에 걸리고, 너무 가벼우면 상층에서만 떠다닙니다.</p>
+              <h5>필요 장비</h5>
+              <p>입문용 견지대 2만~2.5만원대, 원줄 1.5호 50~70m, 목줄 1호, 바늘 5~9호. 낚시점 또는 북한강·남한강변 견지공방에서 구입할 수 있습니다.</p>
+              <p style="font-size:.85rem;color:var(--ink-soft);">릴 없이 손맛을 직접 느끼는 방식이라 여름 피서낚시로 특히 인기가 많습니다.</p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-fly">
+            <summary><span class="td-title"><b>플라이피싱</b><span class="badge hard">어려움</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>가벼운 인조 미끼(플라이)를, 미끼 무게가 아닌 <b>라인 자체의 무게</b>로 캐스팅하는 낚시. 백캐스트(뒤로 던지기)와 포워드캐스트(앞으로 던지기)를 리듬감 있게 반복하는 동작이 기본기입니다.</p>
+              <h5>구성 요소</h5>
+              <p>플라이 라인(무게감 있는 두꺼운 줄) → 리더 → 티펫(가장 가는 끝줄) → 플라이(인조 미끼). 플라이는 수면에 뜨는 <b>드라이플라이</b>, 물속을 표류하는 <b>님프</b>, 작은 물고기를 흉내내는 <b>스트리머</b> 등으로 나뉩니다.</p>
+              <h5>국내 여건</h5>
+              <p>강원 산간 계곡의 송어·산천어가 주 대상이며, 송어양식장 체험장에서 장비 대여와 함께 입문할 수 있습니다.</p>
+              <p style="font-size:.85rem;color:var(--ink-soft);">캐스팅 동작 자체를 따로 연습해야 해 난이도가 높은 편 — 초보자는 강습을 낀 체험 프로그램으로 시작하는 것을 권장합니다.</p>
+            </div>
+          </details>
+
+          <details class="type-detail" id="type-kayak">
+            <summary><span class="td-title"><b>카약낚시</b><span class="badge mid">보통</span></span><span class="chev">›</span></summary>
+            <div class="td-body">
+              <h5>정의</h5>
+              <p>카약으로 이동성을 확보해 육지·방파제에서 닿지 않는 포인트를 공략하는 낚시. 낚시용으로는 앉는 자리가 트여 있어 안정적인 <b>SIT-ON-TOP(개방형)</b> 카약이 주로 쓰입니다.</p>
+              <h5>필요 장비</h5>
+              <p>낚시용 카약, 패들, 구명조끼(다리끈형 필수), 앵커(닻), 방수백. 로드홀더·어군탐지기를 장착한 전용 모델도 있습니다.</p>
+              <h5>안전 수칙</h5>
+              <ul>
+                <li>구명조끼는 예외 없이 상시 착용(허리띠형이 아닌 다리끈형)</li>
+                <li>바람이 강하거나 뇌우 예보가 있으면 출조를 취소</li>
+                <li>단독 출조를 피하고, 항상 이안류·조류 방향을 확인</li>
+              </ul>
+              <h5>시작하는 법</h5>
+              <p>초보자는 구매 전 카약 대여점·체험 투어로 먼저 경험해보는 것을 권장합니다.</p>
+            </div>
+          </details>
+
+        </div>
+
+        <h3>기법 더 알아보기 — 찌낚시 방식</h3>
+        <p>같은 찌낚시도 채비를 어떻게 흘리느냐에 따라 완전히 다른 기법이 됩니다.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>방식</th><th>원리</th><th>적합 상황</th><th>난이도</th></tr></thead>
+          <tbody>
+            <tr><td>고정찌</td><td>찌를 원줄의 정해진 위치에 완전히 고정, 항상 같은 수심 유지</td><td>수심이 일정하고 조류가 적은 얕은 포인트</td><td><span class="badge easy">쉬움</span></td></tr>
+            <tr><td>반유동</td><td>찌는 자유롭게 움직이되 면사매듭으로 멈추는 지점(수심)을 지정</td><td>특정 수심층 집중 공략, 입질 파악이 직관적 — 입문자 최우선 추천</td><td><span class="badge easy">쉬움</span></td></tr>
+            <tr><td>전유동</td><td>저부력찌가 매듭 없이 수면부터 바닥까지 전 수심을 자연스레 흘러감</td><td>대상어 유영층이 일정치 않거나 경계심이 강할 때</td><td><span class="badge hard">어려움</span></td></tr>
+            <tr><td>막대찌</td><td>무게중심이 아래인 자립찌 사용, 원투성과 시인성이 좋음</td><td>저수온기, 원거리 포인트, 배낚시</td><td><span class="badge mid">보통</span></td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>기법 더 알아보기 — 원투 &amp; 방파제 기법</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>처넣기낚시</b><span>채비를 멀리 던지지 않고 방파제 발밑에 넣고 기다리는 가장 쉬운 입문 기법. 우럭·노래미·전갱이 등 대상</span></div>
+          <div class="gear-card"><b>카고낚시(직공낚시)</b><span>봉돌 대신 밑밥통(카고)에 크릴 등을 담아 투척, 채비 주변으로 집어하며 감성돔 등을 노림</span></div>
+          <div class="gear-card"><b>비거리 늘리기</b><span>팔 힘이 아니라 낚싯대 탄성과 원심력이 핵심. 초릿대~봉돌 거리 약 1.5m 유지, 가는 합사(PE) 사용 시 비거리 증가</span></div>
+          <div class="gear-card"><b>서프낚시(서핑캐스팅)</b><span>백사장에서 원투로 먼바다를 노림. 여름 보리멸이 대표 어종, 최근 광어·삼치 서프게임도 확산 중</span></div>
+        </div>
+
+        <h3>기법 더 알아보기 — 루어 리그(배스 중심)</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>리그</th><th>원리</th><th>적합 상황</th></tr></thead>
+          <tbody>
+            <tr><td>텍사스리그</td><td>유동 불릿싱커를 웜 앞에 꽂아 밑걸림 최소화</td><td>오픈워터~수초 밀집지까지 범용</td></tr>
+            <tr><td>다운샷리그</td><td>싱커가 맨 아래, 바늘·웜이 그 위에서 한 자리 오래 머무름</td><td>드롭오프·급경사 등 깊은 수심</td></tr>
+            <tr><td>캐롤라이나리그</td><td>무거운 싱커를 웜과 분리해 멀리 던지고 웜은 바닥 근처를 천천히 배회</td><td>넓은 지역 탐색</td></tr>
+            <tr><td>지그헤드리그</td><td>바늘+추 일체형에 웜을 꽂는 단순 채비</td><td>저활성기·겨울철 예민한 상황</td></tr>
+            <tr><td>노싱커리그</td><td>봉돌 없이 바늘에 웜만 꽂아 가장 자연스러운 폴링</td><td>초심자, 밑걸림 회피</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>기법 더 알아보기 — 지깅 &amp; 에깅 액션</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>하이피치(스피드) 지깅</b><span>빠르고 격렬한 액션으로 도주하는 베이트피시를 흉내내 반사 입질 유도. 방어·부시리 등</span></div>
+          <div class="gear-card"><b>슬로우피칭 지깅</b><span>로드 반동으로 느리고 리드미컬하게, 상처 입은 물고기를 연출. 전용 지그·로드 필요</span></div>
+          <div class="gear-card"><b>라이트지깅</b><span>부드러운 블랭크의 가벼운 로드로 수직 지깅. 보트·카약에서 접근성 좋음</span></div>
+          <div class="gear-card"><b>에깅 3단 액션</b><span>저킹(챔질하듯 튀어오르게)→폴링(가라앉히기)→스테이(5~10초 정지) 반복. 무늬오징어·갑오징어 공통 기본기</span></div>
+        </div>
+
+        <h3>기법 더 알아보기 — 그 외</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>훌치기낚시</b><span>미끼 없이 다수의 바늘로 몸통을 걸어채는 기법. 숭어·학꽁치 무리를 향해 강하게 릴링해 훅킹</span></div>
+          <div class="gear-card"><b>대낚시 vs 릴낚시</b><span>대낚시는 릴 없이 낚싯대만 사용해 손맛이 직접적, 릴낚시는 먼 거리·깊은 수심까지 대응</span></div>
+          <div class="gear-card"><b>내림낚시</b><span>붕어낚시에서 찌가 내려가는 신호로 입질을 파악하는 예민한 기법. 바닥낚시(올림)보다 반응이 빠름</span></div>
+          <div class="gear-card"><b>야간 갈치 집어등</b><span>강한 주광성인 갈치를 집어등으로 유인. 가장 밝은 중심부보다 명암 경계면에 채비를 흘리는 것이 핵심</span></div>
+        </div>
+
+        <h3>필요 장비</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>낚싯대(로드) · 릴</b><span>스피닝릴(범용·초보용), 베이트릴(강한 어종), 전동릴(지깅·심해)로 구분</span></div>
+          <div class="gear-card"><b>낚싯줄</b><span>나일론(신축성), 카본(내마모성, 덜 보임), 합사(PE, 최고 강도) 3대 소재</span></div>
+          <div class="gear-card"><b>채비</b><span>원줄-찌-봉돌-도래-목줄-바늘 구조. 전유동·반유동·막대찌로 상황별 구분</span></div>
+          <div class="gear-card"><b>미끼</b><span>생미끼(크릴, 참갯지렁이, 새우) · 루어(미노우, 웜, 에기, 메탈지그)</span></div>
+          <div class="gear-card"><b>안전 장비</b><span>구명조끼(다리끈형 권장), 편광안경, 미끄럼 방지 신발</span></div>
+          <div class="gear-card"><b>보조 장비</b><span>뜰채, 아이스박스, 소형 랜턴(야간 갈치낚시 등)</span></div>
+        </div>
+
+        <h3>낚싯대(로드) 종류 &amp; 선택 가이드</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>종류</th><th>길이·액션</th><th>용도</th></tr></thead>
+          <tbody>
+            <tr><td>찌낚시대(릴찌대)</td><td>4.5~5.3m, 1~2호(연질~중경질)</td><td>감성돔·참돔 등 구멍찌 채비 운용</td></tr>
+            <tr><td>루어대</td><td>6~9ft, UL(초경량)~M(미디엄)</td><td>볼락·배스 등 루어 캐스팅·액션</td></tr>
+            <tr><td>원투대</td><td>3.6~4.5m, 3호 이상(경질)</td><td>무거운 봉돌을 멀리 캐스팅</td></tr>
+            <tr><td>지깅대</td><td>5~6.5ft, 강한 허리 파워</td><td>메탈지그 운용, 강한 어종 파이팅</td></tr>
+            <tr><td>민물대(붕어대)</td><td>3.6~5.3m(12~18칸), 릴 없음</td><td>저수지 바닥낚시, 대물낚시는 더 긴 대</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>액션(강도)이란</b> 로드가 휘는 정도를 말하며 연질(UL/L)일수록 예민하고 작은 입질을 잘 전달하지만 큰 힘을 받기 어렵고, 경질(H)일수록 강한 어종·원투에 유리하지만 예민함은 떨어집니다. 처음 시작할 땐 특정 어종 전용대보다 <b>범용성이 좋은 중경질(ML~M) 로드 1대</b>로 시작해 경험이 쌓이면 전용 장비를 늘려가는 것이 일반적인 추천입니다.</p>
+
+        <h3>릴의 종류 &amp; 선택 가이드</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>종류</th><th>특징</th><th>추천 대상</th></tr></thead>
+          <tbody>
+            <tr><td>스피닝릴</td><td>로드 아래쪽에 장착, 스풀이 로드와 수직으로 회전. 구조가 단순해 라인 꼬임이 적음</td><td>범용·초보자, 찌낚시·라이트 루어</td></tr>
+            <tr><td>베이트릴</td><td>로드 위쪽에 장착, 스풀이 로드와 일직선으로 회전. 감도가 좋으나 백래시(줄 엉킴) 주의 필요</td><td>돌돔·배스·가물치 등 강한 어종, 원투·배낚시</td></tr>
+            <tr><td>전동릴</td><td>버튼으로 자동으로 줄을 감아올림</td><td>지깅·심해 배낚시 등 수심이 깊은 낚시</td></tr>
+          </tbody>
+        </table></div>
+        <p>릴 번호(2500, 3000, 4000…)는 크기와 줄 감기는 양을 나타내며, 숫자가 클수록 크고 강합니다. 찌낚시·루어낚시는 2500~3000번, 원투·배낚시는 4000번 이상이 일반적입니다. <b>초보자는 드랙 조절이 쉬운 스피닝릴</b>로 시작하는 것이 권장됩니다.</p>
+
+        <h3>릴 셋팅 — 줄감기 &amp; 드랙 조절</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>원줄 감기</b><span>라인 스풀을 엄지·중지 사이에 끼워 팽팽함을 유지하며 감기. PE(합사)는 젖은 수건으로 감싸 쥐고 감아야 백래시를 예방</span></div>
+          <div class="gear-card"><b>채우는 양</b><span>스풀 턱에서 1~2mm 여유를 두고 감아야 줄이 뭉쳐 튕겨나가는 "파마 현상"을 막을 수 있음</span></div>
+          <div class="gear-card"><b>드랙 조절</b><span>노브를 시계방향(조임)으로 돌리면 강한 힘에도 버티고, 반시계(풀기)로 돌리면 작은 힘에도 줄이 풀려나감</span></div>
+          <div class="gear-card"><b>적정 세기 확인</b><span>줄을 45도 각도로 당겼을 때 "지지직" 소리와 함께 서서히 풀려나가면 적정 상태</span></div>
+        </div>
+
+        <h3>쇼크리더 사용법</h3>
+        <p>쇼크리더는 가늘고 잘 늘어나지 않는 PE(합사) 원줄 끝에 연결하는 나일론·카본 목줄로, <b>캐스팅 순간의 충격을 흡수</b>하고 물속에서 덜 보이게 하며 바위·이빨에 의한 마모를 줄여줍니다. 원투낚시는 12호 내외로 굵게, 루어낚시는 대상어에 맞춰 2~5호를 씁니다. 연결은 <a href="#type-surfcast">FG노트</a>가 표준이며(강도 90~95% 유지), 매듭법은 위 <a href="#fishing">매듭법 알아두기</a> 표를 참고하세요.</p>
+
+        <h3>미끼를 바늘에 꽂는 법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>미끼</th><th>꿰는 법</th></tr></thead>
+          <tbody>
+            <tr><td>지렁이(청·참갯지렁이)</td><td>바늘을 머리 쪽부터 넣어 몸통을 따라 조금씩 밀어 넣는다. 여러 마리를 꿸 때는 마지막 한 마리만 이탈 방지로 두 번 꿰어 투척. 체액이 빠진 지렁이는 유인 효과가 떨어지므로 싱싱한 것을 사용</td></tr>
+            <tr><td>크릴(냉동새우)</td><td>꼬리 쪽에서 바늘을 넣어 머리 방향으로 살짝 관통시키는 것이 기본. 통째로 꿰면 자연스러운 움직임이 유지됨</td></tr>
+            <tr><td>생새우</td><td>입질이 약하면 등쪽을 살짝 꿰어 새우가 계속 움직이게 하고, 입질이 없으면 머리 일부·앞발을 제거해 체액을 흘려 유인력을 높임</td></tr>
+            <tr><td>웜(루어)</td><td>지그헤드 바늘을 웜 머리 중앙에 일직선으로 찔러 넣어 몸통이 휘지 않고 일자로 펴지게 꽂는 것이 기본(휘어지면 액션이 부자연스러워짐)</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>매듭법 알아두기</h3>
+        <p>모든 매듭은 <b>조이기 전 물이나 침으로 반드시 적셔야</b> 합니다 — 마른 상태로 급하게 조이면 마찰열로 라인 강도가 최대 30%까지 떨어집니다.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>매듭</th><th>용도</th><th>묶는 순서(핵심)</th></tr></thead>
+          <tbody>
+            <tr><td>클린치노트<br>(개선형)</td><td>바늘·도래에 원줄·목줄을 직접 묶는 가장 기본 매듭</td><td>아이(구멍) 통과 → 본선에 6회 감기 → 첫 고리에 통과 → (개선형) 큰 고리에 한 번 더 통과 후 조임</td></tr>
+            <tr><td>유니노트</td><td>나일론·카본 라인으로 바늘·도래·릴 스풀 연결. 가장 배우기 쉬운 범용 매듭</td><td>아이에 통과시켜 루프 생성 → 루프 안으로 본선+짧은줄 함께 4~5회 감기 → 조여서 밀착</td></tr>
+            <tr><td>8자매듭·루프노트</td><td>도래가 자유롭게 회전하는 여유 고리를 만들어 꼬임 방지</td><td>도래를 줄에 끼움 → 본선에 3~4회 감기 → 처음 루프에 통과시켜 조임</td></tr>
+            <tr><td>파로마노트</td><td>합사(PE) 결속 시 사실상 필수. 강도 최대 95% 유지</td><td>줄을 반으로 접어 두 겹으로 아이 통과 → 헐거운 반매듭 → 바늘을 고리에 통과 → 아이까지 밀어 올려 조임</td></tr>
+            <tr><td>더블 유니노트</td><td>굵기가 다른 원줄-목줄을 직접 연결(강도 약 80~85%, 초보자 추천)</td><td>두 줄을 겹쳐 각자 상대 줄에 유니노트를 만든 뒤 서로 당겨 맞물림</td></tr>
+            <tr><td>FG노트</td><td>PE 원줄과 나일론/카본 쇼크리더 연결. 원투·루어낚시 표준(강도 90~95%)</td><td>두 줄을 X자로 교차 → PE 단선으로 리더를 15~20회 촘촘히 감기 → 하프히치로 고정 → 여분 절단</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.85rem;">매듭 영상: <a href="https://www.youtube.com/watch?v=y7UnYSlQIqc" target="_blank" rel="noopener">유니노트 묶는법</a> · <a href="https://www.youtube.com/watch?v=AxmW_9H6D_E" target="_blank" rel="noopener">FG노트(쇼크리더 연결) 가장 쉬운 방법</a></p>
+
+        <h3>채비 조립 순서</h3>
+        <div class="diagram-box">
+          <svg viewBox="0 0 380 470" xmlns="http://www.w3.org/2000/svg">
+            <line x1="70" y1="15" x2="70" y2="450" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+            <text x="70" y="10" text-anchor="middle" font-size="12" fill="var(--ink-soft)" font-family="'IBM Plex Mono',monospace">원줄</text>
+
+            <g>
+              <rect x="62" y="55" width="16" height="6" rx="2" fill="var(--amber)"/>
+              <line x1="82" y1="58" x2="140" y2="58" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="62" font-size="13" fill="var(--ink)" font-weight="700">면사매듭</text>
+              <text x="146" y="78" font-size="11" fill="var(--ink-soft)">수심을 정하는 스토퍼</text>
+            </g>
+
+            <g>
+              <circle cx="70" cy="105" r="6" fill="var(--tide)"/>
+              <line x1="82" y1="105" x2="140" y2="105" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="109" font-size="13" fill="var(--ink)" font-weight="700">반달구슬</text>
+              <text x="146" y="125" font-size="11" fill="var(--ink-soft)">매듭 보호 완충재</text>
+            </g>
+
+            <g>
+              <ellipse cx="70" cy="157" rx="16" ry="22" fill="var(--sea)" opacity="0.85"/>
+              <line x1="90" y1="157" x2="140" y2="157" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="153" font-size="13" fill="var(--ink)" font-weight="700">구멍찌(어신찌)</text>
+              <text x="146" y="169" font-size="11" fill="var(--ink-soft)">입질을 시각적으로 전달</text>
+            </g>
+
+            <g>
+              <circle cx="70" cy="207" r="7" fill="none" stroke="var(--amber)" stroke-width="4"/>
+              <line x1="82" y1="207" x2="140" y2="207" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="203" font-size="13" fill="var(--ink)" font-weight="700">O형 쿠션고무</text>
+              <text x="146" y="219" font-size="11" fill="var(--ink-soft)">찌·수중찌 충격 완화</text>
+            </g>
+
+            <g>
+              <rect x="60" y="245" width="20" height="16" rx="8" fill="var(--sea-deep)"/>
+              <line x1="82" y1="253" x2="140" y2="253" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="249" font-size="13" fill="var(--ink)" font-weight="700">수중찌</text>
+              <text x="146" y="265" font-size="11" fill="var(--ink-soft)">채비 부력을 중립으로</text>
+            </g>
+
+            <g>
+              <path d="M62 292 L70 306 L78 292" fill="none" stroke="var(--amber)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="82" y1="299" x2="140" y2="299" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="295" font-size="13" fill="var(--ink)" font-weight="700">V형 쿠션고무</text>
+              <text x="146" y="311" font-size="11" fill="var(--ink-soft)">벌어진 쪽이 아래(도래)로</text>
+            </g>
+
+            <g>
+              <circle cx="65" cy="343" r="7" fill="none" stroke="var(--coral)" stroke-width="3"/>
+              <circle cx="76" cy="343" r="7" fill="none" stroke="var(--coral)" stroke-width="3"/>
+              <line x1="90" y1="343" x2="140" y2="343" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="339" font-size="13" fill="var(--ink)" font-weight="700">도래</text>
+              <text x="146" y="355" font-size="11" fill="var(--ink-soft)">원줄·목줄 연결, 꼬임 방지</text>
+            </g>
+
+            <g>
+              <line x1="70" y1="355" x2="70" y2="400" stroke="var(--tide)" stroke-width="2"/>
+              <line x1="82" y1="385" x2="140" y2="385" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="381" font-size="13" fill="var(--ink)" font-weight="700">목줄</text>
+              <text x="146" y="397" font-size="11" fill="var(--ink-soft)">카본 2호 · 1m 내외</text>
+            </g>
+
+            <g>
+              <path d="M70 400 L70 430 Q70 442 82 440 L88 428" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="90" y1="428" x2="140" y2="428" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="424" font-size="13" fill="var(--ink)" font-weight="700">바늘</text>
+              <text x="146" y="440" font-size="11" fill="var(--ink-soft)">감성돔바늘 3호(외걸이)</text>
+            </g>
+          </svg>
+          <p class="diagram-caption">찌낚시(반유동) 채비 조립 순서 — 위에서 아래로 원줄에 끼워 나갑니다</p>
+        </div>
+
+        <div class="tackle-grid">
+          <div class="tackle-card">
+            <h4>찌낚시(반유동) 채비 — 9단계</h4>
+            <ol style="margin:0;padding-left:1.2em;font-size:.86rem;">
+              <li>면사매듭 — 원줄에 묶어두는 수심 기준점(스토퍼)</li>
+              <li>반달구슬 — 매듭 보호용 완충 쿠션</li>
+              <li>구멍찌(어신찌) — 원줄에 자유롭게 끼움</li>
+              <li>O형 쿠션고무 — 찌와 수중찌 사이 완충</li>
+              <li>수중찌 — 채비 부력을 중립으로 맞춤</li>
+              <li>V형 쿠션고무 — 벌어진 쪽이 아래(도래 방향)</li>
+              <li>도래 연결(유니·클린치노트)</li>
+              <li>목줄 연결(카본 2호, 1m 내외)</li>
+              <li>바늘 결속(외걸이 매듭)</li>
+            </ol>
+            <p class="tip"><b>입문 세팅</b> 원줄 나일론 2.5호 · 3B 구멍찌 · 목줄 카본 2호(1m) · 감성돔바늘 3호</p>
+          </div>
+          <div class="tackle-card">
+            <h4>원투낚시 채비 — 7단계</h4>
+            <ol style="margin:0;padding-left:1.2em;font-size:.86rem;">
+              <li>원줄 감기 — PE 4호 또는 나일론 6호, 200m 이상</li>
+              <li>쇼크리더 연결 — 나일론 12호·3~5m, FG노트</li>
+              <li>스냅도래 부착 — 현장 채비 교체 용이</li>
+              <li>봉돌 준비 — 육각봉돌 20호에 도래 결합</li>
+              <li>목줄①제작 — 카본 4호·30cm + 바늘(광어바늘 12호)</li>
+              <li>목줄②제작 — 첫 바늘 위 20~30cm에 하나 더(가지바늘)</li>
+              <li>최종 연결 — 봉돌도래→목줄도래→스냅도래 순</li>
+            </ol>
+            <p class="tip"><b>TIP</b> 로드는 3호 이상(4.5m 전후), 릴 3000번 이상. 목줄은 원줄보다 한 단계 가늘게. 초보자는 가지바늘 여러 개보다 단순 외줄 채비로 시작.</p>
+          </div>
+        </div>
+
+        <h3>봉돌 사용법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>종류</th><th>용도</th></tr></thead>
+          <tbody>
+            <tr><td>고정봉돌</td><td>줄에 직접 물려 고정. 민물낚시 등 전통적 방식</td></tr>
+            <tr><td>유동봉돌(구멍봉돌)</td><td>줄이 구멍을 자유롭게 통과 — 원줄 교체 시 재사용 가능</td></tr>
+            <tr><td>좁쌀봉돌</td><td>목줄에 다는 소형 봉돌. "크기는 작게, 개수는 적게"가 원칙 — 바늘 쪽에 가깝게 달아야 목줄이 자연스러운 각도(약 45도)로 흐름</td></tr>
+            <tr><td>육각봉돌</td><td>원투(캐스팅) 채비 표준. 바닥 고정력이 좋음 — 초보자는 20호 추천</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>무게 선택</b>: 수심이 깊고 조류가 강할수록 무거운 호수를 씁니다. 여밭(암초)이 많으면 봉돌을 도래 쪽(위)에 배치해 밑걸림을 줄이고, 저수온·강한 조류에는 바늘 쪽(아래)에 배치합니다.</p>
+
+        <h3>도래 사용법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>종류</th><th>역할</th></tr></thead>
+          <tbody>
+            <tr><td>일반도래</td><td>원줄-목줄 연결, 회전으로 줄 꼬임 방지</td></tr>
+            <tr><td>스냅도래</td><td>개폐 가능한 고리가 있어 현장에서 채비·루어를 빠르게 교체</td></tr>
+            <tr><td>핀도래</td><td>주꾸미 낚시 등에 사용(보통 10호 전후), 부식 우려로 1회 사용 권장</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.85rem;color:var(--ink-soft);">도래 호수는 숫자가 작을수록 크고 강합니다. 봉돌 20~30호급이면 도래 2~4호가 일반적으로 매칭됩니다.</p>
+
+        <h3>낚시 액세서리 활용법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>액세서리</th><th>사용 팁</th></tr></thead>
+          <tbody>
+            <tr><td>편광선글라스</td><td>수면 반사광 차단. 브라운 렌즈는 얕은 물·맑은 날, 그레이 렌즈는 깊은 물·강한 햇빛에 적합</td></tr>
+            <tr><td>뜰채(랜딩넷)</td><td>그물을 미리 물속에 담가둔 뒤 물고기를 유도해 넣으면 실패가 적음</td></tr>
+            <tr><td>바늘빼기(디스고저)</td><td>줄을 팽팽히 잡고 머리 부분을 바늘 쪽으로 밀어 넣은 뒤 살짝 눌러 제거 — 물고기 손상 최소화</td></tr>
+            <tr><td>라인커터/가위</td><td>매듭 마무리·목줄 교체용. 핀온릴로 조끼에 부착해두면 분실 방지</td></tr>
+            <tr><td>쿨러백/아이스박스</td><td>전체 용량의 1/3~1/2을 얼음으로 채우고, 어획물이 얼음에 직접 닿지 않게 깔판 사용. 얼음은 위쪽에 두는 것이 냉기 유지에 유리</td></tr>
+            <tr><td>헤드랜턴</td><td>야간낚시(갈치·갑오징어·볼락) 필수. 양손이 자유로워 채비 교체에 유리</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>출조 가방 꾸리기</h3>
+        <p>가방을 용도별로 나눠 싸면 현장에서 헤매지 않습니다.</p>
+        <div class="gear-grid">
+          <div class="gear-card"><b>착용 주머니</b><span>구명조끼·신발·모자·편광안경 등 몸에 걸치는 것. 출발 전 미리 착용해보고 크기를 확인</span></div>
+          <div class="gear-card"><b>채비 상자</b><span>당일 쓸 완성 채비와 여분 목줄·바늘·봉돌·루어. 규격을 적어 바늘집에 정리</span></div>
+          <div class="gear-card"><b>작업 주머니</b><span>가위·플라이어(바늘빼기)·자·쓰레기봉투. 날붙이와 바늘은 손에 바로 닿지 않게 분리 보관</span></div>
+          <div class="gear-card"><b>보관·세척용</b><span>아이스박스·얼음팩, 젖은 장비를 담을 방수백, 수건·여벌옷</span></div>
+        </div>
+        <p style="font-size:.85rem;color:var(--ink-soft);">배낚시·체험은 대여 범위(로드·릴만인지, 구명조끼·미끼까지 포함인지)를 예약 전에 확인하세요.</p>
+
+        <h3>장비 손질 · 보관법</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>세척</b><span>사용 후 민물로 소금기와 모래를 씻어내고, 릴은 물에 담그거나 임의로 분해하지 않기</span></div>
+          <div class="gear-card"><b>건조</b><span>그늘에서 완전히 말린 뒤 보관 — 젖은 채로 두면 부식·냄새의 원인</span></div>
+          <div class="gear-card"><b>줄·바늘 정리</b><span>매 조행 후 목줄·바늘 상태를 점검, 손상된 목줄은 미리 교체</span></div>
+          <div class="gear-card"><b>릴 관리</b><span>제조사 설명서의 세척법을 우선 따르고, 정기적으로 릴 오일 주입</span></div>
+        </div>
+
+        <div class="callout amber">
+          <h4>체험·배낚시 문의 메시지 예시</h4>
+          <p>처음 예약할 땐 무엇을 물어야 할지 막막하기 마련입니다. 아래처럼 한 번에 물어보면 됩니다:</p>
+          <p style="font-style:italic;">"○월 ○일 성인 ○명·어린이 ○명, 모두 초보입니다. 가능한 체험(또는 출조)과 실제 집결 주소, 입장·종료 시각, 대여품·개인 준비물, 총요금과 기상 취소 기준을 알려주세요. 낚시라면 봉돌·바늘·미끼 규격도 부탁드립니다."</p>
+        </div>
+
+        <h3>낚시터·포인트 상세</h3>
+        <p>물때와 낚시 포인트는 <a href="https://www.badatime.com/" target="_blank" rel="noopener">바다타임</a>(전국 500여 지역 물때·바다날씨·2,000여 낚시 포인트)에서 확인하는 것이 표준입니다. 앱으로는 <b>한국낚시포인트</b>, <b>피싱노트</b>, <b>어신</b> 등이 지도 기반 포인트·조황·화장실 위치까지 표시합니다. 자세한 물때 읽는 법은 <a href="#tides">물때 캘린더</a> 섹션을 참고하세요.</p>
+
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>유형</th><th>대표 지역</th><th>특징</th></tr></thead>
+          <tbody>
+            <tr><td>갯바위(원도)</td><td>여수 거문도·백도, 통영 추봉도·법항리, 완도·소안권, 추자도(제주)</td><td>감성돔·벵에돔·참돔·돌돔의 성지. 배로 진입, 난이도 높아 중급자 이상 권장</td></tr>
+            <tr><td>방파제(입문용)</td><td>인천 연안부두·소야도, 부산 다대포, 속초항·동명항</td><td>수심 얕고 편의시설(화장실·안전난간) 잘 갖춰져 가족 단위·초보자에 적합</td></tr>
+            <tr><td>배낚시 출항지</td><td>인천 옹진군(남항·만석부두), 태안 신진도·안흥항, 여수 국동항, 통영 영운리항</td><td>우럭·갑오징어·주꾸미 등 계절 출조. 대부분 온라인 예약 가능</td></tr>
+            <tr><td>민물(붕어·배스)</td><td>예당저수지(예산), 충주호, 대청호, 소양호(춘천)</td><td>예당저수지는 국내 최대급 저수지, 충주호는 배스 명당으로 유명</td></tr>
+            <tr><td>관리형(향어터)</td><td>안성 독정낚시터·성은낚시터, 음성 봉낚시터</td><td>시설이 잘 갖춰진 유료 낚시터. 방갈로·취사장 등 편의시설 보유</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>선상낚시 예약 방법</h3>
+        <p>예약 플랫폼(<b>어바웃피싱</b>, <b>선상24</b>, <b>더피싱</b>)에서 ① 지역·항구 선택 → ② 날짜·출항시간 설정 → ③ 선박 확인 → ④ 결제 순으로 예약합니다. 출항 30분 전 도착해 승선명부를 작성하고, <b>신분증과 구명조끼</b>는 대부분 필수입니다. 비용은 반나절 체험형 기준 1인 약 3만~6만원(시즌·지역별 변동), 장비 대여는 별도(약 1만원)인 경우가 많습니다.</p>
+
+        <h3>계절별 낚시 캘린더</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>계절</th><th>주요 어종</th><th>대표 지역</th></tr></thead>
+          <tbody>
+            <tr><td>봄(3~5월)</td><td>감성돔(산란 회유), 볼락, 광어</td><td>완도·통영·거제, 인천 연안부두</td></tr>
+            <tr><td>여름(6~8월)</td><td>돌돔(선상 원투), 벵에돔, 참돔</td><td>거문도·백도, 추자도, 통영 추봉도</td></tr>
+            <tr><td>가을(9~11월)</td><td>감성돔·참돔(피크), 갈치·방어·전갱이</td><td>완도, 여수·통영 선상낚시, 남해안 전반</td></tr>
+            <tr><td>겨울(12~2월)</td><td>대구, 열기, 볼락, 명태(강원)</td><td>속초항·동명항, 남해안 방파제</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="callout amber">
+          <h4>배우기 좋은 곳</h4>
+          <p><a href="https://www.naksinuri.kr/" target="_blank" rel="noopener">낚시누리</a>(해양수산부·한국어촌어항공단 공식 교육 포털)는 어종별 낚시교실과 "초보 탈출하기" 코너, 현장 강습 신청까지 제공합니다. 채비 매듭법은 <a href="https://www.naksinuri.kr/lesson/binding/m/list.do" target="_blank" rel="noopener">낚시누리 채비 필수 묶음법</a>에서도 볼 수 있습니다. 전체 채널 목록은 <a href="#learn">배우고 나누기</a> 참고.</p>
+        </div>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/watch?v=y7UnYSlQIqc" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>유니노트 묶는법</b><span>매듭 강좌 · YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=AxmW_9H6D_E" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>FG노트, 가장 쉬운 방법</b><span>쇼크리더 연결 · YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/@kimjimintv" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>입질의추억TV</b><span>어종·조행 정보 채널</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/channel/UCQ_2Uzf0pXNBPkEaoNgvmUg" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>앵쩡TV</b><span>배스·바다루어 채널</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 02 HAERUJIL ============ -->
+      <section class="section" id="haerujil">
+        <span class="part-no">PART 02</span>
+        <h2>해루질</h2>
+        <p class="kicker">본래 "밤에 얕은 바다에서 맨손으로 어패류를 잡는 일"을 뜻하는 서해안 방언. 지금은 낮·밤을 가리지 않고 갯벌·갯바위에서 조개·낙지·게를 도구 없이, 또는 간단한 도구로 채집하는 활동 전체를 이릅니다.</p>
+
+        <h3>갯벌형 vs 암반형</h3>
+        <p><b>갯벌형</b>은 서·남해의 평탄한 간석지에서 진행하며 바지락·맛조개·동죽·낙지·게가 대상입니다. <b>암반(갯바위)형</b>은 바위 조간대에서 소라·전복·성게·해삼·고둥을 노립니다. 동해는 수심이 깊고 갯벌 노출 면적이 적어 상대적으로 부적합합니다.</p>
+
+        <h3>필요 장비 (우선순위 순)</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>① 구명조끼</b><span>갯골 고립·추락 시 생명과 직결. 지퍼·버클 고정 확인</span></div>
+          <div class="gear-card"><b>② 미끄럼 방지 장화</b><span>발목 고정형. 뻘에서는 아쿠아슈즈보다 장화가 실용적</span></div>
+          <div class="gear-card"><b>③ 방수 헤드랜턴 + 예비등</b><span>1000루멘 이상, 방수 등급 확인. 예비 조명은 별도 보관</span></div>
+          <div class="gear-card"><b>④ 코팅 작업장갑</b><span>굴 껍데기·따개비 베임 사고 예방</span></div>
+          <div class="gear-card"><b>⑤ 외갈고리 · 집게</b><span>법적으로 <em>날 1개</em>짜리만 허용 — 두발갈고리 등은 불법 어구</span></div>
+          <div class="gear-card"><b>⑥ 호미 · 조개갈퀴</b><span>바지락·동죽 등 갯벌 채집 기본 도구</span></div>
+          <div class="gear-card"><b>⑦ 망태기 · 채집통</b><span>양손이 자유롭도록 몸에 고정 가능한 형태 추천</span></div>
+          <div class="gear-card"><b>⑧ 방수팩 · 호루라기</b><span>비상연락 및 구조 신호용, 2인 이상 동행 필수</span></div>
+        </div>
+
+        <div class="diagram-box">
+          <svg viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+            <line x1="70" y1="15" x2="70" y2="320" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+
+            <g>
+              <circle cx="70" cy="35" r="10" fill="var(--sea-deep)"/>
+              <path d="M70 35 L110 55 L98 78 Z" fill="var(--amber)" opacity="0.35"/>
+              <line x1="88" y1="45" x2="140" y2="45" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="41" font-size="13" fill="var(--ink)" font-weight="700">방수 헤드랜턴</text>
+              <text x="146" y="57" font-size="11" fill="var(--ink-soft)">1000루멘 이상, 예비 조명 필수</text>
+            </g>
+
+            <g>
+              <rect x="58" y="88" width="24" height="10" rx="4" fill="var(--coral)"/>
+              <line x1="88" y1="93" x2="140" y2="93" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="89" font-size="13" fill="var(--ink)" font-weight="700">구명조끼</text>
+              <text x="146" y="105" font-size="11" fill="var(--ink-soft)">다리끈형, 상시 착용</text>
+            </g>
+
+            <g>
+              <rect x="52" y="128" width="36" height="26" rx="4" fill="var(--tide)" opacity="0.85"/>
+              <line x1="88" y1="141" x2="140" y2="141" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="137" font-size="13" fill="var(--ink)" font-weight="700">코팅 작업장갑</text>
+              <text x="146" y="153" font-size="11" fill="var(--ink-soft)">굴 껍데기·따개비 베임 예방</text>
+            </g>
+
+            <g>
+              <path d="M55 175 l15 -8 l15 8 v20 l-15 8 l-15 -8 z" fill="var(--amber)" opacity="0.7"/>
+              <line x1="90" y1="193" x2="140" y2="193" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="189" font-size="13" fill="var(--ink)" font-weight="700">외갈고리 · 집게</text>
+              <text x="146" y="205" font-size="11" fill="var(--ink-soft)">날 1개짜리만 합법</text>
+            </g>
+
+            <g>
+              <path d="M55 225 h30 v10 q0 8 -15 8 q-15 0 -15 -8 z" fill="var(--sea)" opacity="0.8"/>
+              <line x1="88" y1="235" x2="140" y2="235" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="231" font-size="13" fill="var(--ink)" font-weight="700">호미 · 조개갈퀴</text>
+              <text x="146" y="247" font-size="11" fill="var(--ink-soft)">갯벌 채집 기본 도구</text>
+            </g>
+
+            <g>
+              <rect x="56" y="265" width="28" height="34" rx="10" fill="var(--sea-deep)"/>
+              <line x1="88" y1="282" x2="140" y2="282" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="278" font-size="13" fill="var(--ink)" font-weight="700">장화</text>
+              <text x="146" y="294" font-size="11" fill="var(--ink-soft)">미끄럼 방지, 발목 고정형</text>
+            </g>
+          </svg>
+          <p class="diagram-caption">해루질 필수 장비 우선순위 — 안전장비(랜턴·구명조끼)부터 챙기세요</p>
+        </div>
+
+        <h3>대상 생물과 채집법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>생물</th><th>포인트</th><th>방법</th></tr></thead>
+          <tbody>
+            <tr><td>낙지</td><td>갯벌 숨구멍(부럿)에서 물이 뽀얗게 올라오는 자리</td><td>구멍 각도를 가늠해 10~15cm 삽으로 파내려가 포획</td></tr>
+            <tr><td>문어</td><td>암반 조간대 바위 틈</td><td>헤드랜턴으로 틈을 비춰 탐색 후 손·집게로 포획</td></tr>
+            <tr><td>소라·전복</td><td>바위 뒤·틈새</td><td>바위를 뒤집어 탐색, 전복은 전용 칼로 살짝 떼어냄(소형은 방류)</td></tr>
+            <tr><td>꽃게·박하지(돌게)</td><td>갯벌·바위틈, 가을(9~10월) 성행</td><td>랜턴 빛에 반응해 뜬 개체를 족대로, 돌게는 바위틈에서 손으로</td></tr>
+            <tr><td>바지락·동죽·개조개</td><td>갯벌 표층~10cm 아래</td><td>호미·조개갈퀴(그레)로 파내거나 끌며 감촉으로 위치 파악</td></tr>
+            <tr><td>맛조개</td><td>모래 갯벌의 맛구멍</td><td>굵은 소금을 구멍에 뿌리면 삼투압으로 튀어나옴 → 즉시 집기</td></tr>
+            <tr><td>굴·해삼·성게</td><td>암반 조간대</td><td>손·집게로 채취, 장갑 필수</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>물때와 시즌</h3>
+        <p>사리(대조기)에는 갯벌 노출 면적이 최대가 되어 채집 효율이 가장 좋고, 조금(소조기)에는 효율이 절반 이하로 떨어집니다. <b>간조 1시간30분~2시간 전 진입 → 간조를 반환점으로 즉시 철수</b>가 기본 원칙입니다. 서해 기준 5~9물 무렵이 최적기입니다.</p>
+
+        <div class="diagram-box">
+          <svg viewBox="0 0 600 165" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="60" width="280" height="40" fill="var(--tide)" opacity="0.18"/>
+            <rect x="300" y="60" width="80" height="40" fill="var(--amber)" opacity="0.25"/>
+            <rect x="380" y="60" width="200" height="40" fill="var(--coral)" opacity="0.22"/>
+            <line x1="20" y1="80" x2="580" y2="80" stroke="var(--ink-soft)" stroke-width="2"/>
+            <path d="M580 80 l-10 -5 v10 z" fill="var(--ink-soft)"/>
+
+            <line x1="300" y1="55" x2="300" y2="105" stroke="var(--sea-deep)" stroke-width="2" stroke-dasharray="4 3"/>
+            <circle cx="300" cy="80" r="5" fill="var(--sea-deep)"/>
+
+            <text x="30" y="45" font-size="13" font-weight="700" fill="var(--tide)">진입 &amp; 채집</text>
+            <text x="30" y="122" font-size="11" fill="var(--ink-soft)">간조 2~3시간 전</text>
+
+            <text x="255" y="45" font-size="13" font-weight="700" fill="var(--sea-deep)">간조(최저)</text>
+            <text x="270" y="122" font-size="11" fill="var(--ink-soft)">반환점</text>
+
+            <text x="390" y="45" font-size="13" font-weight="700" fill="var(--amber)">즉시 철수</text>
+            <text x="390" y="122" font-size="11" fill="var(--ink-soft)">지체 금지</text>
+
+            <text x="460" y="45" font-size="13" font-weight="700" fill="var(--coral)">밀물 진행 — 위험</text>
+            <text x="460" y="122" font-size="11" fill="var(--ink-soft)">갯골 먼저 잠김</text>
+          </svg>
+          <p class="diagram-caption">해루질·갯벌체험 안전 타임라인 — 간조를 반환점으로 삼아 계획하세요</p>
+        </div>
+
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>시기</th><th>주요 대상</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>3~5월(봄)</td><td>바지락·동죽·개조개</td><td>수온이 오르며 조개가 갯벌 표층으로 올라옴</td></tr>
+            <tr><td>5~7월</td><td>바지락·낙지·조개류 집중</td><td>해루질 시즌 본격 시작, 가장 활발한 시기</td></tr>
+            <tr><td>6~8월(여름)</td><td>박하지(돌게)·소라·낙지</td><td>야간 해루질 권장, 랜턴 필수</td></tr>
+            <tr><td>9~11월(가을)</td><td>낙지(제철)·소라·굴</td><td>초가을이 초여름과 함께 최적기</td></tr>
+            <tr><td>12~2월(겨울)</td><td>굴(석화)·바지락</td><td>참가자 적어 한산하나 추위로 난이도 높음</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>지역별 포인트 더 보기</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>지역</th><th>특징</th><th>주요 채집물</th></tr></thead>
+          <tbody>
+            <tr><td>서산 웅도(충남)</td><td>평지 지형으로 이동 편리, 가족 단위 방문 多</td><td>다양한 조개류, 낙지</td></tr>
+            <tr><td>화성 제부도(경기)</td><td>하루 두 번 바닷길 개방. 밀물 속도가 빨라 고립사고 다발 — 각별 주의</td><td>바지락, 쏙, 낙지, 갯지렁이</td></tr>
+            <tr><td>인천 무의도 하나개해변</td><td>공항 인근 접근성 최고, 모래+암반 혼합 지형</td><td>대왕소라, 박하지(돌게), 바지락</td></tr>
+            <tr><td>인천 영흥도(노가리·수해해변)</td><td>수도권 "국민 해루질 장소", 두 해변 채집물이 다름</td><td>꽃게·키조개·쭈꾸미 / 바지락·굴·고둥</td></tr>
+            <tr><td>고흥 연호해변(전남)</td><td>갯벌+암반 혼합, 한적한 남해안</td><td>바지락, 소라, 굴</td></tr>
+            <tr><td>여수 묘도(전남)</td><td>다리로 연결된 작은 섬, 차량 접근 가능</td><td>바지락, 소라, 굴</td></tr>
+            <tr><td>여수 거문도(전남)</td><td>배로 2시간, 청정 해역의 국내 최고 명소 중 하나</td><td>소라, 해삼, 문어</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="stat-row">
+          <div class="stat"><span class="num tabular">592명</span><span class="lbl">최근 5년간 해루질 사고 구조 인원</span></div>
+          <div class="stat"><span class="num tabular">94명</span><span class="lbl">같은 기간 사망·실종자 수</span></div>
+          <div class="stat"><span class="num tabular">71%</span><span class="lbl">물때 오판·고립으로 인한 사고 비율</span></div>
+        </div>
+
+        <div class="callout warn">
+          <h4>안전 &amp; 법규 요약</h4>
+          <p>비어업인이 쓸 수 있는 도구는 호미·뜰채·외갈고리(날 1개)·손 등으로 한정되며, 잠수용 공기통이나 두발갈고리 등은 불법입니다. 어촌계가 관리하는 마을어장에서는 무단 채집이 금지되고, 금어기·금지체장을 어기면 비어업인도 과태료·벌금 대상이 됩니다. 2027년 4월 시행 예정 개정안은 지자체가 해루질의 <b>시간·장소</b>까지 조례로 제한할 수 있게 합니다 — 자세한 내용은 <a href="#safety">안전·법규</a> 섹션 참고.</p>
+        </div>
+
+        <h3>초보자가 실수하기 쉬운 5가지</h3>
+        <ol>
+          <li><b>물때·밀물 시간을 얕보는 것</b> — "이렇게 빨리 들어올 줄 몰랐다"가 사고의 공통 원인. 간조 2~3시간 전 진입, 밀물 전환 즉시 철수.</li>
+          <li><b>갯골(물길) 원정</b> — 밀물 때 가장 먼저·깊게 잠기는 물길. 들어올 때 얕았던 갯골이 나갈 때 허리 깊이가 될 수 있어 건너편으로 넘어가지 말 것.</li>
+          <li><b>혼자 야간 해루질</b> — 2인 이상 동행이 기본, 단독 야간 활동은 매우 위험.</li>
+          <li><b>장비 소홀</b> — 헤드랜턴(예비 포함 2개 이상), 장화, 장갑(꽃게 등은 맨손 채집 시 반사적으로 물릴 위험), 구명조끼·호루라기 누락.</li>
+          <li><b>마을어장·금어기 무시</b> — 표식 없는 갯벌도 어촌계가 관리하는 종패 살포 구역일 수 있어 무단 채취는 절도에 해당할 수 있음.</li>
+        </ol>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/watch?v=ATv0ECvi9DE" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>[해루질] 낙지구멍 구별법</b><span>초보자 가이드 · YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=99alP2YPmQA" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>박하지 돌게 한통 가득 잡는 비결</b><span>갯벌 해루질 · YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/c/%ED%95%B4%EB%A3%A8%EB%82%A8/videos" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>해루남</b><span>해루질·갯벌 브이로그 채널</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 03 DIVING ============ -->
+      <section class="section" id="diving">
+        <span class="part-no">PART 03</span>
+        <h2>다이빙 &amp; 스피어피싱</h2>
+        <p class="kicker">물속에 직접 들어가 관찰하거나 채집하는 활동. 장비와 자격 체계가 가장 정교한 만큼, 국내에서는 법적 규제도 가장 엄격합니다.</p>
+
+        <div class="callout warn">
+          <h4>⚠ 반드시 먼저 읽기 — 국내 스피어피싱은 원칙적으로 전면 불법</h4>
+          <p><b>수산자원관리법 시행규칙 제6조</b>는 비어업인이 사용할 수 있는 도구를 투망·쪽대·외줄낚시·집게·호미·손 등으로 한정하며, <b>작살(스피어건 포함)과 잠수용 스쿠버 장비는 명시적으로 금지</b>합니다. 이 규정은 헌법재판소 2016헌마450 결정에서 합헌으로 확정됐고, 실제로 2019년 태안에서 작살로 광어를 잡아 유튜브에 올린 유튜버가 벌금형(최대 1,000만원 이하)에 처해진 사례가 있습니다. 내수면(강·호수)에서도 내수면어업법으로 작살류·스쿠버 장비 사용이 금지됩니다. 스킨다이빙으로 손·집게 등 허용 도구만 쓰는 경우가 상대적으로 규제 소지가 적지만, 나잠어업 허가 없이 마을어장에서 채집하면 이 역시 위법입니다.</p>
+        </div>
+
+        <h3>종류 구분</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>구분</th><th>정의</th><th>주요 장비</th></tr></thead>
+          <tbody>
+            <tr><td>스킨다이빙</td><td>공기통 없이 마스크·스노클·핀만으로 수면 근처를 탐험</td><td>마스크, 스노클, 핀</td></tr>
+            <tr><td>프리다이빙(자유잠수)</td><td>숨을 참고 잠수하는 스포츠. 깊이·시간 기록이 목표가 되기도 함</td><td>마스크, 롱핀, 웨이트</td></tr>
+            <tr><td>스쿠버다이빙</td><td>공기통을 메고 장시간·깊은 수심 잠수. 이론-수영장-바다 3단계 교육</td><td>BCD, 레귤레이터, 탱크, 슈트</td></tr>
+            <tr><td>스피어피싱(작살낚시)</td><td>작살·스피어건으로 찔러 포획하는 어로 기법</td><td>폴스피어, 하와이안 슬링, 스피어건 — <b>국내 사용 전면 불법</b></td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>필요 장비</h3>
+        <div class="diagram-box">
+          <svg viewBox="0 0 380 400" xmlns="http://www.w3.org/2000/svg">
+            <line x1="70" y1="15" x2="70" y2="380" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+
+            <g>
+              <rect x="55" y="30" width="30" height="18" rx="4" fill="var(--sea)" opacity="0.85"/>
+              <line x1="88" y1="39" x2="140" y2="39" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="35" font-size="13" fill="var(--ink)" font-weight="700">마스크·스노클</text>
+              <text x="146" y="51" font-size="11" fill="var(--ink-soft)">시야 확보, 수면 호흡</text>
+            </g>
+
+            <g>
+              <rect x="58" y="85" width="24" height="10" rx="5" fill="var(--amber)"/>
+              <line x1="88" y1="90" x2="140" y2="90" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="86" font-size="13" fill="var(--ink)" font-weight="700">레귤레이터(호흡기)</text>
+              <text x="146" y="102" font-size="11" fill="var(--ink-soft)">탱크 압축공기를 호흡 가능하게</text>
+            </g>
+
+            <g>
+              <path d="M55 130 q15 -12 30 0 v35 q-15 12 -30 0 z" fill="var(--tide)" opacity="0.8"/>
+              <line x1="88" y1="150" x2="140" y2="150" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="146" font-size="13" fill="var(--ink)" font-weight="700">BCD(부력조절기)</text>
+              <text x="146" y="162" font-size="11" fill="var(--ink-soft)">공기를 넣고 빼며 부력 조절</text>
+            </g>
+
+            <g>
+              <rect x="58" y="195" width="24" height="55" rx="8" fill="var(--sea-deep)"/>
+              <line x1="88" y1="222" x2="140" y2="222" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="218" font-size="13" fill="var(--ink)" font-weight="700">탱크(공기통)</text>
+              <text x="146" y="234" font-size="11" fill="var(--ink-soft)">압축공기 저장</text>
+            </g>
+
+            <g>
+              <rect x="52" y="270" width="36" height="10" rx="3" fill="var(--coral)"/>
+              <rect x="55" y="271" width="6" height="8" fill="var(--surface-2)"/>
+              <rect x="68" y="271" width="6" height="8" fill="var(--surface-2)"/>
+              <line x1="88" y1="275" x2="140" y2="275" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="271" font-size="13" fill="var(--ink)" font-weight="700">웨이트벨트</text>
+              <text x="146" y="287" font-size="11" fill="var(--ink-soft)">부력 상쇄용 무게추</text>
+            </g>
+
+            <g>
+              <path d="M50 320 h38 v14 h-38 z M50 334 q19 30 38 0" fill="var(--ink-soft)" opacity="0.5"/>
+              <line x1="88" y1="330" x2="140" y2="330" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="326" font-size="13" fill="var(--ink)" font-weight="700">웨트슈트/드라이슈트</text>
+              <text x="146" y="342" font-size="11" fill="var(--ink-soft)">체온 유지(수온別 선택)</text>
+            </g>
+
+            <g>
+              <path d="M60 360 q10 25 0 25 q-15 -5 -12 -25 z M80 360 q10 25 0 25 q-15 -5 -12 -25 z" fill="var(--amber)" opacity="0.8"/>
+              <line x1="88" y1="375" x2="140" y2="375" stroke="var(--border-strong)" stroke-width="1"/>
+              <text x="146" y="371" font-size="13" fill="var(--ink)" font-weight="700">핀(오리발)</text>
+              <text x="146" y="387" font-size="11" fill="var(--ink-soft)">추진력, 프리다이빙은 롱핀</text>
+            </g>
+          </svg>
+          <p class="diagram-caption">스쿠버다이빙 기본 장비 구성 — 스킨·프리다이빙은 마스크·스노클·핀 3종만 사용</p>
+        </div>
+
+        <h3>자격증 · 교육 과정</h3>
+        <p>스쿠버다이빙은 <b>PADI</b>(세계 최대), <b>SSI</b>, <b>CMAS</b> 등이 오픈워터→어드밴스드→레스큐→다이브마스터 순으로 인증합니다. 프리다이빙은 AIDA·CMAS·PADI·SSI 등에서 입문 레벨부터 발급합니다.</p>
+
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>단계</th><th>내용</th><th>소요</th></tr></thead>
+          <tbody>
+            <tr><td>① 이론 교육</td><td>온라인(e-러닝) 또는 교재로 챕터별 학습·퀴즈</td><td>약 3시간</td></tr>
+            <tr><td>② 제한수역(풀) 교육</td><td>수영장에서 장비 사용법·기초 스킬 실습</td><td>5회</td></tr>
+            <tr><td>③ 개방수역(바다) 실습</td><td>실제 바다·호수에서 지도강사 감독 하 다이빙</td><td>4회</td></tr>
+            <tr><td>총 기간·비용</td><td>연속 교육 기준(2박3일 집중반 흔함), 응시조건 만 10세 이상+수영 가능</td><td>3~4일 · 약 50만~90만원</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.85rem;color:var(--ink-soft);">취득 후 수심 18m까지 전 세계 바다에서 스쿠버다이빙이 가능합니다. 교재비·발급비·보험 포함, 장비 렌탈은 별도인 경우가 많습니다.</p>
+
+        <h3>합법적으로 채집하는 유일한 길 — 나잠어업 허가</h3>
+        <p>해녀처럼 지역 어촌계의 <b>나잠어업 허가(신고)</b>를 받은 경우에 한해 산소통 없이 수중 채취가 합법입니다. 일반인이 다이빙으로 전복·소라·해삼 등을 합법적으로 접하는 방법은 사실상 허가 지역의 체험 다이빙이나 관찰 위주 투어입니다.</p>
+
+        <h3>인기 다이빙 포인트 (관찰·촬영 목적)</h3>
+        <ul>
+          <li><b>제주도</b> — 범섬, 문섬, 섭섬(해양보호구역). 누디브랜치·전복·씬벵이 등 풍부한 생태</li>
+          <li><b>울릉도</b> — 삼선암, 관음도 쌍굴, 쌍정초(혹돔·볼락 무리)</li>
+          <li><b>동해안</b> — 고성·속초·양양·강릉·울진, 적기는 6월 중순~11월 중순</li>
+          <li><b>삼척 장호항·갈남항</b> — "한국의 나폴리"로 불리는 잔잔한 바다, 초보자 프리다이빙에 적합</li>
+          <li><b>부산 오륙도</b> — 도시 인근에서 접근 가능한 절벽 지형</li>
+          <li><b>여수 웅천</b> — 조류가 적어 고요한 프리다이빙 환경</li>
+        </ul>
+
+        <h3>프리다이빙 vs 스쿠버 — 무엇을 배울까</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>구분</th><th>프리다이빙</th><th>스쿠버다이빙</th></tr></thead>
+          <tbody>
+            <tr><td>공기 공급</td><td>자신의 폐에 저장한 공기만 사용</td><td>공기통 사용, 30분~1시간 체류</td></tr>
+            <tr><td>장비</td><td>마스크·스노클·롱핀·웨이트(경량)</td><td>BCD·호흡기·탱크(중장비)</td></tr>
+            <tr><td>주 목적</td><td>정적 잠수시간·심도 도전, 자유로운 이동</td><td>장시간 관찰·탐험</td></tr>
+            <tr><td>체력 부담</td><td>호흡·심박 훈련 필요, 부담 큼</td><td>부력만 익히면 상대적으로 수월</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.85rem;color:var(--ink-soft);">미니멀 장비로 자유롭고 정적인 몰입을 원하면 프리다이빙, 장시간 수중 관찰·탐험을 원하면 스쿠버가 적합하다는 것이 공통된 가이드입니다.</p>
+
+        <div class="callout amber">
+          <h4>안전 · 보험</h4>
+          <p>감압병은 급격한 상승·반복 다이빙·음주가 위험요인이며, 다이빙 컴퓨터의 무감압한계(NDL)와 안전정지를 지키는 것이 기본입니다. 여행자보험은 통상 다이빙 사고를 보장하지 않으므로, 레크리에이션 다이빙 상해를 별도로 보장하는 다이빙 전용 보험 가입이 권장됩니다.</p>
+        </div>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/playlist?list=PLbdQ3uCWSAjcK2DYAT154JG_ldLHH1fZi" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>다이빙 브이로그 재생목록</b><span>YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/@scubanetkr" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>스쿠버넷</b><span>전 세계 다이빙 여행지 채널</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/channel/UCWmrdQC_s825P7lSIOvz2Lw" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>강싸부의 프리다이빙 포인트</b><span>프리다이빙 입문 채널</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 04 TIDAL FLAT ============ -->
+      <section class="section" id="tidalflat">
+        <span class="part-no">PART 04</span>
+        <h2>갯벌 체험</h2>
+        <p class="kicker">어촌계가 운영하는 체험마을에서 호미·갈퀴를 빌려 정해진 구역에서 조개를 캐는, 가장 안전하고 접근하기 쉬운 방식입니다. 우리 식탁 해산물의 3분의 2 이상이 갯벌을 거쳐 갑니다.</p>
+
+        <h3>체험 유형</h3>
+        <p><b>어촌체험마을형</b>은 입장료·체험비를 내고 도구를 대여받아 정해진 구역에서 채집하는 공식 프로그램입니다. <b>자율 채집(개방형)</b>은 별도 운영 주체 없는 공유수면에서 이뤄지지만, 마을어장(어업권 구역)인 경우 비어업인의 채집이 제한될 수 있습니다.</p>
+
+        <h3>필요 장비</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>호미 · 그레(갈퀴)</b><span>ㄷ자 날로 갯벌을 끌며 조개에 걸리는 감촉으로 위치 파악</span></div>
+          <div class="gear-card"><b>장화 · 장갑</b><span>맨발 진입 금지, 장화 안 양말 착용 권장</span></div>
+          <div class="gear-card"><b>채집통 · 양파망</b><span>일부 체험장은 개인 용기 반입을 제한하기도 함</span></div>
+          <div class="gear-card"><b>뻘배(널배)</b><span>갯벌 전용 이동 썰매. 보성 벌교 꼬막잡이(국가중요어업유산 2호)의 상징</span></div>
+          <div class="gear-card"><b>굵은 소금</b><span>맛조개를 유인해 튀어나오게 하는 특수 채집 도구</span></div>
+          <div class="gear-card"><b>모자 · 선크림 · 여벌옷</b><span>장시간 야외 노출 대비</span></div>
+        </div>
+
+        <div class="diagram-box">
+          <svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 40 q15 -8 30 0 t30 0 t30 0 t30 0 t30 0 t30 0" stroke="var(--sea)" stroke-width="2" fill="none" opacity="0.5" transform="translate(0,10)"/>
+            <line x1="20" y1="60" x2="580" y2="60" stroke="var(--sea)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="24" y="52" font-size="11" fill="var(--sea)">고조선(만조)</text>
+
+            <path d="M20 60 L580 175" stroke="var(--ink)" stroke-width="2" fill="none"/>
+            <path d="M20 60 L580 175 L580 200 L20 200 Z" fill="var(--amber)" opacity="0.12"/>
+
+            <line x1="460" y1="175" x2="580" y2="175" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="464" y="168" font-size="11" fill="var(--coral)">저조선(간조)</text>
+
+            <circle cx="110" cy="82" r="5" fill="var(--tide)"/>
+            <text x="90" y="105" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle">칠게 · 방게</text>
+            <text x="90" y="120" font-size="10" fill="var(--ink-soft)" text-anchor="middle">상부(육지 인접)</text>
+
+            <circle cx="250" cy="107" r="5" fill="var(--amber)"/>
+            <text x="250" y="130" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle">바지락 · 동죽 · 맛조개</text>
+            <text x="250" y="145" font-size="10" fill="var(--ink-soft)" text-anchor="middle">중부 갯벌</text>
+
+            <circle cx="390" cy="132" r="5" fill="var(--coral)"/>
+            <text x="390" y="155" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle">낙지 · 굴</text>
+            <text x="390" y="170" font-size="10" fill="var(--ink-soft)" text-anchor="middle">하부(저조선 인접)</text>
+
+            <rect x="500" y="150" width="14" height="14" fill="var(--sea-deep)"/>
+            <rect x="518" y="145" width="14" height="19" fill="var(--sea-deep)"/>
+            <rect x="536" y="155" width="14" height="10" fill="var(--sea-deep)"/>
+            <text x="525" y="195" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle">전복 · 소라 · 해삼</text>
+            <text x="525" y="210" font-size="10" fill="var(--ink-soft)" text-anchor="middle">암반 지대(다이빙·해루질)</text>
+          </svg>
+          <p class="diagram-caption">조간대 단면 — 육지에서 먼바다로 갈수록 만나는 생물이 달라집니다</p>
+        </div>
+
+        <h3>맛조개 잡는 법 — 소금 기법</h3>
+        <ol>
+          <li>갯벌 표면의 작은 구멍(맛구멍)을 찾는다.</li>
+          <li>굵은 소금을 구멍 안에 뿌린다.</li>
+          <li>삼투압 변화로 맛조개가 스스로 튀어나온다 — 지체하면 다시 들어가므로 즉시 핀셋이나 젓가락으로 집는다.</li>
+          <li>몇 번 뿌려도 반응이 없으면 빈 구멍이다.</li>
+        </ol>
+
+        <h3>전국 대표 체험 지역</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>지역</th><th>특징</th></tr></thead>
+          <tbody>
+            <tr><td>태안 (충남)</td><td>별주부마을 등 전통 독살 체험, 다수의 어촌체험마을</td></tr>
+            <tr><td>화성 궁평리 (경기)</td><td>완만한 경사, 바지락·동죽·굴·낙지가 풍부, 낚시·보트 체험 병행. 궁평항로 1069-17, 031-356-7339</td></tr>
+            <tr><td>강화도 (인천)</td><td>동막해변, 황산도, 강화남단갯벌(천연기념물 419호)</td></tr>
+            <tr><td>신안 (전남)</td><td>증도·임자면, 낙지잡이로 유명, 유네스코 세계자연유산 갯벌</td></tr>
+            <tr><td>보성·벌교 (전남)</td><td>뻘배 꼬막채취 어업 — 전국 꼬막 생산량의 70%</td></tr>
+            <tr><td>인천 마시안갯벌체험장</td><td>영종도 인근. 개인은 현장 매표소 당일결제, 단체는 사전 전화예약(032-746-3093)</td></tr>
+            <tr><td>보령 무창포어촌체험마을 (충남)</td><td>한 달 4~5차례 열리는 "신비의 바닷길", 석대도까지 약 1.5km 도보 이동. 전통 독살체험 가능</td></tr>
+            <tr><td>서천 선도리갯벌체험마을 (충남)</td><td>바닥이 단단한 모래 지형이라 덜 젖고 날카로운 조개가 적어 어린이 체험에 적합</td></tr>
+            <tr><td>고창 만돌어촌체험휴양마을 (전북)</td><td>유네스코 세계유산 고창갯벌 내 위치(약 6km). 천일염 체험 병행</td></tr>
+            <tr><td>진도 회동리 (전남)</td><td>"신비의 바닷길"(회동리~모도 2.8km)이 열리는 명소, 축제 기간 외 상설 체험관 운영</td></tr>
+          </tbody>
+        </table></div>
+        <p>운영 정보는 <a href="https://www.fipa.or.kr/fipa/cntnts/i-163/web.do" target="_blank" rel="noopener">어촌해양본부(한국어촌어항공단)</a>가 전국 121개 마을을 소개하며, 개별 예약은 <a href="https://www.seantour.kr/" target="_blank" rel="noopener">바다여행(seantour.kr)</a>에서 진행합니다.</p>
+
+        <h3>예약 전 체크리스트</h3>
+        <ul>
+          <li>운영일·물때 — 간조 시간대에 맞춰 체험 가능 시간이 정해짐</li>
+          <li>예약 방식 — 개인은 현장 당일결제만 가능한 곳이 많고, 단체는 사전 전화예약 필수인 경우가 일반적</li>
+          <li>입장료 — 대인/소인/미취학 아동 요금이 다름(예: 대인 1만원·소인 5천원 수준)</li>
+          <li>장비 대여 여부·비용 — 장화(약 2천원)·가슴장화(약 5천원)·호미·소쿠리 등, 업체마다 유무상 상이</li>
+          <li>반입 가능 도구 제한 — 개인 그물·투망 등의 반입 가능 여부는 업체별로 다름</li>
+          <li>채취물 반출 규정 — 일부는 현장 구이·회로 먹거나 가져갈 수 있음을 명시</li>
+        </ul>
+        <p style="font-size:.85rem;color:var(--ink-soft);">문의 전화를 걸 때 뭘 물어야 할지 막막하다면 <a href="#fishing">낚시 챕터의 문의 메시지 예시</a>를 그대로 활용해도 좋습니다.</p>
+
+        <h3>갯벌 생물 손질·보관법</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>바지락 해감</b><span>소금물(물 1L당 소금 2큰술)에 2~4시간. 식초 1큰술을 더하면 약 10분으로 단축. 검은 봉지로 덮어 어둡게 하면 더 활발히 뱉어냄</span></div>
+          <div class="gear-card"><b>조개 신선 운반</b><span>얼음은 위쪽에 배치(냉기는 아래로 이동), 조개는 비닐·채반에 담아 얼음물에 직접 잠기지 않게. 얼음 2kg이면 약 24시간 냉장 유지</span></div>
+        </div>
+
+        <div class="callout">
+          <h4>물때 계획</h4>
+          <p>체험은 보통 <b>최대 간조 시각 전후 2시간</b>이 적기이며, 대부분 마을이 사전 예약제입니다. 밀물 속도는 시속 7~15km로 사람 걸음보다 2~3배 빨라 갯골에 고립되는 사고가 잦으니, <a href="https://www.khoa.go.kr/swtc/main.do" target="_blank" rel="noopener">국립해양조사원 스마트 조석예보</a>로 반드시 시간을 확인하세요.</p>
+        </div>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/watch?v=kC3-UDyDy2Y" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>초고수의 갯벌낙지 잡는법</b><span>YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=wM8HgLUI1-s" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>보령 갯벌체험장 조개캐기</b><span>생물탐색 · YouTube</span></span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/shorts/1kRt3juYTM4" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>갯벌 맛조개, 잡아도 끝없이 나온다</b><span>Shorts · YouTube</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ TACKLE GUIDE ============ -->
+      <section class="section" id="tackle">
+        <span class="part-no">GUIDE</span>
+        <h2>어종별 채비 가이드</h2>
+        <p class="kicker">14개 인기 어종의 로드·릴·낚싯줄·채비 구성과 실전 팁을 모았습니다. 수치는 출처마다 조금씩 달라 표준적으로 가장 흔한 값을 기준으로 정리했으니, 태클숍에서 현장 조건(수심·조류)에 맞춰 조정하세요.</p>
+
+        <div class="tackle-filter" id="tackleFilter">
+          <button type="button" class="active" data-cat="all">전체 14종</button>
+          <button type="button" data-cat="jji">찌낚시 2종</button>
+          <button type="button" data-cat="lure">루어 6종</button>
+          <button type="button" data-cat="egi">에깅 3종</button>
+          <button type="button" data-cat="fresh">민물 3종</button>
+        </div>
+
+        <div class="tackle-grid" id="tackleGrid">
+
+          <div class="tackle-card" data-cat="jji">
+            <h4><span class="tag t-fish">찌낚시</span> 감성돔</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>찌낚시 전용대 1.5~2호 · 5.3m 전후</td></tr>
+              <tr><td>릴</td><td>스피닝 2500~3000번</td></tr>
+              <tr><td>낚싯줄</td><td>원줄 나일론 2~3호 · 목줄 카본 1.2~2호</td></tr>
+              <tr><td>채비</td><td>바늘 2~5호(기본 3호) · 구멍찌 0.5~2호 · 목줄 길이 1.5~3m(조류 따라 조절)</td></tr>
+              <tr><td>미끼</td><td>크릴(기본), 깐새우, 게, 참갯지렁이</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 곶부리·수중여 등 조류가 흐르는 자리를 노리고, 찌가 2~3초 지속적으로 빨려들어갈 때 챔질(게 미끼는 한 박자 늦게).</p>
+          </div>
+
+          <div class="tackle-card" data-cat="jji">
+            <h4><span class="tag t-fish">찌낚시·카고</span> 참돔</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>카고낚시 2~3호대, 이카다는 유연한 참돔 전용대</td></tr>
+              <tr><td>릴</td><td>중형 스피닝 4000~5000번(원줄 200m 감기는 사이즈)</td></tr>
+              <tr><td>낚싯줄</td><td>원줄 나일론 3~5호 · 목줄 2~5호, 길이 3.5~4m</td></tr>
+              <tr><td>채비</td><td>바늘 10~12호 · 카고봉돌 수심 10m당 20~30호 · 구멍찌 1.5~5호</td></tr>
+              <tr><td>미끼</td><td>크릴 중심</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 조류에 채비를 태워 멀리 흘리는 원투식 운용. 남해는 4~6월 대물, 7~8월은 마릿수 시즌.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">루어</span> 농어</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>워킹 시버스로드 8~10ft, 근해는 3.6~6.3m 경질대</td></tr>
+              <tr><td>릴</td><td>스피닝 2500~4000번(근해 표준 3500~4000번)</td></tr>
+              <tr><td>낚싯줄</td><td>PE 1~2호(표준 1.5호) + 쇼크리더 카본 2~3호</td></tr>
+              <tr><td>채비</td><td>지그헤드+웜, 미노우·바이브레이션·탑워터 플러그</td></tr>
+              <tr><td>미끼</td><td>봄·가을 미노우 / 여름 탑워터 / 겨울 바이브레이션</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 조류와 베이트피시가 몰리는 지점이 핵심. 최적 시즌은 5~6월(수온 15~22도), 가을엔 일교차 커질 때 폭발적 입질.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">루어</span> 광어(넙치)</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>선상 다운샷 전용대, 60~100g 싱커 대응</td></tr>
+              <tr><td>릴</td><td>스피닝 3000~4000번 또는 베이트릴 150~200급</td></tr>
+              <tr><td>낚싯줄</td><td>PE 1.2~1.5호 + 쇼크리더 카본 3~5호</td></tr>
+              <tr><td>채비</td><td>다운샷리그(오프셋훅 2/0~3/0+웜, 훅-싱커 단차 25~35cm) · 싱커 20~40호</td></tr>
+              <tr><td>미끼</td><td>섀드테일·스트레이트 웜 4인치(저수온엔 어두운 색, 맑은 날 밝은 색)</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 바닥 콘택 유지가 핵심 — 3초 드래깅→1초 정지→살짝 리프트 후 2초 폴링 반복. 물돌이 시간이 골든타임.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">선상·루어</span> 우럭(조피볼락)</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>선상 2.1~2.5m 경질 외줄대 / 루어 7~8ft L~ML</td></tr>
+              <tr><td>릴</td><td>선상 베이트(장구통) 100~150번 또는 스피닝 4000~5000번 / 루어 2500번대</td></tr>
+              <tr><td>낚싯줄</td><td>선상 합사 6호+기둥줄 10호, 목줄 3~4호 / 루어 PE 1.5~2호</td></tr>
+              <tr><td>채비</td><td>바늘 12~18호, 봉돌 12~30호(선상) · 다운샷 봉돌 4~5호, 단차 30~60cm</td></tr>
+              <tr><td>미끼</td><td>참갯지렁이·청갯지렁이·새우(생미끼), 2~3인치 웜</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 암초·인공어초 지대 수심 10~100m, 성수기 4~6월. 루어는 바닥까지 카운트다운 후 톡톡 튕기듯 호핑. 23cm 미만은 방류.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">루어(락피싱)</span> 볼락</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>UL~ML 액션 6.8~7.6ft, 초릿대 선경 0.7~0.8mm</td></tr>
+              <tr><td>릴</td><td>스피닝 1000~2000번, 저속 기어비 선호</td></tr>
+              <tr><td>낚싯줄</td><td>PE 0.2~0.6호 + 쇼크리더 카본 1~2호</td></tr>
+              <tr><td>채비</td><td>지그헤드 0.6~2g(활성 좋을 때 0.6~0.8g) · 카드채비(봉돌+가짓줄 4~6개)</td></tr>
+              <tr><td>미끼</td><td>볼락 전용 그럽·셀테일 웜 1.5~2인치, 야광·글로우 계열</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 초저녁~야간 집어등·방파제 조명 경계부 공략. 입질이 약하면 지그헤드를 더 가볍게(무거우면 이물감으로 흡입 안 함).</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">생미끼·지깅</span> 갈치</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>생미끼 릴찌대 4.5~5.3m / 지깅 7~8ft 라이트지깅대</td></tr>
+              <tr><td>릴</td><td>스피닝 3000~5000번, 심해는 전동릴</td></tr>
+              <tr><td>낚싯줄</td><td>원줄 나일론 3~5호 / 지깅 PE 0.8~1.2호+쇼크리더 카본 4호</td></tr>
+              <tr><td>채비</td><td>바늘 위 10~20cm 와이어 목줄(이빨 대비) 필수, 찌 0.5~1호, 집어등·케미라이트 부착</td></tr>
+              <tr><td>미끼</td><td>꽁치살·고등어살(소금 숙성) / 지깅은 메탈지그·텐야</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 강한 추광성이라 집어등이 핵심. 찌가 완전히 잠겨 안 보일 때까지 기다렸다가 챔질(너무 빠르면 헛챔질).</p>
+          </div>
+
+          <div class="tackle-card" data-cat="lure">
+            <h4><span class="tag t-mollusk">지깅·루어</span> 삼치</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>연안 미디엄 스피닝 7~8ft / 배낚시 지깅대 7~8ft</td></tr>
+              <tr><td>릴</td><td>연안 4000~5000번 / 배낚시 5000~8000번</td></tr>
+              <tr><td>낚싯줄</td><td>PE 0.8~1.5호(연안)·2.5~4호(배낚시) + 와이어 목줄 약 20cm(이빨 대비 필수)</td></tr>
+              <tr><td>채비</td><td>메탈지그 20~40g(연안)·40~80g(배낚시)</td></tr>
+              <tr><td>미끼</td><td>맑은 물엔 실버·블루 지그, 흐린 물엔 야광·레드/핑크</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 가을(8~11월, 10월 피크) 방파제·연안 접근. 삼치는 아래에서 위로 공격하므로 루어를 유영층보다 위로. 강하게 챔질해 확실히 걸 것.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="egi">
+            <h4><span class="tag t-crab">에깅</span> 갑오징어</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>에깅 전용대 8.3~8.6ft, L~UL 액션</td></tr>
+              <tr><td>릴</td><td>소형 스피닝 1500~2000번</td></tr>
+              <tr><td>낚싯줄</td><td>PE 0.6호 이하 + 카본 목줄</td></tr>
+              <tr><td>채비</td><td>다운샷 리그(에기 1개), 에기 1.5~2.5호, 봉돌 20g 내외, 삼각도래로 분리</td></tr>
+              <tr><td>미끼</td><td>수평 에기 — 맑은 물 내추럴 컬러, 흐린 물 야광 계열</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 자갈·암초 지형 우선(모래바닥 기피). 8월 시작, 9~10월 피크. 캐스팅 후 10초 이상 바닥에서 기다렸다 최대한 천천히 감기.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="egi">
+            <h4><span class="tag t-crab">미니에기</span> 주꾸미</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>주꾸미 전용대 5ft 이내(짧고 예민할수록 챔질 유리)</td></tr>
+              <tr><td>릴</td><td>소형 스피닝 또는 소형 베이트릴</td></tr>
+              <tr><td>낚싯줄</td><td>PE 0.6~0.8호 + 카본 목줄 2~3호</td></tr>
+              <tr><td>채비</td><td>미니에기 1단 직결 채비, 봉돌 8~14호(수심·조류에 맞춰 한 번 정하면 유지)</td></tr>
+              <tr><td>미끼</td><td>미니 에기 — 핑크·오렌지·레드 + 탁한 물엔 야광 혼합</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 수심 20~50m권 바위·조개 혼재 지형. 갑자기 묵직해지면 입질 — 서서히 텐션 유지하며 들어올릴 것(급히 채지 않기).</p>
+          </div>
+
+          <div class="tackle-card" data-cat="egi">
+            <h4><span class="tag t-crab">대형 에기</span> 문어</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>문어 전용대 1.5~1.8m(선상) / 방파제는 허리 힘 강한 원투대</td></tr>
+              <tr><td>릴</td><td>베이트릴 로우기어(선상) / 방파제는 릴 종류 영향 적음</td></tr>
+              <tr><td>낚싯줄</td><td>PE 2~3호(선상) 또는 나일론 15~20호(방파제, 벽 마찰 대비)</td></tr>
+              <tr><td>채비</td><td>대형 에기(왕눈이형) 3~4개, 호수 3.5~4호, 봉돌 30~50호</td></tr>
+              <tr><td>미끼</td><td>빨강·흰색 등 시각적으로 눈에 띄는 축광 에기(문어는 시각 포식자)</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 시즌 7~9월 피크. 발밑 위주로 고패질하며 이동 탐색. 입질 후 5~6초 기다려 완전히 감싸게 한 뒤 강하게 챔질.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="fresh">
+            <h4><span class="tag t-fish">루어</span> 배스</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>초보 스피닝 6~6.6ft M파워, 숙련되면 베이트캐스팅 전환</td></tr>
+              <tr><td>릴</td><td>스피닝 2000~2500번 / 베이트 기어비 6.2:1(웜리그)~7점대(무빙루어)</td></tr>
+              <tr><td>낚싯줄</td><td>스피닝 카본·나일론 4호 내외(6~10lb) / 베이트 12~16lb</td></tr>
+              <tr><td>채비</td><td>텍사스·다운샷·네코·프리리그, 딥워터는 러버지그</td></tr>
+              <tr><td>미끼</td><td>스틱웜, 크랭크베이트, 스피너베이트, 탑워터(포퍼·버즈베이트)</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 봄 산란기엔 얕은 수초대 다운샷·네코리그, 여름 아침저녁엔 탑워터. 수몰나무·브레이크라인 등 구조물 주변 집중 공략.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="fresh">
+            <h4><span class="tag t-fish">바닥·대물낚시</span> 붕어</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>카본 민물대(릴 없음) 3.6~4.5m가 표준, 대물낚시는 4.4~5.0칸 이상 장대 병행</td></tr>
+              <tr><td>릴</td><td>바닥낚시는 릴 미사용이 기본(다대편성)</td></tr>
+              <tr><td>낚싯줄</td><td>원줄 나일론 2~3호 · 목줄 플로로카본 1.5~2호(대물은 나일론 2.5~4호)</td></tr>
+              <tr><td>채비</td><td>바늘 9~14호, 막대찌·오뚜기찌, 표준 찌맞춤. 목줄 길이 10~20cm(대물은 25~30cm)</td></tr>
+              <tr><td>미끼</td><td>지렁이(사계절 강세)&gt;글루텐(입문 추천)&gt;옥수수&gt;새우</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 새벽·해질녘, 흐리거나 비 오는 날이 유리. 콩알떡밥은 찌올림이 둔해질 때, 지렁이는 흡입할 때까지 기다렸다 챔질.</p>
+          </div>
+
+          <div class="tackle-card" data-cat="fresh">
+            <h4><span class="tag t-fish">떡밥·글루텐</span> 향어</h4>
+            <table><tbody>
+              <tr><td>로드</td><td>향어 전용대(붕어대보다 강한 반발력) 13~21척(4~6.3m), 쌍포 운영</td></tr>
+              <tr><td>릴</td><td>바닥낚시는 릴 미사용이 기본(유럽식 중층찌낚시는 릴 사용, 확인 필요)</td></tr>
+              <tr><td>낚싯줄</td><td>원줄 카본 3호 전후 · 목줄 케블라 3호, 길이 10~12cm</td></tr>
+              <tr><td>채비</td><td>향어 전용바늘 13호 쌍바늘, 저부력 올림찌, 마이너스 찌맞춤(예민하게)</td></tr>
+              <tr><td>미끼</td><td>어분 계열 집어제(어분10:물5) + 한쪽 바늘엔 글루텐 병행</td></tr>
+            </tbody></table>
+            <p class="tip"><b>TIP</b> 향어 무리가 다니는 자리 선점이 절대적. 야간엔 케미가 오물거리다 살짝 떠오르는 순간 챔질.</p>
+          </div>
+
+        </div>
+        <p style="font-size:.82rem;color:var(--ink-soft);">※ 브랜드·모델명, 정확한 lb/호수 등 출처마다 편차가 큰 세부 수치는 현장 태클숍에서 다시 확인하는 것을 권장합니다.</p>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/watch?v=iR3u2O_8bfc" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>에깅 액션 테크닉 총정리</b><span>저킹·폴링·스테이 · YouTube</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ SPECIES ============ -->
+      <section class="section" id="species">
+        <span class="part-no">GUIDE</span>
+        <h2>어종 · 생물 도감</h2>
+        <p class="kicker">낚시·해루질·다이빙·갯벌에서 만나는 대표 해양생물 40종. 금어기·금지체장은 매년 고시가 바뀌므로 <a href="https://www.mof.go.kr" target="_blank" rel="noopener">해양수산부</a>·<a href="https://www.nifs.go.kr" target="_blank" rel="noopener">국립수산과학원</a> 최신 공지를 반드시 재확인하세요.</p>
+
+        <div class="tackle-filter" id="seasonFilter">
+          <button type="button" class="active" data-season="all">전체</button>
+          <button type="button" data-season="봄">🌸 봄 제철</button>
+          <button type="button" data-season="여름">☀️ 여름 제철</button>
+          <button type="button" data-season="가을">🍁 가을 제철</button>
+          <button type="button" data-season="겨울">❄️ 겨울 제철</button>
+        </div>
+
+        <div class="search-box">
+          <input type="search" id="speciesSearch" placeholder="생물 이름으로 검색 (예: 전복, 낙지, 꽃게)" aria-label="어종 검색">
+        </div>
+
+        <div class="tbl-wrap">
+          <table id="speciesTable">
+            <thead><tr><th>분류</th><th>이름</th><th>서식지</th><th>채집 시기·산란기</th><th>🍽 맛있는 시기</th><th>채집법</th><th>금어기 · 금지체장</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag t-fish">어류</span></td><td>감성돔</td><td>연안 암초·기수역</td><td>가을~겨울(10월~), 산란 4~6월</td><td>가을~겨울(10~12월)</td><td>낚시(찌낚시)</td><td>금어기 5/1~5/31, 25cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>참돔</td><td>연안~근해 암초</td><td>봄·가을, 산란 4~6월</td><td>봄(3~5월, "벚꽃도미")</td><td>낚시(타이라바)</td><td>24cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>농어</td><td>연안 기수역·항만</td><td>5~10월</td><td>초여름(6~7월)</td><td>루어낚시</td><td>30cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>광어(넙치)</td><td>연안 모래바닥</td><td>4~5월, 가을~겨울</td><td>겨울(12~3월, 산란 전)</td><td>낚시(다운샷)</td><td>35cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>우럭(조피볼락)</td><td>암초 지대 10~100m</td><td>봄~가을</td><td>여름(6~8월)</td><td>낚시(외줄·루어)</td><td>23cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>볼락</td><td>암초·해조밭</td><td>겨울~봄</td><td>겨울~초봄(12~3월)</td><td>루어(락피싱)</td><td>15cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>갈치</td><td>남해~제주</td><td>8~9월 성수기, 겨울 대형</td><td>가을(9~10월)</td><td>낚시(원투·외줄)</td><td>금어기 7/1~7/31, 18cm</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>삼치</td><td>남해~서해 회유</td><td>8~10월</td><td>가을~초겨울(10~12월)</td><td>지깅</td><td>금어기 5/1~5/31</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>붕어</td><td>민물 저수지·강</td><td>봄 산란, 사계절</td><td>가을(9~10월, 씨알 최고)</td><td>민물낚시</td><td>내수면 별도 규정 확인</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>배스</td><td>민물 전역(생태교란종)</td><td>연중</td><td>식용 비권장(외래 교란종)</td><td>루어낚시</td><td>살아있는 재방류 금지·포획 권장</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>전어</td><td>연안 내만·하구</td><td>산란 3월 중순~6월, 여름 외해·가을 내만 회귀</td><td>가을("가을전어", 9~10월)</td><td>낚시(원투·처넣기)</td><td>금어기 5/1~7/15</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>숭어</td><td>연안 기수역·하구</td><td>연중</td><td>겨울(참숭어)·여름(가숭어)</td><td>낚시(원투·훌치기)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>방어</td><td>남해~동해 회유성</td><td>가을~겨울 남하 회유</td><td>겨울("겨울 방어", 11~2월)</td><td>지깅</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>부시리</td><td>남해~제주 회유성</td><td>여름~가을</td><td>여름~가을(6~9월)</td><td>지깅</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>학꽁치</td><td>연안 표층</td><td>가을~겨울 연안 접근</td><td>겨울(11~2월)</td><td>낚시(훌치기·원투)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>노래미</td><td>방파제·연안 바닥</td><td>연중, 가을 산란</td><td>봄(3~5월)</td><td>낚시(원투·처넣기)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>도다리</td><td>연안 모래바닥</td><td>겨울 산란 후 봄 접근</td><td>봄("봄 도다리", 3~4월)</td><td>낚시(원투)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-fish">어류</span></td><td>쥐치</td><td>연안~근해 암초</td><td>여름~가을</td><td>여름~가을(7~10월)</td><td>낚시(외줄)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-mollusk">두족류</span></td><td>참문어</td><td>서·남해 암초·갯벌</td><td>성수기 7~9월, 산란 5~9월</td><td>여름~초가을(7~9월)</td><td>해루질·에깅</td><td>전국 금어기 5/16~6/30</td></tr>
+              <tr><td><span class="tag t-mollusk">두족류</span></td><td>낙지</td><td>서·남해 갯벌</td><td>초여름 산란</td><td>가을("가을 낙지", 9~11월)</td><td>해루질(손낙지·가래낙지)</td><td>금어기 6월(지역별 상이)</td></tr>
+              <tr><td><span class="tag t-mollusk">두족류</span></td><td>주꾸미</td><td>서해 연안</td><td>봄·가을, 산란 봄~초여름</td><td>봄(3~5월, 알밴 주꾸미)</td><td>에깅</td><td>금어기 5/11~8/31</td></tr>
+              <tr><td><span class="tag t-mollusk">두족류</span></td><td>갑오징어</td><td>연안~근해</td><td>봄 산란기 접근</td><td>가을(9~11월)</td><td>에깅</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-mollusk">두족류</span></td><td>무늬오징어</td><td>동남해(포항~여수)</td><td>5~11월(동해 9~11월)</td><td>가을(9~11월)</td><td>에깅</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-crab">갑각류</span></td><td>꽃게</td><td>서·남해 갯벌·모래</td><td>봄(4~5월)·가을(9~10월)</td><td>봄(암게, 4~6월)·가을(수게, 9~10월)</td><td>해루질·통발</td><td>금어기 6/21~8/20, 포란개체 연중금지</td></tr>
+              <tr><td><span class="tag t-crab">갑각류</span></td><td>대게</td><td>동해 심해</td><td>산란 6~11월, 3~4월</td><td>겨울~초봄(11~3월)</td><td>통발(일반인 제한적)</td><td>수컷 6/1~11/30, 암컷 연중금지, 9cm</td></tr>
+              <tr><td><span class="tag t-crab">갑각류</span></td><td>대하(새우)</td><td>서해 갯벌·모래</td><td>가을(9~11월)</td><td>가을("가을 대하", 9~10월)</td><td>해루질(뜰채)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-crab">갑각류</span></td><td>방게·칠게</td><td>하구·갯벌</td><td>여름</td><td>여름~가을</td><td>해루질(맨손)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>전복</td><td>남해·제주 암초</td><td>가을 제철</td><td>가을(9~11월)</td><td>다이빙(나잠어업 허가)</td><td>7cm</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>소라</td><td>남해·제주 암초</td><td>가을</td><td>가을(9~11월)</td><td>다이빙·해루질</td><td>5cm, 지역별 금채기(제주 6~8월경)</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>바지락</td><td>서·남해 갯벌</td><td>봄(3~5월)</td><td>봄("봄 바지락", 3~5월)</td><td>해루질(호미)</td><td>지역별 금채기 별도</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>백합</td><td>서·남해 하구</td><td>봄</td><td>봄(4~6월)</td><td>해루질</td><td>금어기 7/1~8/20, 5cm</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>굴</td><td>서·남해 조간대</td><td>겨울</td><td>겨울("R가 든 달", 11~2월)</td><td>갯벌·암반 채취</td><td>상시규제 없음(패류독소 발생시 별도)</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>맛조개</td><td>서해 갯벌</td><td>봄~가을</td><td>봄(3~5월)</td><td>해루질(소금 유인)</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>새조개</td><td>서·남해 사니질</td><td>겨울~초봄</td><td>겨울("새조개 샤브샤브", 12~2월)</td><td>형망(일반채집 제한적)</td><td>금어기 6/1~9/30</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>키조개</td><td>서해 사니질</td><td>봄</td><td>봄(3~5월)</td><td>다이빙(형망)</td><td>금어기 7/1~8/30</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>가리비</td><td>동·남해 사니질</td><td>—</td><td>겨울~봄(12~4월)</td><td>다이빙·형망</td><td>금어기 3/1~6/30</td></tr>
+              <tr><td><span class="tag t-shell">패류</span></td><td>홍합(참담치)</td><td>연안 암반(자연산)</td><td>—</td><td>겨울~봄</td><td>해루질(암반)·다이빙</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-mollusk">기타</span></td><td>해삼</td><td>연안 암반·모래</td><td>겨울~봄</td><td>겨울~봄(11~4월)</td><td>다이빙·해루질</td><td>금어기 7/1~7/31</td></tr>
+              <tr><td><span class="tag t-mollusk">기타</span></td><td>성게</td><td>연안 암초·해조밭</td><td>—</td><td>봄(4~6월, 알 차는 시기)</td><td>다이빙</td><td>확인 필요</td></tr>
+              <tr><td><span class="tag t-mollusk">기타</span></td><td>톳</td><td>조간대 암반</td><td>—</td><td>봄(2~4월, 채취 제철)</td><td>갯바위 채취</td><td>금채기 10/1~1/31</td></tr>
+              <tr><td><span class="tag t-mollusk">기타</span></td><td>개불</td><td>갯벌 모래펄(깊이 서식)</td><td>—</td><td>겨울("겨울 개불", 11~2월)</td><td>해루질(삽으로 굴 파기)</td><td>확인 필요</td></tr>
+            </tbody>
+          </table>
+          <p class="no-match" id="noMatch">일치하는 생물이 없습니다.</p>
+        </div>
+        <p style="font-size:.82rem;color:var(--ink-soft);">※ "확인 필요"로 표시된 항목은 전국 공통 고시를 명확히 확인하지 못한 경우로, 지자체별 조례가 있을 수 있습니다. "맛있는 시기"는 널리 알려진 식문화 기준(살·지방이 오르는 시기)으로, <b>채집 시기(금어기 등 규정)와 다를 수 있습니다</b> — 반드시 금어기·금지체장을 먼저 확인하세요.</p>
+      </section>
+
+      <!-- ============ COMPARE SPECIES ============ -->
+      <section class="section" id="compare">
+        <span class="part-no">GUIDE</span>
+        <h2>헷갈리는 생물 구별</h2>
+        <p class="kicker">이름이 비슷하거나 생김새가 닮아 혼동하기 쉬운 9쌍을 비교했습니다. 특히 참문어·파란고리문어 쌍은 안전과 직결되니 꼭 확인하세요.</p>
+
+        <div class="tackle-grid">
+
+          <div class="tackle-card">
+            <h4>바지락 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 동죽</h4>
+            <table><tbody>
+              <tr><td>바지락</td><td>크기가 작고 껍데기에 불규칙한 방사무늬</td></tr>
+              <tr><td>동죽</td><td>바지락보다 크고 껍데기가 매끈하며 줄무늬가 비교적 규칙적, 살이 도톰</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 크기와 무늬의 규칙성 — 동죽이 더 크고 줄무늬가 가지런합니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>꽃게 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 민꽃게</h4>
+            <table><tbody>
+              <tr><td>꽃게</td><td>몸통 좌우에 날카로운 가시가 돌출</td></tr>
+              <tr><td>민꽃게</td><td>좌우 가시 없이 민들민들, 집게발이 훨씬 굵고 악력이 강함(주로 게장용)</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 몸통 옆쪽 가시 유무를 확인하세요.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>무늬오징어 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 갑오징어</h4>
+            <table><tbody>
+              <tr><td>무늬오징어(흰오징어)</td><td>몸속에 뼈(갑)가 없음. 암컷은 흰 점, 수컷은 흰 줄무늬</td></tr>
+              <tr><td>갑오징어</td><td>몸속에 단단한 타원형 뼈(갑, 오징어뼈)가 있음</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 몸통을 살짝 눌러 속에 딱딱한 뼈가 만져지는지 확인합니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>주꾸미 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 낙지</h4>
+            <table><tbody>
+              <tr><td>주꾸미</td><td>몸길이 약 20cm, 머리가 커서 다리 길이의 1/3 정도. 3번째 다리 밑동에 금색 고리무늬</td></tr>
+              <tr><td>낙지</td><td>몸길이 최대 70cm, 머리가 작아 다리의 1/6 정도. 다리가 가늘고 길게 뻗음</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 크기와 머리·다리 비율, 주꾸미 특유의 금색 고리무늬</p>
+          </div>
+
+          <div class="tackle-card" style="border-color:var(--coral);">
+            <h4>참문어 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 파란고리문어류 <span class="badge hard">위험</span></h4>
+            <table><tbody>
+              <tr><td>참문어</td><td>수십 cm로 큰 편, 갈색~적갈색</td></tr>
+              <tr><td>파란고리문어류</td><td>12~20cm로 매우 작음. 평소 노란빛 바탕이나 위협을 느끼면 0.3초 만에 선명한 파란 고리무늬가 번쩍임</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 크기가 작고 파란 고리무늬가 보이면 <b>무조건 접촉하지 말고 즉시 거리를 두세요</b> — 자세한 위험은 <a href="#hazards">위험 생물 주의</a> 참고.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>광어(넙치) <span style="color:var(--ink-soft);font-weight:400;">vs</span> 도다리(가자미류)</h4>
+            <table><tbody>
+              <tr><td>광어(넙치)</td><td>사람과 마주 봤을 때 눈이 <b>왼쪽</b>으로 쏠림. 입과 이빨이 큼</td></tr>
+              <tr><td>도다리 등 가자미류</td><td>눈이 <b>오른쪽</b>으로 쏠림. 입과 이빨이 작음</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> "좌광우도"(左광右도) — 눈이 왼쪽이면 광어, 오른쪽이면 도다리입니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>쥐노래미 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 노래미</h4>
+            <table><tbody>
+              <tr><td>쥐노래미</td><td>60cm 이상 자람. 옆줄(측선)이 5개, 꼬리지느러미가 I자·V자</td></tr>
+              <tr><td>노래미</td><td>30cm를 넘지 못함. 옆줄이 1개, 꼬리지느러미가 둥근 부채꼴</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 옆줄(측선) 개수와 꼬리지느러미 모양이 가장 확실합니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>쥐치 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 말쥐치</h4>
+            <table><tbody>
+              <tr><td>쥐치</td><td>황토빛 바탕에 암갈색 불규칙한 무늬</td></tr>
+              <tr><td>말쥐치</td><td>짙은 흑회색, 몸이 더 길쭉함(쥐포의 주원료)</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 몸 색깔(황토빛 vs 흑회색)로 쉽게 구별됩니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>고등어 <span style="color:var(--ink-soft);font-weight:400;">vs</span> 망치고등어</h4>
+            <table><tbody>
+              <tr><td>고등어</td><td>배 쪽이 은백색으로 깨끗하고 무늬가 없음</td></tr>
+              <tr><td>망치고등어</td><td>배 쪽에도 깨알 같은 검은 점이 흩어져 있음</td></tr>
+            </tbody></table>
+            <p class="tip"><b>구별 포인트</b> 배 쪽에 점무늬가 있으면 망치고등어입니다.</p>
+          </div>
+
+        </div>
+        <p style="font-size:.82rem;color:var(--ink-soft);">※ 한 가지 특징만으로 종이나 식용 여부를 확정하지 마세요. 확신이 없는 개체는 만지거나 먹지 말고 전문가·공식 도감으로 다시 확인하는 것이 안전합니다.</p>
+      </section>
+
+      <!-- ============ HANDLING & FOOD SAFETY ============ -->
+      <section class="section" id="handling">
+        <span class="part-no">GUIDE</span>
+        <h2>손질 · 보관 · 식중독 예방</h2>
+        <p class="kicker">잡은 순간부터 먹기 직전까지 가장 많이 배탈이 나는 지점을 짚었습니다. 여름 비브리오패혈증, 봄 패류독소는 특히 반드시 알아야 합니다.</p>
+
+        <div class="callout warn">
+          <h4>잡자마자 해야 할 3가지</h4>
+          <ol style="margin-bottom:0;">
+            <li><b>즉시 저온 보관</b> — 아이스박스에 넣어 5°C 이하 유지. 상온에 방치하는 시간이 길수록 세균이 번식합니다.</li>
+            <li><b>생선은 피 빼기·내장 제거</b> — 아가미와 내장부터 상하기 시작하므로 가능하면 현장에서 바로 제거합니다.</li>
+            <li><b>바닷물 세척 금지</b> — 해수에는 비브리오균이 있을 수 있어 조리 전 반드시 <b>흐르는 수돗물</b>로 씻습니다.</li>
+          </ol>
+        </div>
+
+        <h3>어종별 손질법</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>대상</th><th>손질법</th></tr></thead>
+          <tbody>
+            <tr><td>생선(일반)</td><td>비늘을 꼬리→머리 방향으로 긁어낸 뒤, 배를 갈라 내장을 제거하고 흐르는 물로 헹굽니다. <b>내장·아가미 손질용 칼과 회 뜨는 칼은 분리</b>해 사용하는 것이 교차오염 예방에 중요합니다.</td></tr>
+            <tr><td>활어 피빼기(이케지메)</td><td>칼끝이나 송곳으로 머리(뇌)를 찔러 즉사시킨 뒤 아가미 쪽 혈관을 끊어 피를 빼는 방법. 고통을 줄이고 신선도·식감을 오래 유지하는 효과가 있어 활어회 전문점에서 널리 쓰입니다.</td></tr>
+            <tr><td>전복</td><td>살짝 데치면 껍데기와 이빨(입) 제거가 쉬워집니다. 솔로 표면 이물질을 씻어낸 뒤 숟가락으로 살을 떼어내고 내장(미역취)은 따로 분리해 익혀 먹습니다.</td></tr>
+            <tr><td>낙지·문어</td><td>밀가루나 굵은소금을 뿌려 바락바락 주물러 씻으면 표면 점액과 미끄러움이 제거됩니다. 먹물주머니와 눈·입(이빨)을 제거한 뒤 조리합니다.</td></tr>
+            <tr><td>꽃게·게류</td><td>솔로 등딱지 틈을 씻고, 요리 전 배쪽 삼각형 딱지(배꼽)를 열어 아가미(회색 이물질)를 제거합니다. 살아있는 상태로 급속 냉동하면 오래 보관 가능합니다.</td></tr>
+            <tr><td>조개류(바지락 등)</td><td>아래 "해감법" 참고 — 흙·모래를 충분히 뱉어내야 배탈 없이 먹을 수 있습니다.</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>조개 해감법</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>기본 소금물</b><span>물 1L당 소금 2큰술(바닷물 농도), 어둡게(검은 봉지) 덮어 2~4시간</span></div>
+          <div class="gear-card"><b>빠른 해감(식초)</b><span>소금물에 식초 1큰술을 더하면 조개가 바로 입을 열어 약 10분으로 단축</span></div>
+          <div class="gear-card"><b>철분 활용</b><span>녹슨 못 등을 함께 넣으면 자극이 커져 해감이 빨라짐</span></div>
+          <div class="gear-card"><b>백합</b><span>염도가 낮아 해감이 거의 필요 없는 예외적인 조개</span></div>
+        </div>
+
+        <h3>보관법</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>아이스박스 냉기 배치</b><span>냉기는 위→아래로 이동하므로 얼음을 맨 위에. 어획물은 얼음물에 직접 잠기지 않도록 비닐·채반으로 분리</span></div>
+          <div class="gear-card"><b>얼음 비율</b><span>여름철은 전체 용량의 1/3~1/2을 얼음으로. 큰 얼음 덩어리가 잘게 부순 얼음보다 오래 감</span></div>
+          <div class="gear-card"><b>생선 냉장</b><span>내장 제거 후 키친타월로 물기를 닦고 밀폐 후 냉장(2~3일 내), 장기 보관은 냉동</span></div>
+          <div class="gear-card"><b>조개 냉장</b><span>젖은 신문지나 면포로 덮어 냉장고 채소칸에 보관, 밀폐용기는 질식으로 폐사할 수 있어 피함</span></div>
+        </div>
+
+        <h3>식중독 예방 — 계절별 위험</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>위험</th><th>시기·지역</th><th>예방법</th></tr></thead>
+          <tbody>
+            <tr><td><b>비브리오패혈증</b></td><td>수온 21°C 이상인 <b>7~10월</b>. 하구·연안에 주로 서식</td><td>어패류는 5°C 이하 저온 보관 또는 <b>85°C 이상 완전히 익혀서 섭취</b>. 상처 난 피부는 바닷물·해산물 접촉 금지. 간질환자 등 고위험군은 생식 자제(치사율 50% 이상 가능)</td></tr>
+            <tr><td><b>마비성 패류독소</b></td><td><b>3~6월</b>(4월 중순~5월 초 최고치), 남해안 중심. 수온 18°C 이상이면 자연 소멸</td><td>가열해도 독소가 제거되지 않으므로, 지자체가 채취금지를 고시한 해역의 조개·홍합은 절대 섭취 금지 — 관할 수협·지자체 공지 확인</td></tr>
+            <tr><td><b>기생충(아니사키스 등)</b></td><td>연중, 특히 고등어·오징어 등 회로 먹는 어종</td><td>-20°C 이하에서 24시간 이상 냉동하면 사멸. 유통 활어회는 유통 과정에서 관리되지만, 직접 잡은 생선의 즉석 회뜨기는 특히 주의</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="callout">
+          <h4>회로 먹어도 될까?</h4>
+          <p>직접 잡은 활어를 바로 회로 뜨는 것은 낭만이지만, 기생충·세균 위험이 유통 과정의 관리(냉동 등)를 거치지 않은 상태라는 점을 기억해야 합니다. 확신이 없다면 <b>익혀 먹는 조리법(구이·탕·찜)</b>이 가장 안전하며, 특히 여름철 어패류와 봄철 패류는 익혀 먹는 것을 권장합니다.</p>
+        </div>
+      </section>
+
+      <!-- ============ HAZARDOUS SPECIES ============ -->
+      <section class="section" id="hazards">
+        <span class="part-no">SAFETY</span>
+        <h2>위험 생물 주의</h2>
+        <p class="kicker">먹거나 만지면 위험할 수 있는 대표 생물을 모았습니다. 여기 없다고 안전하다는 뜻은 아닙니다 — 확신이 없으면 만지지도, 먹지도 마세요.</p>
+
+        <h3>먼저 구분할 4가지 위험 유형</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>유형</th><th>의미</th><th>대표 사례</th></tr></thead>
+          <tbody>
+            <tr><td><b>자가 손질·섭취 위험</b></td><td>독소가 있어 일반적인 조리로 제거되지 않음. 전문 자격 없이 직접 손질해 먹지 않기</td><td>복어류</td></tr>
+            <tr><td><b>날것 섭취 감염 위험</b></td><td>식용 가능해도 회·덜 익힌 상태로 먹으면 기생충에 감염될 수 있음</td><td>민물고기·민물 게·민물 패류</td></tr>
+            <tr><td><b>접촉 손상 위험</b></td><td>가시·독침·촉수에 의한 찔림·쏘임. 맨손 접촉 금지</td><td>쏠종개·가오리·해파리·파란고리문어</td></tr>
+            <tr><td><b>해역 공지 우선</b></td><td>겉모습이 정상이어도 채취금지 고시가 뜬 해역의 것은 섭취 금지</td><td>패류독소 발생 해역의 조개류</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>대표 위험 생물</h3>
+        <div class="tackle-grid">
+
+          <div class="tackle-card" style="border-color:var(--coral);">
+            <h4>복어류(자주복 등) <span class="badge hard">섭취 위험</span></h4>
+            <p style="font-size:.88rem;">복어독(테트로도톡신)은 신경마비와 호흡장애를 일으킬 수 있고, <b>일반적인 가열·냉동으로는 제거되지 않습니다</b>. 독성 부위는 종·개체마다 달라 전문 조리 자격이 없으면 직접 손질해 먹지 마세요.</p>
+          </div>
+
+          <div class="tackle-card" style="border-color:var(--coral);">
+            <h4>파란고리문어류 <span class="badge hard">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">12~20cm로 작고 평소엔 눈에 잘 띄지 않지만, 위협을 느끼면 0.3초 만에 선명한 파란 고리무늬가 번쩍입니다. 물릴 때 통증이 약해 눈치채지 못할 수 있지만 심각한 신경마비를 일으킬 수 있어 <b>맨손 접촉·장난 절대 금지</b>입니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>해파리류(노무라입깃해파리 등) <span class="badge mid">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">촉수뿐 아니라 해변에 떠밀려온 사체도 쏠 수 있어 맨손으로 만지지 않습니다. 쏘이면 <b>바닷물로 헹구고</b>(민물은 자극을 더 유발할 수 있어 피함) 남은 촉수를 제거하세요. 식초는 해파리 종류에 따라 오히려 독액 방출을 늘릴 수 있어 만능이 아닙니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>쏠종개 <span class="badge mid">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">등지느러미·가슴지느러미에 독가시가 있습니다. 무리 지어 다니는 작은 물고기라도 손으로 모으지 마세요. 찔리면 참을 수 있는 정도의 <b>45~50°C 뜨거운 물에 30~90분</b> 담그면 통증이 줄어듭니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>노랑가오리 등 가오리류 <span class="badge mid">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">꼬리의 가시에 찔리면 깊은 상처와 독성 손상을 입을 수 있습니다. 소금물로 상처를 헹구고 출혈은 직접 압박으로 늦추며, 쏠종개와 마찬가지로 뜨거운 물 요법이 도움이 됩니다. 꼬리·등 쪽을 잡지 마세요.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>말똥성게 등 성게류 <span class="badge easy">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">밟거나 쥐면 가시가 피부에 박힙니다. 식초에 담그면 가시가 녹아 제거가 쉬워지고, 온수에 담그면 통증이 대체로 완화됩니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>조개·굴·담치류 <span class="badge mid">해역 공지 우선</span></h4>
+            <p style="font-size:.88rem;">패류독소가 축적된 조개는 <b>겉모습으로 구별할 수 없고</b>, 해감·냉동·가열을 해도 독소가 없어지지 않습니다. 3~6월 지자체가 채취금지를 고시한 해역의 것은 절대 먹지 마세요 — 자세한 내용은 <a href="#handling">손질·보관·식중독 예방</a> 참고.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>민물고기(참붕어 등) <span class="badge easy">날것 감염 위험</span></h4>
+            <p style="font-size:.88rem;">간흡충은 감염된 민물고기를 회나 덜 익힌 상태로 먹을 때 옮을 수 있습니다. 겉모습만으로는 감염 여부를 알 수 없으니 민물고기는 <b>완전히 익혀서</b> 먹습니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>민물 게·가재(참게 등) <span class="badge easy">날것 감염 위험</span></h4>
+            <p style="font-size:.88rem;">감염된 민물 게·가재를 날것이나 덜 익힌 상태로 먹으면 폐흡충에 감염될 수 있습니다. 생식·생즙(게장 포함)은 피하는 것이 안전합니다.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>다슬기 등 민물 패류 <span class="badge easy">날것 감염 위험</span></h4>
+            <p style="font-size:.88rem;">날것으로 먹으면 흡충류 감염 경로가 될 수 있습니다. 완전히 익혀 먹고, 채집 후에는 반드시 손을 씻으세요.</p>
+          </div>
+
+          <div class="tackle-card">
+            <h4>동자개 등 가시 있는 민물고기 <span class="badge easy">접촉 위험</span></h4>
+            <p style="font-size:.88rem;">등·가슴지느러미 가시가 단단하고 가슴지느러미 가시에는 톱니가 있어 맨손으로 쥐면 찔릴 수 있습니다. 독성 여부와 별개로 상처 감염에 주의하세요.</p>
+          </div>
+
+        </div>
+
+        <div class="callout warn">
+          <h4>응급상황 대처 원칙</h4>
+          <ul style="margin-bottom:0;">
+            <li>호흡곤란·의식저하·심한 마비·큰 출혈이 있으면 즉시 <b>119</b>에 신고하고, 바다 사고라면 위치와 구조 필요 여부도 함께 설명합니다.</li>
+            <li>정확한 위치·먹거나 접촉한 생물·시간·증상을 전달하고, 생물을 다시 잡으려 하지 마세요.</li>
+            <li><b>억지로 토하게 하거나 상처를 절개·입으로 빨아내지 않습니다.</b> 식초·뜨거운 물 요법도 모든 쏘임에 똑같이 적용되지 않으니, 구조요원·의료진의 지시를 따르는 것이 가장 안전합니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ TIDES & WEATHER ============ -->
+      <section class="section" id="tides">
+        <span class="part-no">TOOL</span>
+        <h2>물때 캘린더 &amp; 바다날씨</h2>
+        <p class="kicker">날짜를 고르면 그날의 달 위상으로 사리·조금 정도를 즉시 계산해 보여줍니다. 실시간 파고·수온·바람은 공식 기관 데이터가 필요해 아래 바로가기로 연결했습니다.</p>
+
+        <h3>핵심 용어</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b>간조 / 만조</b><span>썰물이 끝나 수위가 가장 낮은 때 / 밀물이 끝나 가장 높은 때</span></div>
+          <div class="gear-card"><b>사리 / 조금</b><span>태양-지구-달이 일직선일 때 조차 최대(사리) / 직각일 때 조차 최소(조금)</span></div>
+          <div class="gear-card"><b>물때 숫자(1~13물·조금·무시)</b><span>조금·무시 이후 1물부터 다시 세며, 서해 기준 8~11물 무렵이 사리(최대), 무시~2물 무렵이 조금(최소)입니다. 사리는 삭·망 당일이 아니라 그로부터 3~4일 뒤에 옵니다</span></div>
+          <div class="gear-card"><b>갯골</b><span>밀물 시 먼저 물이 차오르는 좁은 물길 — 고립 사고의 주 원인</span></div>
+        </div>
+
+        <h3>날짜별 물때 계산기</h3>
+        <div class="tide-tool">
+          <div class="tide-controls">
+            <div class="tide-date-field">
+              <label for="tideDate">날짜 선택</label>
+              <input type="date" id="tideDate">
+            </div>
+            <div class="tide-month-nav">
+              <button type="button" id="prevMonth" aria-label="이전 달">‹</button>
+              <span id="monthLabel" class="mono tabular"></span>
+              <button type="button" id="nextMonth" aria-label="다음 달">›</button>
+            </div>
+          </div>
+
+          <div class="tide-detail" id="tideDetail"></div>
+
+          <div class="cal-weekdays">
+            <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+          </div>
+          <div class="tide-calendar-grid" id="tideCalendar"></div>
+          <div class="cal-legend">
+            <span><i class="dot" style="background:var(--coral)"></i>사리(조차 최대)</span>
+            <span><i class="dot" style="background:var(--amber)"></i>중간물</span>
+            <span><i class="dot" style="background:var(--tide)"></i>조금(조차 최소)</span>
+          </div>
+        </div>
+
+        <div class="callout amber">
+          <h4>이 계산기가 하는 일 / 못 하는 일</h4>
+          <p>삭(신월)·망(보름)으로부터 며칠이 지났는지를 계산해 전통 <b>물때번호(1~13물·조금·무시)</b>와 상대 세기를 표시합니다. 국립해양조사원 제공 인천 물때표(바다타임)와 대조해 물때번호가 정확히 일치하는 것을 확인했습니다 — 인터넷 연결 없이도 어느 날짜든 바로 확인 가능합니다. 다만 이 번호는 <b>서해·인천 기준</b>이라 남해·동해·제주는 1~2일 어긋날 수 있고, <b>실제 간·만조 정확한 시각, 조차(cm), 파고·수온·바람</b>은 해안 지형과 기상 조건에 따라 달라 이 페이지가 직접 계산하지 않습니다 — 아래 실시간 바로가기에서 확인하세요.</p>
+        </div>
+
+        <h3>파고·바람·유속 — 용어와 안전 기준</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>용어</th><th>의미</th><th>주의 기준(기상청)</th></tr></thead>
+          <tbody>
+            <tr><td>유의파고(파고)</td><td>일정 시간 관측된 파도 중 높은 1/3의 평균 높이(m) — 바다타임·기상청이 표시하는 "파고"가 이 값</td><td><b>풍랑주의보</b> 3m 이상 · <b>풍랑경보</b> 5m 이상(3시간 이상 지속 예상 시)</td></tr>
+            <tr><td>풍속</td><td>해상 바람의 세기(m/s) — 방파제·갯바위·선상낚시 모두 직접적 안전 변수</td><td><b>풍랑주의보</b> 14m/s 이상 · <b>풍랑경보</b> 21m/s 이상</td></tr>
+            <tr><td>유속(조류)</td><td>바닷물이 흐르는 속도 — 사리 무렵 가장 빠르고 조금 무렵 가장 느림. 낚시 채비 무게·다이빙 난이도에 직결</td><td>공식 수치는 지점·시각별 예측이 필요해 국립해양조사원 조류예측 서비스에서 확인</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.82rem;color:var(--ink-soft);">파고 1m 이하 · 풍속 10m/s 이하면 대체로 방파제·선상낚시에 무난한 조건으로 간주됩니다. 특보 발효 중에는 배낚시·다이빙·갯바위 진입을 피하세요.</p>
+
+        <h3>지역별 실시간 바로가기</h3>
+        <p>아래는 바다타임이 실제 제공하는 지역별 페이지로 직접 연결됩니다. 왼쪽은 예보(파고·풍향·풍속), 오른쪽은 실측(조위·수온) 페이지입니다.</p>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>해역</th><th>지역</th><th>바다날씨(파고·바람)</th><th>조위·수온(실측)</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4">서해</td><td>인천</td><td><a href="https://www.badatime.com/158/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/158/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>보령(태안권)</td><td><a href="https://www.badatime.com/127/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/127/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>장항(군산·부안권)</td><td><a href="https://www.badatime.com/121/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/121/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>목포(신안권)</td><td><a href="https://www.badatime.com/105/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/105/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td rowspan="5">남해</td><td>완도</td><td><a href="https://www.badatime.com/60/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/60/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>여수</td><td><a href="https://www.badatime.com/41/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/41/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>거문도</td><td><a href="https://www.badatime.com/51/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/51/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>통영</td><td><a href="https://www.badatime.com/25/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/25/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>부산</td><td><a href="https://www.badatime.com/1/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/1/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td rowspan="4">동해</td><td>울산</td><td><a href="https://www.badatime.com/214/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/214/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>속초</td><td><a href="https://www.badatime.com/192/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/192/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>묵호(강릉권)</td><td><a href="https://www.badatime.com/195/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/195/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>울릉도</td><td><a href="https://www.badatime.com/199/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/199/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td rowspan="2">제주</td><td>제주</td><td><a href="https://www.badatime.com/67/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/67/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+            <tr><td>서귀포</td><td><a href="https://www.badatime.com/72/sea-cast" target="_blank" rel="noopener">예보 ↗</a></td><td><a href="https://www.badatime.com/72/obs" target="_blank" rel="noopener">실측 ↗</a></td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>공식 종합 사이트</h3>
+        <div class="gear-grid">
+          <a class="gear-card" href="https://www.badatime.com/" target="_blank" rel="noopener"><b>바다타임 ↗</b><span>지역별 실시간 물때표·파고·수온·바다갈라짐</span></a>
+          <a class="gear-card" href="https://www.khoa.go.kr/swtc/main.do" target="_blank" rel="noopener"><b>국립해양조사원 조석예보 ↗</b><span>정부 공식 간만조 시각·조위</span></a>
+          <a class="gear-card" href="https://www.weather.go.kr/w/marine/marine-obs.do" target="_blank" rel="noopener"><b>기상청 해양기상 ↗</b><span>해상특보·파고·바람 공식 관측</span></a>
+          <a class="gear-card" href="http://www.khoa.go.kr/tdnet/" target="_blank" rel="noopener"><b>바다누리 해양정보서비스 ↗</b><span>수치조류도 — 지점별 유속·유향 예측</span></a>
+        </div>
+
+        <div class="callout">
+          <h4>실전 원칙</h4>
+          <p>사리 기간(보름·그믐 직후 2~4일)에 갯벌 노출이 최대가 되어 해루질·갯벌 체험 효율이 가장 좋습니다. 어떤 활동이든 <b>간조 전 진입, 간조를 반환점 삼아 즉시 철수</b>가 기본이며, 해무나 안개가 끼면 시간과 무관하게 즉시 이탈해야 합니다.</p>
+        </div>
+      </section>
+
+      <!-- ============ SAFETY & LAW ============ -->
+      <section class="section" id="safety">
+        <span class="part-no">GUIDE</span>
+        <h2>안전 수칙 &amp; 법규</h2>
+        <p class="kicker">바다는 자연이 정한 시간표대로 움직입니다. 아래 규정과 수칙은 활동을 막기 위해서가 아니라, 자원을 지키고 사람을 살리기 위한 것입니다.</p>
+
+        <div class="stat-row">
+          <div class="stat"><span class="num tabular">983건</span><span class="lbl">최근 5년 갯벌·갯바위 사고(2020~2025.8)</span></div>
+          <div class="stat"><span class="num tabular">115명</span><span class="lbl">같은 기간 사망자 수</span></div>
+          <div class="stat"><span class="num tabular">1,511명</span><span class="lbl">같은 기간 구조 인원</span></div>
+        </div>
+
+        <h3>핵심 법규 4가지</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>법률</th><th>핵심 내용</th></tr></thead>
+          <tbody>
+            <tr><td>수산자원관리법 &amp; 시행규칙 제6조</td><td>비어업인은 투망·쪽대·외줄낚시·집게·호미·손 등 "일상적 소형 도구"만 사용 가능. 스쿠버 장비·작살·동력장비·집어등은 전면 금지. 위반 시 최대 1,000만원 이하 벌금</td></tr>
+            <tr><td>수산자원관리법 시행령 별표 1·2</td><td>어종별 금어기(포획 금지 기간)와 금지체장(최소 크기)을 규정. 매년 해양수산부가 최신 고시를 갱신</td></tr>
+            <tr><td>낚시 관리 및 육성법</td><td>낚시터·낚시어선의 안전·위생 관리, 낚시인 안전사고 응급조치 등을 규정</td></tr>
+            <tr><td>내수면어업법 제18조</td><td>강·호수(내수면)에서 작살류·동력보트·스쿠버 장비 사용 금지</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>지자체 조례 예시</h3>
+        <p>2023년 12월 개정으로 시·도가 지역 실정에 맞는 별도 기준을 조례로 정할 수 있게 됐습니다. <b>강원특별자치도</b>는 어촌계 어장 내 전복·해삼·성게 등 정착성 동물과 문어 포획을 금지하고, <b>제주특별자치도</b>는 일몰 후 30분 이후 야간 해루질과 수경·오리발 등 장비 사용을 금지하며 위반 시 벌금을 최대 1,000만원까지 강화했습니다. 활동 전 반드시 해당 지자체 조례를 확인하세요.</p>
+
+        <div class="callout warn">
+          <h4>사고 예방 5원칙</h4>
+          <ul style="margin-bottom:0;">
+            <li>구명조끼 상시 착용, 2인 이상 동행</li>
+            <li>물때표로 간조 시각을 미리 확인하고 알람 설정</li>
+            <li>간조 후 1시간 이내 철수, 갯골 주변 특히 주의</li>
+            <li>해무·안개 발생 시 시간과 무관하게 즉시 이탈</li>
+            <li>음주 후 갯바위·방파제·갯벌 출입 금지 — 실족 사고의 주요 원인</li>
+          </ul>
+        </div>
+        <p>긴급 상황에는 해양경찰청 <b>122</b>로 신고하세요.</p>
+
+        <span class="media-label">영상으로 보기</span>
+        <div class="video-grid">
+          <a class="video-card" href="https://www.youtube.com/watch?v=6jVBm8p2-nc" target="_blank" rel="noopener">
+            <span class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-text"><b>이 도구로 수산물 잡으면 벌금 1천만원?</b><span>불법 어구 안내 · YouTube</span></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ LEARN ============ -->
+      <section class="section" id="learn">
+        <span class="part-no">GUIDE</span>
+        <h2>배우고 나누기</h2>
+        <p class="kicker">이론은 영상으로, 실습은 강습으로. 검색으로 실제 확인된 채널·기관만 골랐습니다.</p>
+
+        <h3>유튜브 채널</h3>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>분야</th><th>채널</th><th>특징</th></tr></thead>
+          <tbody>
+            <tr><td>낚시</td><td><a href="https://www.youtube.com/@kimjimintv" target="_blank" rel="noopener">입질의추억TV</a></td><td>1호 어류 칼럼니스트, 어류·수산물 정보</td></tr>
+            <tr><td>낚시</td><td><a href="https://www.youtube.com/channel/UCQ_2Uzf0pXNBPkEaoNgvmUg" target="_blank" rel="noopener">앵쩡TV</a></td><td>배스·바다루어, 여성 앵글러 콘텐츠</td></tr>
+            <tr><td>해루질</td><td><a href="https://www.youtube.com/c/%ED%95%B4%EB%A3%A8%EB%82%A8/videos" target="_blank" rel="noopener">해루남</a></td><td>캠핑카로 이동하며 해루질·갯벌·먹방</td></tr>
+            <tr><td>해루질</td><td><a href="https://www.youtube.com/@hunterfwang91" target="_blank" rel="noopener">헌터퐝</a></td><td>조간대 해루질 채집 &amp; 요리</td></tr>
+            <tr><td>다이빙</td><td><a href="https://www.youtube.com/@scubanetkr" target="_blank" rel="noopener">스쿠버넷</a></td><td>전 세계 다이빙 여행지 소개</td></tr>
+            <tr><td>프리다이빙</td><td><a href="https://www.youtube.com/channel/UCWmrdQC_s825P7lSIOvz2Lw" target="_blank" rel="noopener">강싸부의 프리다이빙 포인트</a></td><td>프리다이빙 입문·포인트 정보</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>공식 기관 · 교육 포털</h3>
+        <div class="gear-grid">
+          <div class="gear-card"><b><a href="https://www.naksinuri.kr/" target="_blank" rel="noopener">낚시누리</a></b><span>해양수산부·한국어촌어항공단 낚시 교육 포털</span></div>
+          <div class="gear-card"><b><a href="https://www.khoa.go.kr/" target="_blank" rel="noopener">국립해양조사원</a></b><span>공식 조석·물때·해양예보</span></div>
+          <div class="gear-card"><b><a href="https://www.nifs.go.kr/" target="_blank" rel="noopener">국립수산과학원</a></b><span>수산자원 조사, 금어기·금지체장 근거 자료</span></div>
+          <div class="gear-card"><b><a href="https://www.seaman.or.kr/main.do" target="_blank" rel="noopener">한국해양수산연수원</a></b><span>해기사·수산업 종사자 교육기관</span></div>
+          <div class="gear-card"><b><a href="https://www.seantour.kr/" target="_blank" rel="noopener">바다여행(어촌체험마을)</a></b><span>전국 어촌체험휴양마을 예약</span></div>
+          <div class="gear-card"><b><a href="http://www.ekfa.kr/" target="_blank" rel="noopener">한국낚시협회</a></b><span>낚시인 단체, 진흥 행사·박람회</span></div>
+        </div>
+
+        <h3>커뮤니티 · 블로그</h3>
+        <ul>
+          <li><a href="https://web.wolchuck.co.kr/" target="_blank" rel="noopener">월척</a> — 민물·대물 붕어낚시 대표 커뮤니티</li>
+          <li><a href="https://www.monak.kr/" target="_blank" rel="noopener">모두의낚시</a> — 낚시 정보 공유 서비스</li>
+          <li><a href="https://moolttae.com/guide-haeruji.html" target="_blank" rel="noopener">moolttae.com — 해루질 완전 가이드</a> — 물때·장비·안전 총정리</li>
+          <li><a href="https://www.bfg-fishing.com/beginner-guide/tidal-flat-foraging-guide" target="_blank" rel="noopener">BFG — 해루질 기초 가이드</a> — 지역별 포인트 페이지 다수 보유</li>
+        </ul>
+      </section>
+
+      <!-- ============ GLOSSARY ============ -->
+      <section class="section" id="glossary">
+        <span class="part-no">REFERENCE</span>
+        <h2>용어사전</h2>
+        <p class="kicker">이 백과사전 곳곳에 나오는 낚시·물때·규제 용어를 한곳에 모았습니다. 처음 보는 단어가 나오면 여기서 검색해보세요.</p>
+
+        <div class="search-box">
+          <input type="search" id="glossarySearch" placeholder="용어 검색 (예: 드랙, 사리, 금어기)" aria-label="용어 검색">
+        </div>
+
+        <div id="glossaryWrap">
+          <h3>물때 · 지형</h3>
+          <div class="tackle-grid glossary-grid">
+            <div class="gear-card gterm"><b>사리</b><span>태양·지구·달이 일직선이 되어 조차(밀물-썰물 수위 차)가 가장 커지는 시기. 보름·그믐 후 3~4일 뒤 나타남</span></div>
+            <div class="gear-card gterm"><b>조금</b><span>달이 반달일 때 조차가 가장 작아지는 시기. 물흐름이 잔잔함</span></div>
+            <div class="gear-card gterm"><b>무시</b><span>조금 바로 다음, 조차가 가장 미미한 하루. 물때번호가 다시 1물로 리셋되기 직전</span></div>
+            <div class="gear-card gterm"><b>물때번호</b><span>1~13물·조금·무시로 15일 주기를 세는 전통 표기법. 지역마다 하루이틀 차이가 날 수 있음</span></div>
+            <div class="gear-card gterm"><b>간조 / 만조</b><span>썰물이 끝나 수위가 가장 낮은 때 / 밀물이 끝나 가장 높은 때</span></div>
+            <div class="gear-card gterm"><b>조간대</b><span>만조 때는 잠기고 간조 때는 드러나는 바닷가 지대. 갯벌·해루질 활동 무대</span></div>
+            <div class="gear-card gterm"><b>갯골</b><span>조간대에 파인 좁은 물길. 밀물 때 가장 먼저·가장 빠르게 물이 차 고립 사고의 주원인</span></div>
+          </div>
+
+          <h3>장비 · 채비</h3>
+          <div class="tackle-grid glossary-grid">
+            <div class="gear-card gterm"><b>봉돌</b><span>채비를 가라앉히는 추. 고정·유동·좁쌀봉돌 등 형태별로 용도가 다름</span></div>
+            <div class="gear-card gterm"><b>도래(스위블)</b><span>원줄과 목줄을 연결하며 회전해 줄 꼬임을 막는 금속 부속. 스냅도래는 개폐 고리로 빠른 교체 가능</span></div>
+            <div class="gear-card gterm"><b>목줄</b><span>바늘 바로 앞에 연결하는 짧은 줄. 원줄보다 가늘게 써서 원줄을 보호</span></div>
+            <div class="gear-card gterm"><b>쇼크리더</b><span>PE(합사) 원줄 끝에 연결하는 나일론·카본 줄. 캐스팅 충격을 흡수하고 마모를 줄임</span></div>
+            <div class="gear-card gterm"><b>액션(로드)</b><span>낚싯대가 휘는 정도. 연질(UL/L)일수록 예민, 경질(H)일수록 강한 힘 대응</span></div>
+            <div class="gear-card gterm"><b>드랙</b><span>릴에서 강한 힘이 걸리면 스풀이 역회전하며 줄이 풀려나가게 하는 안전장치</span></div>
+            <div class="gear-card gterm"><b>지그헤드</b><span>바늘과 추가 하나로 붙은 루어 부속품. 웜을 꽂아 사용</span></div>
+            <div class="gear-card gterm"><b>에기(에깅)</b><span>새우 모양을 본뜬 오징어류 전용 루어. 에기를 쓰는 낚시를 "에깅"이라 부름</span></div>
+            <div class="gear-card gterm"><b>카고</b><span>밑밥(크릴 등)을 담아 던지는 채비 통. 투척과 동시에 집어 효과</span></div>
+          </div>
+
+          <h3>기법</h3>
+          <div class="tackle-grid glossary-grid">
+            <div class="gear-card gterm"><b>챔질</b><span>입질이 온 순간 낚싯대를 당겨 바늘을 물고기 입에 확실히 거는 동작</span></div>
+            <div class="gear-card gterm"><b>집어 · 밑밥</b><span>미끼(크릴 등)를 뿌려 물고기를 채비 주변에 모으는 것, 그 미끼 자체</span></div>
+            <div class="gear-card gterm"><b>고패질</b><span>루어·채비를 위아래로 살짝 들었다 내렸다 반복하는 동작</span></div>
+            <div class="gear-card gterm"><b>저킹 / 폴링 / 스테이</b><span>에깅의 3단 액션 — 챔질하듯 튀어오르게(저킹) → 가라앉히기(폴링) → 5~10초 정지(스테이)</span></div>
+            <div class="gear-card gterm"><b>슬로우피칭</b><span>로드 반동으로 메탈지그를 느리고 리드미컬하게 움직이는 지깅 기법</span></div>
+            <div class="gear-card gterm"><b>훌치기</b><span>미끼 없이 여러 바늘로 물고기 몸통을 걸어채는 기법. 숭어·학꽁치 등에 사용</span></div>
+          </div>
+
+          <h3>규제 · 안전</h3>
+          <div class="tackle-grid glossary-grid">
+            <div class="gear-card gterm"><b>금어기</b><span>산란기 등 자원 보호를 위해 특정 기간 포획·채취를 금지하는 제도</span></div>
+            <div class="gear-card gterm"><b>금지체장</b><span>이 크기보다 작으면 포획·채취할 수 없는 최소 크기 기준</span></div>
+            <div class="gear-card gterm"><b>비어업인</b><span>어업 허가 없이 취미로 낚시·채집하는 일반인. 사용 가능한 도구가 법으로 제한됨</span></div>
+            <div class="gear-card gterm"><b>나잠어업</b><span>해녀처럼 산소 공급 장치 없이 잠수해 수산물을 채취하는 허가받은 어업. 일반인의 합법적 수중 채집은 사실상 이 허가가 있어야 가능</span></div>
+            <div class="gear-card gterm"><b>패류독소</b><span>플랑크톤이 만드는 독을 조개가 체내에 축적한 것. 가열해도 없어지지 않아 채취금지 고시를 반드시 확인해야 함</span></div>
+            <div class="gear-card gterm"><b>이케지메</b><span>잡은 즉시 신경을 끊어 즉사시켜 신선도와 식감을 오래 유지하는 손질법</span></div>
+          </div>
+        </div>
+        <p class="no-match" id="glossaryNoMatch" style="display:none;text-align:center;color:var(--ink-soft);padding:18px;">일치하는 용어가 없습니다.</p>
+      </section>
+
+      <!-- ============ SOURCES ============ -->
+      <section class="section" id="sources">
+        <span class="part-no">REFERENCE</span>
+        <h2>출처 모음</h2>
+        <p class="kicker">이 백과사전을 만들며 실제 검색으로 확인한 링크입니다. 법규·금어기·가격 등은 시점에 따라 바뀌므로, 활동 전 공식 출처를 직접 재확인하는 것을 권장합니다.</p>
+
+        <div class="src-grid">
+          <div class="src-group">
+            <h4>공식 기관</h4>
+            <ul>
+              <li><a href="https://www.mof.go.kr" target="_blank" rel="noopener">해양수산부</a><span>수산자원관리법·낚시관리육성법 소관</span></li>
+              <li><a href="https://www.nifs.go.kr" target="_blank" rel="noopener">국립수산과학원</a><span>수산자원 조사·연구</span></li>
+              <li><a href="https://www.khoa.go.kr/swtc/main.do" target="_blank" rel="noopener">국립해양조사원 스마트 조석예보</a><span>공식 물때·조석 정보</span></li>
+              <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%88%98%EC%82%B0%EC%9E%90%EC%9B%90%EA%B4%80%EB%A6%AC%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9" target="_blank" rel="noopener">국가법령정보센터 — 수산자원관리법 시행령</a><span>금어기·금지체장 별표 원문</span></li>
+              <li><a href="https://www.fipa.or.kr/fipa/cntnts/i-163/web.do" target="_blank" rel="noopener">한국어촌어항공단 — 어촌체험휴양마을</a><span>전국 121개 체험마을</span></li>
+              <li><a href="https://www.naksinuri.kr/" target="_blank" rel="noopener">낚시누리</a><span>공식 낚시 교육 포털</span></li>
+              <li><a href="https://www.meis.go.kr/mes/mudFlat/experience/view1.do" target="_blank" rel="noopener">해양환경정보포털 — 올바른 갯벌체험</a><span>갯벌 생태·안전 정보</span></li>
+              <li><a href="https://westship.mof.go.kr/ko/page.do?menuIdx=495" target="_blank" rel="noopener">서해어업관리단 — 불법어업 FAQ</a><span>비어업인 채집 규정</span></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>낚시</h4>
+            <ul>
+              <li><a href="https://namu.wiki/w/%EB%82%9A%EC%8B%9C" target="_blank" rel="noopener">낚시 — 나무위키</a></li>
+              <li><a href="https://www.badatime.com/" target="_blank" rel="noopener">바다타임</a><span>물때·포인트 통합 서비스</span></li>
+              <li><a href="https://m.fishingseasons.co.kr/" target="_blank" rel="noopener">낚시춘추</a><span>1971년 창간, 국내 대표 낚시 월간지</span></li>
+              <li><a href="https://fishquest.yatnll.com/entry/%EB%B0%94%EB%8B%A4-%EC%B0%8C%EB%82%9A%EC%8B%9C-%EC%B1%84%EB%B9%84%EB%B2%95-%EC%9E%85%EB%AC%B8%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%EC%84%B1-%EC%84%A4%EB%AA%85" target="_blank" rel="noopener">바다 찌낚시 채비법 입문 가이드</a></li>
+              <li><a href="https://www.klfishing.com/talk_new/bbs/board.php?bo_table=fishing_lecture_5&wr_id=1706" target="_blank" rel="noopener">코러낚시 — 초보자 릴 선택법</a></li>
+              <li><a href="https://law.go.kr/lsInfoP.do?lsiSeq=110996" target="_blank" rel="noopener">낚시 관리 및 육성법</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>해루질</h4>
+            <ul>
+              <li><a href="https://namu.wiki/w/%ED%95%B4%EB%A3%A8%EC%A7%88" target="_blank" rel="noopener">해루질 — 나무위키</a></li>
+              <li><a href="https://moolttae.com/guide-haeruji.html" target="_blank" rel="noopener">해루질 완전 가이드 — moolttae.com</a></li>
+              <li><a href="https://www.bfg-fishing.com/beginner-guide/tidal-flat-foraging-guide" target="_blank" rel="noopener">해루질 기초 가이드 — BFG</a></li>
+              <li><a href="https://www.gardenbom.com/14097/%ED%95%B4%EB%A3%A8%EC%A7%88-%EC%A0%84-%EA%BC%AD-%EC%B1%99%EA%B2%A8%EC%95%BC-%ED%95%A0-%ED%95%84%EC%88%98-%EC%9E%A5%EB%B9%84/" target="_blank" rel="noopener">해루질 필수 장비 10가지</a></li>
+              <li><a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008538312" target="_blank" rel="noopener">해루질 고립 사망·실종 현황 — SBS</a></li>
+              <li><a href="https://www.hdhy.co.kr/news/articleView.html?idxno=30310" target="_blank" rel="noopener">비어업인의 포획·채취 제한 — 현대해양</a></li>
+              <li><a href="https://www.bfg-fishing.com/fishing-spots/tidepooling-hwaseong-jebudo" target="_blank" rel="noopener">화성 제부도 해루질 포인트 — BFG</a></li>
+              <li><a href="https://www.segye.com/newsView/20230609506939" target="_blank" rel="noopener">제부도 고립사고 사례 — 세계일보</a></li>
+              <li><a href="http://www.oceanlife.kr/news/articleView.html?idxno=3143" target="_blank" rel="noopener">초보자를 위한 해루질 기본 가이드라인 — 오션라이프</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>다이빙 · 스피어피싱</h4>
+            <ul>
+              <li><a href="https://www.padi.co.kr/ko/help/scuba-certification-faq" target="_blank" rel="noopener">PADI 스쿠버 다이빙 자격증 FAQ</a></li>
+              <li><a href="https://ssikr.co.kr/" target="_blank" rel="noopener">SSI Korea</a></li>
+              <li><a href="https://blog.padi.com/ko/vacation-spotlight-south-korea/" target="_blank" rel="noopener">한국의 스쿠버 다이빙 추천 지역 — PADI 블로그</a></li>
+              <li><a href="https://casenote.kr/%ED%97%8C%EB%B2%95%EC%9E%AC%ED%8C%90%EC%86%8C/2013%ED%97%8C%EB%A7%88450" target="_blank" rel="noopener">헌법재판소 2013헌마450 결정문</a><span>스쿠버 채취 금지 합헌 판례</span></li>
+              <li><a href="https://www.sedaily.com/article/12403532" target="_blank" rel="noopener">작살로 광어잡다 벌금 1,000만원 — 서울경제</a></li>
+              <li><a href="https://law.komsa.or.kr/lmxsrv/law/lawFullView.do?SEQ=224&SEQ_HISTORY=3247" target="_blank" rel="noopener">수산자원관리법 시행규칙 제6조</a></li>
+              <li><a href="https://blog.padi.com/freediving-vs-scuba-diving-5-big-differences/" target="_blank" rel="noopener">프리다이빙 vs 스쿠버 차이 — PADI 블로그</a></li>
+              <li><a href="http://www.scubada.com/online/cost.php" target="_blank" rel="noopener">오픈워터 코스 비용·기간 안내 - 스쿠바다입니다</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>갯벌 체험</h4>
+            <ul>
+              <li><a href="https://www.yugacrew.com/crewletter/tidal-flat-experience" target="_blank" rel="noopener">갯벌 체험 완벽 가이드 — 크루레터</a></li>
+              <li><a href="https://warmypick.com/entry/%EB%A7%9B%EC%A1%B0%EA%B0%9C-%EC%9E%A1%EB%8A%94-%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%86%8C%EA%B8%88-%ED%95%9C-%EC%A4%8C%EC%9C%BC%EB%A1%9C-%EC%A1%B0%EA%B0%9C-%ED%8F%AD%EB%B0%9C%ED%95%98%EB%8A%94-%EB%B9%84%EB%B2%95-%EA%B3%B5%EA%B0%9C" target="_blank" rel="noopener">맛조개 잡는 법 총정리</a></li>
+              <li><a href="https://ncms.nculture.org/fisheries/story/9240" target="_blank" rel="noopener">낙지를 잡는 방법이 다양한 무안·신안 갯벌 — 지역N문화</a></li>
+              <li><a href="https://www.getbolworldheritage.org/k_getbol/seocheon" target="_blank" rel="noopener">한국의 갯벌 세계자연유산 — 서천</a></li>
+              <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148933356" target="_blank" rel="noopener">갯벌 체험 시 꼭 지켜야 할 안전수칙 — 정책브리핑</a></li>
+              <li><a href="https://cookpick.kr/bajirak-haegam-method-guide/" target="_blank" rel="noopener">바지락 해감 방법 총정리 — cookpick</a></li>
+              <li><a href="https://www.grandculture.net/gochang/toc/GC02800055" target="_blank" rel="noopener">만돌갯벌체험학습장 — 디지털고창문화대전</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>어종 · 법규 데이터</h4>
+            <ul>
+              <li><a href="https://tipodela.com/%EA%B8%88%EC%96%B4%EA%B8%B0-%EA%B8%88%EC%A7%80%EC%B2%B4%EC%9E%A5/" target="_blank" rel="noopener">금어기 및 금지체장 알고 바다 낚시하기</a></li>
+              <li><a href="https://www.etoday.co.kr/news/view/1957904" target="_blank" rel="noopener">참문어 5/16~6/30 포획금지 신설 — 이투데이</a></li>
+              <li><a href="https://www.segye.com/newsView/20210531506339" target="_blank" rel="noopener">대게·꽃게·낙지 6월 금어기 — 세계일보</a></li>
+              <li><a href="https://www.jnuri.net/news/article.html?no=69233" target="_blank" rel="noopener">제주 소라 불법 채취 단속 사례 — 제이누리</a></li>
+              <li><a href="https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%EC%9D%98_%ED%8F%AC%ED%9A%8D_%EC%B1%84%EC%B7%A8_%EB%93%B1%EC%9D%98_%EA%B8%88%EC%A7%80_%EC%95%BC%EC%83%9D%EC%83%9D%EB%AC%BC" target="_blank" rel="noopener">대한민국의 포획·채취 금지 야생생물 — 위키백과</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>학습 · 커뮤니티</h4>
+            <ul>
+              <li><a href="https://www.youtube.com/@kimjimintv" target="_blank" rel="noopener">입질의추억TV</a></li>
+              <li><a href="https://www.youtube.com/channel/UCQ_2Uzf0pXNBPkEaoNgvmUg" target="_blank" rel="noopener">앵쩡TV</a></li>
+              <li><a href="https://www.youtube.com/c/%ED%95%B4%EB%A3%A8%EB%82%A8/videos" target="_blank" rel="noopener">해루남</a></li>
+              <li><a href="https://web.wolchuck.co.kr/" target="_blank" rel="noopener">월척</a></li>
+              <li><a href="https://www.monak.kr/" target="_blank" rel="noopener">모두의낚시</a></li>
+              <li><a href="https://www.diverz.net/" target="_blank" rel="noopener">다이버즈</a><span>스쿠버·프리다이빙 커뮤니티</span></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>낚시 기법 · 채비 상세</h4>
+            <ul>
+              <li><a href="https://klfishing.com/talk_new/bbs/board.php?bo_table=fishing_lecture_3&wr_id=134" target="_blank" rel="noopener">감성돔낚시채비 - 코러낚시</a></li>
+              <li><a href="https://www.badatime.com/gearing/6" target="_blank" rel="noopener">참돔 낚시 채비 - 바다타임</a></li>
+              <li><a href="https://fishdaily.kr/target/seabass-lure" target="_blank" rel="noopener">농어 루어낚시 공략 - 피쉬데일리</a></li>
+              <li><a href="https://fishquest.yatnll.com/entry/%EA%B4%91%EC%96%B4-%EB%8B%A4%EC%9A%B4%EC%83%B7-%EC%B1%84%EB%B9%84-%EA%B5%AC%EC%84%B1%EB%B6%80%ED%84%B0-%EC%9A%B4%EC%98%81%EA%B9%8C%EC%A7%80-%EC%B4%88%EB%B3%B4%EB%8F%84-%EC%89%BD%EA%B2%8C-%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" target="_blank" rel="noopener">광어 다운샷 채비 - fishquest</a></li>
+              <li><a href="https://m.fishingseasons.co.kr/news_Detail.asp?b_no=3327" target="_blank" rel="noopener">볼락 지그헤드 고르기 - 낚시춘추</a></li>
+              <li><a href="https://superbite.net/introductory-guide-to-bass-lure-fishing/" target="_blank" rel="noopener">배스 낚시 입문 가이드 - SUPERBITE</a></li>
+              <li><a href="https://www.ocean-fishing.com/fish/8" target="_blank" rel="noopener">문어 낚시 가이드 - Ocean Fishing</a></li>
+              <li><a href="https://web.wolchuck.co.kr/%EC%9B%94%EC%B2%99%EC%A7%80%EC%8B%9D/%EB%8C%80%EB%AC%BC%EB%82%9A%EC%8B%9C/%EC%B1%84%EB%B9%84%EC%97%90-%EA%B4%80%ED%95%B4-%EA%B6%81%EA%B8%88%ED%95%A9%EB%8B%88%EB%8B%A4" target="_blank" rel="noopener">붕어낚시 채비 - 월척</a></li>
+              <li><a href="https://m.fishingseasons.co.kr/news_Detail.asp?b_no=4015" target="_blank" rel="noopener">슬로우지깅 A to Z - 낚시춘추</a></li>
+              <li><a href="https://www.bfg-fishing.com/beginner-guide/surf-casting-rig-guide" target="_blank" rel="noopener">원투낚시(서프캐스팅) 채비 - BFG</a></li>
+              <li><a href="https://sookistory.com/entry/%EB%A3%A8%EC%96%B4-%EB%82%9A%EC%8B%9C-%EB%A7%A4%EB%93%AD%EB%B2%95-%EC%9C%A0%EB%8B%88%EB%85%B8%ED%8A%B8-%ED%81%B4%EB%A6%B0%EC%B9%98%EB%85%B8%ED%8A%B8-%ED%8C%94%EB%A1%9C%EB%A7%88%EB%85%B8%ED%8A%B8" target="_blank" rel="noopener">루어 낚시 매듭법 - sookistory</a></li>
+              <li><a href="https://www.animatedknots.com/palomar-knot" target="_blank" rel="noopener">Palomar Knot - Animated Knots</a></li>
+              <li><a href="https://www.bfg-fishing.com/beginner-guide/float-fishing-rig-guide" target="_blank" rel="noopener">찌낚시 채비 완벽 가이드 - BFG</a></li>
+              <li><a href="https://cafe.daum.net/ysysu/MujX/8" target="_blank" rel="noopener">봉돌의 기능과 종류 - 요산요수</a></li>
+              <li><a href="https://www.naksinuri.kr/lesson/binding/m/list.do" target="_blank" rel="noopener">채비 필수 묶음법 - 낚시누리</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>낚시터 · 지역 심화</h4>
+            <ul>
+              <li><a href="https://www.bfg-fishing.com/fishing-spots/tongyeong-chubongdo" target="_blank" rel="noopener">통영 추봉도 갯바위 - BFG</a></li>
+              <li><a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202002001000&uc_seq=790&lang_cd=ko" target="_blank" rel="noopener">부산 다대포 등 방파제 낚시 명소 - 부산관광공사</a></li>
+              <li><a href="https://www.sunsang24.com/" target="_blank" rel="noopener">선상24 - 전국 선상낚시 예약</a></li>
+              <li><a href="https://ko.wikipedia.org/wiki/%EC%98%88%EB%8B%B9%EC%A0%80%EC%88%98%EC%A7%80" target="_blank" rel="noopener">예당저수지 - 위키백과</a></li>
+              <li><a href="http://fishingseasons.co.kr/contents_view_detail.asp?b_no=3603" target="_blank" rel="noopener">충주호 배스낚시 명당 - 낚시춘추</a></li>
+              <li><a href="https://www.fnote.kr/NavadaMap/webinfo.do?type=a" target="_blank" rel="noopener">피싱노트 - 낚시 포인트 앱</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>위험 생물 · 유사종 구별</h4>
+            <ul>
+              <li><a href="https://ko.wikipedia.org/wiki/%ED%8C%8C%EB%9E%80%EA%B3%A0%EB%A6%AC%EB%AC%B8%EC%96%B4%EC%86%8D" target="_blank" rel="noopener">파란고리문어속 - 위키백과</a></li>
+              <li><a href="https://www.msdmanuals.com/ko/home/%EB%B6%80%EC%83%81-%EB%B0%8F-%EC%A4%91%EB%8F%85/%EB%AC%BC%EB%A6%B0-%EC%83%81%EC%B2%98-%EB%B0%8F-%EC%8F%98%EC%9D%B8-%EC%83%81%EC%B2%98/%ED%95%B4%ED%8C%8C%EB%A6%AC%EC%97%90-%EC%8F%98%EC%9D%B8-%EC%83%81%EC%B2%98" target="_blank" rel="noopener">해파리에 쏘인 상처 - MSD 매뉴얼</a></li>
+              <li><a href="https://www.msdmanuals.com/ko/home/%EB%B6%80%EC%83%81-%EB%B0%8F-%EC%A4%91%EB%8F%85/%EB%AC%BC%EB%A6%B0-%EC%83%81%EC%B2%98-%EB%B0%8F-%EC%8F%98%EC%9D%B8-%EC%83%81%EC%B2%98/%EC%96%BC%EB%A3%A9%EC%84%B1%EA%B2%8C%EC%97%90-%EC%8F%98%EC%9D%B8-%EC%83%81%EC%B2%98" target="_blank" rel="noopener">얼룩성게에 쏘인 상처 - MSD 매뉴얼</a></li>
+              <li><a href="https://www.msdmanuals.com/ko/home/%EB%B6%80%EC%83%81-%EB%B0%8F-%EC%A4%91%EB%8F%85/%EB%AC%BC%EB%A6%B0-%EC%83%81%EC%B2%98-%EB%B0%8F-%EC%8F%98%EC%9D%B8-%EC%83%81%EC%B2%98/%EB%85%B8%EB%9E%91%EA%B0%80%EC%98%A4%EB%A6%AC-%EC%B0%94%EB%A6%BC" target="_blank" rel="noopener">노랑가오리 찔림 - MSD 매뉴얼</a></li>
+              <li><a href="https://namu.wiki/w/%EC%A5%90%EB%85%B8%EB%9E%98%EB%AF%B8" target="_blank" rel="noopener">쥐노래미 - 나무위키</a></li>
+              <li><a href="https://namu.wiki/w/%EA%B0%91%EC%98%A4%EC%A7%95%EC%96%B4" target="_blank" rel="noopener">갑오징어 - 나무위키</a></li>
+              <li><a href="https://ppss.kr/archives/141672" target="_blank" rel="noopener">좌광우도 - 도다리·가자미·광어 눈 위치 - ㅍㅍㅅㅅ</a></li>
+              <li><a href="https://namu.wiki/w/%EB%A7%9D%EC%B9%98%EA%B3%A0%EB%93%B1%EC%96%B4" target="_blank" rel="noopener">망치고등어 - 나무위키</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>손질·보관·식중독 예방</h4>
+            <ul>
+              <li><a href="https://sihe.seoul.go.kr/archives/556276" target="_blank" rel="noopener">비브리오패혈증 예방법 - 서울시 보건환경연구원</a></li>
+              <li><a href="https://mjh.or.kr/main/health/class/vibrio.do" target="_blank" rel="noopener">8~9월 집중 비브리오패혈증 예방 - 명지병원</a></li>
+              <li><a href="https://sihe.seoul.go.kr/archives/550221" target="_blank" rel="noopener">패류독소 식중독 예방 - 서울시 보건환경연구원</a></li>
+              <li><a href="https://namu.wiki/w/%EC%9D%B4%EC%BC%80%EC%A7%80%EB%A9%94" target="_blank" rel="noopener">이케지메 - 나무위키</a></li>
+              <li><a href="https://wtable.co.kr/guide/63079" target="_blank" rel="noopener">전복 손질법 - 우리의식탁</a></li>
+              <li><a href="https://wtable.co.kr/guide/63054" target="_blank" rel="noopener">낙지 손질법 - 우리의식탁</a></li>
+              <li><a href="https://cookpick.kr/bajirak-haegam-method-guide/" target="_blank" rel="noopener">바지락 해감 방법 총정리</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>로드·릴·미끼 심화</h4>
+            <ul>
+              <li><a href="https://www.klfishing.com/talk_new/bbs/board.php?bo_table=fishing_lecture_5&wr_id=1706" target="_blank" rel="noopener">초보자 낚시 릴 선택방법 - 코러낚시</a></li>
+              <li><a href="https://www.klfishing.com/talk_new/bbs/board.php?bo_table=fishing_lecture_5&wr_id=1707" target="_blank" rel="noopener">릴 줄감는법 - 코러낚시</a></li>
+              <li><a href="https://www.bfg-fishing.com/beginner-guide/reel-drag-setting-guide" target="_blank" rel="noopener">릴 드랙 세팅 완벽 가이드 - BFG</a></li>
+              <li><a href="https://m.fishingseasons.co.kr/news_Detail.asp?b_no=2580" target="_blank" rel="noopener">릴의 구입과 원줄 감기 - 낚시춘추</a></li>
+              <li><a href="https://m.cafe.daum.net/happydinak/5pek/11" target="_blank" rel="noopener">미끼(크릴·갯지렁이) 꿰는 법 - 다음카페</a></li>
+              <li><a href="https://brunch.co.kr/@qrssa/135" target="_blank" rel="noopener">2026 전국 얼음낚시 축제 BEST 13 정리</a></li>
+              <li><a href="https://m.fishingseasons.co.kr/news_Detail.asp?b_no=90570" target="_blank" rel="noopener">[입문자교실] 견지낚시 - 낚시춘추</a></li>
+              <li><a href="https://lgmnews.kr/%EC%95%84%EC%A7%95%EC%A0%84%EA%B0%B1%EC%9D%B4%EB%A3%A8%EC%96%B4-%EC%9E%85%EB%AC%B8%EC%9E%90%ED%8E%B8-%EC%A7%80%EA%B7%B8%ED%97%A4%EB%93%9C%EA%B2%8C%EC%9E%84-%EC%B1%84%EB%B9%84-%EC%A4%80%EB%B9%84%ED%8E%B8" target="_blank" rel="noopener">아징 입문 채비 - LGMNEWS</a></li>
+              <li><a href="https://rhyzomecorp.co.kr/journal/june-redbream-tairaba-guide/" target="_blank" rel="noopener">참돔 타이라바 시즌 채비 - 리좀 저널</a></li>
+              <li><a href="https://cms.seantour.com/GK004/index.do" target="_blank" rel="noopener">궁평어촌체험마을 공식 페이지</a></li>
+            </ul>
+          </div>
+
+          <div class="src-group">
+            <h4>안전 통계</h4>
+            <ul>
+              <li><a href="https://www.kyeonggi.com/article/20251004580030" target="_blank" rel="noopener">갯벌·갯바위 고립사고 5년 통계 — 경기신문</a></li>
+              <li><a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008538312" target="_blank" rel="noopener">해루질 사고 구조·사망 통계 — SBS</a></li>
+              <li><a href="https://imsm.kcg.go.kr/CSMS/main/csiAcdnt/CsiAcdntSttusRB.do" target="_blank" rel="noopener">연안사고통계 — 해양경찰청</a></li>
+              <li><a href="https://www.mof.go.kr/iframe/doc/ko/selectDoc.do?docSeq=53362&menuSeq=971&bbsSeq=10" target="_blank" rel="noopener">조석표 확인 캠페인 — 해양수산부</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p>이 페이지는 공개된 웹 자료를 바탕으로 요약·정리한 실용 가이드이며 법률 자문이 아닙니다. 현장 활동 전에는 반드시 해양수산부 · 국립수산과학원 · 관할 지자체의 최신 고시와 조례를 확인하세요.</p>
+    <p>자유롭게 링크를 공유해 주세요 🌊</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  try{
+    var input = document.getElementById('speciesSearch');
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#speciesTable tbody tr'));
+    var noMatch = document.getElementById('noMatch');
+    var seasonFilter = document.getElementById('seasonFilter');
+    var currentSeason = 'all';
+
+    function applyFilters(){
+      var q = input.value.trim().toLowerCase();
+      var visible = 0;
+      rows.forEach(function(r){
+        var textMatch = r.textContent.toLowerCase().indexOf(q) !== -1;
+        var seasonCell = r.children[4]; // 맛있는 시기 column
+        var seasonMatch = currentSeason === 'all' || (seasonCell && seasonCell.textContent.indexOf(currentSeason) !== -1);
+        var show = textMatch && seasonMatch;
+        r.style.display = show ? '' : 'none';
+        if(show) visible++;
+      });
+      noMatch.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    input.addEventListener('input', applyFilters);
+
+    if(seasonFilter){
+      seasonFilter.addEventListener('click', function(e){
+        var btn = e.target.closest('button');
+        if(!btn) return;
+        Array.prototype.forEach.call(seasonFilter.querySelectorAll('button'), function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentSeason = btn.getAttribute('data-season');
+        applyFilters();
+      });
+    }
+  }catch(e){}
+})();
+
+/* ---- 사이트 전체 검색 ---- */
+(function(){
+  try{
+    var input = document.getElementById('siteSearch');
+    var resultsBox = document.getElementById('siteSearchResults');
+    var searchWrap = document.getElementById('siteSearchBox');
+    if(!input || !resultsBox) return;
+
+    var index = [];
+    function sectionNameOf(node){
+      var sec = node.closest ? node.closest('.section') : null;
+      if(!sec) return '';
+      var h2 = sec.querySelector('h2');
+      return h2 ? h2.textContent.trim() : '';
+    }
+    function addUnit(node, label, section){
+      if(!node || !label) return;
+      label = label.replace(/\s+/g,' ').trim();
+      if(!label) return;
+      index.push({ node: node, label: label, text: (node.textContent||'').toLowerCase(), section: section || sectionNameOf(node) });
+    }
+    function buildIndex(){
+      Array.prototype.forEach.call(document.querySelectorAll('.section h3'), function(h3){ addUnit(h3, h3.textContent, null); });
+      Array.prototype.forEach.call(document.querySelectorAll('#speciesTable tbody tr'), function(tr){
+        var nameCell = tr.children[1];
+        addUnit(tr, nameCell ? nameCell.textContent : tr.textContent, '어종·생물 도감');
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.tackle-card'), function(card){
+        var h4 = card.querySelector('h4');
+        if(h4) addUnit(card, h4.textContent, null);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.gterm'), function(card){
+        var b = card.querySelector('b');
+        if(b) addUnit(card, b.textContent, '용어사전');
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('details.type-detail'), function(d){
+        var b = d.querySelector('.td-title b');
+        if(b) addUnit(d, b.textContent, '낚시 · 종류별 상세');
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.video-card'), function(v){
+        var b = v.querySelector('.vc-text b');
+        if(b) addUnit(v, b.textContent, null);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.gear-card'), function(g){
+        var b = g.querySelector('b');
+        if(b) addUnit(g, b.textContent, null);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.callout'), function(c){
+        var h4 = c.querySelector('h4');
+        if(h4) addUnit(c, h4.textContent, null);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.tbl-wrap table tbody tr'), function(tr){
+        if(tr.closest('#speciesTable')) return; // 이미 별도 색인
+        var firstCell = tr.children[0];
+        if(firstCell) addUnit(tr, firstCell.textContent, null);
+      });
+    }
+    buildIndex();
+
+    function flash(node){
+      try{
+        var prevBg = node.style.backgroundColor;
+        var prevTrans = node.style.transition;
+        node.style.transition = 'background-color .35s ease';
+        node.style.backgroundColor = 'var(--tide)';
+        setTimeout(function(){
+          node.style.backgroundColor = prevBg || '';
+          setTimeout(function(){ node.style.transition = prevTrans || ''; }, 400);
+        }, 850);
+      }catch(e){}
+    }
+
+    function goTo(item){
+      var node = item.node;
+      if(node.tagName === 'DETAILS'){ node.open = true; }
+      var detailsAncestor = node.closest ? node.closest('details') : null;
+      if(detailsAncestor) detailsAncestor.open = true;
+      resultsBox.hidden = true;
+      input.blur();
+      requestAnimationFrame(function(){
+        node.scrollIntoView({ behavior:'smooth', block:'center' });
+        setTimeout(function(){ flash(node); }, 300);
+      });
+    }
+
+    function render(list, query){
+      if(list.length === 0){
+        resultsBox.innerHTML = '<div class="ss-empty">"' + query + '"에 대한 결과가 없습니다.</div>';
+        resultsBox.hidden = false;
+        return;
+      }
+      resultsBox.innerHTML = '';
+      list.forEach(function(item){
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ss-item';
+        var labelSpan = document.createElement('span');
+        labelSpan.className = 'ss-label';
+        labelSpan.textContent = item.label;
+        btn.appendChild(labelSpan);
+        if(item.section){
+          var secSpan = document.createElement('span');
+          secSpan.className = 'ss-section';
+          secSpan.textContent = item.section;
+          btn.appendChild(secSpan);
+        }
+        btn.addEventListener('click', function(){ goTo(item); });
+        resultsBox.appendChild(btn);
+      });
+      resultsBox.hidden = false;
+    }
+
+    function search(q){
+      q = q.toLowerCase().trim();
+      if(!q){ resultsBox.hidden = true; return; }
+      var starts = [], contains = [], deep = [];
+      var seen = {};
+      index.forEach(function(item){
+        var key = item.label + '|' + item.section;
+        if(seen[key]) return; // avoid near-duplicate labels within same section
+        var labelLower = item.label.toLowerCase();
+        if(labelLower.indexOf(q) === 0){ starts.push(item); seen[key]=1; }
+        else if(labelLower.indexOf(q) !== -1){ contains.push(item); seen[key]=1; }
+        else if(item.text.indexOf(q) !== -1){ deep.push(item); seen[key]=1; }
+      });
+      var list = starts.concat(contains).concat(deep).slice(0, 18);
+      render(list, q);
+    }
+
+    input.addEventListener('input', function(){ search(input.value); });
+    input.addEventListener('focus', function(){ if(input.value.trim()) search(input.value); });
+    document.addEventListener('click', function(e){
+      if(searchWrap && !searchWrap.contains(e.target)){ resultsBox.hidden = true; }
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ resultsBox.hidden = true; input.blur(); }
+    });
+  }catch(e){}
+})();
+
+/* ---- 용어사전 검색 ---- */
+(function(){
+  try{
+    var input = document.getElementById('glossarySearch');
+    var wrap = document.getElementById('glossaryWrap');
+    var noMatch = document.getElementById('glossaryNoMatch');
+    if(!input || !wrap) return;
+    var groups = Array.prototype.slice.call(wrap.children).filter(function(el){ return el.tagName === 'H3'; }).map(function(h3){
+      return { h3: h3, grid: h3.nextElementSibling };
+    });
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      var totalVisible = 0;
+      groups.forEach(function(g){
+        var cards = Array.prototype.slice.call(g.grid.querySelectorAll('.gterm'));
+        var groupVisible = 0;
+        cards.forEach(function(c){
+          var match = c.textContent.toLowerCase().indexOf(q) !== -1;
+          c.style.display = match ? '' : 'none';
+          if(match) groupVisible++;
+        });
+        var showGroup = groupVisible > 0;
+        g.h3.style.display = showGroup ? '' : 'none';
+        g.grid.style.display = showGroup ? '' : 'none';
+        totalVisible += groupVisible;
+      });
+      noMatch.style.display = totalVisible === 0 ? 'block' : 'none';
+    });
+  }catch(e){}
+})();
+
+/* ---- 낚시 종류 상세(details) 해시 이동 시 자동 펼치기 ---- */
+(function(){
+  try{
+    function openTarget(){
+      var id = location.hash.slice(1);
+      if(!id) return;
+      var el = document.getElementById(id);
+      if(el && el.tagName === 'DETAILS'){
+        el.open = true;
+        setTimeout(function(){ el.scrollIntoView({block:'start'}); }, 0);
+      }
+    }
+    window.addEventListener('hashchange', openTarget);
+    openTarget();
+  }catch(e){}
+})();
+
+/* ---- 어종별 채비 가이드 필터 ---- */
+(function(){
+  try{
+    var filterBar = document.getElementById('tackleFilter');
+    var cards = Array.prototype.slice.call(document.querySelectorAll('#tackleGrid .tackle-card'));
+    if(!filterBar) return;
+    filterBar.addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if(!btn) return;
+      Array.prototype.forEach.call(filterBar.querySelectorAll('button'), function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var cat = btn.getAttribute('data-cat');
+      cards.forEach(function(c){
+        c.style.display = (cat === 'all' || c.getAttribute('data-cat') === cat) ? '' : 'none';
+      });
+    });
+  }catch(e){}
+})();
+
+/* ---- 물때 계산기 — 서해(인천) 표준 물때번호(1~13물·조금·무시) ----
+   전통 물때번호는 "삭(신월)/망(보름)으로부터 며칠 지났는가"에 15일 주기로 붙는 이름표입니다.
+   실제 사리·조금은 삭·망 당일이 아니라 그 후 며칠 뒤에 나타나는데(조석의 나이 현상),
+   국립해양조사원 제공 인천 물때표(바다타임 2026-09-17~10-01 실측)를 직접 대조해
+   "삭/망 이후 경과일 mod 15 → 물때번호·상대세기" 표를 아래처럼 검증했습니다:
+   경과일 0~14 = 7,8,9,10,11,12,13물,조금,무시,1,2,3,4,5,6물
+   (예: 2026-09-17=삭 이후 6일째=13물, 09-29=18일째(=3일째의 다음 반주기)=10물=최대 로 실측과 일치) */
+(function(){
+  try{
+    var NEW_MOON_REF = Date.UTC(2000,0,6,18,14,0); // 알려진 삭(신월) 기준시각
+    var SYNODIC_DAYS = 29.530588853;
+    var SYNODIC_MS = SYNODIC_DAYS * 86400000;
+
+    var MULDDAE_LABELS   = ['7물','8물','9물','10물','11물','12물','13물','조금','무시','1물','2물','3물','4물','5물','6물'];
+    // 인천 실측(2026-09) 기준 상대 물때세기 — 지역·월별로 소폭 다를 수 있는 참고값
+    var MULDDAE_STRENGTH = [85, 94, 98, 100, 96, 87, 64, 47, 29, 14, 8, 21, 39, 57, 73];
+
+    function moonAgeDays(dateUTCms){
+      var diff = dateUTCms - NEW_MOON_REF;
+      var days = diff / 86400000;
+      var age = days % SYNODIC_DAYS;
+      if(age < 0) age += SYNODIC_DAYS;
+      return age; // 0=삭 시각, SYNODIC_DAYS/2 부근=망
+    }
+    function mulddaeOf(dateUTCms){
+      var age = moonAgeDays(dateUTCms);
+      var d = Math.floor(age) + 1;   // 삭/망 당일=1일째로 세는 전통 음력 날짜 세기에 맞춘 보정
+      var p = d % 15;                 // 15일 주기 내 위치
+      return { p: p, label: MULDDAE_LABELS[p], strength: MULDDAE_STRENGTH[p], lunarAge: age };
+    }
+    function moonIcon(age){
+      var phase = age / SYNODIC_DAYS;
+      var icons = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+      var idx = Math.round(phase * 8) % 8;
+      return icons[idx];
+    }
+    function band(strength){
+      if(strength >= 78) return {tier:'사리', note:'조차가 가장 큽니다. 갯벌 노출 면적이 최대라 해루질·갯벌체험에 유리합니다.', color:'var(--coral)'};
+      if(strength >= 45) return {tier:'중간물', note:'조차가 중간 정도입니다. 대부분의 낚시·체험에 무난합니다.', color:'var(--amber)'};
+      return {tier:'조금', note:'조차가 가장 작습니다. 갯벌 노출은 적지만 물흐름이 잔잔해 일부 찌낚시엔 유리할 수 있습니다.', color:'var(--tide)'};
+    }
+    function dateAtLocalNoon(y,m,d){
+      // 시간대 이슈를 피하기 위해 그날 정오(UTC 기준 근사) 사용
+      return Date.UTC(y, m, d, 12, 0, 0);
+    }
+    function fmtDate(y,m,d){
+      var wd = ['일','월','화','수','목','금','토'][new Date(y,m,d).getDay()];
+      return y+'년 '+(m+1)+'월 '+d+'일 ('+wd+')';
+    }
+
+    var dateInput = document.getElementById('tideDate');
+    var detailEl = document.getElementById('tideDetail');
+    var calEl = document.getElementById('tideCalendar');
+    var monthLabel = document.getElementById('monthLabel');
+    var prevBtn = document.getElementById('prevMonth');
+    var nextBtn = document.getElementById('nextMonth');
+
+    var today = new Date();
+    var state = { y: today.getFullYear(), m: today.getMonth(), d: today.getDate() };
+
+    function pad(n){ return n<10 ? '0'+n : ''+n; }
+    function isoOf(y,m,d){ return y+'-'+pad(m+1)+'-'+pad(d); }
+
+    function renderDetail(){
+      var ms = dateAtLocalNoon(state.y, state.m, state.d);
+      var mt = mulddaeOf(ms);
+      var b = band(mt.strength);
+      detailEl.innerHTML =
+        '<div class="moon-icon">'+moonIcon(mt.lunarAge)+'</div>'+
+        '<div class="td-main">'+
+          '<div class="td-date">'+fmtDate(state.y,state.m,state.d)+'</div>'+
+          '<div class="td-label"><b class="tabular" style="font-size:1.05rem">'+mt.label+'</b> · 상대 물때세기 <b class="tabular">'+mt.strength+'%</b> · <b style="color:'+b.color+'">'+b.tier+'</b></div>'+
+        '</div>'+
+        '<div class="td-gauge"><div class="gauge-track"><div class="gauge-fill" style="width:'+mt.strength+'%"></div></div></div>'+
+        '<div class="td-note">'+b.note+' <span style="opacity:.75">(서해·인천 기준 물때번호. 남해·동해는 1~2일 정도 차이가 날 수 있습니다.)</span></div>';
+      if(dateInput) dateInput.value = isoOf(state.y, state.m, state.d);
+    }
+
+    function renderCalendar(){
+      var y = state.y, m = state.m;
+      monthLabel.textContent = y + '.' + pad(m+1);
+      var first = new Date(y, m, 1);
+      var startWeekday = first.getDay();
+      var daysInMonth = new Date(y, m+1, 0).getDate();
+      var html = '';
+      for(var i=0;i<startWeekday;i++){ html += '<div class="cal-cell empty"></div>'; }
+      for(var d=1; d<=daysInMonth; d++){
+        var ms = dateAtLocalNoon(y,m,d);
+        var mt = mulddaeOf(ms);
+        var b = band(mt.strength);
+        var isToday = (y===today.getFullYear() && m===today.getMonth() && d===today.getDate());
+        var isSelected = (y===state.y && m===state.m && d===state.d);
+        html += '<div class="cal-cell'+(isToday?' today':'')+(isSelected?' selected':'')+'" data-d="'+d+'" title="'+mt.label+' · '+b.tier+' ('+mt.strength+'%)">'+
+                  d+'<div class="bar" style="background:'+b.color+';opacity:'+(0.25+mt.strength/100*0.75).toFixed(2)+'"></div>'+
+                '</div>';
+      }
+      calEl.innerHTML = html;
+      Array.prototype.forEach.call(calEl.querySelectorAll('.cal-cell:not(.empty)'), function(cell){
+        cell.addEventListener('click', function(){
+          state.d = parseInt(cell.getAttribute('data-d'), 10);
+          renderDetail();
+          renderCalendar();
+        });
+      });
+    }
+
+    if(dateInput){
+      dateInput.addEventListener('change', function(){
+        var parts = dateInput.value.split('-');
+        if(parts.length === 3){
+          state.y = parseInt(parts[0],10);
+          state.m = parseInt(parts[1],10) - 1;
+          state.d = parseInt(parts[2],10);
+          renderDetail();
+          renderCalendar();
+        }
+      });
+    }
+    if(prevBtn) prevBtn.addEventListener('click', function(){
+      state.m -= 1;
+      if(state.m < 0){ state.m = 11; state.y -= 1; }
+      var dim = new Date(state.y, state.m+1, 0).getDate();
+      if(state.d > dim) state.d = dim;
+      renderDetail(); renderCalendar();
+    });
+    if(nextBtn) nextBtn.addEventListener('click', function(){
+      state.m += 1;
+      if(state.m > 11){ state.m = 0; state.y += 1; }
+      var dim = new Date(state.y, state.m+1, 0).getDate();
+      if(state.d > dim) state.d = dim;
+      renderDetail(); renderCalendar();
+    });
+
+    renderDetail();
+    renderCalendar();
+  }catch(e){}
+})();
+</script>
