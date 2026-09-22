@@ -393,6 +393,19 @@
   .video-card .vc-text{ min-width:0; }
   .video-card .vc-text b{ display:block; font-size:.86rem; color:var(--ink); margin-bottom:2px; line-height:1.3; }
   .video-card .vc-text span{ font-size:.74rem; color:var(--ink-soft); }
+  /* ---------- Real photos ---------- */
+  .photo{ margin:0 0 20px; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border); background:var(--surface-2); }
+  .photo img{ display:block; width:100%; height:auto; max-height:480px; object-fit:cover; }
+  .photo figcaption{ padding:8px 14px; font-size:.74rem; color:var(--ink-soft); }
+  .photo figcaption a{ color:var(--ink-soft); }
+  .photo-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; margin:0 0 20px; }
+  .photo-grid .photo{ margin:0; }
+  .photo-grid .photo img{ height:130px; object-fit:cover; max-height:none; }
+  .photo-grid .photo figcaption{ padding:6px 10px; font-size:.68rem; }
+  .hero-photo{ border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border); }
+  .hero-photo img{ display:block; width:100%; height:auto; max-height:340px; object-fit:cover; }
+  .hero-photo figcaption{ padding:6px 12px; font-size:.7rem; color:var(--ink-soft); background:var(--surface-2); }
+
   .type-detail-grid{ display:flex; flex-direction:column; gap:16px; margin:0 0 24px; }
   .type-detail{
     background:var(--surface-2); border:1px solid var(--border); border-radius:14px;
@@ -467,27 +480,10 @@
         <span>초보자 중심</span>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
-        <rect width="320" height="280" fill="none"/>
-        <path d="M0 190 Q 40 170 80 190 T 160 190 T 240 190 T 320 190" stroke="var(--tide)" stroke-width="3" fill="none" opacity="0.55"/>
-        <path d="M0 210 Q 40 195 80 210 T 160 210 T 240 210 T 320 210" stroke="var(--sea)" stroke-width="3" fill="none" opacity="0.4"/>
-        <path d="M0 230 Q 40 218 80 230 T 160 230 T 240 230 T 320 230" stroke="var(--amber)" stroke-width="2" fill="none" opacity="0.5"/>
-        <!-- fishing rod & line -->
-        <line x1="235" y1="35" x2="160" y2="150" stroke="var(--sea-deep)" stroke-width="4" stroke-linecap="round"/>
-        <line x1="160" y1="150" x2="150" y2="205" stroke="var(--ink-soft)" stroke-width="1.5"/>
-        <circle cx="150" cy="208" r="4" fill="var(--coral)"/>
-        <!-- shell -->
-        <path d="M60 235 a22 16 0 0 1 44 0 z" fill="var(--amber)" opacity="0.85"/>
-        <path d="M70 235 q4 -10 12 -12 q8 2 12 12" stroke="var(--surface)" stroke-width="1.4" fill="none" opacity="0.6"/>
-        <!-- crab -->
-        <ellipse cx="240" cy="245" rx="17" ry="11" fill="var(--coral)" opacity="0.85"/>
-        <path d="M226 240 l-10 -6 M226 250 l-10 6 M254 240 l10 -6 M254 250 l10 6" stroke="var(--coral)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
-        <!-- headlamp beam (haerujil) -->
-        <circle cx="55" cy="60" r="7" fill="var(--sea-deep)"/>
-        <path d="M55 60 L120 100 L100 130 Z" fill="var(--amber)" opacity="0.28"/>
-      </svg>
-    </div>
+    <figure class="hero-art hero-photo">
+      <img src="images/hero-sokcho.jpg" alt="강원도 속초 대포항 방파제" loading="eager">
+      <figcaption>속초 대포항 · Junho Jung / Caspian blue · <a href="https://commons.wikimedia.org/wiki/File:Korea-Sokcho-Daepo_Port-Breakwater-01.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a></figcaption>
+    </figure>
   </header>
 
   <nav class="toc-wrap" aria-label="빠른 이동">
@@ -553,6 +549,11 @@
         <span class="part-no">PART 01</span>
         <h2>낚시</h2>
         <p class="kicker">대·릴로 물고기를 낚는 가장 오래되고 대중적인 채집법. 낚시터·대상어·기법에 따라 완전히 다른 놀이가 됩니다.</p>
+
+        <figure class="photo">
+          <img src="images/fishing-yulrim.jpg" alt="전남 돌산도 유림 갯바위에서 낚시하는 어부들" loading="lazy">
+          <figcaption>여수 돌산도 유림, 갯바위 낚시 · Smiley.toerist · <a href="https://commons.wikimedia.org/wiki/File:Vissers_in_Yulrim.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
+        </figure>
 
         <h3 id="fishing-types">낚시의 종류</h3>
         <p style="font-size:.82rem;color:var(--ink-soft);">이름을 누르면 아래 상세 설명으로 바로 이동합니다.</p>
@@ -800,6 +801,11 @@
           <div class="gear-card"><b>보조 장비</b><span>뜰채, 아이스박스, 소형 랜턴(야간 갈치낚시 등)</span></div>
         </div>
 
+        <figure class="photo">
+          <img src="images/fishing-rod-hand.jpg" alt="낚싯대를 쥔 손 클로즈업" loading="lazy">
+          <figcaption>Santeri Viinamäki · <a href="https://commons.wikimedia.org/wiki/File:Hand_Holding_Fishing_Rod_01.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
+        </figure>
+
         <h3>낚싯대(로드) 종류 &amp; 선택 가이드</h3>
         <div class="tbl-wrap"><table>
           <thead><tr><th>종류</th><th>길이·액션</th><th>용도</th></tr></thead>
@@ -1039,6 +1045,11 @@
           </tbody>
         </table></div>
 
+        <figure class="photo">
+          <img src="images/harbour-busan.jpg" alt="부산항 풍경" loading="lazy">
+          <figcaption>부산항 · Svwmal · <a href="https://commons.wikimedia.org/wiki/File:South_Korea_Busan_harbour.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a></figcaption>
+        </figure>
+
         <h3>선상낚시 예약 방법</h3>
         <p>예약 플랫폼(<b>어바웃피싱</b>, <b>선상24</b>, <b>더피싱</b>)에서 ① 지역·항구 선택 → ② 날짜·출항시간 설정 → ③ 선박 확인 → ④ 결제 순으로 예약합니다. 출항 30분 전 도착해 승선명부를 작성하고, <b>신분증과 구명조끼</b>는 대부분 필수입니다. 비용은 반나절 체험형 기준 1인 약 3만~6만원(시즌·지역별 변동), 장비 대여는 별도(약 1만원)인 경우가 많습니다.</p>
 
@@ -1084,6 +1095,11 @@
         <span class="part-no">PART 02</span>
         <h2>해루질</h2>
         <p class="kicker">본래 "밤에 얕은 바다에서 맨손으로 어패류를 잡는 일"을 뜻하는 서해안 방언. 지금은 낮·밤을 가리지 않고 갯벌·갯바위에서 조개·낙지·게를 도구 없이, 또는 간단한 도구로 채집하는 활동 전체를 이릅니다.</p>
+
+        <figure class="photo">
+          <img src="images/mudflat-daebudo.jpg" alt="경기도 대부도, 썰물 때 드러난 갯벌" loading="lazy">
+          <figcaption>대부도 갯벌(썰물) · Shinae Hyun · <a href="https://commons.wikimedia.org/wiki/File:Daebudo%27s_sea_at_low_tide.JPG" target="_blank" rel="noopener">CC BY-SA 4.0</a> — 해루질은 이런 조간대에서 이뤄집니다</figcaption>
+        </figure>
 
         <h3>갯벌형 vs 암반형</h3>
         <p><b>갯벌형</b>은 서·남해의 평탄한 간석지에서 진행하며 바지락·맛조개·동죽·낙지·게가 대상입니다. <b>암반(갯바위)형</b>은 바위 조간대에서 소라·전복·성게·해삼·고둥을 노립니다. 동해는 수심이 깊고 갯벌 노출 면적이 적어 상대적으로 부적합합니다.</p>
@@ -1261,6 +1277,17 @@
         <h2>다이빙 &amp; 스피어피싱</h2>
         <p class="kicker">물속에 직접 들어가 관찰하거나 채집하는 활동. 장비와 자격 체계가 가장 정교한 만큼, 국내에서는 법적 규제도 가장 엄격합니다.</p>
 
+        <div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">
+          <figure class="photo">
+            <img src="images/diving-haenyeo-ulsan.jpg" alt="울산 해녀가 물질하는 모습" loading="lazy" style="height:220px;">
+            <figcaption>울산 해녀의 물질(프리다이빙) · hojusaram · <a href="https://commons.wikimedia.org/wiki/File:Korea-Ulsan-Haenyeo-01.jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/diving-haenyeo-jeju.jpg" alt="제주 해녀들이 불턱에서 쉬는 모습" loading="lazy" style="height:220px;">
+            <figcaption>제주 해녀의 불턱 휴식 · karendotcom127 · <a href="https://commons.wikimedia.org/wiki/File:Korea-Jeju-Haenyeo-05.jpg" target="_blank" rel="noopener">CC BY 2.0</a></figcaption>
+          </figure>
+        </div>
+
         <div class="callout warn">
           <h4>⚠ 반드시 먼저 읽기 — 국내 스피어피싱은 원칙적으로 전면 불법</h4>
           <p><b>수산자원관리법 시행규칙 제6조</b>는 비어업인이 사용할 수 있는 도구를 투망·쪽대·외줄낚시·집게·호미·손 등으로 한정하며, <b>작살(스피어건 포함)과 잠수용 스쿠버 장비는 명시적으로 금지</b>합니다. 이 규정은 헌법재판소 2016헌마450 결정에서 합헌으로 확정됐고, 실제로 2019년 태안에서 작살로 광어를 잡아 유튜브에 올린 유튜버가 벌금형(최대 1,000만원 이하)에 처해진 사례가 있습니다. 내수면(강·호수)에서도 내수면어업법으로 작살류·스쿠버 장비 사용이 금지됩니다. 스킨다이빙으로 손·집게 등 허용 도구만 쓰는 경우가 상대적으로 규제 소지가 적지만, 나잠어업 허가 없이 마을어장에서 채집하면 이 역시 위법입니다.</p>
@@ -1402,6 +1429,17 @@
         <span class="part-no">PART 04</span>
         <h2>갯벌 체험</h2>
         <p class="kicker">어촌계가 운영하는 체험마을에서 호미·갈퀴를 빌려 정해진 구역에서 조개를 캐는, 가장 안전하고 접근하기 쉬운 방식입니다. 우리 식탁 해산물의 3분의 2 이상이 갯벌을 거쳐 갑니다.</p>
+
+        <div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">
+          <figure class="photo">
+            <img src="images/tidalflat-mudsledge.jpg" alt="뻘배(널배)로 조개를 옮기는 어민" loading="lazy" style="height:220px;">
+            <figcaption>뻘배로 조개를 옮기는 모습 · Dagamja · <a href="https://commons.wikimedia.org/wiki/File:Koreanmudsledge.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/tidalflat-dolsan-oyster.jpg" alt="전남 돌산도 갯벌의 굴 양식장" loading="lazy" style="height:220px;">
+            <figcaption>돌산도 갯벌 굴 양식장 · Smiley.toerist · <a href="https://commons.wikimedia.org/wiki/File:Oesterkwekerijen_in_Korea_I.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
+          </figure>
+        </div>
 
         <h3>체험 유형</h3>
         <p><b>어촌체험마을형</b>은 입장료·체험비를 내고 도구를 대여받아 정해진 구역에서 채집하는 공식 프로그램입니다. <b>자율 채집(개방형)</b>은 별도 운영 주체 없는 공유수면에서 이뤄지지만, 마을어장(어업권 구역)인 경우 비어업인의 채집이 제한될 수 있습니다.</p>
@@ -1715,6 +1753,29 @@
         <span class="part-no">GUIDE</span>
         <h2>어종 · 생물 도감</h2>
         <p class="kicker">낚시·해루질·다이빙·갯벌에서 만나는 대표 해양생물 40종. 금어기·금지체장은 매년 고시가 바뀌므로 <a href="https://www.mof.go.kr" target="_blank" rel="noopener">해양수산부</a>·<a href="https://www.nifs.go.kr" target="_blank" rel="noopener">국립수산과학원</a> 최신 공지를 반드시 재확인하세요.</p>
+
+        <div class="photo-grid">
+          <figure class="photo">
+            <img src="images/species-crab.jpg" alt="꽃게(Portunus trituberculatus)" loading="lazy">
+            <figcaption>꽃게 · Franz Anthony · <a href="https://commons.wikimedia.org/wiki/File:Portunus_trituberculatus_56277269.jpg" target="_blank" rel="noopener">CC BY 4.0</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/species-octopus.jpg" alt="낙지(Octopus minor)" loading="lazy">
+            <figcaption>낙지 · Ulrich Walder · <a href="https://commons.wikimedia.org/wiki/File:Long_arm_octopus_(Octopus_minor).jpg" target="_blank" rel="noopener">CC0</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/species-clam.jpg" alt="바지락(Ruditapes philippinarum)" loading="lazy">
+            <figcaption>바지락 · <a href="https://commons.wikimedia.org/wiki/File:Ruditapes_philippinarum.jpg" target="_blank" rel="noopener">Public Domain</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/species-abalone.jpg" alt="참전복(Haliotis discus hannai)" loading="lazy">
+            <figcaption>전복 · Jan Delsing · <a href="https://commons.wikimedia.org/wiki/File:Haliotis_discus_hannai_001.jpg" target="_blank" rel="noopener">Public Domain</a></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/species-turban.jpg" alt="소라(Turbo cornutus) 껍데기" loading="lazy">
+            <figcaption>소라 · James St. John · <a href="https://commons.wikimedia.org/wiki/File:Turbo_cornutus_(horned_turban_snail)_2_(25031884946).jpg" target="_blank" rel="noopener">CC BY 2.0</a></figcaption>
+          </figure>
+        </div>
 
         <div class="tackle-filter" id="seasonFilter">
           <button type="button" class="active" data-season="all">전체</button>
