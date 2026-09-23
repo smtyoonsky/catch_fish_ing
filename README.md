@@ -42,4 +42,27 @@
 | species-abalone.jpg | Jan Delsing | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Haliotis_discus_hannai_001.jpg) |
 | species-turban.jpg | James St. John | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Turbo_cornutus_(horned_turban_snail)_2_(25031884946).jpg) |
 
+| type-ice-hwacheon.jpg | 김선주 / KOCIS | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Hwacheon_Sancheoneo_Ice_Festival_01_(52620586388).jpg) |
+| type-kayak.jpg | Thomas & Dianne Jones | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Kayak_fishing_at_Okmulgee_Lake.jpg) |
+| type-boat.jpg | Tudor Washington Collins / Auckland War Memorial Museum | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Man_fishing_from_a_chair_on_a_boat_(AM_79181-1).jpg) |
+| type-lure-casting.jpg | Virginia State Parks staff | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Casting_Practice_(7335756432).jpg) |
+| type-surfcast.jpg | Kgbo | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Woorim_Beach_Surf_fishing.jpg) |
+| diving-gear.jpg | Ahmad Faiz Mustafa | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Scuba_Diver_-_Ahmad_Faiz_Mustafa.jpg) |
+| species-flounder.jpg | Daiju Azuma | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Paralichthys_olivaceus.jpg) |
+| species-flatfish2.jpg | Ryan Hodnett | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Pleuronectinae_-_Kvinnherad,_Norway_2021-07-29.jpg) |
+| species-hairtail.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Trichiurus_lepturus_by_OpenCage.jpg) |
+| species-mackerel.jpg | Kevin Poh | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Narrow-barred_Spanish_Mackerel.jpg) |
+| species-blackporgy.jpg | TMDSA | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Acanthopagrus_schlegelii.JPG) |
+| species-shrimp.jpg | Punnatorn Thepsuwanworn | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Fleshy_prawns.jpg) |
+| species-seacucumber.jpg | harum.koh | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Japan_sea_animal,_Apostichopus_japonicus.jpg) |
+| species-urchin.jpg | Peter Southwood | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Sea_urchin_on_deep_reef_DSC00056.JPG) |
+| species-oyster.jpg | Guido | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Pacific_oysters.jpg) |
+| species-mussel.jpg | Andreas Trepte | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Blue_mussel_Mytilus_edulis.jpg) |
+| hazard-jellyfish.jpg | Nicola | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Jellyfish_(22155766231).jpg) |
+| hazard-stingray.jpg | Philippe Guillaume | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Common_stingray_tenerife.jpg) |
+| hazard-pufferfish.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Takifugu_rubripes_AQUAS.jpg) |
+| species-crab2.jpg | (업로더 표기만 확인) | CC BY-SA 3.0 / GFDL | [Commons](https://commons.wikimedia.org/wiki/File:Charybdis_japonica.jpg) |
+
+일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
+
 원본보다 웹 로딩 속도를 위해 리사이즈·압축했습니다(가로 최대 1400px, 품질 82%).
