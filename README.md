@@ -62,6 +62,29 @@
 | hazard-stingray.jpg | Philippe Guillaume | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Common_stingray_tenerife.jpg) |
 | hazard-pufferfish.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Takifugu_rubripes_AQUAS.jpg) |
 | species-crab2.jpg | (업로더 표기만 확인) | CC BY-SA 3.0 / GFDL | [Commons](https://commons.wikimedia.org/wiki/File:Charybdis_japonica.jpg) |
+| species-surfclam.jpg | Anonymous Powered | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Mactra_veneriformis.jpg) |
+| species-bigfinsquid.jpg | harum.koh | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Bigfin_Reef_Squid_(Sepioteuthis_lessoniana)_(16063247395).jpg) |
+| species-cuttlefish.jpg | Bernard DUPONT | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Golden_Cuttlefish_(Sepia_esculenta)_(8475830927).jpg) |
+| species-webfootoctopus.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Amphioctopus_fangsiao_NIFREL1.jpg) |
+| species-commonoctopus.jpg | Paul Asman and Jill Lenoble | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Common_octopus_Octopus_vulgaris_(4681010396).jpg) |
+| hazard-blueringedoctopus.jpg | Rickard Zerpe | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Greater_blue-ringed_octopus_(Hapalochlaena_lunulata)_(16219454856).jpg) |
+| species-fatcod.jpg | Daiju Azuma | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Hexagrammos_otakii.jpg) |
+| species-greenling.jpg | Jjw | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Hexagrammos_agrammus_catched_at_Jeju_Island.jpg) |
+| species-filefish.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Thamnaconus_modestus_by_OpenCage.jpg) |
+| species-filefish2.jpg | りなべる | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Stephanolepis_cirrhifer_112109251.jpg) |
+| species-mackerel2.jpg | Ruff tuff cream puff | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Scomber_japonicus_San_Diego.jpg) |
+| species-mackerel3.jpg | Brian Gratwicke | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Scomber_australasicus_-_IMG_9102.jpg) |
+| hazard-conesnail.jpg | James St. John | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Conus_geographus_(geography_cone_snail)_1_(24422159755).jpg) |
+| species-mudsnail.jpg | harum.koh | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Semisulcospira_libertina.jpg) |
+| hazard-mittencrab.jpg | Christian Fischer | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:EriocheirSinensis1.jpg) |
+| hazard-catfish.jpg | Huangdan2060 | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Yellow_catfish_Pelteobagrus_fulvidraco_1.JPG) |
+| type-jigging.jpg | Roswaldox | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Rafajigging.jpg) |
+| type-freshwater.jpg | Epop | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Batterie_carpe.JPG) |
+| type-fly.jpg | Aupio | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:투핸드_플라이_캐스팅.jpg) |
+| gear-swivel.jpg | Ra Boe | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Angeln_zubehoer_wirbel_01.jpg) |
+| gear-hooksinker.jpg | Riquix | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Angelhaken_mit_Gewicht.jpg) |
+| gear-sinkers.jpg | Junyu-K | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:202510_Fishing_sinkers_(Close-up_photography_from_Taiwan).jpg) |
+| handling-fillet.jpg | Savannah Rivka | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Fish_filleting_in_Japan_(3).jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
