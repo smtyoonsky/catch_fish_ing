@@ -88,6 +88,25 @@
 | species-damgeombari.jpg | (작가 정보 없음) | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Niphon_spinosus_Takeshima.jpg) |
 | species-jabari.jpg | KENPEI | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Epinephelus_bruneus1.jpg) |
 | species-neungseongeo.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Epinephelus_septemfasciatus_Kaikyokan.jpg) |
+| species-redseabream.jpg | Miya | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Pagrus_major_Red_seabream_ja01.jpg) |
+| species-seabass.jpg | Σ64 | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Lateolabrax_japonicas_01.jpg) |
+| species-rockfish.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Sebastes_schlegelii_by_OpenCage.jpg) |
+| species-bolark.jpg | Daiju Azuma | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Sebastes_Inermis.jpg) |
+| species-bass.jpg | Sam Stukel / USFWS | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Largemouth_Bass_(Micropterus_salmoides)_June_2023_(cropped).jpg) |
+| species-gizzardshad.jpg | 四葉亭四迷 | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Konosirus_punctatus.JPG) |
+| species-mullet.jpg | buku2photo | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Mugil_cephalus_01.jpg) |
+| species-amberjack.jpg | りなべる | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Seriola_quinqueradiata.jpg) |
+| species-yellowtail.jpg | Hugues Evano / IFREMER | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Seriole_(Seriola_lalandi)_(Ifremer_00762-87437).jpg) |
+| species-halfbeak.jpg | Kwun H, Park J, Kim H, Kim J, Park H | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Hyporhamphus_sajori.jpg) |
+| species-snowcrab.jpg | Takaaki Nishioka | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Chionoecetes_opilio.jpg) |
+| species-mudcrab.jpg | ふうけ | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Helice_tridens.jpg) |
+| species-hardclam.jpg | Almandine | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Meretrix_lusoria.jpg) |
+| species-razorclam.jpg | (작가 정보 없음) | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Solen_strictus.jpg) |
+| species-cockle.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Fulvia_mutica_by_OpenCage.jpg) |
+| species-penshell.jpg | harum.koh | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Japan_sea_animal,_Rough_Penshell_(Atrina_pectinata)_(15587024877).jpg) |
+| species-hijiki.jpg | merec0 | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:%E3%83%92%E3%82%B8%E3%82%AD_Sargassum_fusiforme_(52401230327).jpg) |
+| species-spoonworm.jpg | Popolon | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Urechis_unicinctus.jpg) |
+| species-crucian.jpg | Etrusko25 | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Carassius_auratus_Italy.jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
