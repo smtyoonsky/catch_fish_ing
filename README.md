@@ -85,6 +85,9 @@
 | gear-hooksinker.jpg | Riquix | CC BY 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Angelhaken_mit_Gewicht.jpg) |
 | gear-sinkers.jpg | Junyu-K | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:202510_Fishing_sinkers_(Close-up_photography_from_Taiwan).jpg) |
 | handling-fillet.jpg | Savannah Rivka | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Fish_filleting_in_Japan_(3).jpg) |
+| species-damgeombari.jpg | (작가 정보 없음) | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Niphon_spinosus_Takeshima.jpg) |
+| species-jabari.jpg | KENPEI | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Epinephelus_bruneus1.jpg) |
+| species-neungseongeo.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Epinephelus_septemfasciatus_Kaikyokan.jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
