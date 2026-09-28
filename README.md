@@ -114,6 +114,10 @@
 | place-ulleungdo.jpg | KOCIS/Korea.net | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:KOCIS_Ulleungdo,_or_Ulleung_Island_(4925987614).jpg) |
 | place-oryukdo.jpg | Choi2451 | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Oryukdo_Skywalk_in_Busan,_South_Korea.jpg) |
 | place-yeongheungdo.jpg | Jpbarrass | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:2010-09-23_-_Simripo_Beach,_Yeongheung_Island.jpg) |
+| place-jebudo.jpg | Moonhayun | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:The_Jebu_Beach.jpg) |
+| place-muuido.jpg | Ken Eckert | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Cabana_at_Hanagae_Beach,_Muuido.jpg) |
+| place-geomundo.jpg | Gupdaal | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Geomundo_and_Baekdo_from_Bultanbong.jpg) |
+| place-janghohang.jpg | 우한길(HK Woo) | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:%ED%95%9C%EA%B5%AD%EC%9D%98_%EB%82%98%ED%8F%B4%EB%A6%AC_%EC%9E%A5%ED%98%B8_-_panoramio.jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
