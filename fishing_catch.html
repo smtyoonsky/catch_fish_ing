@@ -493,6 +493,19 @@
   .pm-copy-btn:hover{ background:var(--sea); color:#fff; border-color:var(--sea); }
   .pm-copy-btn.copied{ background:var(--sea-deep); color:#fff; border-color:var(--sea-deep); }
   .pm-privacy-note{ font-size:.78rem; color:var(--ink-soft); margin-top:14px; }
+  .pm-video-tool{ margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .pm-video-preview{ width:100%; max-height:360px; border-radius:10px; background:#000; display:block; margin-bottom:12px; }
+  .pm-trim-row{ display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; margin-bottom:6px; }
+  .pm-trim-row input[type="number"]{
+    font:inherit; padding:8px 10px; border-radius:9px; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--ink); width:100%;
+  }
+  .pm-video-hint{ font-size:.78rem; color:var(--ink-soft); margin:0 0 12px; }
+  .pm-video-actions{ display:flex; flex-wrap:wrap; gap:10px; }
+  .pm-video-actions .pm-btn-primary, .pm-video-actions .pm-btn-secondary{ flex:1 1 220px; }
+  .pm-video-progress{ margin-top:12px; font-size:.8rem; color:var(--ink-soft); }
+  .pm-progress-track{ width:100%; height:8px; border-radius:99px; background:var(--border); overflow:hidden; margin-bottom:6px; }
+  .pm-progress-fill{ height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--tide),var(--sea)); transition:width .1s linear; }
 </style>
 
 <div id="pwGate" hidden>
@@ -2707,7 +2720,7 @@
       <section class="section" id="postmaker">
         <span class="part-no">TOOL</span>
         <h2>인증샷 편집 &amp; SNS 문구 생성</h2>
-        <p class="kicker">낚시·해루질·다이빙·갯벌 체험에서 찍은 사진을 올리면 정보 배너를 입혀 바로 다운로드하고, 인스타그램 캡션·유튜브 제목까지 자동으로 만들어 드립니다. 사진은 서버로 전송되지 않고 <b>이 브라우저 안에서만</b> 처리됩니다.</p>
+        <p class="kicker">낚시·해루질·다이빙·갯벌 체험에서 찍은 사진·영상을 올리면 정보 배너와 재미있는 스티커를 입혀 바로 다운로드하고, 인스타그램 캡션·유튜브 제목까지 자동으로 만들어 드립니다. 사진·영상은 서버로 전송되지 않고 <b>이 브라우저 안에서만</b> 처리됩니다.</p>
 
         <div class="pm-tool">
           <div class="pm-upload" id="pmDrop">
@@ -2745,6 +2758,18 @@
                     <select id="pmBannerPos"><option value="bottom">하단</option><option value="top">상단</option></select>
                   </label>
                 </div>
+                <div class="pm-field" style="margin-top:8px;margin-bottom:0;">
+                  <label for="pmSticker">🎉 재미 스티커</label>
+                  <select id="pmSticker">
+                    <option value="">없음</option>
+                    <option value="🏆 오늘의 조과왕">🏆 오늘의 조과왕</option>
+                    <option value="🔥 대물 인증">🔥 대물 인증</option>
+                    <option value="😆 즐거운 하루">😆 즐거운 하루</option>
+                    <option value="🌊 바다가 좋다">🌊 바다가 좋다</option>
+                    <option value="🎣 첫 조황">🎣 첫 조황</option>
+                    <option value="😱 실화냐">😱 실화냐</option>
+                  </select>
+                </div>
               </div>
 
               <div class="pm-field-group">
@@ -2765,6 +2790,40 @@
             </div>
           </div>
 
+          <div class="pm-field-group pm-video-tool">
+            <h4>🎬 영상 편집 (베타)</h4>
+            <p style="font-size:.82rem;color:var(--ink-soft);margin:0 0 12px;">짧은 조과 영상을 올리면 원하는 구간만 잘라 위의 배너·스티커·보정을 입힌 뒤 내보내거나, 유튜브용 썸네일을 뽑을 수 있어요.</p>
+            <div class="pm-upload" id="pmVideoDrop">
+              <input type="file" id="pmVideoFile" accept="video/*" hidden>
+              <label for="pmVideoFile" class="pm-upload-label">
+                <span class="pm-upload-icon">🎬</span>
+                <span><b>영상을 선택</b>하거나 여기로 끌어다 놓으세요</span>
+                <span class="pm-upload-sub">MP4·WebM · 처리도 전부 이 브라우저 안에서 이뤄집니다</span>
+              </label>
+            </div>
+
+            <div id="pmVideoEditor" hidden>
+              <video id="pmVideoPreview" playsinline muted class="pm-video-preview"></video>
+
+              <div class="pm-trim-row">
+                <div class="pm-field" style="flex:1;margin-bottom:0;"><label for="pmTrimStart">시작(초)</label><input type="number" id="pmTrimStart" min="0" step="0.1" value="0"></div>
+                <div class="pm-field" style="flex:1;margin-bottom:0;"><label for="pmTrimEnd">끝(초)</label><input type="number" id="pmTrimEnd" min="0" step="0.1" value="0"></div>
+                <button type="button" id="pmTrimPreview" class="pm-btn-secondary">구간 미리보기</button>
+              </div>
+              <p class="pm-video-hint" id="pmVideoHint"></p>
+
+              <div class="pm-video-actions">
+                <button type="button" id="pmThumbCapture" class="pm-btn-secondary">📸 현재 장면으로 썸네일 만들기</button>
+                <button type="button" id="pmVideoExport" class="pm-btn-primary">🎬 이 구간 내보내기 (WebM)</button>
+              </div>
+              <div class="pm-video-progress" id="pmVideoProgress" hidden>
+                <div class="pm-progress-track"><div class="pm-progress-fill" id="pmProgressFill"></div></div>
+                <span id="pmProgressLabel">녹화 중…</span>
+              </div>
+              <p style="font-size:.78rem;color:var(--ink-soft);margin-top:8px;">내보낸 영상은 <b>WebM</b> 형식입니다 — 유튜브는 바로 업로드할 수 있고, 인스타그램은 기기·앱 버전에 따라 mp4 변환이 필요할 수 있어요. 파일 크기를 위해 구간은 최대 60초를 권장하고, 내보내는 동안(구간 길이만큼 실시간으로 걸려요)은 <b>이 탭을 다른 탭으로 전환하지 마세요</b> — 배경 탭에서는 브라우저가 처리 속도를 늦춰 오래 걸리거나 멈출 수 있어요.</p>
+            </div>
+          </div>
+
           <div class="pm-caption-group" id="pmCaptionGroup" hidden>
             <h4>SNS 멘트 생성</h4>
             <div class="pm-field-row">
@@ -2774,7 +2833,7 @@
                 <option value="short">짧고 임팩트있게</option>
                 <option value="brag">자랑 가득</option>
               </select>
-              <button type="button" id="pmGenerate" class="pm-btn-secondary">문구 생성</button>
+              <button type="button" id="pmGenerate" class="pm-btn-secondary">🔀 문구 생성 (다시 누르면 다른 문구)</button>
             </div>
             <div class="pm-caption-output">
               <div>
@@ -3485,6 +3544,8 @@
     var showBanner = document.getElementById('pmShowBanner');
     var bannerPos = document.getElementById('pmBannerPos');
 
+    var stickerSelect = document.getElementById('pmSticker');
+
     var filterButtons = document.querySelectorAll('#pmFilters button');
     var brightRange = document.getElementById('pmBright');
     var contrastRange = document.getElementById('pmContrast');
@@ -3516,19 +3577,7 @@
       return p.length===3 ? (p[0]+'.'+p[1]+'.'+p[2]) : iso;
     }
 
-    function render(){
-      if(!srcImage) return;
-      var w = srcImage.naturalWidth, h = srcImage.naturalHeight;
-      var scale = Math.min(1, MAX_DIM / Math.max(w,h));
-      var cw = Math.round(w*scale), ch = Math.round(h*scale);
-      canvas.width = cw; canvas.height = ch;
-
-      ctx.save();
-      ctx.filter = buildFilterString();
-      ctx.drawImage(srcImage, 0, 0, cw, ch);
-      ctx.restore();
-      ctx.filter = 'none';
-
+    function drawOverlays(octx, cw, ch){
       if(showBanner && showBanner.checked){
         var speciesTxt = speciesInput.value.trim();
         var placeTxt = placeInput.value.trim();
@@ -3550,7 +3599,7 @@
           var barH = Math.max(56, ch*0.14);
           var pos = bannerPos.value;
           var by = pos === 'top' ? 0 : ch - barH;
-          var grad = ctx.createLinearGradient(0, by, 0, by+barH);
+          var grad = octx.createLinearGradient(0, by, 0, by+barH);
           if(pos === 'top'){
             grad.addColorStop(0, 'rgba(6,20,26,0.80)');
             grad.addColorStop(1, 'rgba(6,20,26,0)');
@@ -3558,8 +3607,8 @@
             grad.addColorStop(0, 'rgba(6,20,26,0)');
             grad.addColorStop(1, 'rgba(6,20,26,0.82)');
           }
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, by, cw, barH);
+          octx.fillStyle = grad;
+          octx.fillRect(0, by, cw, barH);
 
           var mainSize = Math.max(16, Math.round(cw*0.032));
           var subSize = Math.max(11, Math.round(cw*0.02));
@@ -3567,18 +3616,69 @@
           var subY = pos==='top' ? mainY + subSize + 8 : ch - pad;
 
           if(mainLine){
-            ctx.font = '700 '+mainSize+'px "Noto Sans KR", sans-serif';
-            ctx.fillStyle = '#fff';
-            ctx.fillText(mainLine, pad, mainY);
+            octx.font = '700 '+mainSize+'px "Noto Sans KR", sans-serif';
+            octx.fillStyle = '#fff';
+            octx.fillText(mainLine, pad, mainY);
           }
           if(subLine){
-            ctx.font = '400 '+subSize+'px "IBM Plex Mono", monospace';
-            ctx.fillStyle = 'rgba(255,255,255,0.88)';
-            ctx.fillText(subLine, pad, subY);
+            octx.font = '400 '+subSize+'px "IBM Plex Mono", monospace';
+            octx.fillStyle = 'rgba(255,255,255,0.88)';
+            octx.fillText(subLine, pad, subY);
           }
         }
       }
+
+      var stickerTxt = stickerSelect ? stickerSelect.value : '';
+      if(stickerTxt){
+        var sSize = Math.max(13, Math.round(cw*0.026));
+        octx.font = '700 '+sSize+'px "Noto Sans KR", sans-serif';
+        var textW = octx.measureText(stickerTxt).width;
+        var padX = sSize*0.7, padY = sSize*0.55;
+        var pillW = textW + padX*2, pillH = sSize + padY*2;
+        var margin = Math.max(10, cw*0.025);
+        var cx = cw - margin - pillW/2, cy = margin + pillH/2;
+        octx.save();
+        octx.translate(cx, cy);
+        octx.rotate(-6 * Math.PI/180);
+        octx.fillStyle = 'rgba(255,255,255,0.92)';
+        octx.beginPath();
+        if(octx.roundRect){ octx.roundRect(-pillW/2, -pillH/2, pillW, pillH, pillH/2); }
+        else { octx.rect(-pillW/2, -pillH/2, pillW, pillH); }
+        octx.fill();
+        octx.fillStyle = '#13232A';
+        octx.textAlign = 'center';
+        octx.textBaseline = 'middle';
+        octx.fillText(stickerTxt, 0, sSize*0.06);
+        octx.textAlign = 'left';
+        octx.textBaseline = 'alphabetic';
+        octx.restore();
+      }
     }
+
+    function render(){
+      if(!srcImage) return;
+      var w = srcImage.naturalWidth, h = srcImage.naturalHeight;
+      var scale = Math.min(1, MAX_DIM / Math.max(w,h));
+      var cw = Math.round(w*scale), ch = Math.round(h*scale);
+      canvas.width = cw; canvas.height = ch;
+
+      ctx.save();
+      ctx.filter = buildFilterString();
+      ctx.drawImage(srcImage, 0, 0, cw, ch);
+      ctx.restore();
+      ctx.filter = 'none';
+
+      drawOverlays(ctx, cw, ch);
+    }
+
+    window.__pmSetSourceImage = function(img){
+      srcImage = img;
+      if(editor) editor.hidden = false;
+      if(captionGroup) captionGroup.hidden = false;
+      render();
+    };
+    window.__pmBuildFilter = buildFilterString;
+    window.__pmDrawOverlays = drawOverlays;
 
     function loadFile(file){
       if(!file || !/^image\//.test(file.type)) return;
@@ -3634,7 +3734,8 @@
       });
     });
 
-    [speciesInput, placeInput, dateInput2, methodSelect, showBanner, bannerPos].forEach(function(el){
+    [speciesInput, placeInput, dateInput2, methodSelect, showBanner, bannerPos, stickerSelect].forEach(function(el){
+      if(!el) return;
       el.addEventListener('input', render);
       el.addEventListener('change', render);
     });
@@ -3687,6 +3788,8 @@
       '민물낚시': ['민물낚시','붕어낚시','저수지낚시']
     };
 
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
     function genCaption(){
       var species = speciesInput.value.trim();
       var place = placeInput.value.trim();
@@ -3700,20 +3803,40 @@
       var subjectLabel = species || (method || '오늘의 조과');
       var placeLabel = place || '바다';
 
-      var openers = {
-        fun:   subjectLabel + ' 만나러 ' + placeLabel + ' 다녀왔어요 🌊',
-        info:  placeLabel + '에서 ' + (method ? method + '으로 ' : '') + subjectLabel + ' 기록.',
-        short: subjectLabel + ' · ' + placeLabel,
-        brag:  '오늘 ' + placeLabel + '에서 사고쳤습니다 😎 ' + subjectLabel
+      var openerBank = {
+        fun: [
+          subjectLabel + ' 만나러 ' + placeLabel + ' 다녀왔어요 🌊',
+          '오늘의 주인공은 ' + subjectLabel + '! 📸',
+          placeLabel + '에서 ' + subjectLabel + '(이)랑 눈 마주친 썰 풉니다 👀',
+          subjectLabel + ' 잡고 세상 다 가진 기분 ✨'
+        ],
+        info: [
+          placeLabel + '에서 ' + (method ? method + '으로 ' : '') + subjectLabel + ' 기록.',
+          subjectLabel + ' 조과 기록 — ' + placeLabel + '.'
+        ],
+        short: [
+          subjectLabel + ' · ' + placeLabel,
+          placeLabel + ' 🎣 ' + subjectLabel
+        ],
+        brag: [
+          '오늘 ' + placeLabel + '에서 사고쳤습니다 😎 ' + subjectLabel,
+          subjectLabel + '?? 이 정도면 인정이지 않나요 🏆',
+          placeLabel + ' 뒤집어놓고 왔습니다 🔥 ' + subjectLabel
+        ]
+      };
+      var closerBank = {
+        fun: ['다음엔 더 큰 녀석으로 돌아올게요 🎣', '오늘 하루 완전 만족 😄', '역시 바다는 정직해요 🌊'],
+        brag: ['부럽죠? 😏 다음 출조도 기대해주세요.', '이 맛에 출조 끊고 갑니다 🙌', '오늘의 실력은 실력, 운은 운 😆'],
+        info: [], short: []
       };
 
-      var lines = [ openers[tone] || openers.fun ];
+      var lines = [ pick(openerBank[tone] || openerBank.fun) ];
       if(tone !== 'short'){
         if(method) lines.push('방법: ' + method);
         if(dateTxt) lines.push('날짜: ' + dateTxt);
         if(season) lines.push('제철 정보: ' + (speciesClean || '이 녀석') + '은 ' + season + '이 맛있는 시기래요.');
-        if(tone === 'fun') lines.push('다음엔 더 큰 녀석으로 돌아올게요 🎣');
-        if(tone === 'brag') lines.push('부럽죠? 😏 다음 출조도 기대해주세요.');
+        var closers = closerBank[tone] || [];
+        if(closers.length) lines.push(pick(closers));
       }
 
       var tags = [];
@@ -3722,13 +3845,16 @@
       tags.push('갯것대백과');
       var tagLine = tags.filter(Boolean).map(function(t){ return '#'+t; }).join(' ');
 
+      var ytOpeners = [
+        (method ? '['+method+'] ' : '') + placeLabel + '에서 ' + subjectLabel + ' 만난 이야기',
+        (method ? '['+method+'] ' : '') + subjectLabel + ' 후기 (feat. ' + placeLabel + ')',
+        tone==='brag' ? (method ? '['+method+'] ' : '') + placeLabel + '에서 ' + subjectLabel + ' 잡은 후기 (feat. 자랑)' : null
+      ].filter(Boolean);
+
       var instaOut = document.getElementById('pmInstaOut');
       var ytOut = document.getElementById('pmYtOut');
       if(instaOut) instaOut.value = lines.join('\n') + '\n\n' + tagLine;
-      if(ytOut){
-        var ytPrefix = method ? '['+method+'] ' : '';
-        ytOut.value = ytPrefix + placeLabel + '에서 ' + subjectLabel + (tone==='brag' ? ' 잡은 후기 (feat. 자랑)' : ' 만난 이야기');
-      }
+      if(ytOut) ytOut.value = pick(ytOpeners);
     }
 
     var genBtn = document.getElementById('pmGenerate');
@@ -3752,6 +3878,208 @@
         }
       });
     });
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var vFileInput = document.getElementById('pmVideoFile');
+    var vDrop = document.getElementById('pmVideoDrop');
+    var vEditor = document.getElementById('pmVideoEditor');
+    var videoEl = document.getElementById('pmVideoPreview');
+    if(!vFileInput || !videoEl) return;
+
+    var trimStartInput = document.getElementById('pmTrimStart');
+    var trimEndInput = document.getElementById('pmTrimEnd');
+    var trimPreviewBtn = document.getElementById('pmTrimPreview');
+    var videoHint = document.getElementById('pmVideoHint');
+    var thumbBtn = document.getElementById('pmThumbCapture');
+    var exportBtn = document.getElementById('pmVideoExport');
+    var progressWrap = document.getElementById('pmVideoProgress');
+    var progressFill = document.getElementById('pmProgressFill');
+    var progressLabel = document.getElementById('pmProgressLabel');
+    var captionGroup = document.getElementById('pmCaptionGroup');
+
+    var videoObjectUrl = null;
+
+    function loadVideoFile(file){
+      if(!file || !/^video\//.test(file.type)) return;
+      if(videoObjectUrl) URL.revokeObjectURL(videoObjectUrl);
+      videoObjectUrl = URL.createObjectURL(file);
+      videoEl.src = videoObjectUrl;
+      vEditor.hidden = false;
+      if(captionGroup) captionGroup.hidden = false;
+      videoEl.onloadedmetadata = function(){
+        var dur = videoEl.duration || 0;
+        trimStartInput.value = '0';
+        trimEndInput.value = Math.min(dur, 15).toFixed(1);
+        trimStartInput.max = dur.toFixed(1);
+        trimEndInput.max = dur.toFixed(1);
+        videoHint.textContent = '전체 길이: ' + dur.toFixed(1) + '초';
+      };
+    }
+
+    vFileInput.addEventListener('change', function(){
+      if(vFileInput.files && vFileInput.files[0]) loadVideoFile(vFileInput.files[0]);
+    });
+
+    if(vDrop){
+      ['dragover','dragenter'].forEach(function(ev){
+        vDrop.addEventListener(ev, function(e){ e.preventDefault(); vDrop.classList.add('dragover'); });
+      });
+      ['dragleave','drop'].forEach(function(ev){
+        vDrop.addEventListener(ev, function(e){ e.preventDefault(); vDrop.classList.remove('dragover'); });
+      });
+      vDrop.addEventListener('drop', function(e){
+        if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadVideoFile(e.dataTransfer.files[0]);
+      });
+    }
+
+    if(trimPreviewBtn){
+      trimPreviewBtn.addEventListener('click', function(){
+        var s = parseFloat(trimStartInput.value)||0;
+        var eT = parseFloat(trimEndInput.value)||(s+1);
+        videoEl.currentTime = s;
+        videoEl.play();
+        var checker = setInterval(function(){
+          if(videoEl.currentTime >= eT || videoEl.paused){
+            videoEl.pause();
+            clearInterval(checker);
+          }
+        }, 100);
+      });
+    }
+
+    if(thumbBtn){
+      thumbBtn.addEventListener('click', function(){
+        if(!videoEl.videoWidth){ return; }
+        videoEl.pause();
+        var tmp = document.createElement('canvas');
+        tmp.width = videoEl.videoWidth; tmp.height = videoEl.videoHeight;
+        tmp.getContext('2d').drawImage(videoEl, 0, 0, tmp.width, tmp.height);
+        var img = new Image();
+        img.onload = function(){
+          if(window.__pmSetSourceImage) window.__pmSetSourceImage(img);
+          var editorEl = document.getElementById('pmEditor');
+          if(editorEl) editorEl.scrollIntoView({behavior:'smooth', block:'center'});
+        };
+        img.src = tmp.toDataURL('image/png');
+      });
+    }
+
+    if(exportBtn){
+      exportBtn.addEventListener('click', function(){
+        if(typeof MediaRecorder === 'undefined'){
+          alert('이 브라우저는 동영상 내보내기를 지원하지 않습니다. 최신 Chrome, Edge, Firefox를 사용해보세요.');
+          return;
+        }
+        if(!videoEl.videoWidth){ alert('영상을 먼저 불러와주세요.'); return; }
+        var s = parseFloat(trimStartInput.value)||0;
+        var eT = parseFloat(trimEndInput.value)||0;
+        if(eT <= s){ alert('끝 시간이 시작 시간보다 커야 합니다.'); return; }
+        var dur = eT - s;
+        if(dur > 60){ alert('최대 60초까지 내보낼 수 있어요. 구간을 줄여주세요.'); return; }
+
+        exportBtn.disabled = true;
+        if(thumbBtn) thumbBtn.disabled = true;
+        progressWrap.hidden = false;
+        progressFill.style.width = '0%';
+        progressLabel.textContent = '녹화 중… 0.0s / ' + dur.toFixed(1) + 's';
+
+        var outCanvas = document.createElement('canvas');
+        outCanvas.width = videoEl.videoWidth;
+        outCanvas.height = videoEl.videoHeight;
+        var octx = outCanvas.getContext('2d');
+
+        var combined = new MediaStream();
+        var canvasStream = outCanvas.captureStream ? outCanvas.captureStream(30) : null;
+        if(canvasStream){ canvasStream.getVideoTracks().forEach(function(t){ combined.addTrack(t); }); }
+        try{
+          var srcStream = videoEl.captureStream ? videoEl.captureStream() : (videoEl.mozCaptureStream ? videoEl.mozCaptureStream() : null);
+          if(srcStream){ srcStream.getAudioTracks().forEach(function(t){ combined.addTrack(t); }); }
+        }catch(audioErr){}
+
+        var mime = '';
+        ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].some(function(m){
+          if(MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)){ mime = m; return true; }
+          return false;
+        });
+
+        var recorder;
+        try{
+          recorder = new MediaRecorder(combined, mime ? {mimeType:mime} : undefined);
+        }catch(recErr){
+          exportBtn.disabled = false;
+          if(thumbBtn) thumbBtn.disabled = false;
+          progressWrap.hidden = true;
+          alert('동영상 내보내기를 시작할 수 없습니다: ' + recErr.message);
+          return;
+        }
+
+        var chunks = [];
+        recorder.ondataavailable = function(e){ if(e.data && e.data.size) chunks.push(e.data); };
+        recorder.onstop = function(){
+          var blob = new Blob(chunks, {type: mime || 'video/webm'});
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          var dateVal = (document.getElementById('pmDate2')||{}).value || 'video';
+          a.href = url;
+          a.download = 'catch-clip-' + dateVal + '.webm';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+          exportBtn.disabled = false;
+          if(thumbBtn) thumbBtn.disabled = false;
+          progressWrap.hidden = true;
+          videoEl.pause();
+        };
+
+        var intervalId = null;
+        var failsafeId = null;
+
+        function finishExport(){
+          if(intervalId !== null){ clearInterval(intervalId); intervalId = null; }
+          if(failsafeId !== null){ clearTimeout(failsafeId); failsafeId = null; }
+          videoEl.pause();
+          if(recorder.state !== 'inactive') recorder.stop();
+        }
+
+        function tick(){
+          octx.save();
+          octx.filter = window.__pmBuildFilter ? window.__pmBuildFilter() : 'none';
+          octx.drawImage(videoEl, 0, 0, outCanvas.width, outCanvas.height);
+          octx.restore();
+          octx.filter = 'none';
+          if(window.__pmDrawOverlays) window.__pmDrawOverlays(octx, outCanvas.width, outCanvas.height);
+
+          var elapsed = videoEl.currentTime - s;
+          var pct = Math.min(100, Math.max(0, (elapsed/dur)*100));
+          progressFill.style.width = pct.toFixed(1)+'%';
+          progressLabel.textContent = '녹화 중… ' + Math.max(0,elapsed).toFixed(1) + 's / ' + dur.toFixed(1) + 's';
+
+          if(videoEl.currentTime >= eT || videoEl.ended){
+            finishExport();
+          }
+        }
+
+        videoEl.currentTime = s;
+        videoEl.onseeked = function(){
+          videoEl.onseeked = null;
+          videoEl.play().then(function(){
+            recorder.start();
+            intervalId = setInterval(tick, 1000/30);
+            // failsafe: never let the UI stay stuck even if the timer is throttled hard (e.g. backgrounded tab)
+            failsafeId = setTimeout(finishExport, (dur*3 + 15) * 1000);
+          }).catch(function(playErr){
+            exportBtn.disabled = false;
+            if(thumbBtn) thumbBtn.disabled = false;
+            progressWrap.hidden = true;
+            alert('영상 재생을 시작할 수 없습니다: ' + playErr.message);
+          });
+        };
+      });
+    }
   }catch(e){}
 })();
 </script>
