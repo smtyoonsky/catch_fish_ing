@@ -110,6 +110,10 @@
 | species-mirrorcarp.jpg | Sam Stukel / USFWS | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Common_Carp_(Cyprinus_carpio)_Mirror_Variety.jpg) |
 | hazard-catfishball.jpg | Jens Petersen | CC BY 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Catfish_ball.jpg) |
 | type-rockshore.jpg | Thomas Lefebvre | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Fishing_on_the_rocky_shore_(Unsplash).jpg) |
+| place-beomseom.jpg | Alex Brown | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Beomseom_Island.jpg) |
+| place-ulleungdo.jpg | KOCIS/Korea.net | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:KOCIS_Ulleungdo,_or_Ulleung_Island_(4925987614).jpg) |
+| place-oryukdo.jpg | Choi2451 | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Oryukdo_Skywalk_in_Busan,_South_Korea.jpg) |
+| place-yeongheungdo.jpg | Jpbarrass | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:2010-09-23_-_Simripo_Beach,_Yeongheung_Island.jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
