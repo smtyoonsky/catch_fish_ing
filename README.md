@@ -107,6 +107,8 @@
 | species-hijiki.jpg | merec0 | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:%E3%83%92%E3%82%B8%E3%82%AD_Sargassum_fusiforme_(52401230327).jpg) |
 | species-spoonworm.jpg | Popolon | CC BY-SA 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Urechis_unicinctus.jpg) |
 | species-crucian.jpg | Etrusko25 | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Carassius_auratus_Italy.jpg) |
+| species-mirrorcarp.jpg | Sam Stukel / USFWS | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Common_Carp_(Cyprinus_carpio)_Mirror_Variety.jpg) |
+| hazard-catfishball.jpg | Jens Petersen | CC BY 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Catfish_ball.jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
