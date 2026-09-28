@@ -436,6 +436,63 @@
   }
   a.gear-card{ text-decoration:none; display:block; transition:transform .12s; }
   a.gear-card:hover{ transform:translateY(-2px); border-color:var(--sea); }
+
+  /* ---------- Post maker (인증샷 편집 · SNS 문구) ---------- */
+  .pm-tool{ background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); margin:0 0 18px; }
+  .pm-upload-label{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    padding:36px 18px; border:2px dashed var(--border-strong); border-radius:12px; cursor:pointer;
+    background:var(--surface); text-align:center; transition:border-color .12s, background .12s;
+  }
+  .pm-upload-label:hover, .pm-upload.dragover .pm-upload-label{ border-color:var(--sea); background:var(--surface-3); }
+  .pm-upload-icon{ font-size:2rem; }
+  .pm-upload-sub{ font-size:.76rem; color:var(--ink-soft); }
+  .pm-editor{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(240px,1fr); gap:20px; margin-top:18px; }
+  @media (max-width:720px){ .pm-editor{ grid-template-columns:1fr; } }
+  .pm-canvas-wrap{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; }
+  .pm-canvas-wrap canvas{ max-width:100%; height:auto; border-radius:6px; display:block; }
+  .pm-controls{ display:flex; flex-direction:column; gap:18px; min-width:0; }
+  .pm-field-group h4{ font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; color:var(--tide); margin:0 0 10px; font-family:'IBM Plex Mono',monospace; }
+  .pm-field{ display:flex; flex-direction:column; gap:3px; margin-bottom:10px; }
+  .pm-field label{ font-size:.76rem; color:var(--ink-soft); }
+  .pm-field input[type="text"], .pm-field input[type="date"], .pm-field select{
+    font:inherit; padding:8px 10px; border-radius:9px; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--ink); width:100%;
+  }
+  .pm-field-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-size:.82rem; color:var(--ink-soft); margin-bottom:6px; }
+  .pm-field-row select{ font:inherit; padding:6px 9px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink); }
+  .pm-filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .pm-filters button{
+    font:inherit; font-size:.8rem; padding:6px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink-soft);
+  }
+  .pm-filters button.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .pm-slider{ margin-bottom:10px; font-size:.78rem; color:var(--ink-soft); }
+  .pm-slider label{ display:flex; justify-content:space-between; margin-bottom:3px; }
+  .pm-slider input[type="range"]{ width:100%; accent-color:var(--sea); }
+  .pm-btn-primary, .pm-btn-secondary{
+    font:inherit; font-weight:600; font-size:.88rem; padding:11px 16px; border-radius:10px; cursor:pointer; border:none;
+  }
+  .pm-btn-primary{ background:var(--sea-deep); color:#fff; width:100%; }
+  .pm-btn-primary:hover{ background:var(--sea); }
+  .pm-btn-secondary{ background:var(--amber); color:#1a1300; }
+  .pm-btn-secondary:hover{ filter:brightness(1.06); }
+  .pm-caption-group{ margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .pm-caption-group h4{ font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; color:var(--tide); margin:0 0 12px; font-family:'IBM Plex Mono',monospace; }
+  .pm-caption-output{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
+  @media (max-width:640px){ .pm-caption-output{ grid-template-columns:1fr; } }
+  .pm-out-label{ display:block; font-size:.78rem; color:var(--ink-soft); margin-bottom:5px; }
+  .pm-caption-output textarea{
+    width:100%; font:inherit; font-size:.86rem; line-height:1.5; padding:10px 12px; border-radius:10px;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink); resize:vertical;
+  }
+  .pm-copy-btn{
+    font:inherit; font-size:.78rem; margin-top:6px; padding:6px 12px; border-radius:8px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink);
+  }
+  .pm-copy-btn:hover{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .pm-copy-btn.copied{ background:var(--sea-deep); color:#fff; border-color:var(--sea-deep); }
+  .pm-privacy-note{ font-size:.78rem; color:var(--ink-soft); margin-top:14px; }
 </style>
 
 <div id="pwGate" hidden>
@@ -506,6 +563,7 @@
       <a href="#tides">물때·바다날씨</a>
       <a href="#safety">안전·법규</a>
       <a href="#learn">배우기</a>
+      <a href="#postmaker">인증샷·SNS 문구</a>
       <a href="#glossary">용어사전</a>
       <a href="#sources">출처</a>
     </div>
@@ -527,6 +585,7 @@
         <li><a href="#tides">물때 캘린더 · 바다날씨</a></li>
         <li><a href="#safety">안전 수칙 &amp; 법규</a></li>
         <li><a href="#learn">배우고 나누기</a></li>
+        <li><a href="#postmaker">인증샷 편집 · SNS 문구 생성</a></li>
         <li><a href="#glossary">용어사전</a></li>
         <li><a href="#sources">출처 모음</a></li>
       </ul>
@@ -2644,6 +2703,97 @@
         </ul>
       </section>
 
+      <!-- ============ POST MAKER ============ -->
+      <section class="section" id="postmaker">
+        <span class="part-no">TOOL</span>
+        <h2>인증샷 편집 &amp; SNS 문구 생성</h2>
+        <p class="kicker">낚시·해루질·다이빙·갯벌 체험에서 찍은 사진을 올리면 정보 배너를 입혀 바로 다운로드하고, 인스타그램 캡션·유튜브 제목까지 자동으로 만들어 드립니다. 사진은 서버로 전송되지 않고 <b>이 브라우저 안에서만</b> 처리됩니다.</p>
+
+        <div class="pm-tool">
+          <div class="pm-upload" id="pmDrop">
+            <input type="file" id="pmFile" accept="image/*" hidden>
+            <label for="pmFile" class="pm-upload-label" id="pmUploadLabel">
+              <span class="pm-upload-icon">📷</span>
+              <span><b>사진을 선택</b>하거나 여기로 끌어다 놓으세요</span>
+              <span class="pm-upload-sub">JPG·PNG · 브라우저에서만 처리(업로드 없음) · 다시 선택하면 새 사진으로 교체</span>
+            </label>
+          </div>
+
+          <div class="pm-editor" id="pmEditor" hidden>
+            <div class="pm-canvas-wrap">
+              <canvas id="pmCanvas"></canvas>
+            </div>
+
+            <div class="pm-controls">
+              <div class="pm-field-group">
+                <h4>정보 배너</h4>
+                <div class="pm-field"><label for="pmSpecies">어종 · 대상 (크기 포함 가능)</label><input type="text" id="pmSpecies" placeholder="예: 감성돔 42cm"></div>
+                <div class="pm-field"><label for="pmPlace">장소</label><input type="text" id="pmPlace" placeholder="예: 여수 거문도"></div>
+                <div class="pm-field-row">
+                  <div class="pm-field" style="flex:1;margin-bottom:0;"><label for="pmDate2">날짜</label><input type="date" id="pmDate2"></div>
+                  <div class="pm-field" style="flex:1;margin-bottom:0;"><label for="pmMethod">방법</label>
+                    <select id="pmMethod">
+                      <option value="">선택 안 함</option>
+                      <option>찌낚시</option><option>루어낚시</option><option>원투낚시</option><option>지깅</option><option>배낚시</option>
+                      <option>해루질</option><option>다이빙</option><option>갯벌 체험</option><option>민물낚시</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pm-field-row" style="margin-top:8px;">
+                  <label><input type="checkbox" id="pmShowBanner" checked> 배너 표시</label>
+                  <label>위치
+                    <select id="pmBannerPos"><option value="bottom">하단</option><option value="top">상단</option></select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pm-field-group">
+                <h4>보정</h4>
+                <div class="pm-filters" id="pmFilters">
+                  <button type="button" data-filter="none" class="active">원본</button>
+                  <button type="button" data-filter="vivid">선명하게</button>
+                  <button type="button" data-filter="warm">따뜻하게</button>
+                  <button type="button" data-filter="cool">시원하게</button>
+                  <button type="button" data-filter="bw">흑백</button>
+                </div>
+                <div class="pm-slider"><label><span>밝기</span><span id="pmBrightVal">100%</span></label><input type="range" id="pmBright" min="60" max="140" value="100"></div>
+                <div class="pm-slider"><label><span>대비</span><span id="pmContrastVal">100%</span></label><input type="range" id="pmContrast" min="60" max="160" value="100"></div>
+                <div class="pm-slider"><label><span>채도</span><span id="pmSatVal">100%</span></label><input type="range" id="pmSaturate" min="0" max="200" value="100"></div>
+              </div>
+
+              <button type="button" id="pmDownload" class="pm-btn-primary">사진 다운로드 (PNG)</button>
+            </div>
+          </div>
+
+          <div class="pm-caption-group" id="pmCaptionGroup" hidden>
+            <h4>SNS 멘트 생성</h4>
+            <div class="pm-field-row">
+              <select id="pmTone">
+                <option value="fun">재미있게</option>
+                <option value="info">정보성</option>
+                <option value="short">짧고 임팩트있게</option>
+                <option value="brag">자랑 가득</option>
+              </select>
+              <button type="button" id="pmGenerate" class="pm-btn-secondary">문구 생성</button>
+            </div>
+            <div class="pm-caption-output">
+              <div>
+                <label class="pm-out-label" for="pmInstaOut">인스타그램 캡션</label>
+                <textarea id="pmInstaOut" rows="7" readonly placeholder="정보를 입력하고 '문구 생성'을 눌러보세요"></textarea>
+                <button type="button" class="pm-copy-btn" data-target="pmInstaOut">복사</button>
+              </div>
+              <div>
+                <label class="pm-out-label" for="pmYtOut">유튜브 제목 제안</label>
+                <textarea id="pmYtOut" rows="4" readonly></textarea>
+                <button type="button" class="pm-copy-btn" data-target="pmYtOut">복사</button>
+              </div>
+            </div>
+          </div>
+
+          <p class="pm-privacy-note">이 도구는 순수 클라이언트 기능입니다 — 사진과 입력한 정보는 어디로도 전송되지 않고, 탭을 닫으면 사라집니다.</p>
+        </div>
+      </section>
+
       <!-- ============ GLOSSARY ============ -->
       <section class="section" id="glossary">
         <span class="part-no">REFERENCE</span>
@@ -3312,6 +3462,296 @@
 
     renderDetail();
     renderCalendar();
+  }catch(e){}
+})();
+
+(function(){
+  try{
+    var fileInput = document.getElementById('pmFile');
+    var dropZone = document.getElementById('pmDrop');
+    var editor = document.getElementById('pmEditor');
+    var captionGroup = document.getElementById('pmCaptionGroup');
+    var canvas = document.getElementById('pmCanvas');
+    if(!fileInput || !canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    var srcImage = null;
+    var MAX_DIM = 1280;
+
+    var speciesInput = document.getElementById('pmSpecies');
+    var placeInput = document.getElementById('pmPlace');
+    var dateInput2 = document.getElementById('pmDate2');
+    var methodSelect = document.getElementById('pmMethod');
+    var showBanner = document.getElementById('pmShowBanner');
+    var bannerPos = document.getElementById('pmBannerPos');
+
+    var filterButtons = document.querySelectorAll('#pmFilters button');
+    var brightRange = document.getElementById('pmBright');
+    var contrastRange = document.getElementById('pmContrast');
+    var saturateRange = document.getElementById('pmSaturate');
+    var brightVal = document.getElementById('pmBrightVal');
+    var contrastVal = document.getElementById('pmContrastVal');
+    var satVal = document.getElementById('pmSatVal');
+
+    var pmState = { grayscale:0, sepia:0, hue:0 };
+
+    var PRESETS = {
+      none:  { bright:100, contrast:100, saturate:100, grayscale:0, sepia:0, hue:0 },
+      vivid: { bright:104, contrast:118, saturate:135, grayscale:0, sepia:0, hue:0 },
+      warm:  { bright:106, contrast:104, saturate:118, grayscale:0, sepia:18, hue:0 },
+      cool:  { bright:102, contrast:106, saturate:92,  grayscale:0, sepia:0, hue:-8 },
+      bw:    { bright:104, contrast:112, saturate:100, grayscale:100, sepia:0, hue:0 }
+    };
+
+    function buildFilterString(){
+      var extra = '';
+      if(pmState.grayscale) extra += ' grayscale(' + pmState.grayscale + '%)';
+      if(pmState.sepia) extra += ' sepia(' + pmState.sepia + '%)';
+      if(pmState.hue) extra += ' hue-rotate(' + pmState.hue + 'deg)';
+      return 'brightness('+brightRange.value+'%) contrast('+contrastRange.value+'%) saturate('+saturateRange.value+'%)' + extra;
+    }
+
+    function formatDateKr(iso){
+      var p = iso.split('-');
+      return p.length===3 ? (p[0]+'.'+p[1]+'.'+p[2]) : iso;
+    }
+
+    function render(){
+      if(!srcImage) return;
+      var w = srcImage.naturalWidth, h = srcImage.naturalHeight;
+      var scale = Math.min(1, MAX_DIM / Math.max(w,h));
+      var cw = Math.round(w*scale), ch = Math.round(h*scale);
+      canvas.width = cw; canvas.height = ch;
+
+      ctx.save();
+      ctx.filter = buildFilterString();
+      ctx.drawImage(srcImage, 0, 0, cw, ch);
+      ctx.restore();
+      ctx.filter = 'none';
+
+      if(showBanner && showBanner.checked){
+        var speciesTxt = speciesInput.value.trim();
+        var placeTxt = placeInput.value.trim();
+        var methodTxt = methodSelect.value;
+        var dateTxt = dateInput2.value;
+
+        var mainParts = [];
+        if(methodTxt) mainParts.push(methodTxt);
+        if(speciesTxt) mainParts.push(speciesTxt);
+        var mainLine = mainParts.join(' · ');
+
+        var subParts = [];
+        if(placeTxt) subParts.push(placeTxt);
+        if(dateTxt) subParts.push(formatDateKr(dateTxt));
+        var subLine = subParts.join('   ·   ');
+
+        if(mainLine || subLine){
+          var pad = Math.max(14, cw*0.03);
+          var barH = Math.max(56, ch*0.14);
+          var pos = bannerPos.value;
+          var by = pos === 'top' ? 0 : ch - barH;
+          var grad = ctx.createLinearGradient(0, by, 0, by+barH);
+          if(pos === 'top'){
+            grad.addColorStop(0, 'rgba(6,20,26,0.80)');
+            grad.addColorStop(1, 'rgba(6,20,26,0)');
+          } else {
+            grad.addColorStop(0, 'rgba(6,20,26,0)');
+            grad.addColorStop(1, 'rgba(6,20,26,0.82)');
+          }
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, by, cw, barH);
+
+          var mainSize = Math.max(16, Math.round(cw*0.032));
+          var subSize = Math.max(11, Math.round(cw*0.02));
+          var mainY = pos==='top' ? pad+mainSize : ch - pad - (subLine? subSize+8 : 0);
+          var subY = pos==='top' ? mainY + subSize + 8 : ch - pad;
+
+          if(mainLine){
+            ctx.font = '700 '+mainSize+'px "Noto Sans KR", sans-serif';
+            ctx.fillStyle = '#fff';
+            ctx.fillText(mainLine, pad, mainY);
+          }
+          if(subLine){
+            ctx.font = '400 '+subSize+'px "IBM Plex Mono", monospace';
+            ctx.fillStyle = 'rgba(255,255,255,0.88)';
+            ctx.fillText(subLine, pad, subY);
+          }
+        }
+      }
+    }
+
+    function loadFile(file){
+      if(!file || !/^image\//.test(file.type)) return;
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var img = new Image();
+        img.onload = function(){
+          srcImage = img;
+          editor.hidden = false;
+          captionGroup.hidden = false;
+          if(document.fonts && document.fonts.ready){ document.fonts.ready.then(render); }
+          render();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+    });
+
+    if(dropZone){
+      ['dragover','dragenter'].forEach(function(ev){
+        dropZone.addEventListener(ev, function(e){ e.preventDefault(); dropZone.classList.add('dragover'); });
+      });
+      ['dragleave','drop'].forEach(function(ev){
+        dropZone.addEventListener(ev, function(e){ e.preventDefault(); dropZone.classList.remove('dragover'); });
+      });
+      dropZone.addEventListener('drop', function(e){
+        if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+      });
+    }
+
+    Array.prototype.forEach.call(filterButtons, function(btn){
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(filterButtons, function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var p = PRESETS[btn.getAttribute('data-filter')] || PRESETS.none;
+        brightRange.value = p.bright; contrastRange.value = p.contrast; saturateRange.value = p.saturate;
+        pmState.grayscale = p.grayscale; pmState.sepia = p.sepia; pmState.hue = p.hue;
+        brightVal.textContent = p.bright+'%'; contrastVal.textContent = p.contrast+'%'; satVal.textContent = p.saturate+'%';
+        render();
+      });
+    });
+
+    [brightRange, contrastRange, saturateRange].forEach(function(r){
+      r.addEventListener('input', function(){
+        brightVal.textContent = brightRange.value+'%';
+        contrastVal.textContent = contrastRange.value+'%';
+        satVal.textContent = saturateRange.value+'%';
+        render();
+      });
+    });
+
+    [speciesInput, placeInput, dateInput2, methodSelect, showBanner, bannerPos].forEach(function(el){
+      el.addEventListener('input', render);
+      el.addEventListener('change', render);
+    });
+
+    var downloadBtn = document.getElementById('pmDownload');
+    if(downloadBtn){
+      downloadBtn.addEventListener('click', function(){
+        if(!srcImage) return;
+        render();
+        canvas.toBlob(function(blob){
+          if(!blob) return;
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'catch-' + (dateInput2.value || 'photo') + '.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+        }, 'image/png');
+      });
+    }
+
+    /* ---- SNS caption generator ---- */
+    var speciesRows = Array.prototype.slice.call(document.querySelectorAll('#speciesTable tbody tr'));
+    function lookupSeason(name){
+      var key = (name||'').replace(/[0-9]+\s*cm/i,'').trim();
+      if(!key) return '';
+      for(var i=0;i<speciesRows.length;i++){
+        var nameCell = speciesRows[i].children[1];
+        if(!nameCell) continue;
+        var rowName = nameCell.textContent.replace(/\(.+?\)/g,'').trim();
+        if(rowName && (key.indexOf(rowName)!==-1 || rowName.indexOf(key)!==-1)){
+          var seasonCell = speciesRows[i].children[4];
+          return seasonCell ? seasonCell.textContent.trim() : '';
+        }
+      }
+      return '';
+    }
+
+    var METHOD_TAGS = {
+      '찌낚시': ['낚시스타그램','갯바위낚시','찌낚시','주말낚시'],
+      '루어낚시': ['루어낚시','락피싱','에깅','낚시스타그램'],
+      '원투낚시': ['원투낚시','방파제낚시','낚시스타그램'],
+      '지깅': ['지깅','메탈지그','낚시스타그램'],
+      '배낚시': ['배낚시','선상낚시','낚시투어'],
+      '해루질': ['해루질','갯벌','야행성','헤드랜턴'],
+      '다이빙': ['다이빙','프리다이빙','스쿠버다이빙','바닷속'],
+      '갯벌 체험': ['갯벌체험','조개캐기','갯벌'],
+      '민물낚시': ['민물낚시','붕어낚시','저수지낚시']
+    };
+
+    function genCaption(){
+      var species = speciesInput.value.trim();
+      var place = placeInput.value.trim();
+      var method = methodSelect.value;
+      var dateTxt = dateInput2.value ? formatDateKr(dateInput2.value) : '';
+      var toneSel = document.getElementById('pmTone');
+      var tone = toneSel ? toneSel.value : 'fun';
+      var season = lookupSeason(species);
+      var speciesClean = species.replace(/[0-9]+\s*cm/i,'').trim();
+
+      var subjectLabel = species || (method || '오늘의 조과');
+      var placeLabel = place || '바다';
+
+      var openers = {
+        fun:   subjectLabel + ' 만나러 ' + placeLabel + ' 다녀왔어요 🌊',
+        info:  placeLabel + '에서 ' + (method ? method + '으로 ' : '') + subjectLabel + ' 기록.',
+        short: subjectLabel + ' · ' + placeLabel,
+        brag:  '오늘 ' + placeLabel + '에서 사고쳤습니다 😎 ' + subjectLabel
+      };
+
+      var lines = [ openers[tone] || openers.fun ];
+      if(tone !== 'short'){
+        if(method) lines.push('방법: ' + method);
+        if(dateTxt) lines.push('날짜: ' + dateTxt);
+        if(season) lines.push('제철 정보: ' + (speciesClean || '이 녀석') + '은 ' + season + '이 맛있는 시기래요.');
+        if(tone === 'fun') lines.push('다음엔 더 큰 녀석으로 돌아올게요 🎣');
+        if(tone === 'brag') lines.push('부럽죠? 😏 다음 출조도 기대해주세요.');
+      }
+
+      var tags = [];
+      if(speciesClean) tags.push(speciesClean.replace(/\s+/g,''));
+      tags = tags.concat(method && METHOD_TAGS[method] ? METHOD_TAGS[method] : ['낚시스타그램']);
+      tags.push('갯것대백과');
+      var tagLine = tags.filter(Boolean).map(function(t){ return '#'+t; }).join(' ');
+
+      var instaOut = document.getElementById('pmInstaOut');
+      var ytOut = document.getElementById('pmYtOut');
+      if(instaOut) instaOut.value = lines.join('\n') + '\n\n' + tagLine;
+      if(ytOut){
+        var ytPrefix = method ? '['+method+'] ' : '';
+        ytOut.value = ytPrefix + placeLabel + '에서 ' + subjectLabel + (tone==='brag' ? ' 잡은 후기 (feat. 자랑)' : ' 만난 이야기');
+      }
+    }
+
+    var genBtn = document.getElementById('pmGenerate');
+    if(genBtn) genBtn.addEventListener('click', genCaption);
+
+    Array.prototype.forEach.call(document.querySelectorAll('.pm-copy-btn'), function(btn){
+      btn.addEventListener('click', function(){
+        var ta = document.getElementById(btn.getAttribute('data-target'));
+        if(!ta || !ta.value) return;
+        var done = function(){
+          btn.textContent = '복사됨!';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = '복사'; btn.classList.remove('copied'); }, 1500);
+        };
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(ta.value).then(done).catch(function(){
+            ta.select(); try{ document.execCommand('copy'); }catch(e2){} done();
+          });
+        } else {
+          ta.select(); try{ document.execCommand('copy'); }catch(e3){} done();
+        }
+      });
+    });
   }catch(e){}
 })();
 </script>
