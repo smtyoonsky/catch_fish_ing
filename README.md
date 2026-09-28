@@ -109,6 +109,7 @@
 | species-crucian.jpg | Etrusko25 | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Carassius_auratus_Italy.jpg) |
 | species-mirrorcarp.jpg | Sam Stukel / USFWS | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Common_Carp_(Cyprinus_carpio)_Mirror_Variety.jpg) |
 | hazard-catfishball.jpg | Jens Petersen | CC BY 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Catfish_ball.jpg) |
+| type-rockshore.jpg | Thomas Lefebvre | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Fishing_on_the_rocky_shore_(Unsplash).jpg) |
 
 일부 사진은 한국에서 촬영된 정확히 같은 활동/종의 사진을 Commons에서 찾지 못해, 같은 종·근연종의 해외 사진으로 대체했습니다(페이지 캡션에 "근연종"·"해외 사례"로 표시).
 
