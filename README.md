@@ -124,6 +124,7 @@
 | species-meonggae.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Halocynthia_roretzi_Uminomori.jpg) |
 | species-gunso.jpg | Izuzuki Diver | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Aplysia_kurodai.jpg) |
 | species-miyeok.jpg | CSIRO | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_952_Undaria_pinnatifida_Japanese_kelp.jpg) |
+| place-myodo.jpg | Steve46814 | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Yi_Sun-sin_Bridge_18-04174.jpg) |
 | place-beomseom.jpg | Alex Brown | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Beomseom_Island.jpg) |
 | place-ulleungdo.jpg | KOCIS/Korea.net | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:KOCIS_Ulleungdo,_or_Ulleung_Island_(4925987614).jpg) |
 | place-oryukdo.jpg | Choi2451 | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Oryukdo_Skywalk_in_Busan,_South_Korea.jpg) |
