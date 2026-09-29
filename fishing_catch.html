@@ -358,8 +358,9 @@
   .tackle-card h4{ font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:1.02rem; margin:0 0 10px; color:var(--sea-deep); display:flex; align-items:center; gap:8px; }
   :root[data-theme="dark"] .tackle-card h4{ color:var(--ink); }
   @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tackle-card h4{ color:var(--ink); } }
-  .tackle-card table{ min-width:0; font-size:.82rem; }
-  .tackle-card td:first-child{ white-space:nowrap; color:var(--ink-soft); font-weight:600; width:30%; }
+  .tackle-card table{ min-width:0; width:100%; table-layout:fixed; font-size:.82rem; }
+  .tackle-card td:first-child{ color:var(--ink-soft); font-weight:600; width:30%; word-break:keep-all; }
+  .tackle-card td{ overflow-wrap:break-word; }
   .tackle-card .tip{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:.83rem; }
   .tackle-card .tip b{ color:var(--amber); }
   .tackle-filter{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
