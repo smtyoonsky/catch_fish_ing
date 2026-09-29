@@ -522,6 +522,80 @@
     0%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
     100%{ transform:translate(var(--pm-dx,0px), var(--pm-dy,120px)) rotate(var(--pm-rot,180deg)) scale(0.7); opacity:0; }
   }
+
+  /* ---------- Checklist ---------- */
+  .checklist-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .checklist-tabs button{
+    font:inherit; font-size:.85rem; padding:8px 14px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink-soft);
+  }
+  .checklist-tabs button.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .checklist-progress{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:18px; }
+  .checklist-progress .gauge-track{ flex:1 1 200px; }
+  .checklist-progress span{ font-size:.82rem; color:var(--ink-soft); white-space:nowrap; }
+  .checklist-group{ margin-bottom:20px; }
+  .checklist-group h4{
+    font-size:.82rem; color:var(--tide); font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase; letter-spacing:.04em; margin:0 0 8px;
+  }
+  .checklist-item{
+    display:flex; align-items:center; gap:10px; padding:9px 4px; border-bottom:1px dashed var(--border);
+    font-size:.92rem; cursor:pointer;
+  }
+  .checklist-item input{ width:17px; height:17px; accent-color:var(--sea); flex-shrink:0; }
+  .checklist-item.checked span{ text-decoration:line-through; color:var(--ink-soft); }
+
+  /* ---------- Knots ---------- */
+  .knot-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-bottom:10px; }
+  .knot-card{ background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow); }
+  .knot-card h4{ margin:0 0 6px; font-size:1rem; color:var(--sea-deep); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  :root[data-theme="dark"] .knot-card h4{ color:var(--ink); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .knot-card h4{ color:var(--ink); } }
+  .knot-use{ font-size:.82rem; color:var(--ink-soft); margin:0 0 12px; }
+  .knot-illust{ width:100%; height:auto; max-height:100px; margin-bottom:12px; display:block; }
+  .knot-step{ display:none; font-size:.89rem; line-height:1.55; min-height:3.3em; }
+  .knot-step.active{ display:block; }
+  .knot-controls{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
+  .knot-progress{ font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--ink-soft); }
+  .knot-controls button:disabled{ opacity:.4; cursor:default; }
+
+  /* ---------- Regcheck ---------- */
+  .regcheck-box{ background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); margin:0 0 20px; }
+  .regcheck-card{ border-radius:10px; padding:14px 16px; margin-top:10px; border:1.5px solid var(--border-strong); background:var(--surface); }
+  .regcheck-card.warn-strict{ border-color:var(--coral); }
+  .regcheck-card h5{ margin:0 0 6px; font-size:1rem; }
+  .regcheck-card .rc-row{ font-size:.85rem; margin:3px 0; color:var(--ink-soft); }
+  .regcheck-card .rc-reg{ font-weight:700; color:var(--ink); }
+  .regcheck-empty{ font-size:.85rem; color:var(--ink-soft); padding:10px 2px; }
+
+  /* ---------- Playground ---------- */
+  .pg-card{ background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); margin:0 0 24px; }
+  .pg-quiz-top{ display:flex; justify-content:space-between; font-size:.82rem; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; margin-bottom:10px; }
+  .pg-quiz-photo-wrap{ border-radius:10px; overflow:hidden; margin-bottom:12px; background:var(--surface); }
+  .pg-quiz-photo-wrap img{ width:100%; height:220px; object-fit:cover; display:block; }
+  .pg-quiz-question{ font-weight:700; margin:0 0 12px; }
+  .pg-quiz-options{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; }
+  .pg-quiz-options button{
+    font:inherit; font-size:.88rem; padding:10px 12px; border-radius:9px; cursor:pointer; text-align:left;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+  }
+  .pg-quiz-options button:hover{ border-color:var(--sea); }
+  .pg-quiz-options button.correct{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .pg-quiz-options button.wrong{ background:var(--coral); color:#fff; border-color:var(--coral); }
+  .pg-quiz-options button:disabled{ cursor:default; }
+  .pg-quiz-feedback{ min-height:1.4em; font-weight:600; margin:12px 0 0; }
+  .pg-quiz-controls{ display:flex; gap:10px; margin-top:10px; }
+  .pg-type-q{ font-weight:700; margin:0 0 12px; }
+  .pg-type-result-title{ font-size:1.3rem; font-weight:700; margin-bottom:8px; }
+  .badge-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+  .badge-item{
+    text-align:center; padding:14px 8px; border-radius:12px; border:1px solid var(--border);
+    background:var(--surface); opacity:.45; filter:grayscale(1);
+  }
+  .badge-item.unlocked{ opacity:1; filter:none; border-color:var(--amber); background:var(--surface-3); }
+  .badge-item .badge-emoji{ font-size:1.8rem; display:block; margin-bottom:6px; }
+  .badge-item .badge-title{ font-size:.8rem; font-weight:700; display:block; margin-bottom:3px; }
+  .badge-item .badge-desc{ font-size:.7rem; color:var(--ink-soft); }
 </style>
 
 <div id="pwGate" hidden>
@@ -585,6 +659,8 @@
       <a href="#diving">03 다이빙</a>
       <a href="#tidalflat">04 갯벌체험</a>
       <a href="#tackle">어종별 채비</a>
+      <a href="#checklist">준비물 체크리스트</a>
+      <a href="#knots">매듭법 가이드</a>
       <a href="#species">어종도감</a>
       <a href="#compare">유사종 구별</a>
       <a href="#handling">손질·보관</a>
@@ -593,6 +669,7 @@
       <a href="#safety">안전·법규</a>
       <a href="#learn">배우기</a>
       <a href="#postmaker">인증샷·SNS 문구</a>
+      <a href="#playground">놀이터</a>
       <a href="#glossary">용어사전</a>
       <a href="#sources">출처</a>
     </div>
@@ -607,6 +684,8 @@
         <li><a href="#diving">03 · 다이빙 &amp; 스피어피싱</a></li>
         <li><a href="#tidalflat">04 · 갯벌 체험</a></li>
         <li><a href="#tackle">어종별 채비 가이드</a></li>
+        <li><a href="#checklist">준비물 체크리스트</a></li>
+        <li><a href="#knots">매듭법 가이드</a></li>
         <li><a href="#species">어종·생물 도감</a></li>
         <li><a href="#compare">헷갈리는 생물 구별</a></li>
         <li><a href="#handling">손질 · 보관 · 식중독 예방</a></li>
@@ -615,6 +694,7 @@
         <li><a href="#safety">안전 수칙 &amp; 법규</a></li>
         <li><a href="#learn">배우고 나누기</a></li>
         <li><a href="#postmaker">인증샷 편집 · SNS 문구 생성</a></li>
+        <li><a href="#playground">놀이터 (퀴즈·테스트·뱃지)</a></li>
         <li><a href="#glossary">용어사전</a></li>
         <li><a href="#sources">출처 모음</a></li>
       </ul>
@@ -1945,11 +2025,124 @@
         </div>
       </section>
 
+      <!-- ============ CHECKLIST ============ -->
+      <section class="section" id="checklist">
+        <span class="part-no">TOOL</span>
+        <h2>출조 준비물 체크리스트</h2>
+        <p class="kicker">활동 유형을 고르면 필요한 채비·미끼·안전장비 목록이 뜹니다. 체크한 내용은 <b>이 브라우저에 저장</b>되어 다음에 다시 열어도 남아있어요.</p>
+
+        <div class="checklist-tabs" id="checklistTabs">
+          <button type="button" class="active" data-type="찌낚시">🎣 찌낚시</button>
+          <button type="button" data-type="원투낚시">🪝 원투낚시</button>
+          <button type="button" data-type="루어낚시">🎯 루어낚시</button>
+          <button type="button" data-type="배낚시">🚤 배낚시</button>
+          <button type="button" data-type="해루질">🔦 해루질</button>
+          <button type="button" data-type="다이빙">🤿 다이빙</button>
+          <button type="button" data-type="갯벌체험">🦀 갯벌체험</button>
+          <button type="button" data-type="민물낚시">🐟 민물낚시</button>
+        </div>
+
+        <div class="checklist-progress">
+          <div class="gauge-track"><div class="gauge-fill" id="checklistProgressFill" style="width:0%"></div></div>
+          <span id="checklistProgressLabel">0 / 0 체크됨</span>
+          <button type="button" id="checklistReset" class="pm-copy-btn">이 목록 초기화</button>
+        </div>
+
+        <div id="checklistBody"></div>
+      </section>
+
+      <!-- ============ KNOTS ============ -->
+      <section class="section" id="knots">
+        <span class="part-no">TOOL</span>
+        <h2>매듭법 가이드</h2>
+        <p class="kicker">현장에서 가장 자주 쓰는 매듭 3가지를 단계별로 정리했습니다. "다음 단계" 버튼을 눌러가며 순서대로 따라 해보세요.</p>
+
+        <div class="knot-grid">
+          <div class="knot-card">
+            <h4>우력매듭(개량 클린치 매듭) <span class="badge easy">쉬움</span></h4>
+            <p class="knot-use">바늘·도래에 줄을 직접 묶을 때 가장 많이 쓰는 기본 매듭</p>
+            <svg class="knot-illust" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="50" r="14" fill="none" stroke="var(--sea-deep)" stroke-width="3"/>
+              <path d="M54 50 Q100 20 150 50 Q170 62 150 74 Q130 86 120 66 Q112 50 128 44" fill="none" stroke="var(--amber)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="150" y1="50" x2="190" y2="50" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="3 3"/>
+            </svg>
+            <div class="knot-steps">
+              <div class="knot-step active">① 바늘(도래) 구멍에 줄 끝을 통과시킵니다.</div>
+              <div class="knot-step">② 통과시킨 줄 끝으로 원줄을 5~7회 감아줍니다.</div>
+              <div class="knot-step">③ 감은 줄 끝을 바늘 바로 위, 첫 번째로 생긴 고리 속으로 통과시킵니다.</div>
+              <div class="knot-step">④ 그 끝을 방금 생긴 큰 고리 속으로 한 번 더 통과시킵니다 — 이 이중 통과가 '개량형'의 핵심입니다.</div>
+              <div class="knot-step">⑤ 매듭 부분을 침으로 살짝 적신 뒤(마찰열 방지) 원줄과 짧은 끝을 양쪽에서 천천히 당겨 조입니다.</div>
+              <div class="knot-step">⑥ 감은 부분이 나선형으로 가지런히 조여지면 완성 — 자투리 줄은 매듭에 바짝 붙여 잘라냅니다.</div>
+            </div>
+            <div class="knot-controls">
+              <button type="button" class="knot-prev pm-copy-btn">‹ 이전</button>
+              <span class="knot-progress">1 / 6</span>
+              <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
+            </div>
+          </div>
+
+          <div class="knot-card">
+            <h4>더블 유니 노트 <span class="badge mid">보통</span></h4>
+            <p class="knot-use">굵기가 다른 원줄(합사)과 쇼크리더(카본)를 연결할 때 표준으로 쓰는 매듭</p>
+            <svg class="knot-illust" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+              <line x1="10" y1="50" x2="80" y2="50" stroke="var(--sea)" stroke-width="3"/>
+              <circle cx="95" cy="50" r="16" fill="none" stroke="var(--sea-deep)" stroke-width="3"/>
+              <circle cx="125" cy="50" r="16" fill="none" stroke="var(--amber)" stroke-width="3"/>
+              <line x1="141" y1="50" x2="190" y2="50" stroke="var(--coral)" stroke-width="3"/>
+            </svg>
+            <div class="knot-steps">
+              <div class="knot-step active">① 원줄(합사)과 목줄(쇼크리더) 끝을 5~10cm 겹쳐 나란히 놓습니다.</div>
+              <div class="knot-step">② 원줄 끝으로 겹친 두 줄을 고리 모양으로 3~5회 감아 돕니다.</div>
+              <div class="knot-step">③ 감은 원줄 끝을 살짝만 조여 첫 번째 매듭을 느슨하게 고정합니다(아직 완전히 조이지 않음).</div>
+              <div class="knot-step">④ 반대로 목줄 끝으로 같은 방식으로 두 줄을 3~5회 감아 돕니다.</div>
+              <div class="knot-step">⑤ 양쪽 매듭을 침으로 적신 뒤 각각 살살 조입니다.</div>
+              <div class="knot-step">⑥ 원줄과 목줄을 양쪽에서 서서히 당겨 두 매듭을 서로 밀착시킵니다.</div>
+              <div class="knot-step">⑦ 완전히 조여지면 자투리를 매듭에 붙여 자릅니다 — 만나는 지점이 매끈해야 가이드에 잘 걸리지 않습니다.</div>
+            </div>
+            <div class="knot-controls">
+              <button type="button" class="knot-prev pm-copy-btn">‹ 이전</button>
+              <span class="knot-progress">1 / 7</span>
+              <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
+            </div>
+          </div>
+
+          <div class="knot-card">
+            <h4>8자 매듭 루프(고리) <span class="badge easy">쉬움</span></h4>
+            <p class="knot-use">도래 없이 채비를 고리로 바로 연결하고 싶을 때 쓰는 매듭</p>
+            <svg class="knot-illust" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+              <line x1="10" y1="50" x2="70" y2="50" stroke="var(--sea)" stroke-width="3"/>
+              <path d="M70 50 Q100 15 130 50 Q150 72 120 78 Q95 82 100 58 Q104 40 130 42" fill="none" stroke="var(--sea-deep)" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <div class="knot-steps">
+              <div class="knot-step active">① 줄 끝에서 20~25cm 정도를 남기고 두 줄을 겹쳐 큰 고리를 만듭니다.</div>
+              <div class="knot-step">② 겹친 두 줄로 숫자 8을 그리듯 한 번 꼬아줍니다 — 오버핸드 매듭보다 한 번 더 꼬는 것이 핵심입니다.</div>
+              <div class="knot-step">③ 만들어진 고리 속으로 줄 끝(겹친 두 줄 다발)을 통과시킵니다.</div>
+              <div class="knot-step">④ 침으로 적신 뒤 네 줄 가닥을 고르게 당겨 천천히 조입니다.</div>
+              <div class="knot-step">⑤ 원하는 고리 크기가 나올 때까지 위치를 조절한 뒤 완전히 조입니다.</div>
+            </div>
+            <div class="knot-controls">
+              <button type="button" class="knot-prev pm-copy-btn">‹ 이전</button>
+              <span class="knot-progress">1 / 5</span>
+              <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:.82rem;color:var(--ink-soft);">※ 그림은 매듭의 개념을 보여주는 간단한 도식이며, 실제 낚싯줄 형태를 정밀 재현한 것은 아닙니다. 처음이라면 굵은 끈으로 먼저 연습해보는 것을 추천합니다.</p>
+      </section>
+
       <!-- ============ SPECIES ============ -->
       <section class="section" id="species">
         <span class="part-no">GUIDE</span>
         <h2>어종 · 생물 도감</h2>
         <p class="kicker">낚시·해루질·다이빙·갯벌에서 만나는 대표 해양생물 60종. 금어기·금지체장은 매년 고시가 바뀌므로 <a href="https://www.mof.go.kr" target="_blank" rel="noopener">해양수산부</a>·<a href="https://www.nifs.go.kr" target="_blank" rel="noopener">국립수산과학원</a> 최신 공지를 반드시 재확인하세요.</p>
+
+        <div class="regcheck-box" id="regcheckBox">
+          <h3 style="margin-top:0;">🔍 어종별 금어기·방생기준 즉석 조회</h3>
+          <div class="search-box" style="margin-bottom:0;">
+            <input type="search" id="regcheckInput" placeholder="어종 이름을 입력해보세요 (예: 감성돔, 전복, 대게)" aria-label="금어기 조회">
+          </div>
+          <div id="regcheckResult"></div>
+        </div>
 
         <div class="photo-grid">
           <figure class="photo">
@@ -2964,6 +3157,61 @@
         </div>
       </section>
 
+      <!-- ============ PLAYGROUND ============ -->
+      <section class="section" id="playground">
+        <span class="part-no">TOOL</span>
+        <h2>놀이터</h2>
+        <p class="kicker">퀴즈·성향 테스트·뱃지까지, 재미로 즐기는 코너입니다. 점수·뱃지는 <b>이 브라우저에만</b> 저장됩니다.</p>
+
+        <h3>🐟 어종 맞추기 퀴즈</h3>
+        <div class="pg-card" id="pgQuizCard">
+          <div class="pg-quiz-top">
+            <span id="pgQuizProgress">문제 1 / 8</span>
+            <span id="pgQuizScore">점수 0</span>
+          </div>
+          <div class="pg-quiz-photo-wrap">
+            <img id="pgQuizPhoto" alt="퀴즈 사진" loading="lazy">
+          </div>
+          <p class="pg-quiz-question">이 생물의 이름은 무엇일까요?</p>
+          <div class="pg-quiz-options" id="pgQuizOptions"></div>
+          <p class="pg-quiz-feedback" id="pgQuizFeedback"></p>
+          <div class="pg-quiz-controls">
+            <button type="button" id="pgQuizNext" class="pm-btn-secondary" hidden>다음 문제 ›</button>
+            <button type="button" id="pgQuizRestart" class="pm-copy-btn" hidden>처음부터 다시</button>
+          </div>
+        </div>
+
+        <h3>🧭 나는 어떤 낚시꾼 타입?</h3>
+        <div class="pg-card" id="pgTypeCard">
+          <div id="pgTypeQuestion">
+            <span id="pgTypeProgress">질문 1 / 6</span>
+            <p class="pg-type-q" id="pgTypeQText"></p>
+            <div class="pg-quiz-options" id="pgTypeOptions"></div>
+          </div>
+          <div id="pgTypeResult" hidden>
+            <div class="pg-type-result-title" id="pgTypeResultTitle"></div>
+            <p id="pgTypeResultDesc"></p>
+            <button type="button" id="pgTypeRestart" class="pm-copy-btn">다시 테스트하기</button>
+          </div>
+        </div>
+
+        <h3>🌊 오늘의 조황 확률 <span class="badge easy" style="vertical-align:middle;">재미용</span></h3>
+        <div class="pg-card">
+          <p style="font-size:.84rem;color:var(--ink-soft);margin-top:0;">오늘 날짜의 물때 세기에 약간의 운을 더한 <b>재미용 지수</b>입니다 — 과학적 예측이 아니니 참고만 해주세요.</p>
+          <div class="pm-field-row">
+            <input type="text" id="pgLuckSpecies" placeholder="대상 어종 (예: 감성돔)" style="flex:1;min-width:160px;font:inherit;padding:8px 10px;border-radius:9px;border:1px solid var(--border-strong);background:var(--surface);color:var(--ink);">
+            <button type="button" id="pgLuckBtn" class="pm-btn-secondary">확률 뽑기</button>
+          </div>
+          <div id="pgLuckResult"></div>
+        </div>
+
+        <h3>🏅 내 뱃지</h3>
+        <div class="pg-card">
+          <p style="font-size:.84rem;color:var(--ink-soft);margin-top:0;">사이트를 둘러보고 도구를 써보면서 뱃지를 모아보세요.</p>
+          <div class="badge-grid" id="badgeGrid"></div>
+        </div>
+      </section>
+
       <!-- ============ GLOSSARY ============ -->
       <section class="section" id="glossary">
         <span class="part-no">REFERENCE</span>
@@ -3910,6 +4158,7 @@
             var r = downloadBtn.getBoundingClientRect();
             window.__pmCelebrate(r.left + r.width/2, r.top);
           }
+          if(window.__ggUnlockBadge) window.__ggUnlockBadge('postmaker_photo');
         }, 'image/png');
       });
     }
@@ -3932,6 +4181,7 @@
                 var r = shareBtn.getBoundingClientRect();
                 window.__pmCelebrate(r.left + r.width/2, r.top);
               }
+              if(window.__ggUnlockBadge) window.__ggUnlockBadge('postmaker_photo');
             }).catch(function(){ /* 사용자가 공유를 취소한 경우 등 — 조용히 무시 */ });
           } else {
             var url = URL.createObjectURL(blob);
@@ -4084,6 +4334,7 @@
           var r = fortuneBtn.getBoundingClientRect();
           window.__pmCelebrate(r.left + r.width/2, r.top, 8);
         }
+        if(window.__ggUnlockBadge) window.__ggUnlockBadge('fortune_teller');
       });
     }
     if(fortuneAddBtn){
@@ -4272,6 +4523,7 @@
             var r = exportBtn.getBoundingClientRect();
             window.__pmCelebrate(r.left + r.width/2, r.top, 18);
           }
+          if(window.__ggUnlockBadge) window.__ggUnlockBadge('postmaker_video');
         };
 
         var intervalId = null;
@@ -4319,6 +4571,530 @@
         };
       });
     }
+  }catch(e){}
+})();
+
+/* ---------- Badges (shared across tools) ---------- */
+(function(){
+  try{
+    var BADGES = [
+      {id:'first_visit', emoji:'👋', title:'첫 방문', desc:'갯것 대백과에 오신 것을 환영합니다'},
+      {id:'night_owl', emoji:'🌙', title:'심야 방문자', desc:'자정~새벽 4시 사이에 접속'},
+      {id:'postmaker_photo', emoji:'📸', title:'인증샷 제작자', desc:'인증샷 편집 도구로 사진을 완성'},
+      {id:'postmaker_video', emoji:'🎬', title:'영상 편집자', desc:'영상 구간 내보내기를 완료'},
+      {id:'fortune_teller', emoji:'🔮', title:'운세러', desc:'오늘의 조황운세를 뽑아봄'},
+      {id:'checklist_complete', emoji:'✅', title:'준비왕', desc:'체크리스트 하나를 100% 완료'},
+      {id:'species_explorer', emoji:'🔍', title:'도감 탐험가', desc:'금어기 조회기를 여러 번 사용'},
+      {id:'quiz_master', emoji:'🐟', title:'퀴즈왕', desc:'어종 맞추기 퀴즈에서 6문제 이상 정답'},
+      {id:'type_test', emoji:'🧭', title:'자아 탐구', desc:'낚시꾼 유형 테스트를 완료'},
+      {id:'luck_index', emoji:'🌊', title:'오늘의 운세', desc:'조황 확률을 뽑아봄'}
+    ];
+
+    function loadBadges(){
+      try{ return JSON.parse(localStorage.getItem('gg_badges') || '{}'); }catch(e){ return {}; }
+    }
+    function saveBadges(b){
+      try{ localStorage.setItem('gg_badges', JSON.stringify(b)); }catch(e){}
+    }
+
+    function renderBadges(){
+      var grid = document.getElementById('badgeGrid');
+      if(!grid) return;
+      var b = loadBadges();
+      grid.innerHTML = BADGES.map(function(bd){
+        var unlocked = !!b[bd.id];
+        return '<div class="badge-item' + (unlocked ? ' unlocked' : '') + '">' +
+          '<span class="badge-emoji">' + (unlocked ? bd.emoji : '🔒') + '</span>' +
+          '<span class="badge-title">' + bd.title + '</span>' +
+          '<span class="badge-desc">' + bd.desc + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    window.__ggUnlockBadge = function(id){
+      var b = loadBadges();
+      if(!b[id]){
+        b[id] = Date.now();
+        saveBadges(b);
+      }
+      renderBadges();
+    };
+
+    renderBadges();
+    window.__ggUnlockBadge('first_visit');
+    var hour = new Date().getHours();
+    if(hour >= 0 && hour < 4){ window.__ggUnlockBadge('night_owl'); }
+  }catch(e){}
+})();
+
+/* ---------- Checklist ---------- */
+(function(){
+  try{
+    var CHECKLIST_DATA = {
+      '찌낚시': { groups: {
+        '로드·릴·채비': ['찌낚시 전용대(1.5~2호)', '스피닝릴 2500~3000번', '원줄·목줄', '구멍찌 세트', '밑밥·밑밥통·주걱'],
+        '미끼': ['크릴(냉동/생)', '깐새우·게(보조미끼)'],
+        '안전·편의': ['구명조끼', '스파이크화', '편광안경', '뜰채', '쿨러백']
+      }},
+      '원투낚시': { groups: {
+        '로드·릴·채비': ['원투낚싯대', '스피닝릴(중형)', '봉돌 세트', '카드채비'],
+        '미끼': ['청갯지렁이·참갯지렁이'],
+        '안전·편의': ['원투 받침대', '헤드랜턴(야간)', '구명조끼', '릴리스 가위']
+      }},
+      '루어낚시': { groups: {
+        '로드·릴·채비': ['루어 전용대', '스피닝/베이트릴', 'PE라인+쇼크리더', '지그헤드·웜·미노우'],
+        '기타': ['플라이어(바늘 빼기용)', '편광안경'],
+        '안전·편의': ['구명조끼', '워킹화(미끄럼방지)']
+      }},
+      '배낚시': { groups: {
+        '장비': ['선상 전용대', '베이트릴', '개인 채비함'],
+        '컨디션 관리': ['멀미약(승선 1시간 전 복용)', '여벌옷', '방수 장갑'],
+        '안전·편의': ['구명조끼(선내 비치 확인)', '아이스박스', '미끄럼방지 신발']
+      }},
+      '해루질': { groups: {
+        '필수 장비': ['방수 헤드랜턴 + 예비등', '구명조끼', '미끄럼 방지 장화'],
+        '채집 도구': ['외갈고리(날 1개, 합법 규격)', '호미·조개갈퀴', '망태기·채집통'],
+        '안전': ['코팅 작업장갑', '방수팩·호루라기', '동행자(2인 이상)']
+      }},
+      '다이빙': { groups: {
+        '기본 장비': ['마스크·스노클·핀', '웨트슈트/드라이슈트', '웨이트벨트'],
+        '스쿠버 전용': ['BCD·레귤레이터·탱크', '다이빙 컴퓨터', '인증 카드(자격증)'],
+        '안전': ['다이빙 보험', '버디(동행 다이버)']
+      }},
+      '갯벌체험': { groups: {
+        '채집 도구': ['호미·그레(갈퀴)', '채집통·양파망', '굵은 소금(맛조개용)'],
+        '안전·편의': ['장화·장갑', '모자·선크림', '여벌옷']
+      }},
+      '민물낚시': { groups: {
+        '로드·릴·채비': ['민물 카본대(릴 없음/있음)', '찌·봉돌 세트', '바늘'],
+        '미끼': ['지렁이', '글루텐·떡밥', '옥수수'],
+        '안전·편의': ['좌대·의자', '파라솔', '구명조끼(선상·보트 낚시 시)']
+      }}
+    };
+
+    var tabsEl = document.getElementById('checklistTabs');
+    var bodyEl = document.getElementById('checklistBody');
+    var fillEl = document.getElementById('checklistProgressFill');
+    var labelEl = document.getElementById('checklistProgressLabel');
+    var resetBtn = document.getElementById('checklistReset');
+    if(!tabsEl || !bodyEl) return;
+
+    var currentType = '찌낚시';
+
+    function storageKey(type){ return 'gg_checklist_' + type; }
+    function loadChecked(type){
+      try{ return JSON.parse(localStorage.getItem(storageKey(type)) || '{}'); }catch(e){ return {}; }
+    }
+    function saveChecked(type, state){
+      try{ localStorage.setItem(storageKey(type), JSON.stringify(state)); }catch(e){}
+    }
+
+    function updateProgress(total, checkedCount){
+      var pct = total ? Math.round(checkedCount/total*100) : 0;
+      if(fillEl) fillEl.style.width = pct + '%';
+      if(labelEl) labelEl.textContent = checkedCount + ' / ' + total + ' 체크됨';
+      if(total > 0 && checkedCount === total && window.__ggUnlockBadge){
+        window.__ggUnlockBadge('checklist_complete');
+      }
+    }
+
+    function render(type){
+      var data = CHECKLIST_DATA[type];
+      if(!data) return;
+      var checkedState = loadChecked(type);
+      var html = '';
+      var total = 0, checkedCount = 0;
+      Object.keys(data.groups).forEach(function(groupName){
+        html += '<div class="checklist-group"><h4>' + groupName + '</h4>';
+        data.groups[groupName].forEach(function(item){
+          var checked = !!checkedState[item];
+          total++; if(checked) checkedCount++;
+          html += '<label class="checklist-item' + (checked ? ' checked' : '') + '" data-item="' + encodeURIComponent(item) + '">' +
+                    '<input type="checkbox"' + (checked ? ' checked' : '') + '>' +
+                    '<span>' + item + '</span></label>';
+        });
+        html += '</div>';
+      });
+      bodyEl.innerHTML = html;
+      updateProgress(total, checkedCount);
+
+      Array.prototype.forEach.call(bodyEl.querySelectorAll('.checklist-item'), function(row){
+        var cb = row.querySelector('input');
+        cb.addEventListener('change', function(){
+          var item = decodeURIComponent(row.getAttribute('data-item'));
+          var state = loadChecked(type);
+          if(cb.checked) state[item] = true; else delete state[item];
+          saveChecked(type, state);
+          row.classList.toggle('checked', cb.checked);
+          var allBoxes = bodyEl.querySelectorAll('.checklist-item input');
+          var t = 0, c = 0;
+          Array.prototype.forEach.call(allBoxes, function(x){ t++; if(x.checked) c++; });
+          updateProgress(t, c);
+        });
+      });
+    }
+
+    Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function(btn){
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentType = btn.getAttribute('data-type');
+        render(currentType);
+      });
+    });
+
+    if(resetBtn){
+      resetBtn.addEventListener('click', function(){
+        saveChecked(currentType, {});
+        render(currentType);
+      });
+    }
+
+    render(currentType);
+  }catch(e){}
+})();
+
+/* ---------- Knots ---------- */
+(function(){
+  try{
+    Array.prototype.forEach.call(document.querySelectorAll('.knot-card'), function(card){
+      var steps = Array.prototype.slice.call(card.querySelectorAll('.knot-step'));
+      var total = steps.length;
+      var idx = 0;
+      var progressEl = card.querySelector('.knot-progress');
+      var prevBtn = card.querySelector('.knot-prev');
+      var nextBtn = card.querySelector('.knot-next');
+      function render(){
+        steps.forEach(function(s, i){ s.classList.toggle('active', i === idx); });
+        if(progressEl) progressEl.textContent = (idx + 1) + ' / ' + total;
+        if(prevBtn) prevBtn.disabled = idx === 0;
+        if(nextBtn) nextBtn.disabled = idx === total - 1;
+      }
+      if(prevBtn) prevBtn.addEventListener('click', function(){ if(idx > 0){ idx--; render(); } });
+      if(nextBtn) nextBtn.addEventListener('click', function(){ if(idx < total - 1){ idx++; render(); } });
+      render();
+    });
+  }catch(e){}
+})();
+
+/* ---------- Regcheck (금어기 즉석 조회) ---------- */
+(function(){
+  try{
+    var input = document.getElementById('regcheckInput');
+    var resultEl = document.getElementById('regcheckResult');
+    if(!input || !resultEl) return;
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#speciesTable tbody tr'));
+    var searchCount = 0;
+    try{ searchCount = parseInt(localStorage.getItem('gg_regcheck_count') || '0', 10); }catch(e){}
+
+    function bumpCount(){
+      searchCount++;
+      try{ localStorage.setItem('gg_regcheck_count', String(searchCount)); }catch(e){}
+      if(searchCount >= 5 && window.__ggUnlockBadge){ window.__ggUnlockBadge('species_explorer'); }
+    }
+
+    function search(q){
+      q = q.trim();
+      if(!q){ resultEl.innerHTML = ''; return; }
+      var matches = rows.filter(function(r){
+        var name = r.children[1] ? r.children[1].textContent : '';
+        return name.indexOf(q) !== -1;
+      }).slice(0, 6);
+      if(!matches.length){
+        resultEl.innerHTML = '<p class="regcheck-empty">일치하는 어종이 없습니다. 표준명으로 다시 검색해보세요.</p>';
+        return;
+      }
+      bumpCount();
+      resultEl.innerHTML = matches.map(function(r){
+        var name = r.children[1].textContent;
+        var habitat = r.children[2].textContent;
+        var season = r.children[4].textContent;
+        var method = r.children[5].textContent;
+        var reg = r.children[6].textContent;
+        var strict = reg.indexOf('확인 필요') === -1 && reg.indexOf('없음') === -1 && reg !== '—';
+        return '<div class="regcheck-card' + (strict ? ' warn-strict' : '') + '">' +
+          '<h5>' + name + (strict ? ' ⚠️' : '') + '</h5>' +
+          '<div class="rc-row">서식지: ' + habitat + '</div>' +
+          '<div class="rc-row">🍽 제철: ' + season + '</div>' +
+          '<div class="rc-row">채집법: ' + method + '</div>' +
+          '<div class="rc-row rc-reg">금어기·금지체장: ' + reg + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    var debounceTimer = null;
+    input.addEventListener('input', function(){
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function(){ search(input.value); }, 150);
+    });
+  }catch(e){}
+})();
+
+/* ---------- Playground: species quiz ---------- */
+(function(){
+  try{
+    var QUIZ_BANK = [
+      {name:'감성돔', img:'images/species-blackporgy.jpg'},
+      {name:'참돔', img:'images/species-redseabream.jpg'},
+      {name:'농어', img:'images/species-seabass.jpg'},
+      {name:'광어(넙치)', img:'images/species-flounder.jpg'},
+      {name:'우럭(조피볼락)', img:'images/species-rockfish.jpg'},
+      {name:'볼락', img:'images/species-bolark.jpg'},
+      {name:'갈치', img:'images/species-hairtail.jpg'},
+      {name:'고등어', img:'images/species-mackerel2.jpg'},
+      {name:'삼치', img:'images/species-mackerel.jpg'},
+      {name:'전복', img:'images/species-abalone.jpg'},
+      {name:'소라', img:'images/species-turban.jpg'},
+      {name:'대게', img:'images/species-snowcrab.jpg'},
+      {name:'꽃게', img:'images/species-crab.jpg'},
+      {name:'낙지', img:'images/species-octopus.jpg'},
+      {name:'주꾸미', img:'images/species-webfootoctopus.jpg'},
+      {name:'갑오징어', img:'images/species-cuttlefish.jpg'},
+      {name:'무늬오징어', img:'images/species-bigfinsquid.jpg'},
+      {name:'해삼', img:'images/species-seacucumber.jpg'},
+      {name:'성게', img:'images/species-urchin.jpg'},
+      {name:'굴', img:'images/species-oyster.jpg'},
+      {name:'홍합', img:'images/species-mussel.jpg'},
+      {name:'붕어', img:'images/species-crucian.jpg'},
+      {name:'메기', img:'images/species-megi.jpg'},
+      {name:'쏘가리', img:'images/species-ssogari.jpg'},
+      {name:'대구', img:'images/species-daegu.jpg'},
+      {name:'명태', img:'images/species-myeongtae.jpg'},
+      {name:'멍게(우렁쉥이)', img:'images/species-meonggae.jpg'}
+    ];
+    var TOTAL_Q = 8;
+
+    var photoEl = document.getElementById('pgQuizPhoto');
+    var optionsEl = document.getElementById('pgQuizOptions');
+    var progressEl = document.getElementById('pgQuizProgress');
+    var scoreEl = document.getElementById('pgQuizScore');
+    var feedbackEl = document.getElementById('pgQuizFeedback');
+    var nextBtn = document.getElementById('pgQuizNext');
+    var restartBtn = document.getElementById('pgQuizRestart');
+    if(!photoEl || !optionsEl) return;
+
+    var qIndex = 0, score = 0, order = [], answered = false;
+
+    function shuffle(arr){
+      var a = arr.slice();
+      for(var i = a.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function startQuiz(){
+      qIndex = 0; score = 0; answered = false;
+      order = shuffle(QUIZ_BANK).slice(0, TOTAL_Q);
+      restartBtn.hidden = true;
+      nextBtn.hidden = true;
+      loadQuestion();
+    }
+
+    function loadQuestion(){
+      answered = false;
+      feedbackEl.textContent = '';
+      nextBtn.hidden = true;
+      var correct = order[qIndex];
+      photoEl.src = correct.img;
+      progressEl.textContent = '문제 ' + (qIndex + 1) + ' / ' + order.length;
+      scoreEl.textContent = '점수 ' + score;
+
+      var distractors = shuffle(QUIZ_BANK.filter(function(q){ return q.name !== correct.name; })).slice(0, 3);
+      var choices = shuffle([correct].concat(distractors));
+
+      optionsEl.innerHTML = '';
+      choices.forEach(function(choice){
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = choice.name;
+        btn.addEventListener('click', function(){
+          if(answered) return;
+          answered = true;
+          var isCorrect = choice.name === correct.name;
+          if(isCorrect){ score++; btn.classList.add('correct'); feedbackEl.textContent = '정답! 🎉'; }
+          else {
+            btn.classList.add('wrong');
+            feedbackEl.textContent = '아쉬워요 — 정답은 "' + correct.name + '" 입니다.';
+            Array.prototype.forEach.call(optionsEl.children, function(b){
+              if(b.textContent === correct.name) b.classList.add('correct');
+            });
+          }
+          Array.prototype.forEach.call(optionsEl.children, function(b){ b.disabled = true; });
+          scoreEl.textContent = '점수 ' + score;
+          if(qIndex < order.length - 1){ nextBtn.hidden = false; }
+          else { finishQuiz(); }
+        });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function finishQuiz(){
+      feedbackEl.textContent += '  퀴즈 완료! 최종 점수 ' + score + ' / ' + order.length;
+      restartBtn.hidden = false;
+      if(score >= 6 && window.__ggUnlockBadge){ window.__ggUnlockBadge('quiz_master'); }
+    }
+
+    nextBtn.addEventListener('click', function(){
+      qIndex++;
+      loadQuestion();
+    });
+    restartBtn.addEventListener('click', startQuiz);
+
+    startQuiz();
+  }catch(e){}
+})();
+
+/* ---------- Playground: angler type test ---------- */
+(function(){
+  try{
+    var TYPE_QUIZ = [
+      {q:'낚시 가기 전날 밤, 당신은?', options:[
+        {text:'새 장비를 장바구니에 담아본다', type:'gear'},
+        {text:'파고·풍속 예보를 5번은 새로고침', type:'weather'},
+        {text:'내일 챔질할 생각에 설렌다', type:'feel'},
+        {text:'그냥 잔다, 가서 보면 안다', type:'chill'}
+      ]},
+      {q:'포인트에 도착, 제일 먼저 하는 일은?', options:[
+        {text:'장비를 하나씩 세팅하며 감상한다', type:'gear'},
+        {text:'물때·조류부터 다시 확인한다', type:'weather'},
+        {text:'바로 채비부터 던진다', type:'feel'},
+        {text:'인생샷부터 몇 장 찍는다', type:'photo'}
+      ]},
+      {q:'입질이 왔다! 당신의 반응은?', options:[
+        {text:'챔질 타이밍부터 차분히 계산', type:'feel'},
+        {text:'"왔다!!" 소리부터 지른다', type:'night'},
+        {text:'침착하게 랜딩 각도부터 잡는다', type:'weather'},
+        {text:'일단 사진 찍을 준비부터', type:'photo'}
+      ]},
+      {q:'옆자리 조사님이 대물을 잡았다', options:[
+        {text:'장비 뭐 쓰셨는지부터 물어본다', type:'gear'},
+        {text:'부럽지만 내 페이스를 유지한다', type:'chill'},
+        {text:'질 수 없다, 더 집중한다', type:'feel'},
+        {text:'같이 사진 찍자고 한다', type:'photo'}
+      ]},
+      {q:'가장 좋아하는 출조 시간대는?', options:[
+        {text:'해 지고 나서가 진짜 시작', type:'night'},
+        {text:'물때 딱 맞는 시간, 계산대로', type:'weather'},
+        {text:'언제든 나가면 다 좋다', type:'chill'},
+        {text:'장비 세팅할 여유 있는 이른 아침', type:'gear'}
+      ]},
+      {q:'꽝(조과 없음)인 날, 당신은?', options:[
+        {text:'그래도 풍경 보니 좋았다', type:'chill'},
+        {text:'오늘 채비가 문제였다, 복기 시작', type:'feel'},
+        {text:'다음 장비를 알아보기 시작한다', type:'gear'},
+        {text:'꽝샷도 인증샷이다, 찍어서 올린다', type:'photo'}
+      ]}
+    ];
+    var TYPE_RESULTS = {
+      gear:{title:'🛠️ 장비병 환자', desc:'조과보다 장비가 먼저인 당신. 지갑은 늘 위험하지만 그만큼 준비성 하나는 최고입니다.'},
+      weather:{title:'🌤️ 날씨 예민러', desc:'파고 1cm까지 확인하고 나가는 신중파. 덕분에 안전사고와는 거리가 먼 타입입니다.'},
+      feel:{title:'🐟 손맛 매니아', desc:'챔질의 손맛이 인생의 낙인 타입. 조과보다 그 순간의 짜릿함이 전부입니다.'},
+      chill:{title:'😌 힐링파', desc:'조황보다 풍경과 여유가 목적. 꽝이어도 오늘 하루가 힐링이면 그걸로 만족합니다.'},
+      night:{title:'🌙 밤낚시 귀신', desc:'해가 지고 나서야 진짜 시작이라 믿는 타입. 헤드랜턴이 트레이드마크입니다.'},
+      photo:{title:'📸 인증샷 헌터', desc:'잡자마자 사진 각도부터 고민하는 타입. 이 사이트의 인증샷 편집 도구를 가장 사랑할 사람입니다.'}
+    };
+
+    var qWrap = document.getElementById('pgTypeQuestion');
+    var resultWrap = document.getElementById('pgTypeResult');
+    var progressEl = document.getElementById('pgTypeProgress');
+    var qTextEl = document.getElementById('pgTypeQText');
+    var optionsEl = document.getElementById('pgTypeOptions');
+    var titleEl = document.getElementById('pgTypeResultTitle');
+    var descEl = document.getElementById('pgTypeResultDesc');
+    var restartBtn = document.getElementById('pgTypeRestart');
+    if(!qWrap || !optionsEl) return;
+
+    var idx = 0;
+    var tally = {};
+
+    function start(){
+      idx = 0; tally = {};
+      resultWrap.hidden = true;
+      qWrap.hidden = false;
+      loadQ();
+    }
+
+    function loadQ(){
+      var q = TYPE_QUIZ[idx];
+      progressEl.textContent = '질문 ' + (idx + 1) + ' / ' + TYPE_QUIZ.length;
+      qTextEl.textContent = q.q;
+      optionsEl.innerHTML = '';
+      q.options.forEach(function(opt){
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = opt.text;
+        btn.addEventListener('click', function(){
+          tally[opt.type] = (tally[opt.type] || 0) + 1;
+          idx++;
+          if(idx < TYPE_QUIZ.length){ loadQ(); }
+          else { showResult(); }
+        });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function showResult(){
+      qWrap.hidden = true;
+      resultWrap.hidden = false;
+      var bestType = null, bestCount = -1;
+      Object.keys(tally).forEach(function(t){
+        if(tally[t] > bestCount){ bestCount = tally[t]; bestType = t; }
+      });
+      var r = TYPE_RESULTS[bestType] || TYPE_RESULTS.chill;
+      titleEl.textContent = r.title;
+      descEl.textContent = r.desc;
+      if(window.__ggUnlockBadge) window.__ggUnlockBadge('type_test');
+    }
+
+    restartBtn.addEventListener('click', start);
+    start();
+  }catch(e){}
+})();
+
+/* ---------- Playground: 오늘의 조황 확률 ---------- */
+(function(){
+  try{
+    var speciesInput = document.getElementById('pgLuckSpecies');
+    var btn = document.getElementById('pgLuckBtn');
+    var resultEl = document.getElementById('pgLuckResult');
+    if(!btn || !resultEl) return;
+
+    var NEW_MOON_REF = Date.UTC(2000,0,6,18,14,0);
+    var SYNODIC_DAYS = 29.530588853;
+
+    function todayStrength(){
+      var now = Date.now();
+      var age = ((now - NEW_MOON_REF) / 86400000) % SYNODIC_DAYS;
+      if(age < 0) age += SYNODIC_DAYS;
+      var d = Math.floor(age) + 1;
+      var p = d % 15;
+      var STRENGTH = [85,94,98,100,96,87,64,47,29,14,8,21,39,57,73];
+      return STRENGTH[p];
+    }
+
+    btn.addEventListener('click', function(){
+      var species = speciesInput.value.trim() || '오늘의 대상어';
+      var base = todayStrength();
+      var pct = Math.max(5, Math.min(97, base + Math.round((Math.random() - 0.5) * 30)));
+      var mood, color;
+      if(pct >= 80){ mood = '장비 챙겨서 당장 출발하세요! 🎣'; color = 'var(--sea)'; }
+      else if(pct >= 50){ mood = '가능성 있습니다, 밑밥 승부를 걸어보세요 🌊'; color = 'var(--amber)'; }
+      else { mood = '오늘은 풍경 감상 모드로도 충분해요 🏖️'; color = 'var(--ink-soft)'; }
+
+      resultEl.innerHTML =
+        '<div style="margin-top:14px;padding:16px;border-radius:12px;background:var(--surface);border:1.5px solid ' + color + ';">' +
+          '<div style="font-size:.82rem;color:var(--ink-soft);margin-bottom:4px;">오늘 ' + species + ' 잡힐 확률</div>' +
+          '<div style="font-size:2.2rem;font-weight:800;color:' + color + ';">' + pct + '%</div>' +
+          '<div style="font-size:.88rem;margin-top:4px;">' + mood + '</div>' +
+        '</div>';
+
+      if(window.__pmCelebrate){
+        var r = btn.getBoundingClientRect();
+        window.__pmCelebrate(r.left + r.width / 2, r.top, 10);
+      }
+      if(window.__ggUnlockBadge) window.__ggUnlockBadge('luck_index');
+    });
   }catch(e){}
 })();
 </script>
