@@ -110,6 +110,20 @@
 | species-mirrorcarp.jpg | Sam Stukel / USFWS | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Common_Carp_(Cyprinus_carpio)_Mirror_Variety.jpg) |
 | hazard-catfishball.jpg | Jens Petersen | CC BY 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Catfish_ball.jpg) |
 | type-rockshore.jpg | Thomas Lefebvre | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Fishing_on_the_rocky_shore_(Unsplash).jpg) |
+| species-minu.jpg | Sadopaul | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Miichthys_miiuy_at_Sinan_in_2026_(1).jpg) |
+| species-byeongeo.jpg | Biswarup Ganguly | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Pampus_argenteus_20020400.jpg) |
+| species-chamjogi.jpg | 국립국어원 | CC BY-SA 2.0 KR | [Commons](https://commons.wikimedia.org/wiki/File:Larimichthys_polyactis.jpg) |
+| species-daegu.jpg | David Csepp / NOAA | Public Domain | [Commons](https://commons.wikimedia.org/wiki/File:Pacific_cod_Gadus_macrocephalus.jpg) |
+| species-myeongtae.jpg | Σ64 | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:Gadus_chalcogrammus_01.jpg) |
+| species-yeolgi.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Sebastes_thompsoni_Asamushi4.jpg) |
+| species-jeongaengi.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Trachurus_japonicus.jpg) |
+| species-ssogari.jpg | Gaeho77 | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Siniperca_scherzeri,_Danyang.jpg) |
+| species-megi.jpg | Ryosuke Hosoi | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Silurus.jpg) |
+| species-baemjangeo.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Anguilla_japonica.jpg) |
+| species-pirami.jpg | OpenCage | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Zacco_platypus_by_OpenCage.jpg) |
+| species-meonggae.jpg | Totti | CC BY-SA 4.0 | [Commons](https://commons.wikimedia.org/wiki/File:Halocynthia_roretzi_Uminomori.jpg) |
+| species-gunso.jpg | Izuzuki Diver | CC BY-SA 2.5 | [Commons](https://commons.wikimedia.org/wiki/File:Aplysia_kurodai.jpg) |
+| species-miyeok.jpg | CSIRO | CC BY 3.0 | [Commons](https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_952_Undaria_pinnatifida_Japanese_kelp.jpg) |
 | place-beomseom.jpg | Alex Brown | CC BY 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:Beomseom_Island.jpg) |
 | place-ulleungdo.jpg | KOCIS/Korea.net | CC BY-SA 2.0 | [Commons](https://commons.wikimedia.org/wiki/File:KOCIS_Ulleungdo,_or_Ulleung_Island_(4925987614).jpg) |
 | place-oryukdo.jpg | Choi2451 | CC0 | [Commons](https://commons.wikimedia.org/wiki/File:Oryukdo_Skywalk_in_Busan,_South_Korea.jpg) |
