@@ -597,6 +597,52 @@
   .badge-item .badge-emoji{ font-size:1.8rem; display:block; margin-bottom:6px; }
   .badge-item .badge-title{ font-size:.8rem; font-weight:700; display:block; margin-bottom:3px; }
   .badge-item .badge-desc{ font-size:.7rem; color:var(--ink-soft); }
+
+  /* ---------- Lab (조행 노트) ---------- */
+  .lab-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .lab-tabs button{
+    font:inherit; font-size:.85rem; padding:8px 14px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink-soft);
+  }
+  .lab-tabs button.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .lab-pane{ display:none; }
+  .lab-pane.active{ display:block; }
+  .lab-note{ font-size:.84rem; color:var(--ink-soft); margin:0 0 14px; }
+  .lab-subhead{ font-size:.82rem; color:var(--tide); font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.04em; margin:20px 0 6px; }
+  .lab-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:4px 12px; }
+  @media (max-width:560px){ .lab-grid2{ grid-template-columns:1fr; } }
+  .lab-form .pm-field input, .lab-form .pm-field select, .lab-form .ms-ref-row select, .lab-form .ms-ref-row input{
+    font:inherit; padding:8px 10px; border-radius:9px; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--ink); width:100%;
+  }
+  .lab-form .ms-ref-row select, .lab-form .ms-ref-row input{ width:auto; }
+  .ms-ref-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:8px; font-size:.84rem; color:var(--ink-soft); }
+  .ms-step{ font-weight:700; font-size:.92rem; margin:6px 0 10px; }
+  .ms-canvas{ max-width:100%; height:auto; touch-action:manipulation; cursor:crosshair; border-radius:6px; display:block; }
+  .ms-score{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+  .ms-chip{ font-size:.82rem; padding:6px 12px; border-radius:999px; background:var(--surface-3); border:1px solid var(--border); }
+  .ms-chip b{ color:var(--sea-deep); }
+  :root[data-theme="dark"] .ms-chip b{ color:var(--tide); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .ms-chip b{ color:var(--tide); } }
+  .ms-chip.warn{ border-color:var(--coral); }
+  .ms-card-canvas{ width:100%; max-width:420px; height:auto; border-radius:12px; display:block; margin:12px auto; box-shadow:var(--shadow); }
+  .lab-list-item{ border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:8px; background:var(--surface); font-size:.86rem; }
+  .lab-list-item .li-head{ display:flex; justify-content:space-between; gap:8px; align-items:flex-start; font-weight:700; }
+  .lab-list-item .li-meta{ color:var(--ink-soft); font-size:.78rem; margin-top:3px; word-break:break-all; }
+  .lab-list-item .li-actions{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .lab-list-item .pm-copy-btn{ margin-top:0; }
+  .lab-comfort{ min-height:1.3em; font-size:.88rem; font-weight:600; margin:10px 0 0; }
+  .lab-file-btn{ display:inline-block; text-align:center; cursor:pointer; }
+  .rank-box{ background:var(--surface); border:1.5px solid var(--amber); border-radius:12px; padding:12px 14px; margin-bottom:14px; }
+  .rank-box .rank-title{ font-size:1.05rem; font-weight:800; }
+  .rank-box .rank-sub{ font-size:.78rem; color:var(--ink-soft); margin:2px 0 8px; }
+  .tide-banner{ margin-top:14px; padding:10px 14px; border-radius:12px; background:var(--surface-3); border:1px solid var(--border-strong); font-size:.88rem; }
+  .tide-banner a{ white-space:nowrap; }
+  .luck-bars{ margin-top:10px; font-size:.78rem; color:var(--ink-soft); }
+  .luck-bars .lb-row{ display:flex; align-items:center; gap:8px; margin:3px 0; }
+  .luck-bars .lb-name{ width:74px; flex-shrink:0; }
+  .luck-bars .lb-track{ flex:1; height:6px; border-radius:99px; background:var(--border); overflow:hidden; }
+  .luck-bars .lb-fill{ height:100%; background:var(--sea); }
 </style>
 
 <div id="pwGate" hidden>
@@ -640,6 +686,7 @@
         <span>출처 120여 건</span>
         <span>초보자 중심</span>
       </div>
+      <div class="tide-banner" id="tideBanner" hidden></div>
     </div>
     <figure class="hero-art hero-photo">
       <img src="images/hero-sokcho.jpg" alt="강원도 속초 대포항 방파제" loading="eager">
@@ -670,6 +717,7 @@
       <a href="#safety">안전·법규</a>
       <a href="#learn">배우기</a>
       <a href="#postmaker">인증샷·SNS 문구</a>
+      <a href="#lab">조행 노트·어복 측정기</a>
       <a href="#playground">놀이터</a>
       <a href="#glossary">용어사전</a>
       <a href="#sources">출처</a>
@@ -695,6 +743,7 @@
         <li><a href="#safety">안전 수칙 &amp; 법규</a></li>
         <li><a href="#learn">배우고 나누기</a></li>
         <li><a href="#postmaker">인증샷 편집 · SNS 문구 생성</a></li>
+        <li><a href="#lab">조행 노트 · 어복 측정기</a></li>
         <li><a href="#playground">놀이터 (퀴즈·테스트·뱃지)</a></li>
         <li><a href="#glossary">용어사전</a></li>
         <li><a href="#sources">출처 모음</a></li>
@@ -3059,6 +3108,9 @@
                     <option value="🌊 바다가 좋다">🌊 바다가 좋다</option>
                     <option value="🎣 첫 조황">🎣 첫 조황</option>
                     <option value="😱 실화냐">😱 실화냐</option>
+                    <option value="🎯 손맛 지수 100%">🎯 손맛 지수 100%</option>
+                    <option value="🐋 이건 4짜 각">🐋 이건 4짜 각</option>
+                    <option value="🤫 비밀 포인트 출신">🤫 비밀 포인트 출신</option>
                   </select>
                 </div>
               </div>
@@ -3115,6 +3167,25 @@
               </div>
               <p class="pm-video-hint" id="pmVideoHint"></p>
 
+              <div class="lab-grid2" style="margin-top:6px;">
+                <div class="pm-field"><label for="pmAudioMode">🔊 원본 소리</label>
+                  <select id="pmAudioMode">
+                    <option value="keep">원본 그대로</option>
+                    <option value="drag">드랙음·릴소리 강조 (고음역 EQ)</option>
+                    <option value="mute">음소거</option>
+                  </select>
+                </div>
+                <div class="pm-field"><label for="pmBgm">🎵 히트 BGM (합성)</label>
+                  <select id="pmBgm">
+                    <option value="none">없음</option>
+                    <option value="epic">히트! 에픽 (128 BPM)</option>
+                    <option value="chill">여유 로파이 (78 BPM)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="pm-slider"><label><span>BGM 볼륨</span><span id="pmBgmVolVal">40%</span></label><input type="range" id="pmBgmVol" min="0" max="100" value="40"></div>
+              <p class="pm-video-hint">드랙음 강조는 고음역을 키우는 EQ 필터이지 소리를 인식하는 기능은 아니에요. BGM은 브라우저가 즉석에서 합성하는 자체 음원이라 별도 저작권 걱정이 없습니다.</p>
+
               <div class="pm-video-actions">
                 <button type="button" id="pmThumbCapture" class="pm-btn-secondary">📸 현재 장면으로 썸네일 만들기</button>
                 <button type="button" id="pmVideoExport" class="pm-btn-primary">🎬 이 구간 내보내기 (WebM)</button>
@@ -3159,6 +3230,143 @@
           </div>
 
           <p class="pm-privacy-note">이 도구는 순수 클라이언트 기능입니다 — 사진과 입력한 정보는 어디로도 전송되지 않고, 탭을 닫으면 사라집니다.</p>
+        </div>
+      </section>
+
+      <!-- ============ LAB ============ -->
+      <section class="section" id="lab">
+        <span class="part-no">TOOL</span>
+        <h2>조행 노트 &amp; 어복 측정기</h2>
+        <p class="kicker">사진 속 물고기 길이를 직접 재서 어복 지수 카드를 만들고, 꽝 일지·비밀 포인트·채비 레시피를 기록하세요. 모든 기록은 <b>이 기기의 브라우저에만</b> 저장되며 서버로 전송되지 않습니다 — 브라우저 데이터를 지우면 사라지니 <b>백업·복원</b> 탭에서 파일로 보관해두세요.</p>
+
+        <div class="lab-tabs" id="labTabs">
+          <button type="button" class="active" data-pane="labMeasure">📏 어복 측정기</button>
+          <button type="button" data-pane="labKkwang">😭 꽝 로그</button>
+          <button type="button" data-pane="labPoints">📍 내 포인트</button>
+          <button type="button" data-pane="labRecipes">🧰 채비 레시피</button>
+          <button type="button" data-pane="labBackup">💾 백업·복원</button>
+        </div>
+
+        <!-- 1) 어복 측정기 -->
+        <div class="lab-pane active pg-card lab-form" id="labMeasure">
+          <p class="lab-note">AI 자동 판독이 아니라 <b>직접 두 점씩 찍어 재는 수동 측정</b>입니다. 물고기 옆에 길이를 아는 물건(카드·동전 등)을 같은 평면에 두고, 위에서 수직으로 찍을수록 정확해요. 결과는 자기 신고 값이며 참고용입니다.</p>
+          <div class="pm-upload" id="msDrop">
+            <input type="file" id="msFile" accept="image/*" hidden>
+            <label for="msFile" class="pm-upload-label">
+              <span class="pm-upload-icon">📏</span>
+              <span><b>물고기 + 기준 물체</b>가 함께 찍힌 사진을 선택하세요</span>
+              <span class="pm-upload-sub">사진은 업로드되지 않고 이 브라우저 안에서만 처리됩니다</span>
+            </label>
+          </div>
+
+          <div id="msEditor" hidden>
+            <div class="ms-ref-row">
+              <label>기준 물체
+                <select id="msRef">
+                  <option value="8.56">신용카드 긴 변 (8.56cm)</option>
+                  <option value="2.65">500원 동전 지름 (2.65cm)</option>
+                  <option value="29.7">A4 용지 긴 변 (29.7cm)</option>
+                  <option value="custom">직접 입력…</option>
+                </select>
+              </label>
+              <input type="number" id="msRefCustom" min="0.5" step="0.1" placeholder="길이(cm)" hidden>
+            </div>
+            <p class="ms-step" id="msStep"></p>
+            <div class="pm-canvas-wrap"><canvas id="msCanvas" class="ms-canvas"></canvas></div>
+            <div class="pm-btn-row" style="margin:10px 0;">
+              <button type="button" id="msUndo" class="pm-copy-btn">↩ 마지막 점 취소</button>
+              <button type="button" id="msReset" class="pm-copy-btn">처음부터 다시</button>
+            </div>
+
+            <div id="msForm" hidden>
+              <div class="lab-grid2">
+                <div class="pm-field"><label for="msSpecies">어종 (도감에 있으면 금지체장·시즌 반영)</label><input type="text" id="msSpecies" list="msSpeciesList" placeholder="예: 감성돔"><datalist id="msSpeciesList"></datalist></div>
+                <div class="pm-field"><label for="msLen">측정 길이(cm) — 직접 고칠 수 있어요</label><input type="number" id="msLen" min="0.5" step="0.1"></div>
+                <div class="pm-field"><label for="msPlace">장소 (선택)</label><input type="text" id="msPlace" placeholder="예: 여수 거문도"></div>
+                <div class="pm-field"><label for="msDate">날짜 (물때 계산에 사용)</label><input type="date" id="msDate"></div>
+              </div>
+              <div class="ms-score" id="msScore"></div>
+              <canvas id="msCard" class="ms-card-canvas" width="900" height="1125"></canvas>
+              <div class="pm-btn-row">
+                <button type="button" id="msDownload" class="pm-btn-primary">인증 카드 다운로드 (PNG)</button>
+                <button type="button" id="msShare" class="pm-btn-primary pm-btn-share">📤 카드 바로 공유하기</button>
+                <button type="button" id="msSave" class="pm-btn-secondary">📒 조과 기록에 저장</button>
+              </div>
+            </div>
+            <h4 class="lab-subhead">내 조과 기록 (최근 8건)</h4>
+            <div id="msLog"></div>
+          </div>
+        </div>
+
+        <!-- 2) 꽝 로그 -->
+        <div class="lab-pane pg-card lab-form" id="labKkwang">
+          <p class="lab-note">꽝도 기록입니다. 핑계를 고르고 기록하면 연속 꽝 횟수와 칭호가 쌓여요. (커뮤니티 공유·시상은 서버가 필요해 없습니다 — 카드로 직접 공유해보세요.)</p>
+          <div class="lab-grid2">
+            <div class="pm-field"><label for="kkExcuse">오늘의 핑계</label><select id="kkExcuse"></select></div>
+            <div class="pm-field"><label>&nbsp;</label><button type="button" id="kkRandom" class="pm-copy-btn" style="padding:9px 12px;">🎲 아무 핑계나 뽑기</button></div>
+            <div class="pm-field"><label for="kkPlace">장소 (선택)</label><input type="text" id="kkPlace" placeholder="예: 방파제"></div>
+            <div class="pm-field"><label for="kkDate">날짜</label><input type="date" id="kkDate"></div>
+          </div>
+          <div class="pm-field"><label for="kkMemo">한마디 (선택)</label><input type="text" id="kkMemo" placeholder="예: 내일은 꼭 잡는다"></div>
+          <div class="pm-btn-row">
+            <button type="button" id="kkSave" class="pm-btn-secondary">😭 꽝 기록하기</button>
+            <button type="button" id="kkComfort" class="pm-copy-btn" style="padding:10px 14px;">🍶 나에게 위로 한 잔</button>
+          </div>
+          <p class="lab-comfort" id="kkComfortOut"></p>
+          <div class="ms-score" id="kkStats"></div>
+          <canvas id="kkCard" class="ms-card-canvas" width="900" height="900"></canvas>
+          <div class="pm-btn-row">
+            <button type="button" id="kkDownload" class="pm-btn-primary">꽝 카드 다운로드 (PNG)</button>
+            <button type="button" id="kkShare" class="pm-btn-primary pm-btn-share">📤 꽝 카드 공유하기</button>
+          </div>
+          <h4 class="lab-subhead">꽝 기록 (최근 8건)</h4>
+          <div id="kkLog"></div>
+        </div>
+
+        <!-- 3) 내 포인트 -->
+        <div class="lab-pane pg-card lab-form" id="labPoints">
+          <p class="lab-note">나만 아는 포인트를 적어두는 <b>비공개 노트</b>입니다. 좌표는 기본으로 가려지고 "좌표 보기"를 눌러야 보여요. 이 기기에만 저장되며 다른 사람과 공유되지 않습니다. (전국 히트맵·포인트 거래는 서버가 필요해 제공하지 않아요.)</p>
+          <div class="lab-grid2">
+            <div class="pm-field"><label for="ptName">포인트 이름</label><input type="text" id="ptName" maxlength="40" placeholder="예: 할아버지 방파제 끝"></div>
+            <div class="pm-field"><label for="ptRegion">지역 (시·군)</label><input type="text" id="ptRegion" maxlength="30" placeholder="예: 여수시"></div>
+            <div class="pm-field"><label for="ptSpecies">잘 나오는 어종</label><input type="text" id="ptSpecies" maxlength="40" placeholder="예: 감성돔, 볼락"></div>
+            <div class="pm-field"><label for="ptLat">위도</label><input type="number" id="ptLat" step="0.00001" placeholder="예: 34.76012"></div>
+            <div class="pm-field"><label for="ptLng">경도</label><input type="number" id="ptLng" step="0.00001" placeholder="예: 127.66201"></div>
+            <div class="pm-field"><label>&nbsp;</label><button type="button" id="ptGeo" class="pm-copy-btn" style="padding:9px 12px;">📍 현재 위치 가져오기</button></div>
+          </div>
+          <div class="pm-field"><label for="ptMemo">메모 (물때·채비·주의점)</label><input type="text" id="ptMemo" maxlength="120" placeholder="예: 들물 2~3물, 바닥 걸림 심함"></div>
+          <div class="pm-btn-row"><button type="button" id="ptSave" class="pm-btn-secondary">📍 포인트 저장</button></div>
+          <p class="lab-comfort" id="ptMsg"></p>
+          <div id="ptList"></div>
+        </div>
+
+        <!-- 4) 채비 레시피 -->
+        <div class="lab-pane pg-card lab-form" id="labRecipes">
+          <p class="lab-note">잘 잡혔던 채비 조합을 레시피로 남겨두세요. 단톡방에 붙여넣기 좋은 텍스트로 복사할 수 있어요.</p>
+          <div class="lab-grid2">
+            <div class="pm-field"><label for="rcSpecies">어종</label><input type="text" id="rcSpecies" maxlength="30" placeholder="예: 쏘가리"></div>
+            <div class="pm-field"><label for="rcRod">로드</label><input type="text" id="rcRod" maxlength="40" placeholder="예: 7ft ML 스피닝대"></div>
+            <div class="pm-field"><label for="rcReel">릴</label><input type="text" id="rcReel" maxlength="40" placeholder="예: 2500번"></div>
+            <div class="pm-field"><label for="rcLine">라인</label><input type="text" id="rcLine" maxlength="40" placeholder="예: PE 0.8호 + 카본 2호"></div>
+            <div class="pm-field"><label for="rcRig">채비·루어</label><input type="text" id="rcRig" maxlength="50" placeholder="예: 지그헤드 3g + 그럽웜"></div>
+            <div class="pm-field"><label for="rcBait">미끼 (선택)</label><input type="text" id="rcBait" maxlength="40" placeholder="예: 크릴"></div>
+          </div>
+          <div class="pm-field"><label for="rcResult">결과</label><input type="text" id="rcResult" maxlength="60" placeholder="예: 5자 1마리 포함 총 7마리"></div>
+          <div class="pm-field"><label for="rcMemo">메모</label><input type="text" id="rcMemo" maxlength="120" placeholder="예: 여울 아래 천천히 리트리브"></div>
+          <div class="pm-btn-row"><button type="button" id="rcSave" class="pm-btn-secondary">🧰 레시피 저장</button></div>
+          <div id="rcList"></div>
+        </div>
+
+        <!-- 5) 백업·복원 -->
+        <div class="lab-pane pg-card lab-form" id="labBackup">
+          <p class="lab-note">기록은 이 브라우저에만 있어서 <b>브라우저 데이터를 지우거나 기기를 바꾸면 사라집니다.</b> 파일로 내보냈다가 다른 기기에서 복원할 수 있어요. (파일에는 포인트 좌표가 그대로 들어 있으니 남에게 보내지 마세요.)</p>
+          <div class="pm-btn-row">
+            <button type="button" id="bkExport" class="pm-btn-primary">백업 파일 내보내기 (JSON)</button>
+            <label class="pm-btn-secondary lab-file-btn">백업 파일 불러오기<input type="file" id="bkImport" accept="application/json,.json" hidden></label>
+            <button type="button" id="bkReset" class="pm-copy-btn" style="padding:10px 14px;">내 기록 전체 삭제</button>
+          </div>
+          <p class="lab-comfort" id="bkMsg"></p>
+          <div class="ms-score" id="bkStats"></div>
         </div>
       </section>
 
@@ -3212,7 +3420,8 @@
 
         <h3>🏅 내 뱃지</h3>
         <div class="pg-card">
-          <p style="font-size:.84rem;color:var(--ink-soft);margin-top:0;">사이트를 둘러보고 도구를 써보면서 뱃지를 모아보세요.</p>
+          <p style="font-size:.84rem;color:var(--ink-soft);margin-top:0;">사이트를 둘러보고 도구를 써보면서 뱃지를 모아보세요. 뱃지와 기록(조과·꽝·포인트·레시피)이 쌓일수록 <b>조사 등급</b>이 올라갑니다.</p>
+          <div class="rank-box" id="ggRank"></div>
           <div class="badge-grid" id="badgeGrid"></div>
         </div>
       </section>
@@ -3799,6 +4008,12 @@
       var wd = ['일','월','화','수','목','금','토'][new Date(y,m,d).getDay()];
       return y+'년 '+(m+1)+'월 '+d+'일 ('+wd+')';
     }
+    window.__ggTide = {
+      at: function(y,m,d){
+        var mt = mulddaeOf(dateAtLocalNoon(y,m,d));
+        return { label: mt.label, strength: mt.strength, tier: band(mt.strength).tier };
+      }
+    };
 
     var dateInput = document.getElementById('tideDate');
     var detailEl = document.getElementById('tideDetail');
@@ -4458,6 +4673,120 @@
       });
     }
 
+    var bgmVolInput = document.getElementById('pmBgmVol');
+    var bgmVolVal = document.getElementById('pmBgmVolVal');
+    if(bgmVolInput && bgmVolVal){
+      bgmVolInput.addEventListener('input', function(){ bgmVolVal.textContent = bgmVolInput.value + '%'; });
+    }
+
+    /* ---- 합성 BGM (브라우저에서 즉석 합성, 외부 음원 없음) ---- */
+    function scheduleBgm(ctx, out, preset, vol, dur){
+      var t0 = ctx.currentTime + 0.05;
+      var comp = ctx.createDynamicsCompressor();
+      var lim = ctx.createDynamicsCompressor();
+      lim.threshold.value = -6; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.002; lim.release.value = 0.1;
+      var bus = ctx.createGain();
+      var level = vol * 1.0;
+      bus.gain.setValueAtTime(level, t0);
+      bus.gain.setValueAtTime(level, t0 + Math.max(0, dur - 0.5));
+      bus.gain.linearRampToValueAtTime(0.0001, t0 + dur);
+      bus.connect(comp); comp.connect(lim); lim.connect(out);
+
+      var epic = preset === 'epic';
+      var beat = 60 / (epic ? 128 : 78);
+      function hz(n){ return 440 * Math.pow(2, (n - 69) / 12); }
+      var progs = epic
+        ? [[57,60,64],[53,57,60],[48,52,55],[55,59,62]]
+        : [[60,64,67,71],[57,60,64,67],[62,65,69,72],[55,59,62,65]];
+
+      var nbuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.5), ctx.sampleRate);
+      var nd = nbuf.getChannelData(0);
+      for(var i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+
+      function tone(type, freq, t, len, peak, dest, attack){
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = type; o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(peak, t + (attack || 0.01));
+        g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+        o.connect(g); g.connect(dest);
+        o.start(t); o.stop(t + len + 0.05);
+      }
+      function kick(t, peak){
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(150, t);
+        o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+        g.gain.setValueAtTime(peak, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+        o.connect(g); g.connect(bus);
+        o.start(t); o.stop(t + 0.25);
+      }
+      function noise(t, len, type, freq, peak){
+        var s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+        s.buffer = nbuf; f.type = type; f.frequency.value = freq;
+        g.gain.setValueAtTime(peak, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + len);
+        s.connect(f); f.connect(g); g.connect(bus);
+        s.start(t); s.stop(t + len + 0.02);
+      }
+
+      var bassLp = ctx.createBiquadFilter(); bassLp.type = 'lowpass'; bassLp.frequency.value = 500; bassLp.connect(bus);
+      var padLp = ctx.createBiquadFilter(); padLp.type = 'lowpass'; padLp.frequency.value = epic ? 1800 : 1200; padLp.connect(bus);
+      var nBeats = Math.ceil(dur / beat);
+      for(var b = 0; b < nBeats; b++){
+        var t = t0 + b * beat;
+        if(t >= t0 + dur) break;
+        var chord = progs[Math.floor(b / 4) % progs.length], inBar = b % 4;
+        if(epic){
+          kick(t, 0.9);
+          noise(t + beat / 2, 0.08, 'highpass', 7000, 0.22);
+          tone('sawtooth', hz(chord[0] - 24), t, beat * 0.9, 0.3, bassLp);
+          tone('sawtooth', hz(chord[0] - 24), t + beat / 2, beat * 0.4, 0.22, bassLp);
+          tone('triangle', hz(chord[b % 3] + 12), t, beat * 0.45, 0.2, padLp);
+          tone('triangle', hz(chord[(b + 1) % 3] + 12), t + beat / 2, beat * 0.45, 0.16, padLp);
+          if(inBar === 0){ chord.forEach(function(n){ tone('sawtooth', hz(n), t, beat * 4, 0.1, padLp, 0.25); }); }
+        } else {
+          if(inBar === 0 || inBar === 2) kick(t, 0.55);
+          if(inBar === 1 || inBar === 3) noise(t, 0.12, 'bandpass', 1800, 0.35);
+          noise(t + beat / 2, 0.05, 'highpass', 8000, 0.08);
+          tone('sine', hz(chord[0] - 12), t, beat * 1.6, 0.3, bassLp);
+          tone('triangle', hz(chord[b % chord.length] + 12), t, beat * 1.2, 0.22, padLp, 0.02);
+          tone('triangle', hz(chord[(b + 2) % chord.length] + 12), t + beat / 2, beat * 0.9, 0.14, padLp, 0.02);
+        }
+      }
+    }
+
+    function buildAudio(srcTracks, dur){
+      var modeEl = document.getElementById('pmAudioMode'), bgmEl = document.getElementById('pmBgm');
+      var mode = modeEl ? modeEl.value : 'keep', bgm = bgmEl ? bgmEl.value : 'none';
+      var vol = bgmVolInput ? (parseInt(bgmVolInput.value, 10) || 0) / 100 : 0.4;
+      var useBgm = bgm !== 'none' && vol > 0;
+      if(mode === 'keep' && !useBgm) return null;
+      if(mode === 'mute' && !useBgm) return {ctx:null, stream:null};
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return null;
+      var ctx = new AC();
+      if(ctx.state === 'suspended' && ctx.resume) ctx.resume();
+      var dest = ctx.createMediaStreamDestination();
+      var master = ctx.createGain();
+      master.connect(dest);
+      if(mode !== 'mute' && srcTracks.length){
+        var node = ctx.createMediaStreamSource(new MediaStream(srcTracks));
+        if(mode === 'drag'){
+          var hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 250;
+          var pk = ctx.createBiquadFilter(); pk.type = 'peaking'; pk.frequency.value = 3500; pk.Q.value = 1.2; pk.gain.value = 10;
+          var sh = ctx.createBiquadFilter(); sh.type = 'highshelf'; sh.frequency.value = 6000; sh.gain.value = 6;
+          var cp = ctx.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 4;
+          node.connect(hp); hp.connect(pk); pk.connect(sh); sh.connect(cp);
+          node = cp;
+        }
+        node.connect(master);
+      }
+      if(useBgm) scheduleBgm(ctx, master, bgm, vol, dur);
+      return {ctx:ctx, stream:dest.stream};
+    }
+
     if(exportBtn){
       exportBtn.addEventListener('click', function(){
         if(typeof MediaRecorder === 'undefined'){
@@ -4485,9 +4814,16 @@
         var combined = new MediaStream();
         var canvasStream = outCanvas.captureStream ? outCanvas.captureStream(30) : null;
         if(canvasStream){ canvasStream.getVideoTracks().forEach(function(t){ combined.addTrack(t); }); }
+        var audioFx = null;
         try{
           var srcStream = videoEl.captureStream ? videoEl.captureStream() : (videoEl.mozCaptureStream ? videoEl.mozCaptureStream() : null);
-          if(srcStream){ srcStream.getAudioTracks().forEach(function(t){ combined.addTrack(t); }); }
+          var srcAudio = srcStream ? srcStream.getAudioTracks() : [];
+          audioFx = buildAudio(srcAudio, dur);
+          if(audioFx){
+            if(audioFx.stream){ audioFx.stream.getAudioTracks().forEach(function(t){ combined.addTrack(t); }); }
+          } else {
+            srcAudio.forEach(function(t){ combined.addTrack(t); });
+          }
         }catch(audioErr){}
 
         var mime = '';
@@ -4524,6 +4860,7 @@
           if(thumbBtn) thumbBtn.disabled = false;
           progressWrap.hidden = true;
           videoEl.pause();
+          if(audioFx && audioFx.ctx){ try{ audioFx.ctx.close(); }catch(closeErr){} }
           if(window.__pmCelebrate){
             var r = exportBtn.getBoundingClientRect();
             window.__pmCelebrate(r.left + r.width/2, r.top, 18);
@@ -4592,8 +4929,41 @@
       {id:'species_explorer', emoji:'🔍', title:'도감 탐험가', desc:'금어기 조회기를 여러 번 사용'},
       {id:'quiz_master', emoji:'🐟', title:'퀴즈왕', desc:'어종 맞추기 퀴즈에서 6문제 이상 정답'},
       {id:'type_test', emoji:'🧭', title:'자아 탐구', desc:'낚시꾼 유형 테스트를 완료'},
-      {id:'luck_index', emoji:'🌊', title:'오늘의 운세', desc:'조황 확률을 뽑아봄'}
+      {id:'luck_index', emoji:'🌊', title:'오늘의 운세', desc:'조황 확률을 뽑아봄'},
+      {id:'measured', emoji:'📏', title:'줄자 장인', desc:'어복 측정기로 길이를 재서 카드를 만듦'},
+      {id:'grade_s', emoji:'🌟', title:'물때를 찢은 자', desc:'어복 지수 S급 카드를 달성'},
+      {id:'kk_first', emoji:'😭', title:'첫 꽝 입문', desc:'꽝 로그를 처음 기록'},
+      {id:'kk_streak3', emoji:'🏷️', title:'꽝치기 전문', desc:'연속 3회 꽝을 기록'},
+      {id:'point_keeper', emoji:'📍', title:'비밀 포인트 수호자', desc:'내 포인트를 1곳 이상 저장'},
+      {id:'recipe_writer', emoji:'🧰', title:'채비 연구가', desc:'채비 레시피를 1개 이상 저장'}
     ];
+
+    var RANKS = [
+      {min:0,   title:'동네 방파제 주율이', emoji:'🐣'},
+      {min:20,  title:'연안의 강태공', emoji:'🎣'},
+      {min:50,  title:'갯바위의 노련한 고수', emoji:'🪨'},
+      {min:100, title:'먼바다의 큰손', emoji:'🚤'},
+      {min:160, title:'용왕의 오른팔', emoji:'🐉'}
+    ];
+
+    function countOf(key){
+      try{ var v = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(v) ? v.length : 0; }catch(e){ return 0; }
+    }
+
+    function renderRank(unlockedCount){
+      var el = document.getElementById('ggRank');
+      if(!el) return;
+      var pts = unlockedCount * 10 + countOf('gg_catch_log') * 5 + countOf('gg_kk_log') * 2 + countOf('gg_points') * 3 + countOf('gg_recipes') * 3;
+      var cur = RANKS[0], next = null;
+      for(var i = 0; i < RANKS.length; i++){
+        if(pts >= RANKS[i].min){ cur = RANKS[i]; next = RANKS[i + 1] || null; }
+      }
+      var pct = next ? Math.round((pts - cur.min) / (next.min - cur.min) * 100) : 100;
+      el.innerHTML =
+        '<div class="rank-title">' + cur.emoji + ' ' + cur.title + '</div>' +
+        '<div class="rank-sub">활동 점수 ' + pts + '점' + (next ? ' · 다음 등급 "' + next.title + '"까지 ' + (next.min - pts) + '점' : ' · 최고 등급 달성!') + '</div>' +
+        '<div class="gauge-track"><div class="gauge-fill" style="width:' + pct + '%"></div></div>';
+    }
 
     function loadBadges(){
       try{ return JSON.parse(localStorage.getItem('gg_badges') || '{}'); }catch(e){ return {}; }
@@ -4606,6 +4976,8 @@
       var grid = document.getElementById('badgeGrid');
       if(!grid) return;
       var b = loadBadges();
+      var unlockedCount = BADGES.filter(function(bd){ return !!b[bd.id]; }).length;
+      renderRank(unlockedCount);
       grid.innerHTML = BADGES.map(function(bd){
         var unlocked = !!b[bd.id];
         return '<div class="badge-item' + (unlocked ? ' unlocked' : '') + '">' +
@@ -4625,6 +4997,7 @@
       renderBadges();
     };
 
+    window.__ggRenderBadges = renderBadges;
     renderBadges();
     window.__ggUnlockBadge('first_visit');
     var hour = new Date().getHours();
@@ -5065,33 +5438,82 @@
     var resultEl = document.getElementById('pgLuckResult');
     if(!btn || !resultEl) return;
 
-    var NEW_MOON_REF = Date.UTC(2000,0,6,18,14,0);
-    var SYNODIC_DAYS = 29.530588853;
+    var speciesRows = Array.prototype.slice.call(document.querySelectorAll('#speciesTable tbody tr'));
 
-    function todayStrength(){
-      var now = Date.now();
-      var age = ((now - NEW_MOON_REF) / 86400000) % SYNODIC_DAYS;
-      if(age < 0) age += SYNODIC_DAYS;
-      var d = Math.floor(age) + 1;
-      var p = d % 15;
-      var STRENGTH = [85,94,98,100,96,87,64,47,29,14,8,21,39,57,73];
-      return STRENGTH[p];
+    function escHtml(s){
+      return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+    }
+
+    function findRow(name){
+      var key = (name || '').trim();
+      if(!key) return null;
+      var exact = null, loose = null;
+      speciesRows.forEach(function(r){
+        var rn = r.children[1].textContent.replace(/\(.+?\)/g, '').trim();
+        if(!rn) return;
+        if(rn === key && !exact) exact = r;
+        else if((key.indexOf(rn) !== -1 || rn.indexOf(key) !== -1) && !loose) loose = r;
+      });
+      return exact || loose;
+    }
+
+    // 도감의 "채집 시기·산란기"/"맛있는 시기" 문구에서 해당되는 달(1~12)을 뽑아낸다
+    function monthsFromText(txt){
+      var set = {}, m;
+      if(txt.indexOf('연중') !== -1){ for(var k = 1; k <= 12; k++) set[k] = 1; }
+      var reRange = /(\d{1,2})\s*~\s*(\d{1,2})\s*월/g;
+      while((m = reRange.exec(txt))){
+        var a = +m[1], b = +m[2], i = a;
+        for(var c = 0; c < 12; c++){ set[i] = 1; if(i === b) break; i = i % 12 + 1; }
+      }
+      var reOne = /(\d{1,2})\s*월/g;
+      while((m = reOne.exec(txt))){ set[+m[1]] = 1; }
+      var seasons = {'봄':[3,4,5], '여름':[6,7,8], '가을':[9,10,11], '겨울':[12,1,2]};
+      Object.keys(seasons).forEach(function(s){ if(txt.indexOf(s) !== -1) seasons[s].forEach(function(mm){ set[mm] = 1; }); });
+      return set;
+    }
+
+    function seasonFit(row, month){
+      if(!row) return null;
+      var set = monthsFromText(row.children[3].textContent + ' ' + row.children[4].textContent);
+      if(Object.keys(set).length === 0) return null;
+      if(set[month]) return {score:100, text:'지금(' + month + '월)이 도감상 시즌'};
+      var prev = (month + 10) % 12 + 1, next = month % 12 + 1;
+      if(set[prev] || set[next]) return {score:55, text:'시즌 직전·직후'};
+      return {score:20, text:'도감상 비시즌'};
+    }
+
+    function bar(name, val){
+      return '<div class="lb-row"><span class="lb-name">' + name + '</span><span class="lb-track"><span class="lb-fill" style="display:block;width:' + val + '%"></span></span><span>' + val + '</span></div>';
     }
 
     btn.addEventListener('click', function(){
       var species = speciesInput.value.trim() || '오늘의 대상어';
-      var base = todayStrength();
-      var pct = Math.max(5, Math.min(97, base + Math.round((Math.random() - 0.5) * 30)));
+      var now = new Date();
+      var tide = window.__ggTide ? window.__ggTide.at(now.getFullYear(), now.getMonth(), now.getDate()) : {label:'-', strength:50, tier:''};
+      var row = findRow(speciesInput.value);
+      var fit = seasonFit(row, now.getMonth() + 1);
+      var seasonScore = fit ? fit.score : 50;
+      var luck = Math.floor(Math.random() * 11);
+      var pct = Math.max(5, Math.min(97, Math.round(tide.strength * 0.5 + seasonScore * 0.4 + luck)));
       var mood, color;
       if(pct >= 80){ mood = '장비 챙겨서 당장 출발하세요! 🎣'; color = 'var(--sea)'; }
       else if(pct >= 50){ mood = '가능성 있습니다, 밑밥 승부를 걸어보세요 🌊'; color = 'var(--amber)'; }
       else { mood = '오늘은 풍경 감상 모드로도 충분해요 🏖️'; color = 'var(--ink-soft)'; }
+      var seasonNote = fit ? fit.text : (row ? '도감에 시기 정보가 없어 시즌은 중간값(50) 적용' : '도감에 없는 어종이라 시즌은 중간값(50) 적용');
 
       resultEl.innerHTML =
         '<div style="margin-top:14px;padding:16px;border-radius:12px;background:var(--surface);border:1.5px solid ' + color + ';">' +
-          '<div style="font-size:.82rem;color:var(--ink-soft);margin-bottom:4px;">오늘 ' + species + ' 잡힐 확률</div>' +
+          '<div style="font-size:.82rem;color:var(--ink-soft);margin-bottom:4px;">오늘 ' + escHtml(species) + ' 입질 지수</div>' +
           '<div style="font-size:2.2rem;font-weight:800;color:' + color + ';">' + pct + '%</div>' +
           '<div style="font-size:.88rem;margin-top:4px;">' + mood + '</div>' +
+          '<div class="luck-bars">' +
+            bar('물때(' + tide.label + ')', tide.strength) +
+            bar('시즌 적합', seasonScore) +
+            bar('운(랜덤)', luck * 10) +
+            '<div style="margin-top:6px;">계산식: 물때 × 0.5 + 시즌 × 0.4 + 운 0~10 · ' + escHtml(seasonNote) + '</div>' +
+            '<div>날씨·수온은 반영하지 않는 재미용 지수입니다.</div>' +
+          '</div>' +
         '</div>';
 
       if(window.__pmCelebrate){
@@ -5101,5 +5523,667 @@
       if(window.__ggUnlockBadge) window.__ggUnlockBadge('luck_index');
     });
   }catch(e){}
+})();
+
+/* ---------- 사리 물때 안내 배너 (방문 시 계산, 푸시 알림 아님) ---------- */
+(function(){
+  try{
+    var el = document.getElementById('tideBanner');
+    if(!el || !window.__ggTide) return;
+    var n = new Date();
+    var t0 = window.__ggTide.at(n.getFullYear(), n.getMonth(), n.getDate());
+    var tm = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
+    var t1 = window.__ggTide.at(tm.getFullYear(), tm.getMonth(), tm.getDate());
+    var msg;
+    if(t0.strength >= 78) msg = '🌊 오늘은 <b>사리</b> 물때(' + t0.label + ')입니다 — 갯벌 노출이 가장 큰 날이니 물때표와 안전수칙을 먼저 확인하세요.';
+    else if(t1.strength >= 78) msg = '⏰ 내일은 <b>사리</b> 물때(' + t1.label + ')입니다. 조사님, 채비 점검하십시오!';
+    else if(t0.strength < 45) msg = '🌙 오늘은 <b>조금</b> 물때(' + t0.label + ') — 물흐름이 잔잔한 날이에요.';
+    else msg = '🌙 오늘은 <b>' + t0.label + '</b> 물때(세기 ' + t0.strength + '%) · 내일은 ' + t1.label + '입니다.';
+    el.innerHTML = msg + ' <a href="#tides">물때 계산기 ›</a> <span style="color:var(--ink-soft);font-size:.76rem;">(서해·인천 기준 · 페이지를 열 때 계산)</span>';
+    el.hidden = false;
+  }catch(e){}
+})();
+
+/* ---------- Lab: 조행 노트 & 어복 측정기 ---------- */
+(function(){
+  try{
+    var root = document.getElementById('lab');
+    if(!root) return;
+    var FONT = '"Noto Sans KR", sans-serif';
+
+    function $(id){ return document.getElementById(id); }
+    function esc(s){
+      return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+    }
+    function lsGet(key, def){
+      try{ var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; }catch(e){ return def; }
+    }
+    function lsSet(key, val){
+      try{ localStorage.setItem(key, JSON.stringify(val)); return true; }catch(e){ return false; }
+    }
+    function unlock(id){ if(window.__ggUnlockBadge) window.__ggUnlockBadge(id); }
+    function refreshRank(){ if(window.__ggRenderBadges) window.__ggRenderBadges(); }
+    function pad2(n){ return n < 10 ? '0' + n : '' + n; }
+    function todayISO(){ var d = new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+    function fmtKr(iso){ var p = iso.split('-'); return p.length === 3 ? p[0] + '.' + p[1] + '.' + p[2] : iso; }
+    function fmtTs(ts){ var d = new Date(ts); return d.getFullYear() + '.' + pad2(d.getMonth() + 1) + '.' + pad2(d.getDate()); }
+    function confetti(btn, n){
+      if(window.__pmCelebrate && btn){ var r = btn.getBoundingClientRect(); window.__pmCelebrate(r.left + r.width / 2, r.top, n || 8); }
+    }
+    function downloadBlob(blob, name){
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    }
+    function downloadCanvas(canvas, name){
+      canvas.toBlob(function(blob){ if(blob) downloadBlob(blob, name); }, 'image/png');
+    }
+    function shareCanvas(canvas, text, title, btn, name, onDone){
+      canvas.toBlob(function(blob){
+        if(!blob) return;
+        var file = new File([blob], name, {type:'image/png'});
+        if(navigator.canShare && navigator.canShare({files:[file]})){
+          navigator.share({files:[file], text:text, title:title}).then(function(){ confetti(btn, 12); if(onDone) onDone(); }).catch(function(){});
+        } else {
+          downloadBlob(blob, name);
+          if(text && navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).catch(function(){}); }
+          alert('이 브라우저·기기는 바로 공유를 지원하지 않아 카드 이미지를 다운로드했어요' + (text ? ' (문구는 클립보드에 복사)' : '') + '. 앱에서 직접 올려주세요.');
+          if(onDone) onDone();
+        }
+      }, 'image/png');
+    }
+    function roundRectPath(c, x, y, w, h, r){
+      c.beginPath(); c.moveTo(x + r, y);
+      c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+      c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+    }
+    function wrapLines(c, text, maxW){
+      var chars = Array.from(text), lines = [], line = '';
+      chars.forEach(function(ch){
+        var t = line + ch;
+        if(c.measureText(t).width > maxW && line){ lines.push(line); line = ch; } else { line = t; }
+      });
+      if(line) lines.push(line);
+      return lines;
+    }
+    function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+    /* ---- 탭 ---- */
+    var tabBtns = root.querySelectorAll('#labTabs button');
+    Array.prototype.forEach.call(tabBtns, function(btn){
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(tabBtns, function(b){ b.classList.remove('active'); });
+        Array.prototype.forEach.call(root.querySelectorAll('.lab-pane'), function(p){ p.classList.remove('active'); });
+        btn.classList.add('active');
+        var pane = $(btn.getAttribute('data-pane'));
+        if(pane) pane.classList.add('active');
+        if(btn.getAttribute('data-pane') === 'labBackup') renderBackupStats();
+      });
+    });
+
+    /* ---- 도감 연동 ---- */
+    var speciesRows = Array.prototype.slice.call(document.querySelectorAll('#speciesTable tbody tr'));
+    var dl = $('msSpeciesList');
+    if(dl){ dl.innerHTML = speciesRows.map(function(r){ return '<option value="' + esc(r.children[1].textContent.trim()) + '">'; }).join(''); }
+    function findRow(name){
+      var key = (name || '').trim();
+      if(!key) return null;
+      var exact = null, loose = null;
+      speciesRows.forEach(function(r){
+        var rn = r.children[1].textContent.replace(/\(.+?\)/g, '').trim();
+        if(!rn) return;
+        if(rn === key && !exact) exact = r;
+        else if((key.indexOf(rn) !== -1 || rn.indexOf(key) !== -1) && !loose) loose = r;
+      });
+      return exact || loose;
+    }
+    function minLenOf(row){
+      var m = /(\d+(?:\.\d+)?)\s*cm/.exec(row.children[6].textContent);
+      return m ? parseFloat(m[1]) : null;
+    }
+    function tideOn(iso){
+      var p = iso.split('-');
+      return window.__ggTide ? window.__ggTide.at(+p[0], +p[1] - 1, +p[2]) : {label:'-', strength:50, tier:''};
+    }
+
+    /* =========================================================
+       1) 어복 측정기
+       ========================================================= */
+    var ms = { img:null, pts:[] };
+    var msCanvas = $('msCanvas'), msCtx = msCanvas.getContext('2d');
+    var cardCanvas = $('msCard'), cardCtx = cardCanvas.getContext('2d');
+    var MS_STEPS = [
+      '① 기준 물체의 한쪽 끝을 탭하세요',
+      '② 기준 물체의 반대쪽 끝을 탭하세요',
+      '③ 물고기 입 끝을 탭하세요',
+      '④ 물고기 꼬리 끝(전장)을 탭하세요',
+      '✅ 측정 완료 — 아래에서 어종·장소를 입력하고 카드를 만들어보세요'
+    ];
+
+    function refCm(){
+      var sel = $('msRef').value;
+      if(sel === 'custom') return parseFloat($('msRefCustom').value) || 0;
+      return parseFloat(sel);
+    }
+    function dist(a, b){ return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)); }
+
+    function msDraw(){
+      if(!ms.img) return;
+      var c = msCanvas, ctx = msCtx;
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.drawImage(ms.img, 0, 0, c.width, c.height);
+      var lw = Math.max(2, c.width * 0.004), rad = Math.max(6, c.width * 0.012);
+      function seg(a, b, color){
+        ctx.lineWidth = lw * 2.2; ctx.strokeStyle = 'rgba(0,0,0,.55)';
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        ctx.lineWidth = lw; ctx.strokeStyle = color;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      if(ms.pts.length >= 2) seg(ms.pts[0], ms.pts[1], '#FFC247');
+      if(ms.pts.length >= 4) seg(ms.pts[2], ms.pts[3], '#FF5A3C');
+      ms.pts.forEach(function(p, i){
+        var color = i < 2 ? '#FFC247' : '#FF5A3C';
+        ctx.beginPath(); ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
+        ctx.fillStyle = color; ctx.fill();
+        ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+        ctx.fillStyle = '#1a1300'; ctx.font = '700 ' + Math.round(rad * 1.2) + 'px ' + FONT;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(String(i + 1), p.x, p.y + 1);
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      });
+    }
+
+    function msUpdate(){
+      msDraw();
+      $('msStep').textContent = MS_STEPS[Math.min(ms.pts.length, 4)];
+      if(ms.pts.length === 4){
+        var rc = refCm(), pxRef = dist(ms.pts[0], ms.pts[1]), pxFish = dist(ms.pts[2], ms.pts[3]);
+        if(rc > 0 && pxRef > 5){
+          $('msLen').value = (pxFish / pxRef * rc).toFixed(1);
+        } else {
+          $('msLen').value = '';
+          $('msStep').textContent = '⚠️ 기준 물체 길이를 입력하거나 기준 물체의 두 점을 더 멀리 찍어주세요';
+        }
+        $('msForm').hidden = false;
+        msRefreshAll();
+      } else {
+        $('msForm').hidden = true;
+      }
+    }
+
+    function msLoad(file){
+      if(!file || !/^image\//.test(file.type)) return;
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var img = new Image();
+        img.onload = function(){
+          var scale = Math.min(1, 900 / img.naturalWidth);
+          msCanvas.width = Math.round(img.naturalWidth * scale);
+          msCanvas.height = Math.round(img.naturalHeight * scale);
+          ms.img = img; ms.pts = [];
+          $('msEditor').hidden = false;
+          if(!$('msDate').value) $('msDate').value = todayISO();
+          msUpdate();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    $('msFile').addEventListener('change', function(){ if(this.files && this.files[0]) msLoad(this.files[0]); });
+    var msDrop = $('msDrop');
+    ['dragover', 'dragenter'].forEach(function(ev){ msDrop.addEventListener(ev, function(e){ e.preventDefault(); msDrop.classList.add('dragover'); }); });
+    ['dragleave', 'drop'].forEach(function(ev){ msDrop.addEventListener(ev, function(e){ e.preventDefault(); msDrop.classList.remove('dragover'); }); });
+    msDrop.addEventListener('drop', function(e){ if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) msLoad(e.dataTransfer.files[0]); });
+
+    msCanvas.addEventListener('pointerdown', function(e){
+      if(!ms.img || ms.pts.length >= 4) return;
+      var r = msCanvas.getBoundingClientRect();
+      if(!r.width || !r.height) return;
+      ms.pts.push({ x:(e.clientX - r.left) * msCanvas.width / r.width, y:(e.clientY - r.top) * msCanvas.height / r.height });
+      msUpdate();
+      e.preventDefault();
+    });
+    $('msUndo').addEventListener('click', function(){ if(ms.pts.length){ ms.pts.pop(); msUpdate(); } });
+    $('msReset').addEventListener('click', function(){ ms.pts = []; msUpdate(); });
+    $('msRef').addEventListener('change', function(){
+      $('msRefCustom').hidden = this.value !== 'custom';
+      if(ms.pts.length === 4) msUpdate();
+    });
+    $('msRefCustom').addEventListener('input', function(){ if(ms.pts.length === 4) msUpdate(); });
+
+    function gradeOf(total){
+      if(total >= 85) return {g:'S', title:'물때를 찢은 자', color:'#FFC247', fg:'#2b1d00'};
+      if(total >= 70) return {g:'A', title:'어복 충만', color:'#4CC9A0', fg:'#06281e'};
+      if(total >= 50) return {g:'B', title:'무난한 조과', color:'#5AA9E6', fg:'#06223a'};
+      if(total >= 30) return {g:'C', title:'손맛은 봤다', color:'#B0B7C3', fg:'#1d2229'};
+      return {g:'D', title:'그래도 사진은 남았다', color:'#8A8F99', fg:'#ffffff'};
+    }
+    function computeScore(){
+      var len = parseFloat($('msLen').value);
+      var species = $('msSpecies').value.trim();
+      var iso = $('msDate').value || todayISO();
+      var tide = tideOn(iso);
+      var row = findRow(species), min = row ? minLenOf(row) : null;
+      var res = { len:len, species:species, iso:iso, tide:tide, min:min, row:row, valid:len > 0 };
+      if(!res.valid) return res;
+      if(min){
+        res.ratio = len / min;
+        if(len < min){
+          res.under = true; res.total = 0;
+          res.grade = {g:'방', title:'방생 대상 — 착한 조사님', color:'#7FD1AE', fg:'#06281e'};
+          return res;
+        }
+        res.sizeScore = Math.min(100, Math.round((res.ratio - 1) * 100));
+        res.total = Math.round(tide.strength * 0.4 + res.sizeScore * 0.6);
+      } else {
+        res.total = tide.strength;
+      }
+      res.grade = gradeOf(res.total);
+      return res;
+    }
+
+    function renderScoreChips(s){
+      var el = $('msScore');
+      if(!s.valid){ el.innerHTML = ''; return; }
+      var html = '<span class="ms-chip"><b>' + s.grade.g + '</b> ' + esc(s.grade.title) + (s.under ? '' : ' · 어복 지수 <b>' + s.total + '</b>') + '</span>' +
+                 '<span class="ms-chip">🌊 ' + esc(s.tide.label) + ' · 물때세기 <b>' + s.tide.strength + '%</b></span>';
+      if(s.min){
+        html += s.under
+          ? '<span class="ms-chip warn">⚠️ 도감 금지체장 ' + s.min + 'cm 미만 — 방생 대상입니다(고시 재확인)</span>'
+          : '<span class="ms-chip">금지체장 ' + s.min + 'cm 대비 <b>' + s.ratio.toFixed(1) + '배</b></span>';
+      } else {
+        html += '<span class="ms-chip">' + (s.row ? '도감에 금지체장 수치가 없어 물때만 반영' : '도감에 없는 어종이라 물때만 반영') + '</span>';
+      }
+      el.innerHTML = html;
+    }
+
+    function renderCard(){
+      var s = computeScore();
+      renderScoreChips(s);
+      var c = cardCtx, W = 900, H = 1125;
+      c.clearRect(0, 0, W, H);
+      var bg = c.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, '#0E3B4A'); bg.addColorStop(1, '#0A2530');
+      c.fillStyle = bg; c.fillRect(0, 0, W, H);
+      if(!ms.img || !s.valid) return;
+
+      // 사진(측정선 포함) cover 크롭
+      var px = 40, py = 40, pw = 820, ph = 560;
+      c.save(); roundRectPath(c, px, py, pw, ph, 28); c.clip();
+      var sr = msCanvas.width / msCanvas.height, tr = pw / ph, sx = 0, sy = 0, sw = msCanvas.width, sh = msCanvas.height;
+      if(sr > tr){ sw = sh * tr; sx = (msCanvas.width - sw) / 2; } else { sh = sw / tr; sy = (msCanvas.height - sh) / 2; }
+      c.drawImage(msCanvas, sx, sy, sw, sh, px, py, pw, ph);
+      c.restore();
+
+      c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+      // 어종
+      var name = s.species || '이름 모를 대물';
+      var fs = 64; c.font = '800 ' + fs + 'px ' + FONT;
+      while(c.measureText(name).width > 540 && fs > 30){ fs -= 2; c.font = '800 ' + fs + 'px ' + FONT; }
+      c.fillStyle = '#ffffff'; c.fillText(name, 60, 690);
+      // 길이
+      c.font = '800 150px ' + FONT; c.fillStyle = '#FFC247';
+      var lenTxt = s.len.toFixed(1);
+      c.fillText(lenTxt, 60, 830);
+      var lw = c.measureText(lenTxt).width;
+      c.font = '700 54px ' + FONT; c.fillStyle = '#ffffff'; c.fillText('cm', 70 + lw, 830);
+      // 등급 원
+      c.beginPath(); c.arc(730, 735, 100, 0, Math.PI * 2); c.fillStyle = s.grade.color; c.fill();
+      c.lineWidth = 6; c.strokeStyle = 'rgba(255,255,255,.85)'; c.stroke();
+      c.fillStyle = s.grade.fg; c.textAlign = 'center';
+      c.font = '900 ' + (s.grade.g.length > 1 ? 84 : 120) + 'px ' + FONT; c.fillText(s.grade.g, 730, s.grade.g.length > 1 ? 765 : 775);
+      c.font = '700 22px ' + FONT; c.fillText(s.under ? '방생' : '어복 ' + s.total, 730, 815);
+      c.textAlign = 'left';
+      // 보조 정보
+      c.fillStyle = 'rgba(255,255,255,.92)'; c.font = '700 36px ' + FONT;
+      c.fillText(s.grade.title, 60, 900);
+      c.fillStyle = 'rgba(255,255,255,.78)'; c.font = '500 30px ' + FONT;
+      c.fillText('🌊 ' + s.tide.label + ' 물때 · 세기 ' + s.tide.strength + '%', 60, 950);
+      var meta = fmtKr(s.iso) + ($('msPlace').value.trim() ? '  ·  ' + $('msPlace').value.trim() : '');
+      c.fillText(meta, 60, 998);
+      if(s.min){
+        c.fillText(s.under ? '금지체장 ' + s.min + 'cm 미만 — 방생해주세요 🙏' : '금지체장 ' + s.min + 'cm의 ' + s.ratio.toFixed(1) + '배', 60, 1046);
+      }
+      c.fillStyle = 'rgba(255,255,255,.5)'; c.font = '500 22px ' + FONT;
+      c.fillText('수동 측정(자기 신고) · 어복 지수는 재미용 · 갯것 대백과', 60, 1092);
+    }
+
+    function msRefreshAll(){ renderCard(); }
+    ['msSpecies', 'msLen', 'msPlace', 'msDate'].forEach(function(id){
+      $(id).addEventListener('input', msRefreshAll);
+      $(id).addEventListener('change', msRefreshAll);
+    });
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ if(ms.pts.length === 4) renderCard(); }); }
+
+    function msShareText(s){
+      return (s.species || '오늘의 대물') + ' ' + s.len.toFixed(1) + 'cm — 어복 ' + s.grade.g + '급 · ' + s.grade.title + ' #어복측정 #낚시스타그램 #갯것대백과';
+    }
+    function markMeasured(s){
+      unlock('measured');
+      if(s.grade && s.grade.g === 'S') unlock('grade_s');
+      refreshRank();
+    }
+    $('msDownload').addEventListener('click', function(){
+      var s = computeScore(); if(!s.valid) return;
+      renderCard(); downloadCanvas(cardCanvas, 'ggd-eobok-' + s.iso + '.png'); markMeasured(s); confetti(this, 12);
+    });
+    $('msShare').addEventListener('click', function(){
+      var s = computeScore(); if(!s.valid) return;
+      renderCard(); shareCanvas(cardCanvas, msShareText(s), '갯것 대백과 어복 측정 카드', this, 'ggd-eobok.png', function(){ markMeasured(s); });
+    });
+    $('msSave').addEventListener('click', function(){
+      var s = computeScore(); if(!s.valid) return;
+      var log = lsGet('gg_catch_log', []);
+      log.push({ ts:Date.now(), species:s.species, len:+s.len.toFixed(1), total:s.total, g:s.grade.g, place:$('msPlace').value.trim(), date:s.iso });
+      if(log.length > 200) log = log.slice(-200);
+      lsSet('gg_catch_log', log);
+      markMeasured(s); renderCatchLog(); confetti(this, 14);
+    });
+
+    function renderCatchLog(){
+      var log = lsGet('gg_catch_log', []).slice().sort(function(a, b){ return b.ts - a.ts; }).slice(0, 8);
+      $('msLog').innerHTML = log.length ? log.map(function(it){
+        return '<div class="lab-list-item"><div class="li-head"><span>' + esc(it.species || '이름 없음') + ' ' + esc(it.len) + 'cm · ' + esc(it.g) + (it.g === '방' ? '' : '급(' + esc(it.total) + ')') + '</span>' +
+          '<button type="button" class="pm-copy-btn" data-del-catch="' + esc(it.ts) + '">삭제</button></div>' +
+          '<div class="li-meta">' + esc(it.date || fmtTs(it.ts)) + (it.place ? ' · ' + esc(it.place) : '') + '</div></div>';
+      }).join('') : '<p class="lab-note">아직 저장한 조과가 없어요.</p>';
+    }
+    $('msLog').addEventListener('click', function(e){
+      var t = e.target.getAttribute && e.target.getAttribute('data-del-catch');
+      if(!t) return;
+      lsSet('gg_catch_log', lsGet('gg_catch_log', []).filter(function(it){ return String(it.ts) !== t; }));
+      renderCatchLog(); refreshRank();
+    });
+
+    /* =========================================================
+       2) 꽝 로그
+       ========================================================= */
+    var EXCUSES = [
+      '바람이 너무 불어서', '옆 조사님 라인이 걸려서', '물때가 안 맞아서', '용왕님이 휴가 중이라서',
+      '수온이 갑자기 떨어져서', '미끼가 마음에 안 들었나 봐요', '고기가 어제 다 먹고 갔대요', '채비가 문제였던 것 같다',
+      '달이 너무 밝아서', '포인트를 잘못 골랐다', '사실 구경하러 온 거라서', '오늘은 낚시 아니고 힐링'
+    ];
+    var COMFORTS = [
+      '물고기도 오늘은 쉬는 날이었나 봅니다. 내일은 당신 차례예요.',
+      '꽝은 대물을 만나기 위한 예열입니다 🔥',
+      '바다는 거짓말을 안 해요. 대신 타이밍을 숨길 뿐이죠.',
+      '조과는 없어도 바닷바람은 공짜로 얻었잖아요 🌊',
+      '오늘의 꽝이 내일의 월척을 만듭니다. (아마도)',
+      '따뜻한 컵라면 한 그릇이면 꽝도 반쯤 잊혀집니다 🍜',
+      '프로는 꽝도 기록합니다. 당신은 이미 프로예요 📒',
+      '변수가 너무 많았어요 — 바람, 물때, 용왕님… 당신 탓이 아닙니다.',
+      '다음엔 이 자리를 내 포인트 노트에 적어두세요 📍',
+      '잡은 고기는 없어도 쓰레기는 주워 오셨길… 🌱'
+    ];
+    var kkSel = $('kkExcuse');
+    kkSel.innerHTML = EXCUSES.map(function(x){ return '<option>' + esc(x) + '</option>'; }).join('');
+    $('kkRandom').addEventListener('click', function(){ kkSel.selectedIndex = Math.floor(Math.random() * EXCUSES.length); renderKkCard(); });
+    kkSel.addEventListener('change', renderKkCard);
+    ['kkPlace', 'kkDate', 'kkMemo'].forEach(function(id){ $(id).addEventListener('input', renderKkCard); $(id).addEventListener('change', renderKkCard); });
+
+    function kkStats(){
+      var kk = lsGet('gg_kk_log', []), items = [];
+      lsGet('gg_catch_log', []).forEach(function(c){ items.push({ts:c.ts, t:'c'}); });
+      kk.forEach(function(k){ items.push({ts:k.ts, t:'k'}); });
+      items.sort(function(a, b){ return a.ts - b.ts; });
+      var streak = 0;
+      for(var i = items.length - 1; i >= 0; i--){ if(items[i].t === 'k') streak++; else break; }
+      var counts = {}, top = null, topN = 0;
+      kk.forEach(function(k){ counts[k.excuse] = (counts[k.excuse] || 0) + 1; if(counts[k.excuse] > topN){ topN = counts[k.excuse]; top = k.excuse; } });
+      return { total:kk.length, streak:streak, top:top, topN:topN };
+    }
+    function kkTitle(st){
+      if(st.streak >= 3) return '🏷️ 꽝치기 전문';
+      if(st.total >= 10) return '🏆 용왕님 외면 수상자';
+      if(st.total >= 1) return '😭 첫 꽝 입문';
+      return '';
+    }
+    function renderKkStats(){
+      var st = kkStats(), title = kkTitle(st);
+      $('kkStats').innerHTML = '<span class="ms-chip">통산 꽝 <b>' + st.total + '</b>회</span>' +
+        '<span class="ms-chip">현재 연속 <b>' + st.streak + '</b>회</span>' +
+        (st.top ? '<span class="ms-chip">최다 핑계 <b>' + esc(st.top) + '</b> (' + st.topN + '회)</span>' : '') +
+        (title ? '<span class="ms-chip"><b>' + title + '</b></span>' : '');
+    }
+    function renderKkLog(){
+      var log = lsGet('gg_kk_log', []).slice().sort(function(a, b){ return b.ts - a.ts; }).slice(0, 8);
+      $('kkLog').innerHTML = log.length ? log.map(function(it){
+        return '<div class="lab-list-item"><div class="li-head"><span>' + esc(it.excuse) + '</span>' +
+          '<button type="button" class="pm-copy-btn" data-del-kk="' + esc(it.ts) + '">삭제</button></div>' +
+          '<div class="li-meta">' + esc(it.date || fmtTs(it.ts)) + (it.place ? ' · ' + esc(it.place) : '') + (it.memo ? ' · ' + esc(it.memo) : '') + '</div></div>';
+      }).join('') : '<p class="lab-note">아직 꽝 기록이 없어요. (없는 게 제일 좋죠 🙂)</p>';
+    }
+    $('kkLog').addEventListener('click', function(e){
+      var t = e.target.getAttribute && e.target.getAttribute('data-del-kk');
+      if(!t) return;
+      lsSet('gg_kk_log', lsGet('gg_kk_log', []).filter(function(it){ return String(it.ts) !== t; }));
+      renderKkLog(); renderKkStats(); renderKkCard(); refreshRank();
+    });
+    var currentComfort = COMFORTS[0];
+    function renderKkCard(){
+      var c = $('kkCard').getContext('2d'), W = 900, H = 900;
+      var bg = c.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, '#26324A'); bg.addColorStop(1, '#10151F');
+      c.fillStyle = bg; c.fillRect(0, 0, W, H);
+      c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+      c.font = '200px ' + FONT; c.fillStyle = '#fff'; c.fillText('😭', W / 2, 260);
+      c.font = '900 110px ' + FONT; c.fillStyle = '#FFC247'; c.fillText('오늘도 꽝!', W / 2, 410);
+      var excuse = '“' + kkSel.value + '”';
+      c.font = '700 46px ' + FONT; c.fillStyle = '#ffffff';
+      var y = 500;
+      wrapLines(c, excuse, 760).slice(0, 3).forEach(function(line){ c.fillText(line, W / 2, y); y += 62; });
+      var iso = $('kkDate').value || todayISO(), place = $('kkPlace').value.trim();
+      c.font = '500 30px ' + FONT; c.fillStyle = 'rgba(255,255,255,.75)';
+      c.fillText(fmtKr(iso) + (place ? '  ·  ' + place : ''), W / 2, y + 20);
+      var st = kkStats();
+      c.fillText('통산 꽝 ' + st.total + '회 · 연속 ' + st.streak + '회', W / 2, y + 66);
+      c.font = '500 28px ' + FONT; c.fillStyle = 'rgba(255,255,255,.9)';
+      var cy = y + 130;
+      wrapLines(c, currentComfort, 780).slice(0, 2).forEach(function(line){ c.fillText(line, W / 2, cy); cy += 40; });
+      c.font = '500 22px ' + FONT; c.fillStyle = 'rgba(255,255,255,.45)';
+      c.fillText('갯것 대백과 · 꽝 로그', W / 2, H - 36);
+      c.textAlign = 'left';
+    }
+    $('kkSave').addEventListener('click', function(){
+      var log = lsGet('gg_kk_log', []);
+      log.push({ ts:Date.now(), excuse:kkSel.value, place:$('kkPlace').value.trim(), date:$('kkDate').value || todayISO(), memo:$('kkMemo').value.trim() });
+      if(log.length > 200) log = log.slice(-200);
+      lsSet('gg_kk_log', log);
+      unlock('kk_first');
+      if(kkStats().streak >= 3) unlock('kk_streak3');
+      currentComfort = pick(COMFORTS);
+      $('kkComfortOut').textContent = currentComfort;
+      renderKkLog(); renderKkStats(); renderKkCard(); refreshRank();
+    });
+    $('kkComfort').addEventListener('click', function(){
+      currentComfort = pick(COMFORTS);
+      $('kkComfortOut').textContent = '🍶 ' + currentComfort;
+      renderKkCard(); confetti(this, 6);
+    });
+    $('kkDownload').addEventListener('click', function(){ renderKkCard(); downloadCanvas($('kkCard'), 'ggd-kkwang.png'); });
+    $('kkShare').addEventListener('click', function(){
+      renderKkCard();
+      shareCanvas($('kkCard'), '오늘의 꽝 핑계: ' + kkSel.value + ' #꽝 #낚시스타그램 #갯것대백과', '갯것 대백과 꽝 카드', this, 'ggd-kkwang.png');
+    });
+
+    /* =========================================================
+       3) 내 포인트 (비공개 노트)
+       ========================================================= */
+    function renderPoints(){
+      var pts = lsGet('gg_points', []).slice().sort(function(a, b){ return b.ts - a.ts; });
+      $('ptList').innerHTML = pts.length ? pts.map(function(p){
+        var hasCoord = typeof p.lat === 'number' && typeof p.lng === 'number';
+        return '<div class="lab-list-item"><div class="li-head"><span>📍 ' + esc(p.name) + '</span></div>' +
+          '<div class="li-meta">' + esc(p.region || '지역 미입력') + (p.species ? ' · ' + esc(p.species) : '') + ' · ' + fmtTs(p.ts) + '</div>' +
+          (p.memo ? '<div class="li-meta">' + esc(p.memo) + '</div>' : '') +
+          '<div class="li-actions">' +
+            (hasCoord ? '<button type="button" class="pm-copy-btn" data-reveal="' + esc(p.id) + '">좌표 보기</button><span class="li-meta" data-coord="' + esc(p.id) + '">●●.●●●●●, ●●●.●●●●●</span>' : '<span class="li-meta">좌표 없음</span>') +
+            '<button type="button" class="pm-copy-btn" data-del-pt="' + esc(p.id) + '">삭제</button>' +
+          '</div></div>';
+      }).join('') : '<p class="lab-note">아직 저장한 포인트가 없어요.</p>';
+    }
+    $('ptList').addEventListener('click', function(e){
+      var tgt = e.target;
+      if(!tgt.getAttribute) return;
+      var rv = tgt.getAttribute('data-reveal'), del = tgt.getAttribute('data-del-pt');
+      if(rv){
+        var p = lsGet('gg_points', []).filter(function(x){ return String(x.id) === rv; })[0];
+        var span = $('ptList').querySelector('[data-coord="' + rv + '"]');
+        if(!p || !span) return;
+        var shown = tgt.getAttribute('data-shown') === '1';
+        if(shown){
+          span.textContent = '●●.●●●●●, ●●●.●●●●●'; tgt.textContent = '좌표 보기'; tgt.setAttribute('data-shown', '0');
+        } else {
+          span.innerHTML = esc(p.lat.toFixed(5) + ', ' + p.lng.toFixed(5)) + ' · <a href="https://www.google.com/maps?q=' + encodeURIComponent(p.lat + ',' + p.lng) + '" target="_blank" rel="noopener">지도에서 열기</a>';
+          tgt.textContent = '좌표 숨기기'; tgt.setAttribute('data-shown', '1');
+        }
+      } else if(del){
+        lsSet('gg_points', lsGet('gg_points', []).filter(function(x){ return String(x.id) !== del; }));
+        renderPoints(); refreshRank();
+      }
+    });
+    $('ptGeo').addEventListener('click', function(){
+      var msg = $('ptMsg');
+      if(!navigator.geolocation){ msg.textContent = '이 브라우저는 위치 기능을 지원하지 않아요. 좌표를 직접 입력해주세요.'; return; }
+      msg.textContent = '위치를 가져오는 중…';
+      navigator.geolocation.getCurrentPosition(function(pos){
+        $('ptLat').value = pos.coords.latitude.toFixed(5);
+        $('ptLng').value = pos.coords.longitude.toFixed(5);
+        msg.textContent = '현재 위치를 채웠어요. (이 값은 기기 밖으로 나가지 않습니다)';
+      }, function(){
+        msg.textContent = '위치를 가져오지 못했어요. 브라우저 위치 권한을 확인하거나 직접 입력해주세요.';
+      }, { enableHighAccuracy:true, timeout:10000 });
+    });
+    $('ptSave').addEventListener('click', function(){
+      var msg = $('ptMsg'), name = $('ptName').value.trim();
+      if(!name){ msg.textContent = '포인트 이름을 입력해주세요.'; return; }
+      var latStr = $('ptLat').value.trim(), lngStr = $('ptLng').value.trim(), lat = null, lng = null;
+      if(latStr || lngStr){
+        lat = parseFloat(latStr); lng = parseFloat(lngStr);
+        if(!(lat >= -90 && lat <= 90) || !(lng >= -180 && lng <= 180)){ msg.textContent = '좌표 범위가 올바르지 않아요 (위도 -90~90, 경도 -180~180).'; return; }
+      }
+      var pts = lsGet('gg_points', []);
+      var rec = { id:Date.now(), ts:Date.now(), name:name, region:$('ptRegion').value.trim(), species:$('ptSpecies').value.trim(), memo:$('ptMemo').value.trim() };
+      if(lat !== null){ rec.lat = lat; rec.lng = lng; }
+      pts.push(rec);
+      if(pts.length > 300) pts = pts.slice(-300);
+      lsSet('gg_points', pts);
+      ['ptName', 'ptRegion', 'ptSpecies', 'ptLat', 'ptLng', 'ptMemo'].forEach(function(id){ $(id).value = ''; });
+      msg.textContent = '저장했어요. 좌표는 목록에서 가려진 채로 보관됩니다.';
+      unlock('point_keeper'); renderPoints(); refreshRank();
+    });
+
+    /* =========================================================
+       4) 채비 레시피
+       ========================================================= */
+    var RC_FIELDS = [['rcRod', '로드'], ['rcReel', '릴'], ['rcLine', '라인'], ['rcRig', '채비·루어'], ['rcBait', '미끼'], ['rcResult', '결과'], ['rcMemo', '메모']];
+    function recipeText(r){
+      var lines = ['🎣 [' + (r.species || '채비 레시피') + ']'];
+      RC_FIELDS.forEach(function(f){ if(r[f[0]]) lines.push(f[1] + ': ' + r[f[0]]); });
+      lines.push('#채비레시피 #갯것대백과');
+      return lines.join('\n');
+    }
+    function renderRecipes(){
+      var rc = lsGet('gg_recipes', []).slice().sort(function(a, b){ return b.ts - a.ts; });
+      $('rcList').innerHTML = rc.length ? rc.map(function(r){
+        var body = RC_FIELDS.filter(function(f){ return r[f[0]]; }).map(function(f){ return f[1] + ': ' + esc(r[f[0]]); }).join(' · ');
+        return '<div class="lab-list-item"><div class="li-head"><span>🧰 ' + esc(r.species || '이름 없음') + '</span></div>' +
+          '<div class="li-meta">' + body + '</div>' +
+          '<div class="li-actions"><button type="button" class="pm-copy-btn" data-copy-rc="' + esc(r.ts) + '">텍스트 복사</button><button type="button" class="pm-copy-btn" data-del-rc="' + esc(r.ts) + '">삭제</button></div></div>';
+      }).join('') : '<p class="lab-note">아직 저장한 레시피가 없어요.</p>';
+    }
+    $('rcList').addEventListener('click', function(e){
+      var tgt = e.target;
+      if(!tgt.getAttribute) return;
+      var cp = tgt.getAttribute('data-copy-rc'), del = tgt.getAttribute('data-del-rc');
+      if(cp){
+        var r = lsGet('gg_recipes', []).filter(function(x){ return String(x.ts) === cp; })[0];
+        if(r && navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(recipeText(r)).then(function(){ tgt.textContent = '복사됨!'; setTimeout(function(){ tgt.textContent = '텍스트 복사'; }, 1400); }).catch(function(){});
+        }
+      } else if(del){
+        lsSet('gg_recipes', lsGet('gg_recipes', []).filter(function(x){ return String(x.ts) !== del; }));
+        renderRecipes(); refreshRank();
+      }
+    });
+    $('rcSave').addEventListener('click', function(){
+      var rec = { ts:Date.now(), species:$('rcSpecies').value.trim() };
+      var any = !!rec.species;
+      RC_FIELDS.forEach(function(f){ rec[f[0]] = $(f[0]).value.trim(); if(rec[f[0]]) any = true; });
+      if(!any) return;
+      var rc = lsGet('gg_recipes', []);
+      rc.push(rec);
+      if(rc.length > 200) rc = rc.slice(-200);
+      lsSet('gg_recipes', rc);
+      ['rcSpecies'].concat(RC_FIELDS.map(function(f){ return f[0]; })).forEach(function(id){ $(id).value = ''; });
+      unlock('recipe_writer'); renderRecipes(); refreshRank(); confetti(this, 8);
+    });
+
+    /* =========================================================
+       5) 백업·복원
+       ========================================================= */
+    var KEY_RE = /^gg_(badges|catch_log|kk_log|points|recipes|regcheck_count|checklist_.+)$/;
+    function renderBackupStats(){
+      $('bkStats').innerHTML = '<span class="ms-chip">조과 <b>' + lsGet('gg_catch_log', []).length + '</b>건</span>' +
+        '<span class="ms-chip">꽝 <b>' + lsGet('gg_kk_log', []).length + '</b>건</span>' +
+        '<span class="ms-chip">포인트 <b>' + lsGet('gg_points', []).length + '</b>곳</span>' +
+        '<span class="ms-chip">레시피 <b>' + lsGet('gg_recipes', []).length + '</b>개</span>' +
+        '<span class="ms-chip">뱃지 <b>' + Object.keys(lsGet('gg_badges', {})).length + '</b>개</span>';
+    }
+    function renderAll(){ renderCatchLog(); renderKkLog(); renderKkStats(); renderKkCard(); renderPoints(); renderRecipes(); renderBackupStats(); refreshRank(); }
+
+    $('bkExport').addEventListener('click', function(){
+      var data = {};
+      try{
+        for(var i = 0; i < localStorage.length; i++){
+          var k = localStorage.key(i);
+          if(KEY_RE.test(k)) data[k] = localStorage.getItem(k);
+        }
+      }catch(e){}
+      var payload = { app:'ggd', version:1, exportedAt:new Date().toISOString(), data:data };
+      downloadBlob(new Blob([JSON.stringify(payload)], {type:'application/json'}), 'ggd-backup-' + todayISO() + '.json');
+      $('bkMsg').textContent = Object.keys(data).length + '개 항목을 내보냈어요. 이 파일에는 포인트 좌표가 그대로 들어 있으니 남에게 보내지 마세요.';
+    });
+    $('bkImport').addEventListener('change', function(){
+      var file = this.files && this.files[0], input = this;
+      if(!file) return;
+      if(file.size > 2 * 1024 * 1024){ $('bkMsg').textContent = '파일이 너무 커요 (2MB 이하만 불러올 수 있어요).'; input.value = ''; return; }
+      var reader = new FileReader();
+      reader.onload = function(){
+        try{
+          var obj = JSON.parse(reader.result);
+          if(!obj || obj.app !== 'ggd' || typeof obj.data !== 'object' || obj.data === null) throw new Error('형식');
+          var keys = Object.keys(obj.data).filter(function(k){ return KEY_RE.test(k) && typeof obj.data[k] === 'string' && obj.data[k].length < 1000000; });
+          keys.forEach(function(k){ JSON.parse(obj.data[k]); });
+          if(!keys.length) throw new Error('비어 있음');
+          if(!confirm('백업 파일의 ' + keys.length + '개 항목으로 현재 기록을 덮어씁니다. 계속할까요?')){ input.value = ''; return; }
+          keys.forEach(function(k){ localStorage.setItem(k, obj.data[k]); });
+          $('bkMsg').textContent = keys.length + '개 항목을 복원했어요.';
+          renderAll();
+        }catch(err){
+          $('bkMsg').textContent = '올바른 백업 파일이 아니에요. 이 사이트에서 내보낸 JSON만 불러올 수 있어요.';
+        }
+        input.value = '';
+      };
+      reader.readAsText(file);
+    });
+    $('bkReset').addEventListener('click', function(){
+      if(!confirm('조과·꽝·포인트·레시피·뱃지·체크리스트 기록을 모두 삭제합니다. 되돌릴 수 없어요. 계속할까요?')) return;
+      try{
+        var del = [];
+        for(var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if(KEY_RE.test(k)) del.push(k); }
+        del.forEach(function(k){ localStorage.removeItem(k); });
+      }catch(e){}
+      $('bkMsg').textContent = '모든 기록을 삭제했어요.';
+      renderAll();
+    });
+
+    /* ---- 초기화 ---- */
+    $('kkDate').value = todayISO();
+    $('msDate').value = todayISO();
+    renderAll();
+  }catch(e){ if(window.console) console.error(e); }
 })();
 </script>
