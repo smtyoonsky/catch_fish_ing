@@ -559,6 +559,20 @@
   .knot-controls{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
   .knot-progress{ font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--ink-soft); }
   .knot-controls button:disabled{ opacity:.4; cursor:default; }
+  .knot-videos{ margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
+  .knot-videos-label{ display:block; font-size:.8rem; font-weight:700; color:var(--tide); font-family:'IBM Plex Mono',monospace; margin-bottom:8px; }
+  .knot-video-btns{ display:flex; flex-direction:column; gap:6px; }
+  .knot-video-btn{
+    font:inherit; font-size:.82rem; text-align:left; padding:8px 12px; border-radius:9px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink);
+  }
+  .knot-video-btn:hover{ border-color:var(--sea); }
+  .knot-video-btn.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .knot-video-stage{ margin-top:10px; }
+  .knot-video-frame{ position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
+  .knot-video-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .knot-video-open{ display:inline-block; margin-top:6px; font-size:.78rem; }
+  .knot-video-note{ font-size:.74rem; color:var(--ink-soft); margin:8px 0 0; }
 
   /* ---------- Regcheck ---------- */
   .regcheck-box{ background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); margin:0 0 20px; }
@@ -2133,6 +2147,15 @@
               <span class="knot-progress">1 / 6</span>
               <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
             </div>
+            <div class="knot-videos">
+              <span class="knot-videos-label">🎬 영상으로 보기</span>
+              <div class="knot-video-btns">
+                <button type="button" class="knot-video-btn" data-yt="4pMxKv2V9vE" data-title="클린치 노트 (어신TV)">▶ 한국어 · 1:46 · 어신TV</button>
+                <button type="button" class="knot-video-btn" data-yt="2YO7JWNdVC0" data-title="Improved Clinch Knot (Fishing with Nat)">▶ English · 1:19 · 실제 손동작</button>
+              </div>
+              <div class="knot-video-stage" hidden></div>
+              <p class="knot-video-note">한국어 영상은 4~5회 감는 설명이고 위 글은 5~7회입니다(줄 굵기에 따라 다름). 영상은 각 채널의 YouTube 콘텐츠이며, 재생 버튼을 누르면 그때 YouTube에서 불러옵니다.</p>
+            </div>
           </div>
 
           <div class="knot-card">
@@ -2158,6 +2181,15 @@
               <span class="knot-progress">1 / 7</span>
               <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
             </div>
+            <div class="knot-videos">
+              <span class="knot-videos-label">🎬 영상으로 보기</span>
+              <div class="knot-video-btns">
+                <button type="button" class="knot-video-btn" data-yt="BOmuFen4Gx4" data-start="147" data-title="더블 유니 노트·전차매듭 (몽하비TV)">▶ 한국어 · 8:07 · 실습 구간부터 · 몽하비TV</button>
+                <button type="button" class="knot-video-btn" data-yt="wofuWhqnb3s" data-title="더블 유니 노트 6단계 (낚시한입)">▶ 한국어 · 0:46 · 합사+카본 요약</button>
+              </div>
+              <div class="knot-video-stage" hidden></div>
+              <p class="knot-video-note">이 매듭은 "전차매듭"이라고도 부릅니다. 합사는 미끄러워서 영상처럼 합사 쪽을 6~8회까지 더 많이 감는 경우가 많습니다(위 글의 3~5회는 최소 기준). 재생 버튼을 누르면 그때 YouTube에서 불러옵니다.</p>
+            </div>
           </div>
 
           <div class="knot-card">
@@ -2178,6 +2210,15 @@
               <button type="button" class="knot-prev pm-copy-btn">‹ 이전</button>
               <span class="knot-progress">1 / 5</span>
               <button type="button" class="knot-next pm-btn-secondary">다음 단계 ›</button>
+            </div>
+            <div class="knot-videos">
+              <span class="knot-videos-label">🎬 영상으로 보기</span>
+              <div class="knot-video-btns">
+                <button type="button" class="knot-video-btn" data-yt="NBz6bSKPo24" data-start="90" data-title="8자 매듭 따라하기 (핑크붕어낚시)">▶ 한국어 · 4:19 · 고리 설명은 1:30경부터</button>
+                <button type="button" class="knot-video-btn" data-yt="3k5SYb_2Dic" data-title="Figure 8 Loop (Fishing with Nat)">▶ English · 1:43 · 루어째 통과시키는 방식</button>
+              </div>
+              <div class="knot-video-stage" hidden></div>
+              <p class="knot-video-note">영어 영상은 같은 매듭을 줄 끝 대신 루어를 통과시켜 묶는 방식입니다. 한국어 영상은 붕어낚시 기준으로 설명합니다. 재생 버튼을 누르면 그때 YouTube에서 불러옵니다.</p>
             </div>
           </div>
         </div>
@@ -3585,6 +3626,12 @@
           <div class="src-group">
             <h4>낚시 기법 · 채비 상세</h4>
             <ul>
+              <li><a href="https://www.youtube.com/watch?v=4pMxKv2V9vE" target="_blank" rel="noopener">클린치 노트 — 어신TV (YouTube)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=2YO7JWNdVC0" target="_blank" rel="noopener">Improved Clinch Knot — Fishing with Nat (YouTube)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=BOmuFen4Gx4" target="_blank" rel="noopener">더블유니노트(전차매듭) — 몽하비TV (YouTube)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=wofuWhqnb3s" target="_blank" rel="noopener">더블 유니 노트 6단계 — 낚시한입 (YouTube)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=NBz6bSKPo24" target="_blank" rel="noopener">8자 매듭 따라하기 — 핑크붕어낚시 (YouTube)</a></li>
+              <li><a href="https://www.youtube.com/watch?v=3k5SYb_2Dic" target="_blank" rel="noopener">Figure 8 Loop — Fishing with Nat (YouTube)</a></li>
               <li><a href="https://klfishing.com/talk_new/bbs/board.php?bo_table=fishing_lecture_3&wr_id=134" target="_blank" rel="noopener">감성돔낚시채비 - 코러낚시</a></li>
               <li><a href="https://www.badatime.com/gearing/6" target="_blank" rel="noopener">참돔 낚시 채비 - 바다타임</a></li>
               <li><a href="https://fishdaily.kr/target/seabass-lure" target="_blank" rel="noopener">농어 루어낚시 공략 - 피쉬데일리</a></li>
@@ -5151,6 +5198,38 @@
       if(prevBtn) prevBtn.addEventListener('click', function(){ if(idx > 0){ idx--; render(); } });
       if(nextBtn) nextBtn.addEventListener('click', function(){ if(idx < total - 1){ idx++; render(); } });
       render();
+
+      // 영상: 버튼을 눌렀을 때만 YouTube(nocookie)를 불러온다
+      var stage = card.querySelector('.knot-video-stage');
+      var vBtns = card.querySelectorAll('.knot-video-btn');
+      Array.prototype.forEach.call(vBtns, function(btn){
+        btn.addEventListener('click', function(){
+          var id = btn.getAttribute('data-yt');
+          if(!stage || !/^[A-Za-z0-9_-]{11}$/.test(id || '')) return;
+          var start = parseInt(btn.getAttribute('data-start') || '0', 10) || 0;
+          var title = btn.getAttribute('data-title') || '매듭 영상';
+          Array.prototype.forEach.call(vBtns, function(b){ b.classList.toggle('active', b === btn); });
+          stage.innerHTML = '';
+          var frame = document.createElement('div');
+          frame.className = 'knot-video-frame';
+          var iframe = document.createElement('iframe');
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1' + (start ? '&start=' + start : '');
+          iframe.title = title;
+          iframe.loading = 'lazy';
+          iframe.allow = 'accelerometer; encrypted-media; picture-in-picture; fullscreen';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.setAttribute('allowfullscreen', '');
+          frame.appendChild(iframe);
+          var link = document.createElement('a');
+          link.className = 'knot-video-open';
+          link.href = 'https://www.youtube.com/watch?v=' + id + (start ? '&t=' + start + 's' : '');
+          link.target = '_blank'; link.rel = 'noopener';
+          link.textContent = '재생이 안 되면 YouTube에서 열기 ›';
+          stage.appendChild(frame);
+          stage.appendChild(link);
+          stage.hidden = false;
+        });
+      });
     });
   }catch(e){}
 })();
