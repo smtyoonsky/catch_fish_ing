@@ -658,6 +658,35 @@
   .luck-bars .lb-name{ width:74px; flex-shrink:0; }
   .luck-bars .lb-track{ flex:1; height:6px; border-radius:99px; background:var(--border); overflow:hidden; }
   .luck-bars .lb-fill{ height:100%; background:var(--sea); }
+
+  /* ---------- 바다 날씨 브리핑 ---------- */
+  .wx-card{ background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); margin:0 0 22px; }
+  .wx-controls{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .wx-label{ font-size:.8rem; color:var(--ink-soft); }
+  .wx-controls select{ font:inherit; padding:8px 10px; border-radius:9px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink); min-width:0; flex:1 1 180px; }
+  .wx-geo{ margin-top:0; padding:8px 12px; }
+  .wx-privacy{ font-size:.76rem; color:var(--ink-soft); margin:10px 0 0; }
+  .wx-status{ margin-top:12px; font-size:.88rem; color:var(--ink-soft); }
+  .wx-status.err{ color:var(--coral); font-weight:600; }
+  .wx-days{ display:flex; gap:8px; margin:14px 0 10px; }
+  .wx-days button{ font:inherit; font-size:.85rem; padding:7px 16px; border-radius:999px; cursor:pointer; border:1px solid var(--border-strong); background:var(--chip-bg); color:var(--ink-soft); }
+  .wx-days button.active{ background:var(--sea); color:#fff; border-color:var(--sea); }
+  .wx-verdict{ border-radius:12px; padding:12px 14px; border:1.5px solid var(--border-strong); background:var(--surface); margin-bottom:10px; }
+  .wx-verdict .wx-v-title{ font-weight:800; font-size:1.05rem; }
+  .wx-verdict .wx-v-sub{ font-size:.82rem; color:var(--ink-soft); margin-top:4px; }
+  .wx-verdict.good{ border-color:var(--sea); }
+  .wx-verdict.caution{ border-color:var(--amber); }
+  .wx-verdict.danger{ border-color:var(--coral); }
+  .wx-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .wx-chart-title{ font-size:.76rem; color:var(--ink-soft); margin:10px 0 4px; font-family:'IBM Plex Mono',monospace; }
+  .wx-chart svg{ width:100%; height:auto; display:block; }
+  .wx-chart text{ font-family:'IBM Plex Mono',monospace; font-size:10px; fill:var(--ink-soft); }
+  .wx-table{ min-width:0; font-size:.8rem; }
+  .wx-table th, .wx-table td{ text-align:center; padding:6px 4px; }
+  .wx-table td.wx-bad{ color:var(--coral); font-weight:700; }
+  .wx-table td.wx-mid{ color:var(--amber); font-weight:700; }
+  .wx-warn{ margin-top:14px; font-size:.78rem; color:var(--ink-soft); background:var(--surface-3); border-left:3px solid var(--amber); border-radius:8px; padding:10px 12px; }
+  .wx-credit{ font-size:.72rem; color:var(--ink-soft); margin:10px 0 0; }
 </style>
 
 <div id="pwGate" hidden>
@@ -2937,7 +2966,35 @@
       <section class="section" id="tides">
         <span class="part-no">TOOL</span>
         <h2>물때 캘린더 &amp; 바다날씨</h2>
-        <p class="kicker">날짜를 고르면 그날의 달 위상으로 사리·조금 정도를 즉시 계산해 보여줍니다. 실시간 파고·수온·바람은 공식 기관 데이터가 필요해 아래 바로가기로 연결했습니다.</p>
+        <p class="kicker">날짜를 고르면 그날의 달 위상으로 사리·조금 정도를 즉시 계산해 보여줍니다. 파고·바람·조류·수온은 아래 <b>바다 날씨 브리핑</b>(모델 예측값)에서 해역별로 볼 수 있고, 공식 실측·예보는 바로가기로 연결했습니다.</p>
+
+        <h3>🌊 오늘의 바다 날씨 브리핑</h3>
+        <div class="wx-card" id="wxCard">
+          <div class="wx-controls">
+            <label class="wx-label" for="wxRegion">해역</label>
+            <select id="wxRegion"></select>
+            <button type="button" id="wxGeo" class="pm-copy-btn wx-geo">📍 내 위치로 보기</button>
+          </div>
+          <p class="wx-privacy">이 카드를 쓰면 선택한 해역(내 위치는 약 1km로 반올림한 좌표)이 날씨 데이터 제공처 <b>Open-Meteo</b>로 전송됩니다. 페이지를 열 때는 아무것도 전송하지 않고, 해역을 고르거나 버튼을 눌렀을 때만 불러옵니다.</p>
+          <div class="wx-status" id="wxStatus" role="status" aria-live="polite">해역을 고르면 오늘·내일의 파고·바람·조류·수온을 불러옵니다.</div>
+          <div id="wxResult" hidden>
+            <div class="wx-days" id="wxDays">
+              <button type="button" class="active" data-day="0">오늘</button>
+              <button type="button" data-day="1">내일</button>
+            </div>
+            <div class="wx-verdict" id="wxVerdict"></div>
+            <div class="wx-chips" id="wxChips"></div>
+            <div class="wx-chart-title">파고(m) — 점선: 1m(무난 기준) · 3m(풍랑주의보 기준)</div>
+            <div class="wx-chart" id="wxWaveChart"></div>
+            <div class="wx-chart-title">풍속(m/s) — 점선: 10(무난 기준) · 14(풍랑주의보 기준)</div>
+            <div class="wx-chart" id="wxWindChart"></div>
+            <div class="tbl-wrap"><table class="wx-table" id="wxTable"></table></div>
+          </div>
+          <div class="wx-warn">
+            <b>꼭 읽어주세요</b> — 약 8km 격자의 모델 예측값이라 연안·방파제의 국지 조건과 다를 수 있고, 제공처도 "연안 정확도는 제한적이며 연안 항해용이 아니다"라고 밝힙니다. 해수면 높이(조위)는 조석표가 아니므로 <b>간조·만조 시각은 제공하지 않습니다</b> — 아래 물때 계산기와 공식 조석 예보를 보세요. 판단 기준(파고 1m·풍속 10m/s 이하 무난, 3m·14m/s는 풍랑주의보 수준)은 이 페이지 아래 표와 같으며, 출조 전 <a href="https://www.weather.go.kr" target="_blank" rel="noopener">기상청</a> 해상예보·특보와 현장 상황이 항상 우선입니다.
+          </div>
+          <p class="wx-credit">날씨 데이터: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (<a href="https://open-meteo.com/en/license" target="_blank" rel="noopener">CC BY 4.0</a>) · 기상·해양 모델 예측</p>
+        </div>
 
         <h3>핵심 용어</h3>
         <div class="gear-grid">
@@ -2976,7 +3033,7 @@
 
         <div class="callout amber">
           <h4>이 계산기가 하는 일 / 못 하는 일</h4>
-          <p>삭(신월)·망(보름)으로부터 며칠이 지났는지를 계산해 전통 <b>물때번호(1~13물·조금·무시)</b>와 상대 세기를 표시합니다. 국립해양조사원 제공 인천 물때표(바다타임)와 대조해 물때번호가 정확히 일치하는 것을 확인했습니다 — 인터넷 연결 없이도 어느 날짜든 바로 확인 가능합니다. 다만 이 번호는 <b>서해·인천 기준</b>이라 남해·동해·제주는 1~2일 어긋날 수 있고, <b>실제 간·만조 정확한 시각, 조차(cm), 파고·수온·바람</b>은 해안 지형과 기상 조건에 따라 달라 이 페이지가 직접 계산하지 않습니다 — 아래 실시간 바로가기에서 확인하세요.</p>
+          <p>삭(신월)·망(보름)으로부터 며칠이 지났는지를 계산해 전통 <b>물때번호(1~13물·조금·무시)</b>와 상대 세기를 표시합니다. 국립해양조사원 제공 인천 물때표(바다타임)와 대조해 물때번호가 정확히 일치하는 것을 확인했습니다 — 인터넷 연결 없이도 어느 날짜든 바로 확인 가능합니다. 다만 이 번호는 <b>서해·인천 기준</b>이라 남해·동해·제주는 1~2일 어긋날 수 있고, <b>실제 간·만조 정확한 시각과 조차(cm)</b>는 이 페이지가 계산하지 않습니다 — 아래 실시간 바로가기에서 확인하세요. 파고·수온·바람은 위 바다 날씨 브리핑이 모델 예측값을 보여주지만 연안 정확도에 한계가 있으니, 실측은 바로가기의 관측 페이지를 보세요.</p>
         </div>
 
         <h3>파고·바람·유속 — 용어와 안전 기준</h3>
@@ -3550,6 +3607,7 @@
           <div class="src-group">
             <h4>공식 기관</h4>
             <ul>
+              <li><a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank" rel="noopener">Open-Meteo Marine Weather API — 파고·수온·조류 모델 (CC BY 4.0)</a><span>바다 날씨 브리핑 데이터 · 비영리 무료 이용</span></li>
               <li><a href="https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=287151&amp;efYd=20260701" target="_blank" rel="noopener">수산자원관리법 시행령 (2026.7.1 시행본, 제7조의2 비어업인 포획·채취기준)</a><span>국가법령정보센터</span></li>
               <li><a href="https://www.law.go.kr/LSW/flDownload.do?flSeq=165059791" target="_blank" rel="noopener">시행령 별표 1 — 포획·채취 금지 기간(금어기), 2026.6.23 개정 (PDF)</a><span>국가법령정보센터</span></li>
               <li><a href="https://www.law.go.kr/LSW/flDownload.do?flSeq=165059807" target="_blank" rel="noopener">시행령 별표 2 — 금지체장·체중, 2024.6.4 개정 (PDF)</a><span>국가법령정보센터</span></li>
@@ -6285,6 +6343,290 @@
     $('kkDate').value = todayISO();
     $('msDate').value = todayISO();
     renderAll();
+  }catch(e){ if(window.console) console.error(e); }
+})();
+/* ---------- 바다 날씨 브리핑 (Open-Meteo, 클릭 시에만 호출) ---------- */
+(function(){
+  try{
+    var sel = document.getElementById('wxRegion');
+    if(!sel) return;
+    var statusEl = document.getElementById('wxStatus'), resultEl = document.getElementById('wxResult');
+    var daysEl = document.getElementById('wxDays'), verdictEl = document.getElementById('wxVerdict');
+    var chipsEl = document.getElementById('wxChips'), waveEl = document.getElementById('wxWaveChart');
+    var windEl = document.getElementById('wxWindChart'), tableEl = document.getElementById('wxTable');
+    var geoBtn = document.getElementById('wxGeo');
+
+    var REGIONS = [
+      {name:'인천 영흥도 앞바다 (서해)', lat:37.25, lon:126.30},
+      {name:'태안 안흥항 앞바다 (서해)', lat:36.65, lon:126.05},
+      {name:'군산 앞바다 (서해)', lat:35.95, lon:126.35},
+      {name:'목포·신안 앞바다 (서남해)', lat:34.60, lon:125.90},
+      {name:'완도 앞바다 (남해)', lat:34.20, lon:126.75},
+      {name:'여수 앞바다 (남해)', lat:34.50, lon:127.80},
+      {name:'통영·거제 앞바다 (남해)', lat:34.60, lon:128.50},
+      {name:'부산 앞바다 (남해 동부)', lat:35.00, lon:129.15},
+      {name:'포항 앞바다 (동해)', lat:36.05, lon:129.55},
+      {name:'삼척·강릉 앞바다 (동해)', lat:37.55, lon:129.20},
+      {name:'속초 앞바다 (동해)', lat:38.20, lon:128.70},
+      {name:'제주 북쪽 바다', lat:33.65, lon:126.55},
+      {name:'서귀포 앞바다 (제주 남쪽)', lat:33.15, lon:126.55}
+    ];
+    sel.innerHTML = '<option value="">해역 선택…</option>' + REGIONS.map(function(r, i){ return '<option value="' + i + '">' + r.name + '</option>'; }).join('');
+
+    var WAVE_T1 = 1, WAVE_T2 = 3, WIND_T1 = 10, WIND_T2 = 14, GUST_T = 14;
+    var COMPASS16 = ['북','북북동','북동','동북동','동','동남동','남동','남남동','남','남남서','남서','서남서','서','서북서','북서','북북서'];
+    var COMPASS8 = ['북','북동','동','남동','남','남서','서','북서'];
+    function c16(d){ return COMPASS16[Math.round((((d % 360) + 360) % 360) / 22.5) % 16]; }
+    function c8(d){ return COMPASS8[Math.round((((d % 360) + 360) % 360) / 45) % 8]; }
+    function kn(kmh){ return kmh * 0.5399568; }
+    function f1(v){ return v.toFixed(1); }
+    function hh(h){ return (h < 10 ? '0' : '') + h; }
+
+    // 판단 기준은 페이지의 풍랑주의보 안내(파고 3m, 풍속 14m/s)와 "무난"(1m, 10m/s) 문구와 동일
+    function judge(wave, wind, gust){
+      if((wave !== null && wave >= WAVE_T2) || (wind !== null && wind >= WIND_T2)) return 'danger';
+      if((wave !== null && wave >= WAVE_T1) || (wind !== null && wind >= WIND_T1) || (gust !== null && gust >= GUST_T)) return 'caution';
+      return 'good';
+    }
+
+    function kstNow(){
+      try{
+        var o = {};
+        new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', hour12:false}).formatToParts(new Date()).forEach(function(p){ o[p.type] = p.value; });
+        return {date: o.year + '-' + o.month + '-' + o.day, hour: parseInt(o.hour, 10) % 24};
+      }catch(e){ return null; }
+    }
+
+    function num(v){ return (typeof v === 'number' && isFinite(v)) ? v : null; }
+    var TIME_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+    function normalize(m, w){
+      var hm = m && m.hourly, hw = w && w.hourly;
+      if(!hm || !hw || !Array.isArray(hm.time) || !Array.isArray(hw.time)) return null;
+      var n = hm.time.length;
+      if(n < 48 || hw.time.length !== n) return null;
+      var needM = ['wave_height','sea_surface_temperature','ocean_current_velocity','ocean_current_direction'];
+      var needW = ['wind_speed_10m','wind_gusts_10m','wind_direction_10m'];
+      var i, k;
+      for(k = 0; k < needM.length; k++) if(!Array.isArray(hm[needM[k]]) || hm[needM[k]].length !== n) return null;
+      for(k = 0; k < needW.length; k++) if(!Array.isArray(hw[needW[k]]) || hw[needW[k]].length !== n) return null;
+      for(i = 0; i < n; i++){ if(typeof hm.time[i] !== 'string' || !TIME_RE.test(hm.time[i]) || hm.time[i] !== hw.time[i]) return null; }
+      var d = {time:hm.time.slice(), wave:[], sst:[], cur:[], curDir:[], wind:[], gust:[], windDir:[]};
+      for(i = 0; i < n; i++){
+        d.wave.push(num(hm.wave_height[i])); d.sst.push(num(hm.sea_surface_temperature[i]));
+        d.cur.push(num(hm.ocean_current_velocity[i])); d.curDir.push(num(hm.ocean_current_direction[i]));
+        d.wind.push(num(hw.wind_speed_10m[i])); d.gust.push(num(hw.wind_gusts_10m[i])); d.windDir.push(num(hw.wind_direction_10m[i]));
+      }
+      return d;
+    }
+
+    function slotsFor(d, dayIdx){
+      var dates = [], i;
+      for(i = 0; i < d.time.length; i++){ var dt = d.time[i].slice(0, 10); if(dates.indexOf(dt) === -1) dates.push(dt); }
+      if(dayIdx >= dates.length) return null;
+      var slots = [];
+      for(i = 0; i < d.time.length; i++){
+        if(d.time[i].slice(0, 10) !== dates[dayIdx]) continue;
+        var hr = parseInt(d.time[i].slice(11, 13), 10);
+        if(hr < 6 || hr > 21) continue;
+        slots.push({h:hr, wave:d.wave[i], sst:d.sst[i], cur:d.cur[i], curDir:d.curDir[i], wind:d.wind[i], gust:d.gust[i], windDir:d.windDir[i]});
+      }
+      return {date: dates[dayIdx], slots: slots};
+    }
+
+    function maxOf(slots, key){
+      var best = null;
+      slots.forEach(function(s){ if(s[key] !== null && (best === null || s[key] > best.v)) best = {v:s[key], s:s}; });
+      return best;
+    }
+
+    function colorFor(v, t1, t2){ return v >= t2 ? 'var(--coral)' : (v >= t1 ? 'var(--amber)' : 'var(--sea)'); }
+
+    function chart(kind, slots, key, ymax, guides, t1, t2, label, nowHour){
+      var W = 320, H = 118, L = 30, R = 8, T = 8, B = 20, pw = W - L - R, ph = H - T - B, n = slots.length;
+      function X(i){ return L + pw * (i + 0.5) / n; }
+      function Y(v){ return T + ph * (1 - Math.min(v, ymax) / ymax); }
+      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '">';
+      s += '<line x1="' + L + '" y1="' + (T + ph) + '" x2="' + (W - R) + '" y2="' + (T + ph) + '" stroke="var(--border-strong)"/>';
+      s += '<text x="' + (L - 4) + '" y="' + (T + ph + 3) + '" text-anchor="end">0</text><text x="' + (L - 4) + '" y="' + (T + 8) + '" text-anchor="end">' + ymax + '</text>';
+      guides.forEach(function(g){
+        if(g > ymax) return;
+        var y = Y(g);
+        s += '<line x1="' + L + '" y1="' + y + '" x2="' + (W - R) + '" y2="' + y + '" stroke="' + (g >= t2 ? 'var(--coral)' : 'var(--amber)') + '" stroke-dasharray="3 3"/>';
+        s += '<text x="' + (W - R) + '" y="' + (y - 2) + '" text-anchor="end">' + g + '</text>';
+      });
+      var i;
+      for(i = 0; i < n; i++){ if(slots[i].h % 3 === 0) s += '<text x="' + X(i) + '" y="' + (H - 6) + '" text-anchor="middle">' + hh(slots[i].h) + '</text>'; }
+      if(nowHour !== null){
+        for(i = 0; i < n; i++){ if(slots[i].h === nowHour){ s += '<line x1="' + X(i) + '" y1="' + T + '" x2="' + X(i) + '" y2="' + (T + ph) + '" stroke="var(--ink-soft)" stroke-width="1" opacity=".55"/>'; } }
+      }
+      if(kind === 'bar'){
+        var bw = pw / n * 0.68;
+        for(i = 0; i < n; i++){
+          var v = slots[i][key]; if(v === null) continue;
+          var y0 = Y(v), hgt = Math.max(1, (T + ph) - y0);
+          s += '<rect x="' + (X(i) - bw / 2) + '" y="' + y0 + '" width="' + bw + '" height="' + hgt + '" rx="2" fill="' + colorFor(v, t1, t2) + '"><title>' + hh(slots[i].h) + '시 ' + f1(v) + 'm</title></rect>';
+        }
+      } else {
+        var seg = [];
+        var flush = function(){ if(seg.length > 1) s += '<polyline points="' + seg.join(' ') + '" fill="none" stroke="var(--tide)" stroke-width="2" stroke-linejoin="round"/>'; seg = []; };
+        for(i = 0; i < n; i++){
+          var w = slots[i][key];
+          if(w === null){ flush(); continue; }
+          seg.push(X(i) + ',' + Y(w));
+        }
+        flush();
+        for(i = 0; i < n; i++){
+          var w2 = slots[i][key]; if(w2 === null) continue;
+          s += '<circle cx="' + X(i) + '" cy="' + Y(w2) + '" r="3" fill="' + colorFor(w2, t1, t2) + '"><title>' + hh(slots[i].h) + '시 ' + f1(w2) + 'm/s</title></circle>';
+        }
+      }
+      return s + '</svg>';
+    }
+
+    var state = {data:null, label:'', day:0};
+    function setStatus(msg, isErr){ statusEl.textContent = msg; statusEl.className = 'wx-status' + (isErr ? ' err' : ''); }
+
+    function render(d, label, dayIdx){
+      var pack = slotsFor(d, dayIdx);
+      if(!pack || !pack.slots.length){ setStatus('이 날짜의 낮 시간 데이터가 없어요.', true); return; }
+      var slots = pack.slots, now = kstNow();
+      var isToday = dayIdx === 0 && now && now.date === pack.date;
+      var mw = maxOf(slots, 'wave'), mwd = maxOf(slots, 'wind'), mg = maxOf(slots, 'gust'), mc = maxOf(slots, 'cur');
+      var level = judge(mw ? mw.v : null, mwd ? mwd.v : null, mg ? mg.v : null);
+      var titles = {good:'🟢 무난한 편', caution:'🟡 주의 — 조건을 확인하세요', danger:'🔴 풍랑주의보 수준 — 출조 비권장'};
+
+      var reasons = [];
+      if(mw && mw.v >= WAVE_T2) reasons.push('파고 ' + WAVE_T2 + 'm 이상(최대 ' + f1(mw.v) + 'm, ' + hh(mw.s.h) + '시경)');
+      else if(mw && mw.v >= WAVE_T1) reasons.push('파고 ' + WAVE_T1 + 'm 이상(최대 ' + f1(mw.v) + 'm, ' + hh(mw.s.h) + '시경)');
+      if(mwd && mwd.v >= WIND_T2) reasons.push('풍속 ' + WIND_T2 + 'm/s 이상(최대 ' + f1(mwd.v) + ', ' + hh(mwd.s.h) + '시경)');
+      else if(mwd && mwd.v >= WIND_T1) reasons.push('풍속 ' + WIND_T1 + 'm/s 이상(최대 ' + f1(mwd.v) + ', ' + hh(mwd.s.h) + '시경)');
+      if(level !== 'danger' && mg && mg.v >= GUST_T && !(mwd && mwd.v >= WIND_T1)) reasons.push('돌풍 ' + GUST_T + 'm/s 이상(최대 ' + f1(mg.v) + ')');
+      var sub = reasons.length ? reasons.join(' · ') : ('파고 최대 ' + (mw ? f1(mw.v) + 'm' : '–') + ' · 풍속 최대 ' + (mwd ? f1(mwd.v) + 'm/s' : '–') + ' — 모두 무난 기준 이내');
+      verdictEl.className = 'wx-verdict ' + level;
+      verdictEl.innerHTML = '<div class="wx-v-title">' + titles[level] + '</div><div class="wx-v-sub">' + sub + '</div><div class="wx-v-sub">' + pack.date.slice(5).replace('-', '월 ') + '일 06~21시 모델 예측 기준 · 참고용이며 기상특보·현장 상황이 우선입니다</div>';
+
+      var chips = [];
+      var ssts = slots.map(function(s){ return s.sst; }).filter(function(v){ return v !== null; });
+      if(ssts.length){ var lo = Math.min.apply(null, ssts), hi = Math.max.apply(null, ssts); chips.push('🌡️ 수온 ' + (f1(lo) === f1(hi) ? f1(lo) : f1(lo) + '~' + f1(hi)) + '°C (모델)'); }
+      if(mc){
+        var kt = kn(mc.v);
+        chips.push('🌀 조류 최대 ' + f1(kt) + '노트' + (kt >= 0.2 && mc.s.curDir !== null ? ' · ' + c8(mc.s.curDir) + '쪽으로' : ' · 거의 없음') + ' (' + hh(mc.s.h) + '시경)');
+      }
+      if(mwd && mwd.s.windDir !== null) chips.push('🌬️ ' + hh(mwd.s.h) + '시경 ' + c16(mwd.s.windDir) + '풍 (불어오는 방향)');
+      if(mg) chips.push('💨 최대 돌풍 ' + f1(mg.v) + 'm/s');
+      chipsEl.innerHTML = chips.map(function(c){ return '<span class="ms-chip">' + c + '</span>'; }).join('');
+
+      var nowHour = isToday ? now.hour : null;
+      var waveVals = slots.map(function(s){ return s.wave; }).filter(function(v){ return v !== null; });
+      if(waveVals.length){
+        var wy = Math.max(1.5, Math.ceil(Math.max.apply(null, waveVals) * 1.15 * 2) / 2);
+        waveEl.innerHTML = chart('bar', slots, 'wave', wy, [WAVE_T1, WAVE_T2], WAVE_T1, WAVE_T2, '시간대별 파고, 최대 ' + (mw ? f1(mw.v) : '') + '미터', nowHour);
+      } else { waveEl.innerHTML = '<p class="wx-status">파고 데이터가 없어요.</p>'; }
+      var windVals = slots.map(function(s){ return s.wind; }).filter(function(v){ return v !== null; });
+      if(windVals.length){
+        var vy = Math.max(12, Math.ceil(Math.max.apply(null, windVals) * 1.15 / 2) * 2);
+        windEl.innerHTML = chart('line', slots, 'wind', vy, [WIND_T1, WIND_T2], WIND_T1, WIND_T2, '시간대별 풍속, 최대 ' + (mwd ? f1(mwd.v) : '') + '미터 매초', nowHour);
+      } else { windEl.innerHTML = '<p class="wx-status">풍속 데이터가 없어요.</p>'; }
+
+      var rows = '<thead><tr><th>시각</th><th>파고(m)</th><th>풍속(돌풍)</th><th>풍향</th><th>조류(노트)</th><th>수온(°C)</th></tr></thead><tbody>';
+      [6, 9, 12, 15, 18, 21].forEach(function(hr){
+        var s = null; slots.forEach(function(x){ if(x.h === hr) s = x; });
+        if(!s) return;
+        var wc = s.wave === null ? '' : (s.wave >= WAVE_T2 ? ' class="wx-bad"' : (s.wave >= WAVE_T1 ? ' class="wx-mid"' : ''));
+        var nc = s.wind === null ? '' : (s.wind >= WIND_T2 ? ' class="wx-bad"' : (s.wind >= WIND_T1 ? ' class="wx-mid"' : ''));
+        rows += '<tr><td>' + hh(hr) + '시</td><td' + wc + '>' + (s.wave === null ? '–' : f1(s.wave)) + '</td><td' + nc + '>' + (s.wind === null ? '–' : f1(s.wind) + (s.gust === null ? '' : ' (' + Math.round(s.gust) + ')')) + '</td><td>' + (s.windDir === null ? '–' : c16(s.windDir) + '풍') + '</td><td>' + (s.cur === null ? '–' : f1(kn(s.cur))) + '</td><td>' + (s.sst === null ? '–' : f1(s.sst)) + '</td></tr>';
+      });
+      tableEl.innerHTML = rows + '</tbody>';
+      resultEl.hidden = false;
+      var clock = new Date();
+      setStatus('📍 ' + label + ' · 불러온 시각 ' + hh(clock.getHours()) + ':' + hh(clock.getMinutes()), false);
+    }
+
+    var reqId = 0;
+    function getJson(url){
+      return new Promise(function(resolve, reject){
+        var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        var timer = setTimeout(function(){ if(ctl) ctl.abort(); reject(new Error('timeout')); }, 12000);
+        fetch(url, ctl ? {signal: ctl.signal} : undefined).then(function(r){
+          clearTimeout(timer);
+          if(!r.ok){ var e = new Error('http'); e.status = r.status; throw e; }
+          return r.json();
+        }).then(resolve, function(e){ clearTimeout(timer); reject(e); });
+      });
+    }
+    function cacheKey(lat, lon){ return 'gg_wx_' + lat.toFixed(2) + '_' + lon.toFixed(2); }
+    function readCache(key){
+      try{
+        var c = JSON.parse(sessionStorage.getItem(key) || 'null');
+        if(c && typeof c.t === 'number' && Date.now() - c.t < 30 * 60 * 1000 && c.d && Array.isArray(c.d.time) && c.d.time.length >= 48) return c.d;
+      }catch(e){}
+      return null;
+    }
+
+    function load(lat, lon, label){
+      var my = ++reqId;
+      resultEl.hidden = true;
+      setStatus('불러오는 중…', false);
+      var key = cacheKey(lat, lon), cached = readCache(key);
+      var p;
+      if(cached){ p = Promise.resolve(cached); }
+      else {
+        var mUrl = 'https://marine-api.open-meteo.com/v1/marine?latitude=' + lat + '&longitude=' + lon + '&hourly=wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction&forecast_days=2&timezone=Asia%2FSeoul';
+        var wUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=ms&forecast_days=2&timezone=Asia%2FSeoul';
+        p = Promise.all([getJson(mUrl), getJson(wUrl)]).then(function(res){
+          var d = normalize(res[0], res[1]);
+          if(!d){ var e = new Error('shape'); e.shape = true; throw e; }
+          try{ sessionStorage.setItem(key, JSON.stringify({t:Date.now(), d:d})); }catch(e2){}
+          return d;
+        });
+      }
+      p.then(function(d){
+        if(my !== reqId) return;
+        if(d.wave.every(function(v){ return v === null; })){ setStatus('이 지점은 육지 격자라 파고·조류 데이터가 없어요. 바다에 더 가까운 해역을 선택해주세요.', true); return; }
+        state.data = d; state.label = label; state.day = 0;
+        Array.prototype.forEach.call(daysEl.querySelectorAll('button'), function(b){ b.classList.toggle('active', b.getAttribute('data-day') === '0'); });
+        render(d, label, 0);
+      }).catch(function(e){
+        if(my !== reqId) return;
+        if(e && e.shape) setStatus('제공처 응답 형식이 달라 표시할 수 없어요. 아래 공식 예보를 이용해주세요.', true);
+        else if(e && e.status === 429) setStatus('요청이 많아 제공처가 잠시 막았어요. 몇 분 뒤에 다시 시도해주세요.', true);
+        else setStatus('날씨 데이터를 불러오지 못했어요(네트워크 또는 제공처 일시 오류). 잠시 후 다시 시도하거나 아래 공식 기상 예보를 확인하세요.', true);
+      });
+    }
+
+    sel.addEventListener('change', function(){
+      var r = REGIONS[parseInt(sel.value, 10)];
+      if(r) load(r.lat, r.lon, r.name);
+    });
+    if(geoBtn){
+      geoBtn.addEventListener('click', function(){
+        if(!navigator.geolocation){ setStatus('이 브라우저는 위치 기능을 지원하지 않아요. 해역을 직접 선택해주세요.', true); return; }
+        setStatus('위치를 가져오는 중…', false);
+        navigator.geolocation.getCurrentPosition(function(pos){
+          var lat = Math.round(pos.coords.latitude * 100) / 100, lon = Math.round(pos.coords.longitude * 100) / 100;
+          if(!isFinite(lat) || !isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180){ setStatus('위치 값이 올바르지 않아요. 해역을 직접 선택해주세요.', true); return; }
+          sel.value = '';
+          load(lat, lon, '내 위치(약 1km로 반올림)');
+        }, function(err){
+          var msg = err && err.code === 1 ? '위치 권한이 거부됐어요. 브라우저 설정에서 허용하거나 해역을 직접 선택해주세요.' : (err && err.code === 3 ? '위치 확인 시간이 초과됐어요. 다시 시도하거나 해역을 선택해주세요.' : '위치를 확인할 수 없어요. 해역을 직접 선택해주세요.');
+          setStatus(msg, true);
+        }, {enableHighAccuracy:false, timeout:10000, maximumAge:600000});
+      });
+    }
+    daysEl.addEventListener('click', function(e){
+      var b = e.target;
+      if(!b || b.tagName !== 'BUTTON' || !state.data) return;
+      var di = parseInt(b.getAttribute('data-day'), 10);
+      Array.prototype.forEach.call(daysEl.querySelectorAll('button'), function(x){ x.classList.toggle('active', x === b); });
+      state.day = di;
+      render(state.data, state.label, di);
+    });
+
+    window.__ggWx = {
+      judge: judge,
+      normalize: normalize,
+      render: function(d, label, day){ state.data = d; state.label = label; state.day = day || 0; render(d, label, day || 0); }
+    };
   }catch(e){ if(window.console) console.error(e); }
 })();
 </script>
